@@ -3,12 +3,13 @@ $(function() {
     window.readerData = {
         currentPage: '', // (string), url
         firstPage: '', // (string), url
-        lastPage: '' // (string), url
+        lastPage: '', // (string), url
+        scrollPosition: 0 // (int), main's vertical scroll position (scrollTop())
     };
 
     // fns
-    var url = (readerData.currentPage !== '' ? readerData.currentPage : readerData.firstPage),
-        main = $('main');
+    // var url = (readerData.currentPage !== '' ? readerData.currentPage : readerData.firstPage);
+    var main = $('main');
 
     function updatedReaderData(prop, attr) {
         readerData[prop] = attr;
@@ -17,26 +18,39 @@ $(function() {
     function loadChapter(url) {
         main.load(url);
         updatedReaderData('currentPage', url);
-        setPosition();
+        main.scrollTop(readerData.scrollPosition);
+        setLocation();
     }
 
-    function setPosition() {
+    function setLocation() {
+        updatedReaderData('scrollPosition', $('main').scrollTop());
+        alert($('main').scrollTop());
         var clientBook = {
-            'currentPage': readerData.currentPage
+            'currentPage': (readerData.currentPage !== '' ? readerData.currentPage : readerData.firstPage),
+            'scrollPosition': readerData.scrollPosition
         };
         localStorage.setItem('clientBook', JSON.stringify(clientBook));
     }
 
-    function getPosition() {
+    function getLocation() {
         if (localStorage.getItem('clientBook') === null) {
-            setPosition();
+            setLocation();
         }
-        var obj = localStorage.getItem('clientBook');
-        readerData.currentPage = JSON.parse(obj).currentPage;
+        var obj = JSON.parse(localStorage.getItem('clientBook'));
+        readerData.currentPage = obj.currentPage;
+        readerData.scrollPosition = obj.scrollPosition;
+    }
+
+    function initialPosition() {
+        main.scrollTop(0);
+    }
+
+    function goToLastPosition() {
+        // main.scrollTo(readerData.scrollPosition);
     }
 
     // events
-    $(window).on('beforeunload', 'setPosition');
+    $(window).on('beforeunload', 'setLocation');
 
     // get data, build dom
     var jsonUrl = 'data/bookData.json',
@@ -58,6 +72,7 @@ $(function() {
                     href: o.src,
                     click: function(e) {
                         e.preventDefault();
+                        setLocation();
                         loadChapter(o.src);
                     }
                 }).appendTo($('<li/>').appendTo('.chapters'));
@@ -76,11 +91,13 @@ $(function() {
     function init() {
 
         // check local storage for location
-        getPosition();
+        getLocation();
 
         // if localstorage exists, it's already readerData.currentPage, if not it's readerData.firstPage
-        var page = (readerData.currentPage !== '' ? readerData.currentPage : readerData.firstPage);
+        var page = readerData.currentPage;
         loadChapter(page);
+        // goToLastPosition();
+
     }
 
 
