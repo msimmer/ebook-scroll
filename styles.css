@@ -42,6 +42,9 @@ ul.components li a{
     width: 100%;
     background: lightblue;
 }
+ul.chapters li {
+    margin: 0 10px;
+}
 main{
     margin:0 11%;
     position: absolute;
