@@ -1,0 +1,10 @@
+[{
+    "title": "Chapter 1",
+    "src": "components/page-1.html"
+}, {
+    "title": "Chapter 2",
+    "src": "components/page-3.html"
+}, {
+    "title": "Chapter 3",
+    "src": "components/page-3.html"
+}]
