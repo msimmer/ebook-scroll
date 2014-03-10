@@ -1,14 +1,15 @@
 $(function() {
 
     window.readerData = {
-        currentPage: '', // (string), url
-        firstPage: '', // (string), url
-        lastPage: '', // (string), url
-        scrollPosition: 0 // (int), main's vertical scroll position (scrollTop())
+        currentPage: null, // (string) url
+        firstPage: null, // (string) url
+        lastPage: null, // (string) url
+        scrollPosition: {} // (obj) containing src: (str) url, pos: (int) main.scrollTop()
     };
 
+    var readerData = window.readerData;
+
     // fns
-    // var url = (readerData.currentPage !== '' ? readerData.currentPage : readerData.firstPage);
     var main = $('main');
 
     function updatedReaderData(prop, attr) {
@@ -18,39 +19,52 @@ $(function() {
     function loadChapter(url) {
         main.load(url);
         updatedReaderData('currentPage', url);
-        main.scrollTop(readerData.scrollPosition);
-        setLocation();
     }
 
-    function setLocation() {
-        updatedReaderData('scrollPosition', $('main').scrollTop());
-        alert($('main').scrollTop());
+    function saveLocation() {
+        var page = readerData.currentPage;
+        readerData.scrollPosition[page] = main.scrollTop();
+
         var clientBook = {
-            'currentPage': (readerData.currentPage !== '' ? readerData.currentPage : readerData.firstPage),
-            'scrollPosition': readerData.scrollPosition
+            currentPage: page,
+            scrollPosition: readerData.scrollPosition
         };
+
         localStorage.setItem('clientBook', JSON.stringify(clientBook));
     }
 
-    function getLocation() {
-        if (localStorage.getItem('clientBook') === null) {
-            setLocation();
+    function goToPreviousLocation() {
+
+        var pos = function() {
+            var localStorageBook = JSON.parse(localStorage.getItem('clientBook')),
+                lastPos = localStorageBook.scrollPosition[readerData.currentPage];
+
+            var pos = (lastPos !== main.scrollTop() ? lastPos : 0);
+
+            return pos;
         }
-        var obj = JSON.parse(localStorage.getItem('clientBook'));
-        readerData.currentPage = obj.currentPage;
-        readerData.scrollPosition = obj.scrollPosition;
+
+        setTimeout(function(){
+            main.scrollTop(pos);
+        }, 10)
+
     }
 
-    function initialPosition() {
-        main.scrollTop(0);
-    }
+    function getLocation() {
+        if (localStorage.getItem('clientBook') !== null) {
+            var obj = JSON.parse(localStorage.getItem('clientBook'));
+            readerData.currentPage = obj.currentPage;
+            $.extend(readerData.scrollPosition, obj.scrollPosition);
+        } else {
+            var clientBook = {
+                currentPage: readerData.firstPage,
+                scrollPosition: {}
+            };
+            clientBook.scrollPosition[readerData.firstPage] = 0;
 
-    function goToLastPosition() {
-        // main.scrollTo(readerData.scrollPosition);
+            localStorage.setItem('clientBook', JSON.stringify(clientBook));
+        }
     }
-
-    // events
-    $(window).on('beforeunload', 'setLocation');
 
     // get data, build dom
     var jsonUrl = 'data/bookData.json',
@@ -72,8 +86,10 @@ $(function() {
                     href: o.src,
                     click: function(e) {
                         e.preventDefault();
-                        setLocation();
+                        saveLocation();
                         loadChapter(o.src);
+                        // getLocation();
+                        goToPreviousLocation();
                     }
                 }).appendTo($('<li/>').appendTo('.chapters'));
             })
@@ -85,18 +101,24 @@ $(function() {
             init();
         });
 
+    // events
+    $(window).on('beforeunload', function() {
+        saveLocation();
+    });
 
     // init
 
     function init() {
 
-        // check local storage for location
+        // local storage->readerData
         getLocation();
 
         // if localstorage exists, it's already readerData.currentPage, if not it's readerData.firstPage
         var page = readerData.currentPage;
         loadChapter(page);
-        // goToLastPosition();
+
+        // readerData page location->DOM
+        goToPreviousLocation();
 
     }
 
