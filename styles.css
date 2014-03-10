@@ -1,0 +1,48 @@
+html,body,div,hr,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;vertical-align:baseline;}
+html, body{
+    margin:0;
+    padding:0;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    background: grey;
+}
+header{
+    background: lightblue;
+    height: 80px;
+    width: 100%;
+}
+.site-title{
+    margin:0;
+    color:black;
+}
+ul.controls{
+    list-style: none;
+    margin:0;
+    padding:0;
+    position: absolute;
+    top: 0;
+    right:0;
+}
+ul.controls li{
+    display: inline-block;
+    border:1px solid blue;
+    width: 50px;
+    height: 50px;
+}
+ul.controls li a{
+    display: block;
+    height: 100%;
+    width: 100%;
+    background: coral;
+}
+main{
+    margin:0 11%;
+    position: absolute;
+    top:80px;
+    right:0;
+    bottom:0;
+    left:0;
+    background: white;
+    overflow: scroll;
+}
