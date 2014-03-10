@@ -1,15 +1,38 @@
 $(function() {
 
+    var readerData = readerData || {
+        currentPage:'' // (string), url
+    };
+
+    // fns
     var url = 'components/page-1.html',
         main = $('main');
 
-    function loadChapter(url) {
-        main.load(url);
+    function updatedReaderData(prop, attr){
+        readerData[prop] = attr;
     }
 
-    function savePosition(){}
-    function getPosition(){}
+    function loadChapter(url) {
+        main.load(url);
+        updatedReaderData(currentPage, url);
+    }
 
+    function savePosition() {
+        var clientBook = {
+            'lastPage': readerData.currentPage
+        };
+        localStorage.setItem('clientBook', JSON.stringify(clientBook));
+    }
+
+    function getPosition() {
+        var retrievedObject = localStorage.getItem('clientBook');
+        console.log('retrievedObject: ', JSON.parse(retrievedObject));
+    }
+
+    // events
+    $(window).on('beforeunload', 'savePosition'));
+
+    // init
     var jsonUrl = 'data/bookData.json',
         chapters = $('.chapters');
 
@@ -24,7 +47,7 @@ $(function() {
                     href: o.src,
                     click: function(e) {
                         e.preventDefault();
-                        loadChapter(o.src)
+                        loadChapter(o.src);
                     }
                 }).wrap('<li/>').appendTo('.chapters');
             })
