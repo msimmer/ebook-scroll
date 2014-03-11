@@ -17,9 +17,7 @@ App = {
 
     // fns
     updatedReaderData: function(prop, attr) {
-
         var that = this;
-
         that.readerData[prop] = attr;
     },
 
@@ -54,19 +52,8 @@ App = {
 
         var that = this;
 
-        that.saveLocation();
-
-        $.ajax({
-            url: url,
-            success: function(data) {
-                that.el.empty();
-                that.el.append(data);
-                that.updatedReaderData('currentPage', url);
-            },
-            error: function(x, t, e) {
-                console.log(x + ' ' + t + ' ' + e);
-            }
-        });
+        that.el.load(url);
+        that.updatedReaderData('currentPage', url);
 
     },
 
@@ -74,12 +61,15 @@ App = {
 
         var that = this;
 
-        var page = that.readerData.currentPage;
+        var page = that.readerData.currentPage,
+            scrollPos = {};
+
         that.readerData.scrollPosition[page] = that.el.scrollTop();
+        var scrollPos = that.readerData.scrollPosition;
 
         var clientBook = {
             currentPage: page,
-            scrollPosition: that.readerData.scrollPosition
+            scrollPosition: scrollPos
         };
 
         localStorage.setItem('clientBook', JSON.stringify(clientBook));
@@ -98,6 +88,7 @@ App = {
                 contrast: that.readerData.contrast,
                 speed: that.readerData.speed
             };
+            localStorage.setItem('userPreferences', JSON.stringify(userPreferences));
         }
     },
 
@@ -122,14 +113,12 @@ App = {
             var localStorageBook = JSON.parse(localStorage.getItem('clientBook')),
                 lastPos = localStorageBook.scrollPosition[that.readerData.currentPage];
 
-            var pos = (lastPos !== that.el.scrollTop() ? lastPos : 0);
-
-            return pos;
+            return lastPos;
         };
 
         setTimeout(function() {
             that.el.scrollTop(pos);
-        }, 10)
+        }, 50)
 
     },
 
@@ -147,7 +136,6 @@ App = {
                 scrollPosition: {}
             };
             clientBook.scrollPosition[that.readerData.firstPage] = 0;
-
             localStorage.setItem('clientBook', JSON.stringify(clientBook));
         }
     },
@@ -164,23 +152,25 @@ App = {
         var jsonUrl = 'data/bookData.json',
             chapters = $('.chapters');
 
-        $.getJSON(jsonUrl, {
+        var jsonData = $.getJSON(jsonUrl, {
             format: 'json'
         })
             .success(function(data) {
+
                 $.each(data, function(i, o) {
                     if (i === 0) {
-                        that.updatedReaderData('firstPage', o.src);
+                        that.readerData.firstPage = o.src;
+                        // var page = (localStorage.getItem('clientBook') === null ? that.readerData.firstPage : that.readerData.currentPage);
+                        // that.readerData.currentPage = page;
                     }
                     if (i === data.length - 1) {
-                        that.updatedReaderData('lastPage', o.src);
+                        that.readerData.lastPage = o.src;
                     }
                     $('<a/>', {
                         text: o.title,
                         href: o.src,
                         click: function(e) {
                             e.preventDefault();
-                            that.saveLocation();
                             that.loadChapter(o.src);
                             that.goToPreviousLocation();
                         }
@@ -189,10 +179,27 @@ App = {
             })
             .fail(function() {
                 console.log(arguments);
-            })
-            .done(function() {
-                // console.log('json loaded');
             });
+
+        jsonData.complete(function() {
+
+            // styles
+            that.removeElementStyles();
+            that.getUserPreferences();
+            that.setDomElements();
+            that.setStyles();
+            that.layout.adjustFramePosition();
+
+            that.getLocation();
+
+            // var page = (localStorage.getItem('clientBook') === null ? that.readerData.firstPage : that.readerData.currentPage);
+            // that.readerData.currentPage = page;
+            that.loadChapter(that.readerData.currentPage);
+
+            // readerData page location->DOM
+            that.goToPreviousLocation();
+        });
+
     }
 
 }

@@ -5,23 +5,6 @@ $.extend(App, {
         this.bindEventHandlers();
         this.getJsonData();
 
-        // styles
-        this.removeElementStyles();
-        this.getUserPreferences();
-        this.setDomElements();
-        this.setStyles();
-        this.layout.adjustFramePosition();
-
-        // local storage->readerData
-        this.getLocation();
-
-        // if localstorage exists, it's already readerData.currentPage, if not it's readerData.firstPage
-        var page = this.readerData.currentPage;
-        this.loadChapter(page);
-
-        // readerData page location->DOM
-        this.goToPreviousLocation();
-
     }
 });
 
@@ -33,9 +16,17 @@ $(function() {
     app.init();
 
     // events
-    $(window).on('beforeunload', function() {
-        app.saveLocation();
-        app.updateUserPreferences();
-    });
+    window.onunload = window.onbeforeunload = (function() {
+
+        var writeComplete = false;
+
+        return function() {
+            if (writeComplete) return;
+            writeComplete = true;
+            app.saveLocation();
+            app.updateUserPreferences();
+        }
+
+    }());
 
 });

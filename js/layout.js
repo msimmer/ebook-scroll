@@ -46,6 +46,9 @@ $.extend(App, {
 
             var that = App;
 
+            this.setFrameHeight();
+            this.setFrameWidth();
+
             var h = $(window).height() / 2,
                 w = $(window).width() / 2,
                 frame = that.el,

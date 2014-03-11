@@ -24,7 +24,7 @@ $.extend(App, {
     events: {
         playPause: function(callback) {
 
-            var that = this.parent,
+            var that = App,
                 isScrolling = that.readerData.isScrolling,
                 playBtn = $('.controls').find('.play-btn'),
                 state = (isScrolling ? 'pause' : 'play');
@@ -71,12 +71,9 @@ $.extend(App, {
         },
         fontIncrement: function() {
             var that = App;
-            console.log(that);
             var size = (that.readerData.fSize <= that.readerData.maxFontSize ? that.readerData.fSize + 10 : that.readerData.fSize);
             that.updatedReaderData('fSize', size);
             that.el.css('font-size', that.readerData.fSize + '%');
-            that.layout.setFrameHeight();
-            that.layout.setFrameWidth();
             that.layout.adjustFramePosition();
             return that;
         },
@@ -85,8 +82,6 @@ $.extend(App, {
             var size = (that.readerData.fSize >= that.readerData.minFontSize ? that.readerData.fSize - 10 : that.readerData.fSize);
             that.updatedReaderData('fSize', size);
             that.el.css('font-size', that.readerData.fSize + '%');
-            that.layout.setFrameHeight();
-            that.layout.setFrameWidth();
             that.layout.adjustFramePosition();
             return that;
         },
