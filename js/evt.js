@@ -6,7 +6,8 @@ $.extend(App, {
         '.speed-dec, click': 'speedDecrement',
         '.font-inc, click': 'fontIncrement',
         '.font-dec, click': 'fontDecrement',
-        '.contrast-toggle, click': 'contrastToggle'
+        '.contrast-toggle, click': 'contrastToggle',
+        'main a, click':'embeddedLinkClick'
     },
     bindEventHandlers: function() {
 
@@ -40,6 +41,9 @@ $.extend(App, {
             if (typeof callback === 'function') {
                 callback();
             }
+
+            // dev
+            playBtn.html(state === 'pause' ? '&#9654;' : '&mid; &mid;');
 
             return app;
         },
@@ -103,34 +107,30 @@ $.extend(App, {
 
             return app;
 
+        },
+        embeddedLinkClick:function(e){
+
+            e.preventDefault();
+
+            var app = App;
+            var target = $(e.target),
+                href = target.attr('href'),
+                ext = href.match(/^http/);
+
+            if (ext) {
+                routeInternalLink(href);
+            } else{
+                routeInternalLink(href);
+            }
+
+            function routeInternalLink(url){
+                app.loadChapter(url);
+            }
+            function routeExternalLink(url){
+                target.attr('target', '_blank');
+                target.trigger('click');
+            }
+
         }
     }
 });
-
-
-// $(function(){
-
-//   App = {
-
-//     foo:function(cb){
-
-//       App.bar();
-
-//       alert('foo');
-
-//       if (typeof cb === 'function'){
-
-//         cb();
-
-//       }
-
-//     },
-//     bar:function(){
-
-//       alert('bar');
-
-//     }
-
-//   };
-
-// });

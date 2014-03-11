@@ -38,12 +38,14 @@ $.extend(App, {
         var textCss = {};
         var textCss = {
             'font-size': '',
-            'color': ''
+            'color': '',
+            'text-decoration': ''
         };
 
         $.each(that.textElements, function(i, o) {
             that.el.find(o).css(textCss);
         });
+
     },
 
     setStyles: function() {

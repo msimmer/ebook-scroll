@@ -13,6 +13,9 @@ nav{
     /*background: lightblue;*/
     height: 100%;
 }
+a{
+    text-decoration: none;
+}
 .site-title{
     margin:25px;
     padding:0;
@@ -46,7 +49,7 @@ ul.components li a{
 }
 ul.chapters li {
     margin: 0 10px;
-    display: none;
+    /*display: none;*/
 }
 main{
     font-size: 100%; /* set adjustable font-size */
@@ -64,6 +67,10 @@ main{
     margin-top: 20%;
     /*-webkit-box-shadow: inset 8px 8px 8px #fff;
     box-shadow: inset 8px 8px 8px #fff;*/
+}
+main a, main a:link, main a:active, main a:visited{
+    color: blue!important;
+    text-decoration: underline!important;
 }
 main:before{
     display: inline-block;
