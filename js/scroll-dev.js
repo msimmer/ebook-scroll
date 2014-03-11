@@ -4,7 +4,11 @@ $(function() {
         currentPage: null, // (string) url
         firstPage: null, // (string) url
         lastPage: null, // (string) url
-        scrollPosition: {} // (obj) containing src: (str) url, pos: (int) main.scrollTop()
+        scrollPosition: {}, // (obj) containing src: (str) url, pos: (int) main.scrollTop()
+        scrollState: 'pause', // (str) pause or play
+        fontSize: 100, // (int) percent of main's font-size, default 100%
+        contrast: 'light', // (str) light or dark
+        speed: 0 // (int) scroll speed
     };
 
     var readerData = window.readerData;

@@ -13,12 +13,7 @@
     </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <link type="text/css" rel="stylesheet" href='styles.css' />
-    <script type="text/javascript" src='jquery.js'></script>
-    <script type="text/javascript" src='scroll-dev.js'></script>
-    <style type="text/css">
-
-    </style>
+    <link type="text/css" rel="stylesheet" href='css/styles.css' />
 </head>
 
 <body>
@@ -26,13 +21,33 @@
         <p class="site-title">Site</p>
         <ul class="chapters"></ul>
         <ul class="controls">
+            <li><a class='play-btn' data-state='play' href="#">Pause/Play</a>
+            </li>
             <li><a class='inc' href="#">+</a>
             </li>
             <li><a class='dec' href="#">-</a>
             </li>
+            <li><a class='font-inc' href="#">A</a>
+            </li>
+            <li><a class='font-dec' href="#">a</a>
+            </li>
+            <li><a class="contrast-inc" href="#">C+</a>
+            </li>
+            <li><a class="contrast-dec" href="#">C-</a>
+            </li>
         </ul>
     </header>
     <main></main>
+    <footer>
+        <p class="info">?</p>
+        <p class="page-count"></p>
+    </footer>
+    <script type="text/javascript" src='vendor/jquery.js'></script>
+    <script type="text/javascript" src='js/env.js'></script>
+    <script type="text/javascript" src='js/nav.js'></script>
+    <script type="text/javascript" src='js/style.js'></script>
+    <script type="text/javascript" src='js/evt.js'></script>
+    <script type="text/javascript" src='js/init.js'></script>
 </body>
 
 </html>
