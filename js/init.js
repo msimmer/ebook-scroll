@@ -8,6 +8,7 @@ $.extend(App, {
         // styles
         this.removeElementStyles();
         this.getUserPreferences();
+        this.setDomElements();
         this.setStyles();
 
         // local storage->readerData

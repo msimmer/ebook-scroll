@@ -19,6 +19,17 @@ App = {
         this.readerData[prop] = attr;
     },
 
+    setDomElements: function() {
+
+        var currentContrast = this.readerData.contrast,
+            nextContrast = $('.contrast-toggle').attr('data-contrast');
+
+        if (currentContrast === nextContrast) {
+            this.events.contrastToggle();
+        }
+
+    },
+
     loadChapter: function(url) {
         this.el.load(url);
         this.updatedReaderData('currentPage', url);
@@ -47,7 +58,7 @@ App = {
             var userPreferences = {
                 fSize: this.readerData.fSize,
                 contrast: this.readerData.contrast,
-                speed:this.readerData.speed
+                speed: this.readerData.speed
             };
         }
     },
@@ -59,7 +70,7 @@ App = {
         var userPreferences = {
             fSize: this.readerData.fSize,
             contrast: this.readerData.contrast,
-            speed:this.readerData.speed
+            speed: this.readerData.speed
         };
 
         localStorage.setItem('userPreferences', JSON.stringify(userPreferences));

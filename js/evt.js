@@ -6,8 +6,7 @@ $.extend(App, {
         '.speed-dec, click': 'speedDecrement',
         '.font-inc, click': 'fontIncrement',
         '.font-dec, click': 'fontDecrement',
-        '.contrast-inc, click': 'contrastIncrement',
-        '.contrast-de, click': 'contrastDecrement'
+        '.contrast-toggle, click': 'contrastToggle'
     },
     bindEventHandlers: function() {
 
@@ -40,10 +39,10 @@ $.extend(App, {
 
             return app;
         },
-        startScrolling:function(){
+        startScrolling: function() {
             //
         },
-        stopScrolling:function(){
+        stopScrolling: function() {
             //
         },
         speedIncrement: function() {
@@ -55,14 +54,14 @@ $.extend(App, {
         fontIncrement: function() {
             var app = App;
             var size = (app.readerData.fSize <= app.readerData.maxFontSize ? app.readerData.fSize + 10 : app.readerData.fSize);
-            app.updatedReaderData('fSize', size)
+            app.updatedReaderData('fSize', size);
             app.el.css('font-size', app.readerData.fSize + '%');
             return app;
         },
         fontDecrement: function() {
             var app = App;
             var size = (app.readerData.fSize >= app.readerData.minFontSize ? app.readerData.fSize - 10 : app.readerData.fSize);
-            app.updatedReaderData('fSize', size)
+            app.updatedReaderData('fSize', size);
             app.el.css('font-size', app.readerData.fSize + '%');
             return app;
         },
@@ -70,28 +69,62 @@ $.extend(App, {
             var app = App;
             var lightCss = {},
                 darkCss = {},
-                isLight = (app.readerData.contrast === 'light' ? true : false);
-
-            var lightCss = {
-                'background-color':'#333',
-                'color':'#FEFEFE'
-            };
+                contrastBtn = $('.controls').find('.contrast-toggle'),
+                prevContrast = (contrastBtn.attr('data-contrast') === 'light' ? 'dark' : 'light'),
+                nextContrast = contrastBtn.attr('data-contrast');
 
             var darkCss = {
-                'background-color':'#FFF',
-                'color':'#000'
+                'background-color': '#333',
+                'color': '#FEFEFE'
             };
 
-            if (isLight) {
-                app.readerData.contrast = 'dark';
+            var lightCss = {
+                'background-color': '#FFF',
+                'color': '#000'
+            };
+
+            if (nextContrast === 'dark') {
                 app.el.css(darkCss);
             } else {
-                app.readerData.contrast = 'light';
                 app.el.css(lightCss);
             }
+
+            contrastBtn.attr('data-contrast', prevContrast);
+            app.updatedReaderData('contrast', nextContrast);
+
+            // dev
+            contrastBtn.text(prevContrast);
 
             return app;
 
         }
     }
 });
+
+
+// $(function(){
+
+//   App = {
+
+//     foo:function(cb){
+
+//       App.bar();
+
+//       alert('foo');
+
+//       if (typeof cb === 'function'){
+
+//         cb();
+
+//       }
+
+//     },
+//     bar:function(){
+
+//       alert('bar');
+
+//     }
+
+//   };
+
+// });
