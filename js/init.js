@@ -26,12 +26,14 @@ $.extend(App, {
 // DOM ready
 $(function() {
 
-    App.init();
+    var app = App;
+
+    app.init();
 
     // events
     $(window).on('beforeunload', function() {
-        App.saveLocation();
-        App.updateUserPreferences();
+        app.saveLocation();
+        app.updateUserPreferences();
     });
 
 });

@@ -6,10 +6,10 @@ App = {
         lastPage: null, // (string) url
         scrollPosition: {}, // (obj) containing src: (str) url, pos: (int) main.scrollTop()
         scrollState: 'pause', // (str) pause or play
-        defaultFontSize: 18, // (int) default body font-size
+        defaultFontSize: 18, // (int) default body font-size in px
         fSize: 100, // (int) percent of main's font-size, default 100%
-        maxFontSize: 180, // (int) max font size in px
-        minFontSize: 70, // (int) min font size in px
+        maxFontSize: 180, // (int) max font size in %
+        minFontSize: 70, // (int) min font size in %
         contrast: 'light', // (str) light or dark
         speed: 0 // (int) scroll speed
     },
