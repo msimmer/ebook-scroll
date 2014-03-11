@@ -6,27 +6,28 @@ html, body{
     overflow: hidden;
     height: 100%;
     width: 100%;
-    background: grey;
+    /*background: grey;*/
 }
-header{
-    background: lightblue;
-    height: 80px;
-    width: 100%;
+nav{
+    position: absolute;
+    /*background: lightblue;*/
+    height: 100%;
 }
 .site-title{
-    margin:0;
+    margin:25px;
+    padding:0;
     color:black;
 }
 ul.controls, ul.components{
     list-style: none;
     margin:0;
     padding:0;
-    position: absolute;
+    /*position: absolute;*/
     top: 0;
     right:0;
 }
 ul.controls li, ul.components li{
-    display: inline-block;
+    display: block;
     border:1px solid blue;
     width: 50px;
     height: 50px;
@@ -35,25 +36,63 @@ ul.controls li a{
     display: block;
     height: 100%;
     width: 100%;
-    background: coral;
+    /*background: coral;*/
 }
 ul.components li a{
     display: block;
     height: 100%;
     width: 100%;
-    background: lightblue;
+    /*background: lightblue;*/
 }
 ul.chapters li {
     margin: 0 10px;
+    display: none;
 }
 main{
     font-size: 100%; /* set adjustable font-size */
-    margin:0 11%;
+    margin:0 auto;
     position: absolute;
-    top:80px;
+    top:0;
     right:0;
     bottom:0;
     left:0;
     background: white;
     overflow: scroll;
+    /* font-size-adjust variables */
+    max-width: 600px;
+    max-height: 200px;
+    margin-top: 20%;
+    /*-webkit-box-shadow: inset 8px 8px 8px #fff;
+    box-shadow: inset 8px 8px 8px #fff;*/
+}
+main:before{
+    display: inline-block;
+    position: fixed;
+    height: 250px;
+    z-index: 999;
+    border-left:15px solid black;
+    border-top:15px solid black;
+    border-bottom: 15px solid black;
+    content:' ';
+    width:50px;
+    top:31%;
+    margin-left:-90px;
+}
+.runner-help{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin:25px;
+    padding:0;
+    text-decoration: none;
+}
+.runner-help a{
+    text-decoration: none;
+}
+.runner-page-count{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 25px;
+    padding:0;
 }

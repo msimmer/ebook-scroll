@@ -21,7 +21,7 @@ $.extend(App, {
 
     },
     events: {
-        playPause: function() {
+        playPause: function(callback) {
             var app = App,
                 isScrolling = app.readerData.isScrolling,
                 playBtn = $('.controls').find('.play-btn'),
@@ -35,6 +35,10 @@ $.extend(App, {
             } else {
                 app.readerData.isScrolling = true;
                 app.events.stopScrolling();
+            }
+
+            if (typeof callback === 'function') {
+                callback();
             }
 
             return app;
@@ -84,8 +88,10 @@ $.extend(App, {
             };
 
             if (nextContrast === 'dark') {
+                $('html *').css(darkCss);
                 app.el.css(darkCss);
             } else {
+                $('html *').css(lightCss);
                 app.el.css(lightCss);
             }
 
