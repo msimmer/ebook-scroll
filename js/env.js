@@ -17,25 +17,30 @@ App = {
 
     // fns
     updatedReaderData: function(prop, attr) {
-        this.readerData[prop] = attr;
+
+        var that = this;
+
+        that.readerData[prop] = attr;
     },
 
     setDomElements: function() {
 
-        var currentContrast = this.readerData.contrast,
+        var that = this;
+
+        var currentContrast = that.readerData.contrast,
             nextContrast = $('.contrast-toggle').attr('data-contrast');
 
         if (currentContrast === nextContrast) {
-            this.events.contrastToggle();
+            that.events.contrastToggle();
         }
 
         var bracket = $('<div/>', {
             class: 'bracket',
             css: {
-                top: this.el.offset().top - 25,
-                left: this.el.offset().left - 25,
+                top: that.el.offset().top - 25,
+                left: that.el.offset().left - 25,
                 width: 60,
-                height: this.el.height() + 50,
+                height: that.el.height() + 50,
                 borderTop: '15px solid black',
                 borderLeft: '15px solid black',
                 borderBottom: '15px solid black',
@@ -46,17 +51,31 @@ App = {
     },
 
     loadChapter: function(url) {
-        this.el.load(url);
-        this.updatedReaderData('currentPage', url);
-        this.saveLocation();
+
+        var that = this;
+
+        that.saveLocation();
+
+        $.ajax({
+            url: url,
+            success: function(data) {
+                that.el.empty();
+                that.el.append(data);
+                that.updatedReaderData('currentPage', url);
+            },
+            error: function(x, t, e) {
+                console.log(x + ' ' + t + ' ' + e);
+            }
+        });
+
     },
 
     saveLocation: function() {
 
         var that = this;
 
-        var page = this.readerData.currentPage;
-        this.readerData.scrollPosition[page] = this.el.scrollTop();
+        var page = that.readerData.currentPage;
+        that.readerData.scrollPosition[page] = that.el.scrollTop();
 
         var clientBook = {
             currentPage: page,
@@ -67,14 +86,17 @@ App = {
     },
 
     getUserPreferences: function() {
+
+        var that = this;
+
         if (localStorage.getItem('userPreferences') !== null) {
             var obj = JSON.parse(localStorage.getItem('userPreferences'));
-            $.extend(this.readerData, obj);
+            $.extend(that.readerData, obj);
         } else {
             var userPreferences = {
-                fSize: this.readerData.fSize,
-                contrast: this.readerData.contrast,
-                speed: this.readerData.speed
+                fSize: that.readerData.fSize,
+                contrast: that.readerData.contrast,
+                speed: that.readerData.speed
             };
         }
     },
@@ -84,9 +106,9 @@ App = {
         var that = this;
 
         var userPreferences = {
-            fSize: this.readerData.fSize,
-            contrast: this.readerData.contrast,
-            speed: this.readerData.speed
+            fSize: that.readerData.fSize,
+            contrast: that.readerData.contrast,
+            speed: that.readerData.speed
         };
 
         localStorage.setItem('userPreferences', JSON.stringify(userPreferences));
@@ -112,16 +134,19 @@ App = {
     },
 
     getLocation: function() {
+
+        var that = this;
+
         if (localStorage.getItem('clientBook') !== null) {
             var obj = JSON.parse(localStorage.getItem('clientBook'));
-            this.readerData.currentPage = obj.currentPage;
-            $.extend(this.readerData.scrollPosition, obj.scrollPosition);
+            that.readerData.currentPage = obj.currentPage;
+            $.extend(that.readerData.scrollPosition, obj.scrollPosition);
         } else {
             var clientBook = {
-                currentPage: this.readerData.firstPage,
+                currentPage: that.readerData.firstPage,
                 scrollPosition: {}
             };
-            clientBook.scrollPosition[this.readerData.firstPage] = 0;
+            clientBook.scrollPosition[that.readerData.firstPage] = 0;
 
             localStorage.setItem('clientBook', JSON.stringify(clientBook));
         }
@@ -133,7 +158,7 @@ App = {
 
     getJsonData: function() {
 
-        // get data, build dom
+        // get book data and insert into DOM
         var that = this;
 
         var jsonUrl = 'data/bookData.json',

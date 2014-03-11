@@ -10,45 +10,45 @@ $.extend(App, {
         resizeStopped: function() {},
 
         targetContainerWidth: function() {
-            var app = App;
-            var w = parseInt(app.el.css('font-size'), 10) * 25;
+            var that = App;
+            var w = parseInt(that.el.css('font-size'), 10) * 25;
             return w;
         },
         targetContainerHeight: function() {
-            var app = App;
-            var h = parseInt(app.el.css('line-height'), 10) * 7;
+            var that = App;
+            var h = parseInt(that.el.css('line-height'), 10) * 7;
             return h;
         },
         setFrameHeight: function() {
-            var app = App;
-            var targetHeight = app.layout.targetContainerHeight();
+            var that = App;
+            var targetHeight = that.layout.targetContainerHeight();
 
-            app.el.css({
+            that.el.css({
                 'height': targetHeight,
                 'max-height': targetHeight
             });
 
-            return app;
+            return that;
 
         },
         setFrameWidth: function() {
-            var app = App;
-            var targetWidth = app.layout.targetContainerWidth();
+            var that = App;
+            var targetWidth = that.layout.targetContainerWidth();
 
-            app.el.css({
+            that.el.css({
                 'width': targetWidth,
                 'max-width': targetWidth
             });
 
-            return app;
+            return that;
         },
         adjustFramePosition: function() {
 
-            var app = App;
+            var that = App;
 
             var h = $(window).height() / 2,
                 w = $(window).width() / 2,
-                frame = app.el,
+                frame = that.el,
                 frameMidH = frame.height() / 2,
                 frameMidW = frame.width() / 2;
 
@@ -57,16 +57,16 @@ $.extend(App, {
                 left: w - frameMidW
             });
 
-            app.layout.adjustBracketPosition();
+            that.layout.adjustBracketPosition();
 
-            return app;
+            return that;
 
         },
         adjustBracketPosition: function() {
 
-            var app = App;
+            var that = App;
 
-            var el = app.el,
+            var el = that.el,
                 bracket = $('.bracket');
 
             bracket.css({
@@ -80,7 +80,7 @@ $.extend(App, {
                 position: 'absolute'
             });
 
-            return app;
+            return that;
 
         }
 

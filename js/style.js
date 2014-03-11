@@ -1,7 +1,7 @@
 App = App || {};
 $.extend(App, {
 
-    styles: {
+    baseStyles: {
 
         body: {
             'fSize': App.readerData.defaultFontSize + 'px'
@@ -37,10 +37,11 @@ $.extend(App, {
 
         var textCss = {};
         var textCss = {
-            'font-size': '',
-            'line-height':'',
-            'color': '',
-            'text-decoration': ''
+            fontSize: '',
+            lineHeight: '',
+            color: '',
+            textDecoration: '',
+            backgroundColor: 'transparent'
         };
 
         $.each(that.textElements, function(i, o) {
@@ -53,25 +54,24 @@ $.extend(App, {
 
         var that = this;
 
-        $.each(that.styles, function(i, o) {
+        $.each(that.baseStyles, function(i, o) {
             that.el.find(i).css('font-size', o.fSize);
         });
 
         var mainCss = {};
         var mainCss = {
             'font-size': this.readerData.fSize + '%',
-            'line-height':'1.2',
-            '-webkit-transition': 'background-color 250ms ease-out', // contrast toggle
-            '-moz-transition': 'background-color 250ms ease-out',
-            '-o-transition': 'background-color 250ms ease-out',
-            'transition': 'background-color 250ms ease-out',
-            '-webkit-transition': 'color 250ms ease-out',
-            '-moz-transition': 'color 250ms ease-out',
-            '-o-transition': 'color 250ms ease-out',
-            'transition': 'color 250ms ease-out'
+            'line-height': '1.2'
         };
 
         this.el.css(mainCss);
+
+        $('html,body,main').css({
+            '-webkit-transition': 'background-color 150ms ease-out', // contrast toggle
+            '-moz-transition': 'background-color 150ms ease-out',
+            '-o-transition': 'background-color 150ms ease-out',
+            'transition': 'background-color 150ms ease-out'
+        });
 
     }
 

@@ -23,19 +23,20 @@ $.extend(App, {
     },
     events: {
         playPause: function(callback) {
-            var app = App,
-                isScrolling = app.readerData.isScrolling,
+
+            var that = this.parent,
+                isScrolling = that.readerData.isScrolling,
                 playBtn = $('.controls').find('.play-btn'),
                 state = (isScrolling ? 'pause' : 'play');
 
             playBtn.attr('data-state', state);
 
             if (isScrolling) {
-                app.readerData.isScrolling = false;
-                app.events.startScrolling();
+                that.readerData.isScrolling = false;
+                that.events.startScrolling();
             } else {
-                app.readerData.isScrolling = true;
-                app.events.stopScrolling();
+                that.readerData.isScrolling = true;
+                that.events.stopScrolling();
             }
 
             if (typeof callback === 'function') {
@@ -45,7 +46,7 @@ $.extend(App, {
             // dev
             playBtn.html(state === 'pause' ? '&#9654;' : '&mid; &mid;');
 
-            return app;
+            return that;
         },
         startScrolling: function() {
             //
@@ -69,61 +70,62 @@ $.extend(App, {
             //
         },
         fontIncrement: function() {
-            var app = App;
-            var size = (app.readerData.fSize <= app.readerData.maxFontSize ? app.readerData.fSize + 10 : app.readerData.fSize);
-            app.updatedReaderData('fSize', size);
-            app.el.css('font-size', app.readerData.fSize + '%');
-            app.layout.setFrameHeight();
-            app.layout.setFrameWidth();
-            app.layout.adjustFramePosition();
-            return app;
+            var that = App;
+            console.log(that);
+            var size = (that.readerData.fSize <= that.readerData.maxFontSize ? that.readerData.fSize + 10 : that.readerData.fSize);
+            that.updatedReaderData('fSize', size);
+            that.el.css('font-size', that.readerData.fSize + '%');
+            that.layout.setFrameHeight();
+            that.layout.setFrameWidth();
+            that.layout.adjustFramePosition();
+            return that;
         },
         fontDecrement: function() {
-            var app = App;
-            var size = (app.readerData.fSize >= app.readerData.minFontSize ? app.readerData.fSize - 10 : app.readerData.fSize);
-            app.updatedReaderData('fSize', size);
-            app.el.css('font-size', app.readerData.fSize + '%');
-            app.layout.setFrameHeight();
-            app.layout.setFrameWidth();
-            app.layout.adjustFramePosition();
-            return app;
+            var that = App;
+            var size = (that.readerData.fSize >= that.readerData.minFontSize ? that.readerData.fSize - 10 : that.readerData.fSize);
+            that.updatedReaderData('fSize', size);
+            that.el.css('font-size', that.readerData.fSize + '%');
+            that.layout.setFrameHeight();
+            that.layout.setFrameWidth();
+            that.layout.adjustFramePosition();
+            return that;
         },
         contrastToggle: function() {
-            var app = App;
+            var that = App;
             var lightCss = {},
                 darkCss = {},
                 contrastBtn = $('.controls').find('.contrast-toggle'),
                 prevContrast = (contrastBtn.attr('data-contrast') === 'light' ? 'dark' : 'light'),
                 nextContrast = contrastBtn.attr('data-contrast');
 
-            var darkCss = {
-                'background-color': '#333',
-                'color': '#FEFEFE'
-            };
-
-            var lightCss = {
-                'background-color': '#FFF',
-                'color': '#000'
-            };
-
             if (nextContrast === 'dark') {
-                $('html *').css(darkCss);
+                $('html,body,main').css({
+                    backgroundColor:'#333'
+                });
+                $.each(that.textElements, function(i,o){
+                    $(o).removeClass('lightCss').addClass('darkCss');
+                });
             } else {
-                $('html *').css(lightCss);
+                $('html,body,main').css({
+                    backgroundColor:'#FFF'
+                });
+                $.each(that.textElements, function(i,o){
+                    $(o).removeClass('darkCss').addClass('lightCss');
+                });
             }
 
             contrastBtn.attr('data-contrast', prevContrast);
-            app.updatedReaderData('contrast', nextContrast);
+            that.updatedReaderData('contrast', nextContrast);
 
             // dev
             contrastBtn.text(prevContrast);
 
-            return app;
+            return that;
 
         },
         embeddedLinkClick: function(e) {
 
-            var app = App;
+            var that = App;
             var target = $(e.target),
                 href = target.attr('href'),
                 ext = href.match(/^http/);
@@ -136,7 +138,7 @@ $.extend(App, {
             }
 
             function routeInternalLink(url) {
-                app.loadChapter(url);
+                that.loadChapter(url);
             }
 
             function routeExternalLink(url) {
