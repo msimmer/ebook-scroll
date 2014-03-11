@@ -2,7 +2,13 @@ App = App || {};
 $.extend(App, {
     init: function() {
 
+        this.bindEventHandlers();
         this.getJsonData();
+
+        // styles
+        this.removeElementStyles();
+        this.getUserPreferences();
+        this.setStyles();
 
         // local storage->readerData
         this.getLocation();
@@ -25,6 +31,7 @@ $(function() {
     // events
     $(window).on('beforeunload', function() {
         App.saveLocation();
+        App.updateUserPreferences();
     });
 
 });

@@ -6,7 +6,10 @@ App = {
         lastPage: null, // (string) url
         scrollPosition: {}, // (obj) containing src: (str) url, pos: (int) main.scrollTop()
         scrollState: 'pause', // (str) pause or play
-        fontSize: 100, // (int) percent of main's font-size, default 100%
+        defaultFontSize: 18, // (int) default body font-size
+        fSize: 100, // (int) percent of main's font-size, default 100%
+        maxFontSize: 180, // (int) max font size in px
+        minFontSize: 70, // (int) min font size in px
         contrast: 'light', // (str) light or dark
         speed: 0 // (int) scroll speed
     },
@@ -34,6 +37,32 @@ App = {
         };
 
         localStorage.setItem('clientBook', JSON.stringify(clientBook));
+    },
+
+    getUserPreferences: function() {
+        if (localStorage.getItem('userPreferences') !== null) {
+            var obj = JSON.parse(localStorage.getItem('userPreferences'));
+            $.extend(this.readerData, obj);
+        } else {
+            var userPreferences = {
+                fSize: this.readerData.fSize,
+                contrast: this.readerData.contrast,
+                speed:this.readerData.speed
+            };
+        }
+    },
+
+    updateUserPreferences: function() {
+
+        var that = this;
+
+        var userPreferences = {
+            fSize: this.readerData.fSize,
+            contrast: this.readerData.contrast,
+            speed:this.readerData.speed
+        };
+
+        localStorage.setItem('userPreferences', JSON.stringify(userPreferences));
     },
 
     goToPreviousLocation: function() {
