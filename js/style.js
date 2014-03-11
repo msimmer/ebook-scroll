@@ -38,6 +38,7 @@ $.extend(App, {
         var textCss = {};
         var textCss = {
             'font-size': '',
+            'line-height':'',
             'color': '',
             'text-decoration': ''
         };
@@ -59,6 +60,7 @@ $.extend(App, {
         var mainCss = {};
         var mainCss = {
             'font-size': this.readerData.fSize + '%',
+            'line-height':'1.2',
             '-webkit-transition': 'background-color 250ms ease-out', // contrast toggle
             '-moz-transition': 'background-color 250ms ease-out',
             '-o-transition': 'background-color 250ms ease-out',

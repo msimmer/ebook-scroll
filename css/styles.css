@@ -53,7 +53,7 @@ ul.chapters li {
 }
 main{
     font-size: 100%; /* set adjustable font-size */
-    margin:0 auto;
+    /*margin:0 auto;*/
     position: absolute;
     top:0;
     right:0;
@@ -64,16 +64,17 @@ main{
     /* font-size-adjust variables */
     max-width: 600px;
     max-height: 200px;
-    margin-top: 20%;
+    /*margin-top: 20%;*/
     /*-webkit-box-shadow: inset 8px 8px 8px #fff;
     box-shadow: inset 8px 8px 8px #fff;*/
+    /*border:1px solid blue;*/
 }
 main a, main a:link, main a:active, main a:visited{
     color: blue!important;
     text-decoration: underline!important;
 }
 main:before{
-    display: inline-block;
+    /*display: inline-block;
     position: fixed;
     height: 250px;
     z-index: 999;
@@ -83,7 +84,10 @@ main:before{
     content:' ';
     width:50px;
     top:31%;
-    margin-left:-90px;
+    margin-left:-90px;*/
+
+    /*color:blue;*/
+    /*display: none;*/
 }
 .runner-help{
     position: absolute;

@@ -10,6 +10,7 @@ $.extend(App, {
         this.getUserPreferences();
         this.setDomElements();
         this.setStyles();
+        this.layout.adjustFramePosition();
 
         // local storage->readerData
         this.getLocation();

@@ -12,7 +12,7 @@ App = {
         minFontSize: 70, // (int) min font size in %
         contrast: 'light', // (str) light or dark
         speed: 0, // (int) scroll speed
-        components:[] // (array) ordered list of ebook chapters pulled from <spine>
+        components: [] // (array) ordered list of ebook chapters pulled from <spine>
     },
 
     // fns
@@ -28,6 +28,20 @@ App = {
         if (currentContrast === nextContrast) {
             this.events.contrastToggle();
         }
+
+        var bracket = $('<div/>', {
+            class: 'bracket',
+            css: {
+                top: this.el.offset().top - 25,
+                left: this.el.offset().left - 25,
+                width: 60,
+                height: this.el.height() + 50,
+                borderTop: '15px solid black',
+                borderLeft: '15px solid black',
+                borderBottom: '15px solid black',
+                position: 'absolute'
+            }
+        }).appendTo('body');
 
     },
 
@@ -113,7 +127,7 @@ App = {
         }
     },
 
-    goToNextChapter:function(){
+    goToNextChapter: function() {
         //
     },
 

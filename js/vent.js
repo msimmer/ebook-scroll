@@ -73,6 +73,9 @@ $.extend(App, {
             var size = (app.readerData.fSize <= app.readerData.maxFontSize ? app.readerData.fSize + 10 : app.readerData.fSize);
             app.updatedReaderData('fSize', size);
             app.el.css('font-size', app.readerData.fSize + '%');
+            app.layout.setFrameHeight();
+            app.layout.setFrameWidth();
+            app.layout.adjustFramePosition();
             return app;
         },
         fontDecrement: function() {
@@ -80,6 +83,9 @@ $.extend(App, {
             var size = (app.readerData.fSize >= app.readerData.minFontSize ? app.readerData.fSize - 10 : app.readerData.fSize);
             app.updatedReaderData('fSize', size);
             app.el.css('font-size', app.readerData.fSize + '%');
+            app.layout.setFrameHeight();
+            app.layout.setFrameWidth();
+            app.layout.adjustFramePosition();
             return app;
         },
         contrastToggle: function() {
@@ -117,16 +123,15 @@ $.extend(App, {
         },
         embeddedLinkClick: function(e) {
 
-            e.preventDefault();
-
             var app = App;
             var target = $(e.target),
                 href = target.attr('href'),
                 ext = href.match(/^http/);
 
             if (ext) {
-                routeInternalLink(href);
+                routeExternalLink(href);
             } else {
+                e.preventDefault();
                 routeInternalLink(href);
             }
 
@@ -135,8 +140,8 @@ $.extend(App, {
             }
 
             function routeExternalLink(url) {
+                e.stopPropagation();
                 target.attr('target', '_blank');
-                target.trigger('click');
             }
 
         }
