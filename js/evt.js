@@ -23,7 +23,28 @@ $.extend(App, {
     },
     events: {
         playPause: function() {
-            console.log('event');
+            var app = App,
+                isScrolling = app.readerData.isScrolling,
+                playBtn = $('.controls').find('.play-btn'),
+                state = (isScrolling ? 'pause' : 'play');
+
+            playBtn.attr('data-state', state);
+
+            if (isScrolling) {
+                app.readerData.isScrolling = false;
+                app.events.startScrolling();
+            } else {
+                app.readerData.isScrolling = true;
+                app.events.stopScrolling();
+            }
+
+            return app;
+        },
+        startScrolling:function(){
+            //
+        },
+        stopScrolling:function(){
+            //
         },
         speedIncrement: function() {
             console.log('event');
@@ -36,18 +57,41 @@ $.extend(App, {
             var size = (app.readerData.fSize <= app.readerData.maxFontSize ? app.readerData.fSize + 10 : app.readerData.fSize);
             app.updatedReaderData('fSize', size)
             app.el.css('font-size', app.readerData.fSize + '%');
+            return app;
         },
         fontDecrement: function() {
             var app = App;
             var size = (app.readerData.fSize >= app.readerData.minFontSize ? app.readerData.fSize - 10 : app.readerData.fSize);
             app.updatedReaderData('fSize', size)
             app.el.css('font-size', app.readerData.fSize + '%');
+            return app;
         },
-        contrastIncrement: function() {
-            console.log('event');
-        },
-        contrastDecrement: function() {
-            console.log('event');
+        contrastToggle: function() {
+            var app = App;
+            var lightCss = {},
+                darkCss = {},
+                isLight = (app.readerData.contrast === 'light' ? true : false);
+
+            var lightCss = {
+                'background-color':'#333',
+                'color':'#FEFEFE'
+            };
+
+            var darkCss = {
+                'background-color':'#FFF',
+                'color':'#000'
+            };
+
+            if (isLight) {
+                app.readerData.contrast = 'dark';
+                app.el.css(darkCss);
+            } else {
+                app.readerData.contrast = 'light';
+                app.el.css(lightCss);
+            }
+
+            return app;
+
         }
     }
 });

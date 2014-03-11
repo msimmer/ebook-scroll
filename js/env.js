@@ -5,7 +5,7 @@ App = {
         firstPage: null, // (string) url
         lastPage: null, // (string) url
         scrollPosition: {}, // (obj) containing src: (str) url, pos: (int) main.scrollTop()
-        scrollState: 'pause', // (str) pause or play
+        isScrolling: false, // (bool) true/false
         defaultFontSize: 18, // (int) default body font-size in px
         fSize: 100, // (int) percent of main's font-size, default 100%
         maxFontSize: 180, // (int) max font size in %

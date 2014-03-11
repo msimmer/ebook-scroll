@@ -35,8 +35,14 @@ $.extend(App, {
 
         var that = this;
 
+        var textCss = {};
+        var textCss = {
+            'font-size': '',
+            'color': ''
+        };
+
         $.each(that.textElements, function(i, o) {
-            that.el.find(o).css('font-size', '');
+            that.el.find(o).css(textCss);
         });
     },
 
@@ -48,7 +54,20 @@ $.extend(App, {
             that.el.find(i).css('font-size', o.fSize);
         });
 
-        this.el.css('font-size', this.readerData.fSize + '%');
+        var mainCss = {};
+        var mainCss = {
+            'font-size': this.readerData.fSize + '%',
+            '-webkit-transition': 'background-color 250ms ease-out', // contrast toggle
+            '-moz-transition': 'background-color 250ms ease-out',
+            '-o-transition': 'background-color 250ms ease-out',
+            'transition': 'background-color 250ms ease-out',
+            '-webkit-transition': 'color 250ms ease-out',
+            '-moz-transition': 'color 250ms ease-out',
+            '-o-transition': 'color 250ms ease-out',
+            'transition': 'color 250ms ease-out'
+        };
+
+        this.el.css(mainCss);
 
     }
 
