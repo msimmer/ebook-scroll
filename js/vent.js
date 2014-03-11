@@ -7,7 +7,7 @@ $.extend(App, {
         '.font-inc, click': 'fontIncrement',
         '.font-dec, click': 'fontDecrement',
         '.contrast-toggle, click': 'contrastToggle',
-        'main a, click':'embeddedLinkClick'
+        'main a, click': 'embeddedLinkClick'
     },
     bindEventHandlers: function() {
 
@@ -59,6 +59,15 @@ $.extend(App, {
         speedDecrement: function() {
             console.log('event');
         },
+        getEndPosition: function() {
+            //
+        },
+        isChapterEnd: function() {
+            //
+        },
+        isBookEnd: function() {
+            //
+        },
         fontIncrement: function() {
             var app = App;
             var size = (app.readerData.fSize <= app.readerData.maxFontSize ? app.readerData.fSize + 10 : app.readerData.fSize);
@@ -93,10 +102,8 @@ $.extend(App, {
 
             if (nextContrast === 'dark') {
                 $('html *').css(darkCss);
-                app.el.css(darkCss);
             } else {
                 $('html *').css(lightCss);
-                app.el.css(lightCss);
             }
 
             contrastBtn.attr('data-contrast', prevContrast);
@@ -108,7 +115,7 @@ $.extend(App, {
             return app;
 
         },
-        embeddedLinkClick:function(e){
+        embeddedLinkClick: function(e) {
 
             e.preventDefault();
 
@@ -119,14 +126,15 @@ $.extend(App, {
 
             if (ext) {
                 routeInternalLink(href);
-            } else{
+            } else {
                 routeInternalLink(href);
             }
 
-            function routeInternalLink(url){
+            function routeInternalLink(url) {
                 app.loadChapter(url);
             }
-            function routeExternalLink(url){
+
+            function routeExternalLink(url) {
                 target.attr('target', '_blank');
                 target.trigger('click');
             }

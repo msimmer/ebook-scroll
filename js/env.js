@@ -11,7 +11,8 @@ App = {
         maxFontSize: 180, // (int) max font size in %
         minFontSize: 70, // (int) min font size in %
         contrast: 'light', // (str) light or dark
-        speed: 0 // (int) scroll speed
+        speed: 0, // (int) scroll speed
+        components:[] // (array) ordered list of ebook chapters pulled from <spine>
     },
 
     // fns
@@ -33,6 +34,7 @@ App = {
     loadChapter: function(url) {
         this.el.load(url);
         this.updatedReaderData('currentPage', url);
+        this.saveLocation();
     },
 
     saveLocation: function() {
@@ -109,6 +111,10 @@ App = {
 
             localStorage.setItem('clientBook', JSON.stringify(clientBook));
         }
+    },
+
+    goToNextChapter:function(){
+        //
     },
 
     getJsonData: function() {
