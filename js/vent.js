@@ -49,7 +49,45 @@ $.extend(App, {
             return that;
         },
         startScrolling: function() {
-            //
+
+            var elem = document.getElementById('animatedElem'),
+                startTime = null,
+                endPos = 500, // in pixels
+                duration = 2000; // in milliseconds
+
+            function render(time) {
+                if (time === undefined) {
+                    time = new Date().getTime();
+                }
+                if (startTime === null) {
+                    startTime = time;
+                }
+
+                elem.style.left = ((time - startTime) / duration * endPos % endPos) + 'px';
+            }
+
+            var globalID;
+
+            function repeatOften() {
+                render();
+                globalID = requestAnimationFrame(repeatOften);
+            }
+
+            $("#start").on("click", function() {
+                globalID = requestAnimationFrame(repeatOften);
+            });
+
+            $("#stop").on("click", function() {
+                cancelAnimationFrame(globalID);
+            });
+
+            // elem.onclick = function() {
+            //     (function animationLoop() {
+            //         render();
+            //         requestAnimationFrame(animationLoop, elem);
+            //     })();
+            // };
+
         },
         stopScrolling: function() {
             //
@@ -95,16 +133,16 @@ $.extend(App, {
 
             if (nextContrast === 'dark') {
                 $('html,body,main').css({
-                    backgroundColor:'#333'
+                    backgroundColor: '#333'
                 });
-                $.each(that.textElements, function(i,o){
+                $.each(that.textElements, function(i, o) {
                     $(o).removeClass('lightCss').addClass('darkCss');
                 });
             } else {
                 $('html,body,main').css({
-                    backgroundColor:'#FFF'
+                    backgroundColor: '#FFF'
                 });
-                $.each(that.textElements, function(i,o){
+                $.each(that.textElements, function(i, o) {
                     $(o).removeClass('darkCss').addClass('lightCss');
                 });
             }
