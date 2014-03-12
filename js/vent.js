@@ -50,36 +50,54 @@ $.extend(App, {
         },
         startScrolling: function() {
 
-            var elem = document.getElementById('animatedElem'),
-                startTime = null,
-                endPos = 500, // in pixels
-                duration = 2000; // in milliseconds
+            var that = App;
 
-            function render(time) {
-                if (time === undefined) {
-                    time = new Date().getTime();
-                }
-                if (startTime === null) {
-                    startTime = time;
-                }
+            scrollInterval = setInterval(function() {
+                that.el.scrollTop(that.el.scrollTop() + 1);
+                // if (scrollData.stopPos[1] === true) {
+                // clearInterval(scrollInterval);
+                // removeHandlers();
+                // console.log('document end');
+                // console.log('finished: ' + scrollData.stopPos[1]);
+                // }
+            }, 60);
 
-                elem.style.left = ((time - startTime) / duration * endPos % endPos) + 'px';
-            }
 
-            var globalID;
+            /**
+             *
+             * refactor to include following rFA
+             *
+             */
+            // var elem = document.getElementById('animatedElem'),
+            //     startTime = null,
+            //     endPos = 500, // in pixels
+            //     duration = 2000; // in milliseconds
 
-            function repeatOften() {
-                render();
-                globalID = requestAnimationFrame(repeatOften);
-            }
+            // function render(time) {
+            //     if (time === undefined) {
+            //         time = new Date().getTime();
+            //     }
+            //     if (startTime === null) {
+            //         startTime = time;
+            //     }
 
-            $("#start").on("click", function() {
-                globalID = requestAnimationFrame(repeatOften);
-            });
+            //     elem.style.left = ((time - startTime) / duration * endPos % endPos) + 'px';
+            // }
 
-            $("#stop").on("click", function() {
-                cancelAnimationFrame(globalID);
-            });
+            // var globalID;
+
+            // function repeatOften() {
+            //     render();
+            //     globalID = requestAnimationFrame(repeatOften);
+            // }
+
+            // $("#start").on("click", function() {
+            //     globalID = requestAnimationFrame(repeatOften);
+            // });
+
+            // $("#stop").on("click", function() {
+            //     cancelAnimationFrame(globalID);
+            // });
 
             // elem.onclick = function() {
             //     (function animationLoop() {

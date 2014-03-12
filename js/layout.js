@@ -73,7 +73,7 @@ $.extend(App, {
                 bracket = $('.bracket');
 
             bracket.css({
-                top: el.offset().top - 30,
+                top: el.offset().top - 45,
                 left: el.offset().left - 80,
                 width: 40,
                 height: el.height() + 60,

@@ -47,6 +47,9 @@ $.extend(App, {
 
             // if local storage already existed, return to last reading position
             that.goToPreviousLocation();
+
+            // start scrolling!
+            that.events.startScrolling();
         });
 
     }
