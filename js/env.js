@@ -101,7 +101,15 @@ App = {
 
         $.when(promisePageLoad).then(function(data) {
             that.el.empty();
-            that.el.html(data);
+            var content = $('<section/>', {
+                id:'page',
+                css:{
+                    margin:0,
+                    padding:0,
+                    border:0
+                }
+            }).html(data);
+            that.el.html(content);
             that.readerData.currentPage = url;
             that.updateLocalStorage('clientBook', 'currentPage', url);
         });

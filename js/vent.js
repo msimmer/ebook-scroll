@@ -111,10 +111,10 @@ $.extend(App, {
             //
         },
         speedIncrement: function() {
-            console.log('event');
+            //
         },
         speedDecrement: function() {
-            console.log('event');
+            //
         },
         getEndPosition: function() {
             //

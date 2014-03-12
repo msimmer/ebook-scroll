@@ -3,11 +3,36 @@ $.extend(App, {
 
     layout: {
 
-        countPages: function() {},
-        counterIncrement: function() {},
-        counterDecrement: function() {},
+        countPages: function() {
 
-        resizeStopped: function() {},
+            var that = App;
+
+            var frameH = that.el.height(),
+                page = that.el.find('section#page'),
+                pageH = page.height(),
+                totalPageIndicator = $('.total-page-count'),
+                currentPageIndicator = $('.current-page-count');
+
+            var t = Math.round(pageH / frameH);
+
+            function getCurrentPage(){
+                return Math.round((-(page.offset().top - that.el.offset().top) / frameH) + 1);
+            }
+
+            totalPageIndicator.html(t);
+            currentPageIndicator.html(getCurrentPage());
+
+            that.el.scroll(function() {
+                currentPageIndicator.html(getCurrentPage());
+            })
+
+            return that;
+
+        },
+
+        resizeStopped: function() {
+            //
+        },
 
         targetContainerWidth: function() {
             var that = App;
