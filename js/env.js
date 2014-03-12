@@ -21,6 +21,45 @@ App = {
         that.readerData[prop] = attr;
     },
 
+    debug: function() {
+        //
+    },
+
+    getFromLocalStorage: function(obj, prop, attr) {
+
+        var that = this;
+
+        var parsedObj = JSON.parse(localStorage.getItem(obj));
+
+        if (attr !== 'null' && typeof attr !== 'undefined') {
+            return parsedObj[prop][attr];
+        }
+        return parsedObj[prop];
+    },
+
+    updateLocalStorage: function(obj, prop, attr, nestedAttr) {
+
+        if (localStorage.getItem(obj) === null) return this; // localstorage was not added on page load or was removed
+        if (prop === null || attr === null) {
+            throw 'updateLocalStorage() null argument';
+        }
+
+        var that = this;
+
+        var parsedObj = JSON.parse(localStorage.getItem(obj));
+
+        if (typeof nestedAttr !== 'undefined') {
+            parsedObj[prop][attr] = nestedAttr;
+        } else if (typeof nestedAttr === 'undefined') {
+            parsedObj[prop] = attr;
+        }
+
+        localStorage.setItem(obj, JSON.stringify(parsedObj));
+
+        return that;
+
+    },
+
     setDomElements: function() {
 
         var that = this;
@@ -52,29 +91,43 @@ App = {
 
         var that = this;
 
-        that.el.load(url);
         that.updatedReaderData('currentPage', url);
+
+        var promisePageLoad = $.get(url).success(function(data) {
+            // console.log('success');
+        }).error(function(x, s, r) {
+            console.log('Error: ' + ' ' + r);
+        });
+
+        $.when(promisePageLoad).then(function(data) {
+            that.el.empty();
+            that.el.html(data);
+            that.readerData.currentPage = url;
+            that.updateLocalStorage('clientBook', 'currentPage', url);
+        });
 
         return that;
 
     },
-
     saveLocation: function() {
 
         var that = this;
 
-        var page = that.readerData.currentPage,
-            scrollPos = {};
+        that.updatedReaderData(
+            'clientBook',
+            'scrollPosition',
+            that.readerData.currentPage,
+            that.readerData.scrollPosition[that.readerData.currentPage]
+        );
 
-        that.readerData.scrollPosition[page] = that.el.scrollTop();
-        var scrollPos = that.readerData.scrollPosition;
+        that.readerData.scrollPosition[that.readerData.currentPage] = that.el.scrollTop();
 
-        var clientBook = {
-            currentPage: page,
-            scrollPosition: scrollPos
-        };
-
-        localStorage.setItem('clientBook', JSON.stringify(clientBook));
+        that.updateLocalStorage(
+            'clientBook',
+            'scrollPosition',
+            that.readerData.currentPage,
+            that.readerData.scrollPosition[that.readerData.currentPage]
+        );
 
         return that;
 
@@ -120,12 +173,7 @@ App = {
 
         var that = this;
 
-        var pos = function() {
-            var localStorageBook = JSON.parse(localStorage.getItem('clientBook')),
-                lastPos = localStorageBook.scrollPosition[that.readerData.currentPage];
-
-            return lastPos;
-        };
+        var pos = that.getFromLocalStorage('clientBook', 'scrollPosition', that.readerData.currentPage);
 
         setTimeout(function() {
             that.el.scrollTop(pos);

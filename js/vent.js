@@ -52,15 +52,15 @@ $.extend(App, {
 
             var that = App;
 
-            scrollInterval = setInterval(function() {
-                that.el.scrollTop(that.el.scrollTop() + 1);
+            // scrollInterval = setInterval(function() {
+                // that.el.scrollTop(that.el.scrollTop() + 1);
                 // if (scrollData.stopPos[1] === true) {
                 // clearInterval(scrollInterval);
                 // removeHandlers();
                 // console.log('document end');
                 // console.log('finished: ' + scrollData.stopPos[1]);
                 // }
-            }, 60);
+            // }, 60);
 
 
             /**

@@ -23,14 +23,17 @@ $.extend(App, {
                     href: o.src,
                     click: function(e) {
                         e.preventDefault();
+                        that.saveLocation();
                         that.loadChapter(o.src);
                         that.goToPreviousLocation();
                     }
                 }).appendTo($('<li/>').appendTo('.chapters'));
             })
+        }).error(function(x, s, r) {
+            console.log('Error: ' + ' ' + r);
         });
 
-        $.when(promiseJSON).then(function(){
+        $.when(promiseJSON).then(function() {
 
             // get local storage or set it if it's === null
             that.getLocation();
@@ -61,6 +64,8 @@ $(function() {
     var app = App;
 
     app.init();
+
+    app.readerData.scroollPosition = {};
 
     // events
     window.onunload = window.onbeforeunload = (function() {
