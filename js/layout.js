@@ -15,16 +15,59 @@ $.extend(App, {
 
             var t = Math.round(pageH / frameH);
 
-            function getCurrentPage(){
+            function getCurrentPage() {
                 return Math.round((-(page.offset().top - that.el.offset().top) / frameH) + 1);
             }
 
             totalPageIndicator.html(t);
             currentPageIndicator.html(getCurrentPage());
 
-            that.el.scroll(function() {
+            var scrollInt;
+
+            function restInterval() {
+                console.log('rest called');
+                clearInterval(scrollInt);
+                scrollInt = setInterval(updatePageCount, 4999); // adjust to ~ speed-1
+            }
+
+            function quickInterval() {
+                console.log('quick called');
+                clearInterval(scrollInt);
+                scrollInt = setInterval(updatePageCount, 60);
+            }
+
+            var isActive;
+
+            that.el.on({
+                mouseenter: function(e) {
+
+                    quickInterval();
+                    var pastOffset = page.offset().top;
+
+                    isActive = setInterval(function() {
+                        var offset = page.offset().top;
+
+                        if (Math.abs(offset) < Math.abs(pastOffset) + 35 || Math.abs(offset) > Math.abs(pastOffset) - 35) {
+                            clearInterval(isActive);
+                            restInterval();
+                        }
+
+                    }, 1000);
+
+                },
+                mousemove: function(e) {
+                    //
+                },
+                mouseleave: function() {
+                    clearInterval(isActive);
+                    restInterval();
+                }
+            });
+
+            function updatePageCount() {
+                console.log('update called');
                 currentPageIndicator.html(getCurrentPage());
-            })
+            }
 
             return that;
 
