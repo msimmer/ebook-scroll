@@ -30,7 +30,7 @@ $.extend(App, {
                 }).appendTo($('<li/>').appendTo('.chapters'));
             })
         }).error(function(x, s, r) {
-            console.log('Error: ' + ' ' + r);
+            if (App.debug) console.log('Error: ' + ' ' + r);
         });
 
         $.when(promiseJSON).then(function() {
@@ -90,7 +90,6 @@ $(function() {
     $(window).on('resize', function(){
         var intrvl;
         intrvl = setInterval(function(){
-            console.log('int');
             app.layout.adjustFramePosition();
             clearInterval(intrvl);
         }, 60);

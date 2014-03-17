@@ -127,7 +127,7 @@ $.extend(App, {
             var speed = that.readerData.scrollSpeed;
             that.readerData.scrollSpeed -= 15;
             that.events.startScrolling();
-            console.log(that.readerData.scrollSpeed);
+            if (App.debug) console.log(that.readerData.scrollSpeed);
         },
         speedDecrement: function() {
 
@@ -136,7 +136,7 @@ $.extend(App, {
             var speed = that.readerData.scrollSpeed;
             that.readerData.scrollSpeed += 15;
             that.events.startScrolling();
-            console.log(that.readerData.scrollSpeed);
+            if (App.debug) console.log(that.readerData.scrollSpeed);
         },
         getEndPosition: function() {
             //

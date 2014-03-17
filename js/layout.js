@@ -5,7 +5,7 @@ $.extend(App, {
 
         countPages: function() {
 
-            console.log('Counting pages');
+            if (App.debug) console.log('Counting pages');
 
             var that = App;
 
@@ -29,11 +29,8 @@ $.extend(App, {
         },
 
         resizeStopped: function() {
-
             var that = App;
-
             that.layout.adjustFramePosition();
-
         },
 
         targetContainerWidth: function() {
@@ -43,7 +40,7 @@ $.extend(App, {
         },
         targetContainerHeight: function() {
             var that = App;
-            var h = parseInt(that.el.css('line-height'), 10) * 7;
+            var h = parseInt(that.el.css('line-height'), 10) * 9;
             return h;
         },
         setFrameHeight: function() {

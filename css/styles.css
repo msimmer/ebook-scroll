@@ -97,8 +97,8 @@ ul.components li {
 }
 ul.controls li a {
     display: inline-block;
-    height: 40px;
-    width: 40px;
+    height: 30px;
+    width: 30px;
     margin:0;
 }
 ul.controls li a:first-child{
