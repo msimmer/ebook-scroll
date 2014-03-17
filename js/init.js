@@ -81,7 +81,7 @@ $(function() {
         app.events.listenForPageMove(interval);
 
         // start scrolling!
-        // app.events.startScrolling();
+        app.events.startScrolling();
     }, 500);
 
     // app.readerData.scroollPosition = {};
@@ -90,9 +90,9 @@ $(function() {
     $(window).on('resize', function(){
         var intrvl;
         intrvl = setInterval(function(){
-            app.layout.adjustFramePosition();
             clearInterval(intrvl);
-        }, 60);
+            app.layout.resizeStopped();
+        }, 100);
     });
 
     window.onunload = window.onbeforeunload = (function() {

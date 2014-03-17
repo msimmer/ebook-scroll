@@ -9,6 +9,7 @@ App = {
         firstPage: null, // (string) url
         lastPage: null, // (string) url
         scrollPosition: {}, // (obj) containing src: (str) url, pos: (int) main.scrollTop()
+        endPosition: null,
 
         // User data
         defaultFontSize: 18, // (int) default body font-size in px

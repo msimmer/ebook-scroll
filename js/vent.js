@@ -52,13 +52,11 @@ $.extend(App, {
 
             var that = App;
 
-            // console.log(intrvl);
             clearInterval(that.readerData.scrollInt);
-            that.readerData.scrollInt = setInterval(that.layout.countPages, intrvl); // adjust to ~ speed-1
+            that.readerData.scrollInt = setInterval(that.layout.countPages, intrvl);
 
         },
         listenSlower: function() {
-            // console.log('listen slow');
 
             var that = App;
 
@@ -67,18 +65,11 @@ $.extend(App, {
 
         },
         listenFaster: function(e) {
-            // console.log('listen fast');
 
             var that = App;
 
             var intrvl = that.readerData.scrollSpeed * 2.5; // abstract
             that.events.listenForPageMove(intrvl);
-
-            // var timer;
-            // timer = setTimeout(function(e){
-            //     that.events.listenSlower();
-            //     clearTimeout(timer);
-            // }, 2000); // abstract for page speed
 
         },
         playPause: function(callback) {
@@ -118,7 +109,12 @@ $.extend(App, {
 
         },
         stopScrolling: function() {
-            //
+
+            var that = App;
+
+            if (that.readerData.scrollInterval !== null) {
+                clearTimeout(that.readerData.scrollInterval);
+            }
         },
         speedIncrement: function() {
 
@@ -137,9 +133,6 @@ $.extend(App, {
             that.readerData.scrollSpeed += 15;
             that.events.startScrolling();
             if (App.debug) console.log(that.readerData.scrollSpeed);
-        },
-        getEndPosition: function() {
-            //
         },
         isChapterEnd: function() {
             //

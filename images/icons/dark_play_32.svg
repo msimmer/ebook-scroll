@@ -3,6 +3,6 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="32px" height="32px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" xml:space="preserve">
-<rect x="0.5" y="0.5" fill='#fff' stroke="#fff" stroke-miterlimit="10" width="31" height="31"/>
-<polygon points="12,8.18 23.506,16.315 12,24.451 "/>
+<rect x="0.5" y="0.5" fill='#333' stroke="#fff" stroke-miterlimit="10" width="31" height="31"/>
+<polygon fill='#fff' points="12,8.18 23.506,16.315 12,24.451 "/>
 </svg>

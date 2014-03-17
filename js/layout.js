@@ -28,8 +28,13 @@ $.extend(App, {
 
         },
 
+        getEndPosition: function() {
+            //
+        },
+
         resizeStopped: function() {
             var that = App;
+            that.layout.countPages();
             that.layout.adjustFramePosition();
         },
 
@@ -88,6 +93,12 @@ $.extend(App, {
             nav.css({
                 top: h - frameMidH - 30
             });
+
+            if ((frame.width() + nav.width() * 3) >= $(window).width()) {
+                nav.hide();
+            } else{
+                nav.show();
+            }
 
             return that;
 
