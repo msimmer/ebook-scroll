@@ -29,7 +29,11 @@ $.extend(App, {
         },
 
         resizeStopped: function() {
-            //
+
+            var that = App;
+
+            that.layout.adjustFramePosition();
+
         },
 
         targetContainerWidth: function() {
@@ -72,15 +76,20 @@ $.extend(App, {
             this.setFrameHeight();
             this.setFrameWidth();
 
-            var h = $(window).height() / 2,
+            var frame = that.el,
+                nav = $('nav'),
+                h = $(window).height() / 2,
                 w = $(window).width() / 2,
-                frame = that.el,
                 frameMidH = frame.height() / 2,
                 frameMidW = frame.width() / 2;
 
             frame.css({
                 top: h - frameMidH - 30,
                 left: w - frameMidW
+            });
+
+            nav.css({
+                top: h - frameMidH - 30
             });
 
             return that;

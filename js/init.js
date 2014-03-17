@@ -72,40 +72,30 @@ $(function() {
 
     app.init();
 
-    // dev
-
-    //    $.debounce = function(func, wait, immediate) {
-    //     var timeout;
-    //     return function() {
-    //         var context = this, args = arguments;
-    //         var later = function() {
-    //             timeout = null;
-    //             if (!immediate) func.apply(context, args);
-    //         };
-    //         var callNow = immediate && !timeout;
-    //         clearTimeout(timeout);
-    //         timeout = setTimeout(later, wait);
-    //         if (callNow) func.apply(context, args);
-    //     };
-    // };
-
-
     setTimeout(function() {
         // set reader elements
         app.layout.countPages();
 
         var interval = app.readerData.scrollSpeed * 60; // abstract
 
-        console.log(interval);
         app.events.listenForPageMove(interval);
 
         // start scrolling!
-        app.events.startScrolling();
+        // app.events.startScrolling();
     }, 500);
 
     // app.readerData.scroollPosition = {};
 
     // events
+    $(window).on('resize', function(){
+        var intrvl;
+        intrvl = setInterval(function(){
+            console.log('int');
+            app.layout.adjustFramePosition();
+            clearInterval(intrvl);
+        }, 60);
+    });
+
     window.onunload = window.onbeforeunload = (function() {
 
         var writeComplete = false;

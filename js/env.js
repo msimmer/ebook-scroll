@@ -68,13 +68,7 @@ App = {
     setDomElements: function() {
 
         var that = this;
-
-        var currentContrast = that.readerData.contrast,
-            nextContrast = $('.contrast-toggle').attr('data-contrast');
-
-        if (currentContrast === nextContrast) {
-            that.events.contrastToggle();
-        }
+        that.events.contrastToggle(that.readerData.contrast);
 
     },
 

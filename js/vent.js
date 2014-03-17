@@ -28,13 +28,13 @@ $.extend(App, {
 
             var that = App;
 
-            console.log(intrvl);
+            // console.log(intrvl);
             clearInterval(that.readerData.scrollInt);
             that.readerData.scrollInt = setInterval(that.layout.countPages, intrvl); // adjust to ~ speed-1
 
         },
         listenSlower: function() {
-            console.log('listen slow');
+            // console.log('listen slow');
 
             var that = App;
 
@@ -43,7 +43,7 @@ $.extend(App, {
 
         },
         listenFaster: function(e) {
-            console.log('listen fast');
+            // console.log('listen fast');
 
             var that = App;
 
@@ -78,9 +78,6 @@ $.extend(App, {
                 callback();
             }
 
-            // dev
-            playBtn.html(state === 'pause' ? '&#9654;' : '&mid; &mid;');
-
             return that;
         },
         startScrolling: function() {
@@ -92,9 +89,7 @@ $.extend(App, {
             }
 
             that.readerData.scrollInterval = setInterval(function() {
-
                 that.el.scrollTop(that.el.scrollTop() + 1);
-
             }, that.readerData.scrollSpeed);
 
         },
@@ -144,22 +139,26 @@ $.extend(App, {
             that.layout.adjustFramePosition();
             return that;
         },
-        contrastToggle: function() {
-            var that = App;
-            var lightCss = {},
-                darkCss = {},
-                contrastBtn = $('.controls').find('.contrast-toggle'),
-                prevContrast = (contrastBtn.attr('data-contrast') === 'light' ? 'dark' : 'light'),
-                nextContrast = contrastBtn.attr('data-contrast');
+        contrastToggle: function(e) {
 
-            if (nextContrast === 'dark') {
+            var that = App;
+
+            // if (contrast === that.readerData.contrast) {
+            //     return;
+            // }
+
+            var contrast = e && e.target ? $(e.target).attr('data-contrast') : e,
+                lightCss = {},
+                darkCss = {};
+
+            if (contrast === 'dark') {
                 $('html,body,main').css({
                     backgroundColor: '#333'
                 });
                 $.each(that.textElements, function(i, o) {
                     $(o).removeClass('lightCss').addClass('darkCss');
                 });
-            } else {
+            } else if (contrast === 'light') {
                 $('html,body,main').css({
                     backgroundColor: '#FFF'
                 });
@@ -168,11 +167,7 @@ $.extend(App, {
                 });
             }
 
-            contrastBtn.attr('data-contrast', prevContrast);
-            that.updatedReaderData('contrast', nextContrast);
-
-            // dev
-            contrastBtn.text(prevContrast);
+            that.updatedReaderData('contrast', contrast);
 
             return that;
 

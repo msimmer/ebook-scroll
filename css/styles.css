@@ -52,7 +52,7 @@
     scrollbar-shadow-color: transparent;
     scrollbar-dark-shadow-color: transparent;
 }
- html, body, div, hr, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+html, body, div, hr, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
     margin:0;
     padding:0;
     border:0;
@@ -69,6 +69,7 @@ html, body {
 }
 nav {
     position: absolute;
+    margin:0 25px;
     height: 100%;
 }
 a {
@@ -78,6 +79,7 @@ a {
     margin:25px;
     padding:0;
     color:black;
+    display: none;
 }
 ul.controls, ul.components {
     list-style: none;
@@ -86,16 +88,21 @@ ul.controls, ul.components {
     top: 0;
     right:0;
 }
-ul.controls li, ul.components li {
+ul.controls li{
     display: block;
-    border:1px solid blue;
-    width: 50px;
-    height: 50px;
+}
+ul.components li {
+    width: 35px;
+    height: 35px;
 }
 ul.controls li a {
-    display: block;
-    height: 100%;
-    width: 100%;
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    margin:0;
+}
+ul.controls li a:first-child{
+    margin-top:0;
 }
 ul.components li a {
     display: block;
@@ -103,7 +110,7 @@ ul.components li a {
     width: 100%;
 }
 ul.chapters {
-    /*display: none;*/
+    display: none;
 }
 ul.chapters li {
     margin: 0 10px;
@@ -129,18 +136,19 @@ main a, main a:link, main a:active, main a:visited {
 .runner-help {
     position: absolute;
     bottom: 0;
-    left: 0;
+    right: 0;
     margin:25px;
     padding:0;
     text-decoration: none;
 }
 .runner-help a {
+    /*color:black;*/
     text-decoration: none;
 }
 .runner-page-count {
     position: absolute;
     bottom: 0;
-    right: 0;
+    left: 0;
     margin: 25px;
     padding:0;
 }
@@ -150,3 +158,82 @@ main a, main a:link, main a:active, main a:visited {
 .lightCss {
     color:#000;
 }
+
+/**
+* icons
+*/
+/* Light */
+    .lightCss [data-state='play'] {
+        background: url(../images/icons/light_stop_32.svg?89f51375-2d81-47fe-9db4-3dd0835ae2db) no-repeat center center;
+        background-size:contain;
+    }
+    .lightCss [data-state='pause'] {
+        background: url(../images/icons/light_play_32.svg?89f51375-2d81-47fe-9db4-3dd0835ae2db) no-repeat center center;
+        background-size:contain;
+    }
+    .lightCss .speed-inc {
+        background: url(../images/icons/light_faster_32.svg?89f51375-2d81-47fe-9db4-3dd0835ae2db) no-repeat center center;
+        background-size:contain;
+    }
+    .lightCss .speed-dec {
+        background: url(../images/icons/light_slower_32.svg?89f51375-2d81-47fe-9db4-3dd0835ae2db) no-repeat center center;
+        background-size:contain;
+    }
+    .lightCss .font-inc {
+        background: url(../images/icons/light_bigger_32.svg?89f51375-2d81-47fe-9db4-3dd0835ae2db) no-repeat center center;
+        background-size:contain;
+    }
+    .lightCss .font-dec {
+        background: url(../images/icons/light_smaller_32.svg?89f51375-2d81-47fe-9db4-3dd0835ae2db) no-repeat center center;
+        background-size:contain;
+    }
+    .lightCss .contrast-light {
+        background: url(../images/icons/light_lighter_32.svg?89f51375-2d81-47fe-9db4-3dd0835ae2db) no-repeat center center;
+        background-size:contain;
+    }
+    .lightCss .contrast-dark {
+        background: url(../images/icons/light_darker_32.svg?89f51375-2d81-47fe-9db4-3dd0835ae2db) no-repeat center center;
+        background-size:contain;
+    }
+    .lightCss .full-screen {
+        background: url(../images/icons/light_fullscreen_32.svg?89f51375-2d81-47fe-9db4-3dd0835ae2db) no-repeat center center;
+        background-size:contain;
+    }
+
+    /* Dark */
+    .darkCss [data-state='play'] {
+        background: url(../images/icons/dark_stop_32.svg?89f51375-2d81-47fe-9db4-3dd0835ae2db) no-repeat center center;
+        background-size:contain;
+    }
+    .darkCss [data-state='pause'] {
+        background: url(../images/icons/dark_play_32.svg?89f51375-2d81-47fe-9db4-3dd0835ae2db) no-repeat center center;
+        background-size:contain;
+    }
+    .darkCss .speed-inc {
+        background: url(../images/icons/dark_faster_32.svg?89f51375-2d81-47fe-9db4-3dd0835ae2db) no-repeat center center;
+        background-size:contain;
+    }
+    .darkCss .speed-dec {
+        background: url(../images/icons/dark_slower_32.svg?89f51375-2d81-47fe-9db4-3dd0835ae2db) no-repeat center center;
+        background-size:contain;
+    }
+    .darkCss .font-inc {
+        background: url(../images/icons/dark_bigger_32.svg?89f51375-2d81-47fe-9db4-3dd0835ae2db) no-repeat center center;
+        background-size:contain;
+    }
+    .darkCss .font-dec {
+        background: url(../images/icons/dark_smaller_32.svg?89f51375-2d81-47fe-9db4-3dd0835ae2db) no-repeat center center;
+        background-size:contain;
+    }
+    .darkCss .contrast-light {
+        background: url(../images/icons/dark_lighter_32.svg?89f51375-2d81-47fe-9db4-3dd0835ae2db) no-repeat center center;
+        background-size:contain;
+    }
+    .darkCss .contrast-dark {
+        background: url(../images/icons/dark_darker_32.svg?89f51375-2d81-47fe-9db4-3dd0835ae2db) no-repeat center center;
+        background-size:contain;
+    }
+    .darkCss .full-screen {
+        background: url(../images/icons/dark_fullscreen_32.svg?89f51375-2d81-47fe-9db4-3dd0835ae2db) no-repeat center center;
+        background-size:contain;
+    }
