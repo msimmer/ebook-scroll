@@ -21,7 +21,7 @@ App = {
         // Reader data
         scrollSpeed: 60, // (int) scroll speed
         isScrolling: false, // (bool) true/false
-        scrollInterval: null,
+        scrollInt: null //(function) stores current scrollInterval
     },
 
     // fns

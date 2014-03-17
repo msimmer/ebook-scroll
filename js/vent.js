@@ -48,49 +48,39 @@ $.extend(App, {
                 }
             }
         },
-        listenForPageMove: function(intrvl) {
-
-            var that = App;
-
-            clearInterval(that.readerData.scrollInt);
-            that.readerData.scrollInt = setInterval(that.layout.countPages, intrvl);
-
-        },
+        listenForPageMove: null, // storing our setInterval
         listenSlower: function() {
-
             var that = App;
-
+            // if (that.readerData.isScrolling === false) return;
             var intrvl = that.readerData.scrollSpeed * 60; // abstract
-            that.events.listenForPageMove(intrvl);
+            window.clearInterval(that.events.listenForPageMove);
+            that.events.listenForPageMove = setInterval(function() {
+                that.layout.countPages();
+            }, intrvl);
 
         },
-        listenFaster: function(e) {
-
+        listenFaster: function() {
             var that = App;
-
-            var intrvl = that.readerData.scrollSpeed * 2.5; // abstract
-            that.events.listenForPageMove(intrvl);
+            // if (that.readerData.isScrolling === false) return;
+            var intrvl = that.readerData.scrollSpeed * 3; // abstract
+            window.clearInterval(that.events.listenForPageMove);
+            that.events.listenForPageMove = setInterval(function() {
+                that.layout.countPages();
+            }, intrvl);
 
         },
-        playPause: function(callback) {
+        playPause: function() {
 
             var that = App,
-                isScrolling = that.readerData.isScrolling,
                 playBtn = $('.controls').find('.play-btn'),
-                state = (isScrolling ? 'pause' : 'play');
+                state = that.readerData.isScrolling ? 'play' : 'pause';
 
             playBtn.attr('data-state', state);
 
-            if (isScrolling) {
-                that.readerData.isScrolling = false;
+            if (that.readerData.isScrolling === false) {
                 that.events.startScrolling();
             } else {
-                that.readerData.isScrolling = true;
                 that.events.stopScrolling();
-            }
-
-            if (typeof callback === 'function') {
-                callback();
             }
 
             return that;
@@ -99,22 +89,28 @@ $.extend(App, {
 
             var that = App;
 
-            if (that.readerData.scrollInterval !== null) {
-                clearTimeout(that.readerData.scrollInterval);
-            }
+            window.clearInterval(that.readerData.scrollInt);
 
-            that.readerData.scrollInterval = setInterval(function() {
+            that.readerData.scrollInt = setInterval(function() {
                 that.el.scrollTop(that.el.scrollTop() + 1);
             }, that.readerData.scrollSpeed);
+
+            that.readerData.isScrolling = true;
+            that.events.listenSlower();
 
         },
         stopScrolling: function() {
 
             var that = App;
 
-            if (that.readerData.scrollInterval !== null) {
-                clearTimeout(that.readerData.scrollInterval);
-            }
+            var playBtn = $('.controls').find('.play-btn').attr('data-state', 'play');
+
+            console.log('stopped');
+            window.clearInterval(that.readerData.scrollInt);
+            window.clearInterval(that.events.listenForPageMove);
+
+            that.readerData.isScrolling = false;
+
         },
         speedIncrement: function() {
 

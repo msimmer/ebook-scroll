@@ -76,15 +76,10 @@ $(function() {
         // set reader elements
         app.layout.countPages();
 
-        var interval = app.readerData.scrollSpeed * 60; // abstract
-
-        app.events.listenForPageMove(interval);
-
         // start scrolling!
         app.events.startScrolling();
-    }, 500);
 
-    // app.readerData.scroollPosition = {};
+    }, 500);
 
     // events
     $(window).on('resize', function(){

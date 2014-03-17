@@ -24,12 +24,16 @@ $.extend(App, {
             totalPageIndicator.html(t);
             currentPageIndicator.html(getCurrentPage());
 
+            var timer;
+            if (t === getCurrentPage()) {
+                timer = setTimeout(function(){
+                    clearTimeout(timer);
+                    that.events.stopScrolling();
+                }, 2000);
+            }
+
             return that;
 
-        },
-
-        getEndPosition: function() {
-            //
         },
 
         resizeStopped: function() {
@@ -96,7 +100,7 @@ $.extend(App, {
 
             if ((frame.width() + nav.width() * 3) >= $(window).width()) {
                 nav.hide();
-            } else{
+            } else {
                 nav.show();
             }
 
