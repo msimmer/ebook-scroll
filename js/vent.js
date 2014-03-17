@@ -7,6 +7,7 @@ $.extend(App, {
         '.font-inc, click': 'fontIncrement',
         '.font-dec, click': 'fontDecrement',
         '.contrast-toggle, click': 'contrastToggle',
+        '.full-screen, click': 'toggleFullScreen',
         'main a, click': 'embeddedLinkClick',
         'main, mouseenter': 'listenFaster',
         'main, mouseleave': 'listenSlower'
@@ -24,6 +25,29 @@ $.extend(App, {
 
     },
     events: {
+        toggleFullScreen: function() {
+            if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                } else if (document.documentElement.msRequestFullscreen) {
+                    document.documentElement.msRequestFullscreen();
+                } else if (document.documentElement.mozRequestFullScreen) {
+                    document.documentElement.mozRequestFullScreen();
+                } else if (document.documentElement.webkitRequestFullscreen) {
+                    document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                }
+            }
+        },
         listenForPageMove: function(intrvl) {
 
             var that = App;
