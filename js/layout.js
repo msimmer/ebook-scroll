@@ -5,6 +5,8 @@ $.extend(App, {
 
         countPages: function() {
 
+            console.log('Counting pages');
+
             var that = App;
 
             var frameH = that.el.height(),
@@ -21,53 +23,6 @@ $.extend(App, {
 
             totalPageIndicator.html(t);
             currentPageIndicator.html(getCurrentPage());
-
-            var scrollInt;
-
-            function restInterval() {
-                console.log('rest called');
-                clearInterval(scrollInt);
-                scrollInt = setInterval(updatePageCount, 4999); // adjust to ~ speed-1
-            }
-
-            function quickInterval() {
-                console.log('quick called');
-                clearInterval(scrollInt);
-                scrollInt = setInterval(updatePageCount, 60);
-            }
-
-            var isActive;
-
-            that.el.on({
-                mouseenter: function(e) {
-
-                    quickInterval();
-                    var pastOffset = page.offset().top;
-
-                    isActive = setInterval(function() {
-                        var offset = page.offset().top;
-
-                        if (Math.abs(offset) < Math.abs(pastOffset) + 35 || Math.abs(offset) > Math.abs(pastOffset) - 35) {
-                            clearInterval(isActive);
-                            restInterval();
-                        }
-
-                    }, 1000);
-
-                },
-                mousemove: function(e) {
-                    //
-                },
-                mouseleave: function() {
-                    clearInterval(isActive);
-                    restInterval();
-                }
-            });
-
-            function updatePageCount() {
-                console.log('update called');
-                currentPageIndicator.html(getCurrentPage());
-            }
 
             return that;
 
@@ -126,29 +81,6 @@ $.extend(App, {
             frame.css({
                 top: h - frameMidH - 30,
                 left: w - frameMidW
-            });
-
-            that.layout.adjustBracketPosition();
-
-            return that;
-
-        },
-        adjustBracketPosition: function() {
-
-            var that = App;
-
-            var el = that.el,
-                bracket = $('.bracket');
-
-            bracket.css({
-                top: el.offset().top - 45,
-                left: el.offset().left - 80,
-                width: 40,
-                height: el.height() + 60,
-                borderTop: '15px solid black',
-                borderLeft: '15px solid black',
-                borderBottom: '15px solid black',
-                position: 'absolute'
             });
 
             return that;

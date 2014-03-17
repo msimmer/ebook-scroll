@@ -51,8 +51,15 @@ $.extend(App, {
             // if local storage already existed, return to last reading position
             that.goToPreviousLocation();
 
-            // start scrolling!
-            that.events.startScrolling();
+            // // set reader elements
+            // that.layout.countPages();
+
+            // var interval = that.scrollSpeed * 4999; // abstract
+            // that.events.listenForPageMove(interval);
+
+            // // start scrolling!
+            // that.events.startScrolling();
+
         });
 
     }
@@ -83,9 +90,18 @@ $(function() {
     // };
 
 
-    setTimeout(function(){
+    setTimeout(function() {
+        // set reader elements
         app.layout.countPages();
-    },500);
+
+        var interval = app.readerData.scrollSpeed * 60; // abstract
+
+        console.log(interval);
+        app.events.listenForPageMove(interval);
+
+        // start scrolling!
+        app.events.startScrolling();
+    }, 500);
 
     // app.readerData.scroollPosition = {};
 

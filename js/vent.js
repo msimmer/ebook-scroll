@@ -7,7 +7,9 @@ $.extend(App, {
         '.font-inc, click': 'fontIncrement',
         '.font-dec, click': 'fontDecrement',
         '.contrast-toggle, click': 'contrastToggle',
-        'main a, click': 'embeddedLinkClick'
+        'main a, click': 'embeddedLinkClick',
+        'main, mouseenter': 'listenFaster',
+        'main, mouseleave': 'listenSlower'
     },
     bindEventHandlers: function() {
 
@@ -22,6 +24,39 @@ $.extend(App, {
 
     },
     events: {
+        listenForPageMove: function(intrvl) {
+
+            var that = App;
+
+            console.log(intrvl);
+            clearInterval(that.readerData.scrollInt);
+            that.readerData.scrollInt = setInterval(that.layout.countPages, intrvl); // adjust to ~ speed-1
+
+        },
+        listenSlower: function() {
+            console.log('listen slow');
+
+            var that = App;
+
+            var intrvl = that.readerData.scrollSpeed * 60; // abstract
+            that.events.listenForPageMove(intrvl);
+
+        },
+        listenFaster: function(e) {
+            console.log('listen fast');
+
+            var that = App;
+
+            var intrvl = that.readerData.scrollSpeed * 2.5; // abstract
+            that.events.listenForPageMove(intrvl);
+
+            // var timer;
+            // timer = setTimeout(function(e){
+            //     that.events.listenSlower();
+            //     clearTimeout(timer);
+            // }, 2000); // abstract for page speed
+
+        },
         playPause: function(callback) {
 
             var that = App,
@@ -52,71 +87,37 @@ $.extend(App, {
 
             var that = App;
 
-            scrollInterval = setInterval(function() {
+            if (that.readerData.scrollInterval !== null) {
+                clearTimeout(that.readerData.scrollInterval);
+            }
+
+            that.readerData.scrollInterval = setInterval(function() {
+
                 that.el.scrollTop(that.el.scrollTop() + 1);
 
-                // if (scrollData.stopPos[1] === true) {
-                // clearInterval(scrollInterval);
-                // removeHandlers();
-                // console.log('document end');
-                // console.log('finished: ' + scrollData.stopPos[1]);
-                // }
-
-            }, 60);
-
-
-            /**
-             *
-             * refactor to include following rFA
-             *
-             */
-            // var elem = document.getElementById('animatedElem'),
-            //     startTime = null,
-            //     endPos = 500, // in pixels
-            //     duration = 2000; // in milliseconds
-
-            // function render(time) {
-            //     if (time === undefined) {
-            //         time = new Date().getTime();
-            //     }
-            //     if (startTime === null) {
-            //         startTime = time;
-            //     }
-
-            //     elem.style.left = ((time - startTime) / duration * endPos % endPos) + 'px';
-            // }
-
-            // var globalID;
-
-            // function repeatOften() {
-            //     render();
-            //     globalID = requestAnimationFrame(repeatOften);
-            // }
-
-            // $("#start").on("click", function() {
-            //     globalID = requestAnimationFrame(repeatOften);
-            // });
-
-            // $("#stop").on("click", function() {
-            //     cancelAnimationFrame(globalID);
-            // });
-
-            // elem.onclick = function() {
-            //     (function animationLoop() {
-            //         render();
-            //         requestAnimationFrame(animationLoop, elem);
-            //     })();
-            // };
+            }, that.readerData.scrollSpeed);
 
         },
         stopScrolling: function() {
             //
         },
         speedIncrement: function() {
-            //
+
+            var that = App;
+
+            var speed = that.readerData.scrollSpeed;
+            that.readerData.scrollSpeed -= 15;
+            that.events.startScrolling();
+            console.log(that.readerData.scrollSpeed);
         },
         speedDecrement: function() {
-            //
+
+            var that = App;
+
+            var speed = that.readerData.scrollSpeed;
+            that.readerData.scrollSpeed += 15;
+            that.events.startScrolling();
+            console.log(that.readerData.scrollSpeed);
         },
         getEndPosition: function() {
             //

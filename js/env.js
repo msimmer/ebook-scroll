@@ -1,18 +1,23 @@
 App = {
     el: $('main'),
+    dev: true,
     readerData: {
+        // App data
+        components: [], // (array) ordered list of ebook chapters pulled from <spine>
         currentPage: null, // (string) url
         firstPage: null, // (string) url
         lastPage: null, // (string) url
         scrollPosition: {}, // (obj) containing src: (str) url, pos: (int) main.scrollTop()
-        isScrolling: false, // (bool) true/false
+        // User data
         defaultFontSize: 18, // (int) default body font-size in px
         fSize: 100, // (int) percent of main's font-size, default 100%
         maxFontSize: 180, // (int) max font size in %
         minFontSize: 70, // (int) min font size in %
         contrast: 'light', // (str) light or dark
-        speed: 0, // (int) scroll speed
-        components: [] // (array) ordered list of ebook chapters pulled from <spine>
+        // Reader data
+        scrollSpeed: 60, // (int) scroll speed
+        isScrolling: false, // (bool) true/false
+        scrollInterval: null,
     },
 
     // fns
@@ -71,20 +76,6 @@ App = {
             that.events.contrastToggle();
         }
 
-        var bracket = $('<div/>', {
-            class: 'bracket',
-            css: {
-                top: that.el.offset().top - 25,
-                left: that.el.offset().left - 25,
-                width: 60,
-                height: that.el.height() + 50,
-                borderTop: '15px solid black',
-                borderLeft: '15px solid black',
-                borderBottom: '15px solid black',
-                position: 'absolute'
-            }
-        }).appendTo('body');
-
     },
 
     loadChapter: function(url) {
@@ -102,11 +93,11 @@ App = {
         $.when(promisePageLoad).then(function(data) {
             that.el.empty();
             var content = $('<section/>', {
-                id:'page',
-                css:{
-                    margin:0,
-                    padding:0,
-                    border:0
+                id: 'page',
+                css: {
+                    margin: 0,
+                    padding: 0,
+                    border: 0
                 }
             }).html(data);
             that.el.html(content);
@@ -117,6 +108,7 @@ App = {
         return that;
 
     },
+
     saveLocation: function() {
 
         var that = this;
