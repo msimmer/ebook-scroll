@@ -8,9 +8,7 @@ $.extend(App, {
         '.font-dec, click': 'fontDecrement',
         '.contrast-toggle, click': 'contrastToggle',
         '.full-screen, click': 'toggleFullScreen',
-        'main a, click': 'embeddedLinkClick',
-        'main, mouseenter': 'listenFaster',
-        'main, mouseleave': 'listenSlower'
+        'main a, click': 'embeddedLinkClick'
     },
     bindEventHandlers: function() {
         var that = this;
@@ -45,22 +43,18 @@ $.extend(App, {
                 }
             }
         },
-        listenForPageMove: null, // storing setInterval
-        listenSlower: function() {
+        listenForPageChangeInterval: null, // storing setInterval
+        listenForPageChange: function() {
             var that = App;
             if (that.readerData.isScrolling === false) return;
-            var intrvl = that.readerData.scrollSpeed * 60; // abstract
-            window.clearInterval(that.events.listenForPageMove);
-            that.events.listenForPageMove = setInterval(function() {
-                that.layout.countPages();
-            }, intrvl);
-        },
-        listenFaster: function() {
-            var that = App;
-            if (that.readerData.isScrolling === false) return;
-            var intrvl = that.readerData.scrollSpeed * 3; // abstract
-            window.clearInterval(that.events.listenForPageMove);
-            that.events.listenForPageMove = setInterval(function() {
+
+            var fontSize = $(that.el.first('p')).css('font-size');
+            var lineHeight = Math.floor(parseInt(fontSize.replace('px', '')) * 1.5);
+
+            var intrvl = (lineHeight * that.el.height()) * (that.readerData.scrollSpeed / 30);
+
+            window.clearInterval(that.events.listenForPageChangeInterval);
+            that.events.listenForPageChangeInterval = setInterval(function() {
                 that.layout.countPages();
             }, intrvl);
         },
@@ -71,7 +65,7 @@ $.extend(App, {
             playBtn.attr('data-state', state);
             if (that.readerData.isScrolling === false) {
                 that.events.startScrolling();
-            } else {
+            } else if (that.readerData.isScrolling === true) {
                 that.events.stopScrolling();
             }
             return that;
@@ -83,14 +77,14 @@ $.extend(App, {
                 that.el.scrollTop(that.el.scrollTop() + 1);
             }, that.readerData.scrollSpeed);
             that.readerData.isScrolling = true;
-            that.events.listenSlower();
+            that.events.listenForPageChange();
         },
         stopScrolling: function() {
             var that = App;
             var playBtn = $('.controls').find('.play-btn').attr('data-state', 'play');
             if (App.debug) console.log('Stopped');
             window.clearInterval(that.readerData.scrollInt);
-            window.clearInterval(that.events.listenForPageMove);
+            window.clearInterval(that.events.listenForPageChangeInterval);
             that.readerData.isScrolling = false;
         },
         speedIncrement: function() {
@@ -119,17 +113,18 @@ $.extend(App, {
         },
         fontIncrement: function() {
             var that = App;
-            var size = (that.readerData.fSize <= that.readerData.maxFontSize ? that.readerData.fSize + 10 : that.readerData.fSize);
-            that.el.css('font-size', that.readerData.fSize + '%');
+            var size = (that.readerData.fSize <= that.readerData.maxFontSize) ? that.readerData.fSize + 10 : that.readerData.fSize;
+            that.el.css('font-size', size + '%');
             that.layout.adjustFramePosition();
             that.updatedReaderData('fSize', size);
+            console.log(that.readerData.fSize);
             that.updateUserPreferences();
             return that;
         },
         fontDecrement: function() {
             var that = App;
-            var size = (that.readerData.fSize >= that.readerData.minFontSize ? that.readerData.fSize - 10 : that.readerData.fSize);
-            that.el.css('font-size', that.readerData.fSize + '%');
+            var size = (that.readerData.fSize >= that.readerData.minFontSize) ? that.readerData.fSize - 10 : that.readerData.fSize;
+            that.el.css('font-size', size + '%');
             that.layout.adjustFramePosition();
             that.updatedReaderData('fSize', size);
             that.updateUserPreferences();
