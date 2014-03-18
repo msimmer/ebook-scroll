@@ -22,11 +22,9 @@ $.extend(App, {
                 page = main.find('#page');
 
             if (main.height() - page.height() >= -main.scrollTop()) {
-                console.log(main.height() - page.height() >= -main.scrollTop());
                 if (that.readerData.currentPage === that.readerData.lastPage) {
                     that.events.isBookEnd();
                 } else if (that.readerData.currentPage !== that.readerData.lastPage) {
-                    console.log(main.height() - page.height() >= -main.scrollTop());
                     that.events.isChapterEnd();
                 }
             }

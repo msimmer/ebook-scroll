@@ -88,7 +88,7 @@ $.extend(App, {
         stopScrolling: function() {
             var that = App;
             var playBtn = $('.controls').find('.play-btn').attr('data-state', 'play');
-            console.log('stopped');
+            if (App.debug) console.log('Stopped');
             window.clearInterval(that.readerData.scrollInt);
             window.clearInterval(that.events.listenForPageMove);
             that.readerData.isScrolling = false;
@@ -96,14 +96,14 @@ $.extend(App, {
         speedIncrement: function() {
             var that = App;
             that.events.stopScrolling();
-            that.readerData.scrollSpeed += 10;
+            that.readerData.scrollSpeed -= 10;
             that.events.startScrolling();
             that.updateUserPreferences();
         },
         speedDecrement: function() {
             var that = App;
             that.events.stopScrolling();
-            that.readerData.scrollSpeed -= 10;
+            that.readerData.scrollSpeed += 10;
             that.events.startScrolling();
             that.updateUserPreferences();
         },

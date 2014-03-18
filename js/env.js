@@ -94,10 +94,8 @@ App = {
         return that;
     },
     getUserPreferences: function() {
-        console.log('get user prefs');
         var that = this;
         if (localStorage.getItem('userPreferences') !== null) {
-            console.log('getting user prefs');
             var obj = JSON.parse(localStorage.getItem('userPreferences'));
             $.extend(that.readerData, obj);
         } else {
@@ -111,7 +109,6 @@ App = {
         return that;
     },
     updateUserPreferences: function() {
-        console.log('update prefs');
         var that = this;
         var userPreferences = {
             fSize: that.readerData.fSize,
