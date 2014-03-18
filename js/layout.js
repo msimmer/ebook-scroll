@@ -59,7 +59,6 @@ $.extend(App, {
             var that = App;
             var targetWidth = that.layout.targetContainerWidth();
             that.el.css({
-                'width': targetWidth,
                 'max-width': targetWidth
             });
             return that;
@@ -74,18 +73,47 @@ $.extend(App, {
                 w = $(window).width() / 2,
                 frameMidH = frame.height() / 2,
                 frameMidW = frame.width() / 2;
-            frame.css({
-                top: h - frameMidH - 30,
-                left: w - frameMidW
-            });
+
             nav.css({
                 top: h - frameMidH - 30
             });
-            if ((frame.width() + nav.width() * 3) >= $(window).width()) {
-                nav.hide();
+
+            var overlap = (frame.width() + nav.width() * 3) >= $(window).width();
+
+            if (overlap) {
+                nav.addClass('mobile');
             } else {
-                nav.show();
+                nav.removeClass('mobile');
             }
+
+            var targetWidth = that.layout.targetContainerWidth(),
+                smallScreen = targetWidth >= $(window).width(),
+                mobileCss = {},
+                mobileCss = {
+                    top: h - frameMidH - 30,
+                    left: 0,
+                    marginTop: 0,
+                    marginRight: 25,
+                    marginBottom: 0,
+                    marginLeft: 25
+                },
+                desktopCss = {},
+                desktopCss = {
+                    top: h - frameMidH - 30,
+                    left: w - frameMidW,
+                    marginTop: 0,
+                    marginRight: 0,
+                    marginBottom: 0,
+                    marginLeft: 0
+                };
+
+
+            if (smallScreen) {
+                frame.css(mobileCss);
+            } else {
+                frame.css(desktopCss);
+            }
+
             return that;
         }
     }

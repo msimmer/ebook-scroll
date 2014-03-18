@@ -137,7 +137,7 @@ main {
     background: white;
     overflow: scroll;
     /* font-size-adjust variables */
-    max-width: 600px;
+    /*max-width: 600px;*/
     max-height: 200px;
 }
 main a, main a:link, main a:active, main a:visited {
@@ -242,3 +242,68 @@ main a, main a:link, main a:active, main a:visited {
         background: url(../images/icons/dark_fullscreen_32.svg?39ae7f0b-94b0-4a59-87a1-a8a9c675a7bf) no-repeat center center;
         background-size:contain;
     }
+
+/**
+*
+* Media Queries
+*
+* iPad portrait -> landscape
+*
+*/
+
+nav.mobile{
+    top:0!important;
+    text-align: justify;
+    margin:25px 0;
+    width: 100%;
+}
+nav.mobile ul.controls{
+    display: inline;
+}
+nav.mobile ul.controls li{
+    display: inline;
+}
+nav.mobile ul.controls li:last-child:after{
+    content: '.';
+    visibility: hidden;
+    display: inline-block;
+    width: 100%;
+}
+nav.mobile ul.controls li a{
+    /*padding:0 50px;*/
+}
+nav.mobile ul.controls li:first-child a{
+    /*padding:0 50px 0 0;*/
+}
+nav.mobile ul.controls li:last-child a{
+    /*padding:0 0 0 50px;*/
+}
+
+@media screen and (min-width: 481px) and (max-width: 1024px) {
+    body:before{
+        position: fixed;
+        content: 'iPad portrait -> landscape';
+        visibility: visible;
+        color: black;
+        background: white;
+        display: none;
+    }
+}
+
+/**
+*
+* Mobile phones -> iPad portrait
+*
+*/
+
+@media screen and (min-width: 320px) and (max-width: 481px) {
+    body:before{
+        position: fixed;
+        content: 'Mobile phones -> iPad portrait';
+        visibility: visible;
+        color: black;
+        background: white;
+    }
+
+
+}
