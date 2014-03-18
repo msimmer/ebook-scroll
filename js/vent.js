@@ -70,65 +70,52 @@ $.extend(App, {
 
         },
         playPause: function() {
-
             var that = App,
                 playBtn = $('.controls').find('.play-btn'),
                 state = that.readerData.isScrolling ? 'play' : 'pause';
-
             playBtn.attr('data-state', state);
-
             if (that.readerData.isScrolling === false) {
                 that.events.startScrolling();
             } else {
                 that.events.stopScrolling();
             }
-
             return that;
         },
         startScrolling: function() {
-
             var that = App;
-
             window.clearInterval(that.readerData.scrollInt);
-
             that.readerData.scrollInt = setInterval(function() {
                 that.el.scrollTop(that.el.scrollTop() + 1);
             }, that.readerData.scrollSpeed);
-
             that.readerData.isScrolling = true;
             that.events.listenSlower();
-
         },
         stopScrolling: function() {
-
             var that = App;
-
             var playBtn = $('.controls').find('.play-btn').attr('data-state', 'play');
-
             console.log('stopped');
             window.clearInterval(that.readerData.scrollInt);
             window.clearInterval(that.events.listenForPageMove);
-
             that.readerData.isScrolling = false;
-
         },
         speedIncrement: function() {
-
             var that = App;
-
-            var speed = that.readerData.scrollSpeed;
-            that.readerData.scrollSpeed -= 15;
+            that.events.stopScrolling();
+            that.readerData.scrollSpeed += 10;
+            that.readerData.scrollSpeed = speed;
             that.events.startScrolling();
+            that.updateUserPreferences();
             if (App.debug) console.log(that.readerData.scrollSpeed);
         },
         speedDecrement: function() {
-
             var that = App;
-
-            var speed = that.readerData.scrollSpeed;
-            that.readerData.scrollSpeed += 15;
+            that.events.stopScrolling();
+            that.readerData.scrollSpeed -= 10;
             that.events.startScrolling();
+            that.updateUserPreferences();
             if (App.debug) console.log(that.readerData.scrollSpeed);
+            console.log(that.readerData.scrollSpeed);
+            console.log(speed);
         },
         isChapterEnd: function() {
             //
@@ -139,75 +126,53 @@ $.extend(App, {
         fontIncrement: function() {
             var that = App;
             var size = (that.readerData.fSize <= that.readerData.maxFontSize ? that.readerData.fSize + 10 : that.readerData.fSize);
-            that.updatedReaderData('fSize', size);
             that.el.css('font-size', that.readerData.fSize + '%');
             that.layout.adjustFramePosition();
+            that.updatedReaderData('fSize', size);
+            that.updateUserPreferences();
             return that;
         },
         fontDecrement: function() {
             var that = App;
             var size = (that.readerData.fSize >= that.readerData.minFontSize ? that.readerData.fSize - 10 : that.readerData.fSize);
-            that.updatedReaderData('fSize', size);
             that.el.css('font-size', that.readerData.fSize + '%');
             that.layout.adjustFramePosition();
+            that.updatedReaderData('fSize', size);
+            that.updateUserPreferences();
             return that;
         },
         contrastToggle: function(e) {
-
             var that = App;
-
-            // if (contrast === that.readerData.contrast) {
-            //     return;
-            // }
-
-            var contrast = e && e.target ? $(e.target).attr('data-contrast') : e,
-                lightCss = {},
-                darkCss = {};
-
+            var contrast = e && e.target ? $(e.target).attr('data-contrast') : e;
             if (contrast === 'dark') {
-                $('html,body,main').css({
-                    backgroundColor: '#333'
-                });
-                $.each(that.textElements, function(i, o) {
-                    $(o).removeClass('lightCss').addClass('darkCss');
-                });
+                $('html').addClass('darkCss');
+                $('html').removeClass('lightCss');
             } else if (contrast === 'light') {
-                $('html,body,main').css({
-                    backgroundColor: '#FFF'
-                });
-                $.each(that.textElements, function(i, o) {
-                    $(o).removeClass('darkCss').addClass('lightCss');
-                });
+                $('html').addClass('lightCss');
+                $('html').removeClass('darkCss');
             }
-
             that.updatedReaderData('contrast', contrast);
-
+            that.updateUserPreferences();
             return that;
-
         },
         embeddedLinkClick: function(e) {
-
             var that = App;
             var target = $(e.target),
                 href = target.attr('href'),
                 ext = href.match(/^http/);
-
             if (ext) {
                 routeExternalLink(href);
             } else {
                 e.preventDefault();
                 routeInternalLink(href);
             }
-
             function routeInternalLink(url) {
                 that.loadChapter(url);
             }
-
             function routeExternalLink(url) {
                 e.stopPropagation();
                 target.attr('target', '_blank');
             }
-
         }
     }
 });

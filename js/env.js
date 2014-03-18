@@ -129,16 +129,19 @@ App = {
 
     getUserPreferences: function() {
 
+        console.log('get user prefs');
+
         var that = this;
 
         if (localStorage.getItem('userPreferences') !== null) {
+            console.log('getting user prefs');
             var obj = JSON.parse(localStorage.getItem('userPreferences'));
             $.extend(that.readerData, obj);
         } else {
             var userPreferences = {
                 fSize: that.readerData.fSize,
                 contrast: that.readerData.contrast,
-                speed: that.readerData.speed
+                scrollSpeed: that.readerData.scrollSpeed
             };
             localStorage.setItem('userPreferences', JSON.stringify(userPreferences));
         }
@@ -149,12 +152,14 @@ App = {
 
     updateUserPreferences: function() {
 
+        console.log('update prefs');
+
         var that = this;
 
         var userPreferences = {
             fSize: that.readerData.fSize,
             contrast: that.readerData.contrast,
-            speed: that.readerData.speed
+            scrollSpeed: that.readerData.scrollSpeed
         };
 
         localStorage.setItem('userPreferences', JSON.stringify(userPreferences));

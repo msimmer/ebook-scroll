@@ -79,7 +79,7 @@ $(function() {
         // start scrolling!
         app.events.startScrolling();
 
-    }, 500);
+    }, 1500);
 
     // events
     $(window).on('resize', function(){
