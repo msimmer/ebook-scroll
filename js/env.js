@@ -2,7 +2,6 @@ App = {
     el: $('main'),
     debug: true,
     readerData: {
-
         // App data
         components: [], // (array) ordered list of ebook chapters pulled from <spine>
         currentPage: null, // (string) url
@@ -10,80 +9,57 @@ App = {
         lastPage: null, // (string) url
         scrollPosition: {}, // (obj) containing src: (str) url, pos: (int) main.scrollTop()
         endPosition: null,
-
         // User data
         defaultFontSize: 18, // (int) default body font-size in px
         fSize: 100, // (int) percent of main's font-size, default 100%
         maxFontSize: 180, // (int) max font size in %
         minFontSize: 70, // (int) min font size in %
         contrast: 'light', // (str) light or dark
-
         // Reader data
         scrollSpeed: 60, // (int) scroll speed
         isScrolling: false, // (bool) true/false
         scrollInt: null //(function) stores current scrollInterval
     },
-
     // fns
     updatedReaderData: function(prop, attr) {
         var that = this;
         that.readerData[prop] = attr;
     },
-
     getFromLocalStorage: function(obj, prop, attr) {
-
         var that = this;
-
         var parsedObj = JSON.parse(localStorage.getItem(obj));
-
         if (attr !== 'null' && typeof attr !== 'undefined') {
             return parsedObj[prop][attr];
         }
         return parsedObj[prop];
     },
-
     updateLocalStorage: function(obj, prop, attr, nestedAttr) {
-
         if (localStorage.getItem(obj) === null) return this; // localstorage was not added on page load or was removed
         if (prop === null || attr === null) {
             throw 'updateLocalStorage() null argument';
         }
-
         var that = this;
-
         var parsedObj = JSON.parse(localStorage.getItem(obj));
-
         if (typeof nestedAttr !== 'undefined') {
             parsedObj[prop][attr] = nestedAttr;
         } else if (typeof nestedAttr === 'undefined') {
             parsedObj[prop] = attr;
         }
-
         localStorage.setItem(obj, JSON.stringify(parsedObj));
-
         return that;
-
     },
-
     setDomElements: function() {
-
         var that = this;
         that.events.contrastToggle(that.readerData.contrast);
-
     },
-
     loadChapter: function(url) {
-
         var that = this;
-
         that.updatedReaderData('currentPage', url);
-
         var promisePageLoad = $.get(url).success(function(data) {
             if (App.debug) console.log('success');
         }).error(function(x, s, r) {
             if (App.debug) console.log('Error: ' + ' ' + r);
         });
-
         $.when(promisePageLoad).then(function(data) {
             that.el.empty();
             var content = $('<section/>', {
@@ -98,41 +74,28 @@ App = {
             that.readerData.currentPage = url;
             that.updateLocalStorage('clientBook', 'currentPage', url);
         });
-
         return that;
-
     },
-
     saveLocation: function() {
-
         var that = this;
-
         that.updatedReaderData(
             'clientBook',
             'scrollPosition',
             that.readerData.currentPage,
             that.readerData.scrollPosition[that.readerData.currentPage]
         );
-
         that.readerData.scrollPosition[that.readerData.currentPage] = that.el.scrollTop();
-
         that.updateLocalStorage(
             'clientBook',
             'scrollPosition',
             that.readerData.currentPage,
             that.readerData.scrollPosition[that.readerData.currentPage]
         );
-
         return that;
-
     },
-
     getUserPreferences: function() {
-
         console.log('get user prefs');
-
         var that = this;
-
         if (localStorage.getItem('userPreferences') !== null) {
             console.log('getting user prefs');
             var obj = JSON.parse(localStorage.getItem('userPreferences'));
@@ -145,47 +108,29 @@ App = {
             };
             localStorage.setItem('userPreferences', JSON.stringify(userPreferences));
         }
-
         return that;
-
     },
-
     updateUserPreferences: function() {
-
         console.log('update prefs');
-
         var that = this;
-
         var userPreferences = {
             fSize: that.readerData.fSize,
             contrast: that.readerData.contrast,
             scrollSpeed: that.readerData.scrollSpeed
         };
-
         localStorage.setItem('userPreferences', JSON.stringify(userPreferences));
-
         return that;
-
     },
-
     goToPreviousLocation: function() {
-
         var that = this;
-
         var pos = that.getFromLocalStorage('clientBook', 'scrollPosition', that.readerData.currentPage);
-
         setTimeout(function() {
             that.el.scrollTop(pos);
         }, 50);
-
         return that;
-
     },
-
     getLocation: function() {
-
         var that = this;
-
         if (localStorage.getItem('clientBook') !== null) {
             var obj = JSON.parse(localStorage.getItem('clientBook'));
             that.readerData.currentPage = obj.currentPage;
@@ -195,20 +140,14 @@ App = {
                 currentPage: that.readerData.firstPage,
                 scrollPosition: {}
             };
-
             that.readerData.currentPage = that.readerData.firstPage;
             that.readerData.scrollPosition[that.readerData.firstPage] = 0;
-
             clientBook.scrollPosition[that.readerData.firstPage] = 0;
             localStorage.setItem('clientBook', JSON.stringify(clientBook));
         }
-
         return that;
-
     },
-
     goToNextChapter: function() {
         return this;
     }
-
 }

@@ -13,16 +13,13 @@ $.extend(App, {
         'main, mouseleave': 'listenSlower'
     },
     bindEventHandlers: function() {
-
         var that = this;
-
         $.each(that.eventHandlers, function(k, v) {
             var split = k.split(","),
                 el = $.trim(split[0]),
                 trigger = $.trim(split[1]);
             $(document).delegate(el, trigger, that.events[v]);
         });
-
     },
     events: {
         toggleFullScreen: function() {
@@ -48,26 +45,24 @@ $.extend(App, {
                 }
             }
         },
-        listenForPageMove: null, // storing our setInterval
+        listenForPageMove: null, // storing setInterval
         listenSlower: function() {
             var that = App;
-            // if (that.readerData.isScrolling === false) return;
+            if (that.readerData.isScrolling === false) return;
             var intrvl = that.readerData.scrollSpeed * 60; // abstract
             window.clearInterval(that.events.listenForPageMove);
             that.events.listenForPageMove = setInterval(function() {
                 that.layout.countPages();
             }, intrvl);
-
         },
         listenFaster: function() {
             var that = App;
-            // if (that.readerData.isScrolling === false) return;
+            if (that.readerData.isScrolling === false) return;
             var intrvl = that.readerData.scrollSpeed * 3; // abstract
             window.clearInterval(that.events.listenForPageMove);
             that.events.listenForPageMove = setInterval(function() {
                 that.layout.countPages();
             }, intrvl);
-
         },
         playPause: function() {
             var that = App,
@@ -102,10 +97,8 @@ $.extend(App, {
             var that = App;
             that.events.stopScrolling();
             that.readerData.scrollSpeed += 10;
-            that.readerData.scrollSpeed = speed;
             that.events.startScrolling();
             that.updateUserPreferences();
-            if (App.debug) console.log(that.readerData.scrollSpeed);
         },
         speedDecrement: function() {
             var that = App;
@@ -113,15 +106,16 @@ $.extend(App, {
             that.readerData.scrollSpeed -= 10;
             that.events.startScrolling();
             that.updateUserPreferences();
-            if (App.debug) console.log(that.readerData.scrollSpeed);
-            console.log(that.readerData.scrollSpeed);
-            console.log(speed);
         },
         isChapterEnd: function() {
-            //
+            var that = App;
+            that.events.stopScrolling();
+            if (App.debug) console.log('Chapter end');
         },
         isBookEnd: function() {
-            //
+            var that = App;
+            that.events.stopScrolling();
+            if (App.debug) console.log('Book end');
         },
         fontIncrement: function() {
             var that = App;
@@ -143,14 +137,17 @@ $.extend(App, {
         },
         contrastToggle: function(e) {
             var that = App;
-            var contrast = e && e.target ? $(e.target).attr('data-contrast') : e;
+            var contrast = e && e.target ? $(e.target).attr('data-contrast') : e,
+                html = $('html');
+
             if (contrast === 'dark') {
-                $('html').addClass('darkCss');
-                $('html').removeClass('lightCss');
+                html.addClass('darkCss');
+                html.removeClass('lightCss');
             } else if (contrast === 'light') {
-                $('html').addClass('lightCss');
-                $('html').removeClass('darkCss');
+                html.addClass('lightCss');
+                html.removeClass('darkCss');
             }
+
             that.updatedReaderData('contrast', contrast);
             that.updateUserPreferences();
             return that;
@@ -160,15 +157,19 @@ $.extend(App, {
             var target = $(e.target),
                 href = target.attr('href'),
                 ext = href.match(/^http/);
+
             if (ext) {
                 routeExternalLink(href);
             } else {
                 e.preventDefault();
                 routeInternalLink(href);
             }
+
             function routeInternalLink(url) {
                 that.loadChapter(url);
+                that.saveLocation();
             }
+
             function routeExternalLink(url) {
                 e.stopPropagation();
                 target.attr('target', '_blank');
