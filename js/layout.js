@@ -65,29 +65,15 @@ $.extend(App, {
         },
         adjustFramePosition: function() {
             var that = App;
+
             this.setFrameHeight();
             this.setFrameWidth();
+
             var frame = that.el,
-                nav = $('nav'),
                 h = $(window).height() / 2,
                 w = $(window).width() / 2,
                 frameMidH = frame.height() / 2,
-                frameMidW = frame.width() / 2,
-                ctrl = nav.find('.controls'),
-                ctrlH = ctrl.height();
-
-            var overlap = frame.position().left <= 115; // initial sidebar width + margin
-
-            if (overlap) {
-                nav.addClass('mobile').css({
-                    width: frame.width()
-                });
-            } else {
-                nav.removeClass('mobile').css({
-                    top: (nav.height() / 2) - (ctrlH / 2) - 30,
-                    width: 66
-                });
-            }
+                frameMidW = frame.width() / 2;
 
             var targetWidth = that.layout.targetContainerWidth(),
                 smallScreen = targetWidth >= $(window).width(),
@@ -110,14 +96,39 @@ $.extend(App, {
                     marginLeft: 0
                 };
 
-
             if (smallScreen) {
                 frame.css(mobileCss);
             } else {
                 frame.css(desktopCss);
             }
 
+            this.adjustNavPosition();
+
             return that;
+        },
+        adjustNavPosition:function(){
+            var that = App;
+            var frame = that.el,
+                nav = $('nav'),
+                ctrl = nav.find('.controls'),
+                ctrlH = 180, // .controls height before mobile layout abstract
+                overlap = frame.position().left <= 115; // initial sidebar width + margin
+
+            if (overlap) {
+                nav.addClass('mobile');
+                nav.css({
+                    width: frame.width()
+                });
+            } else {
+                nav.removeClass('mobile');
+                nav.css({
+                    top: ($(window).height() / 2) - (ctrlH / 2) - 30,
+                    width: 66
+                });
+            }
+
+            return that;
+
         }
     }
 });

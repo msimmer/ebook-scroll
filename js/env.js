@@ -62,8 +62,7 @@ App = {
         }).error(function(x, s, r) {
             if (App.debug) console.log('Error: ' + ' ' + r);
         });
-        $.when(promisePageLoad).then(function(data) {
-            that.el.empty();
+        return $.when(promisePageLoad).done(function(data) {
             var content = $('<section/>', {
                 id: 'page',
                 css: {
@@ -75,8 +74,11 @@ App = {
             that.el.html(content);
             that.readerData.currentPage = url;
             that.updateLocalStorage('clientBook', 'currentPage', url);
+
+        }).then(function(){
+            that.layout.adjustFramePosition();
+            that.layout.countPages();
         });
-        return that;
     },
     saveLocation: function() {
         var that = this;

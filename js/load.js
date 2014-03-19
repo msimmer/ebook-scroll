@@ -1,23 +1,19 @@
+var app = window.App;
+
 // DOM ready
 $(function() {
-    var app = window.App;
+
     app.init();
-    setTimeout(function() {
 
-        // set reader elements
-        app.layout.countPages();
-
-        // start scrolling!
-        // app.events.startScrolling();
-    }, 1500);
-    // events
+    // window events
     $(window).on('resize', function() {
         var intrvl;
         intrvl = setInterval(function() {
             clearInterval(intrvl);
             app.layout.resizeStopped();
-        }, 100);
+        }, 50);
     });
+
     window.onunload = window.onbeforeunload = (function() {
         var writeComplete = false;
         return function() {
@@ -27,4 +23,5 @@ $(function() {
             app.updateUserPreferences();
         }
     }());
+
 });

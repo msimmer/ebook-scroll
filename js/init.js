@@ -24,21 +24,20 @@ $.extend(App, {
                         that.goToPreviousLocation();
                     }
                 }).appendTo($('<li/>').appendTo('.chapters'));
-            })
+            });
         }).error(function(x, s, r) {
             if (App.debug) console.log('Error: ' + ' ' + r);
         });
-        $.when(promiseJSON).then(function() {
+        $.when(promiseJSON).then(function(data) {
 
             // get local storage or set it if it's === null
             that.getLocation();
             that.getUserPreferences();
 
             // build DOM
-            that.removeElementStyles();
-            that.setDomElements();
-            that.setStyles();
-            that.layout.adjustFramePosition();
+            that.removeElementStyles(); // remove contrast color
+            that.setDomElements(); // add contrast color
+            that.setStyles(); // add fontsize, line-height
 
             // load the last page read, or the first page if local storage wasn't set
             that.loadChapter(that.readerData.currentPage);
@@ -46,13 +45,11 @@ $.extend(App, {
             // if local storage already existed, return to last reading position
             that.goToPreviousLocation();
 
-            // // set reader elements
-            // that.layout.countPages();
-            // var interval = that.scrollSpeed * 4999; // abstract
-            // that.events.listenForPageMove(interval);
-            // // start scrolling!
-            // that.events.startScrolling();
+            $('ul.controls, nav.mobile ul.controls, .runner-help, .runner-page-count').fadeIn(400);
+
+            console.log('when called');
 
         });
+
     }
 });
