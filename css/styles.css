@@ -79,6 +79,9 @@ html.darkCss{
 .darkCss body, .darkCss main, .lightCss body,.lightCss main{
     background-color: transparent!important;
 }
+body{
+    -webkit-overflow-scrolling: touch;
+}
 nav {
     position: absolute;
     margin:0 25px;

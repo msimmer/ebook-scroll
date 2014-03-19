@@ -26,4 +26,10 @@ $(function() {
         }
     }());
 
+    $(document).on('touchmove', function(e) {
+        if (!$(e.target).parents().is('main')) {
+            e.preventDefault();
+        }
+    });
+
 });
