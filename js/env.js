@@ -45,7 +45,7 @@ App = {
     updateLocalStorage: function(obj, prop, attr, nestedAttr) {
         if (localStorage.getItem(obj) === null) return this; // localstorage was not added on page load or was removed
         if (prop === null || attr === null) {
-            throw 'updateLocalStorage() null argument';
+            // throw 'updateLocalStorage() null argument';
         }
         var that = this;
         var parsedObj = JSON.parse(localStorage.getItem(obj));
@@ -62,13 +62,10 @@ App = {
         that.events.contrastToggle(that.readerData.contrast);
     },
     loadChapter: function(url) {
+        if (App.debug) console.log('Current page is ' + url);
         var that = this;
         that.updatedReaderData('currentPage', url);
-        var promisePageLoad = $.get(url).success(function(data) {
-            if (App.debug) console.log('Chapter loaded');
-        }).error(function(x, s, r) {
-            if (App.debug) console.log('Error: ' + ' ' + r);
-        });
+        var promisePageLoad = $.get(url);
         return $.when(promisePageLoad).done(function(data) {
             var content = $('<section/>', {
                 id: 'page',
@@ -81,12 +78,14 @@ App = {
             that.el.html(content);
             that.readerData.currentPage = url;
             that.updateLocalStorage('clientBook', 'currentPage', url);
+            if (App.debug) console.log('Local storage updated');
         }).then(function() {
             that.layout.adjustFramePosition();
             that.layout.countPages();
         });
     },
     saveLocation: function() {
+        if (App.debug) console.log('Saving current location');
         var that = this;
         that.updatedReaderData(
             'clientBook',
@@ -119,6 +118,7 @@ App = {
         return that;
     },
     updateUserPreferences: function() {
+        if (App.debug) console.log('Updating user preferences');
         var that = this;
         var userPreferences = {
             fSize: that.readerData.fSize,

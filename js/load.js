@@ -1,11 +1,9 @@
 var app = window.App;
 
-// DOM ready
 $(function() {
 
     app.init();
 
-    // window events
     window.addEventListener('orientationchange', app.events.orientationHasChanged);
 
     $(window).on('resize', function() {

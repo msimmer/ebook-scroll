@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Cardo';
+    src: url(../fonts/Cardo-Regular.ttf);
+    font-weight:400;
+}
 /* Webkit */
  ::-webkit-scrollbar {
     display:none;
@@ -180,78 +185,78 @@ section#page{
 */
 /* Light */
     .lightCss [data-state='pause'] {
-        background: url(../images/icons/light_stop_32.svg?c7d5d513-fbba-42cf-90c3-a267b773fa50) no-repeat center center;
+        background: url(../images/icons/light_stop_32.svg?083cde3a-7976-450c-bc0f-e8b734915544) no-repeat center center;
         background-size:contain;
     }
     .lightCss [data-state='play'] {
-        background: url(../images/icons/light_play_32.svg?433ab8a3-f71c-40e4-96e2-8f7dbd44aa1f) no-repeat center center;
+        background: url(../images/icons/light_play_32.svg?3003c36d-eaca-4b39-b731-dc76e583eabb) no-repeat center center;
         background-size:contain;
     }
     .lightCss .speed-inc {
-        background: url(../images/icons/light_faster_32.svg?e2e39925-8446-4c7a-bf59-a9a4ad028281) no-repeat center center;
+        background: url(../images/icons/light_faster_32.svg?13ec8e15-3f1e-4b20-b0b3-b19ff7facf72) no-repeat center center;
         background-size:contain;
     }
     .lightCss .speed-dec {
-        background: url(../images/icons/light_slower_32.svg?ecd9580d-3a48-40fd-9e75-8f8841a305bb) no-repeat center center;
+        background: url(../images/icons/light_slower_32.svg?1d21254b-c0fc-434b-87ff-a30b2933fe54) no-repeat center center;
         background-size:contain;
     }
     .lightCss .font-inc {
-        background: url(../images/icons/light_bigger_32.svg?2a7277a6-decf-407d-94b9-ee91ddafabed) no-repeat center center;
+        background: url(../images/icons/light_bigger_32.svg?68974889-8c8b-4b64-a88e-c671bc4aeab0) no-repeat center center;
         background-size:contain;
     }
     .lightCss .font-dec {
-        background: url(../images/icons/light_smaller_32.svg?5ca29037-bd73-401c-a1ee-36f018c1d916) no-repeat center center;
+        background: url(../images/icons/light_smaller_32.svg?ba8d6e3c-b0e2-4bc5-b4d0-327c5db28a3d) no-repeat center center;
         background-size:contain;
     }
     .lightCss .contrast-light {
-        background: url(../images/icons/light_lighter_32.svg?f8865cde-dab3-4436-badb-0d7ac106b5ca) no-repeat center center;
+        background: url(../images/icons/light_lighter_32.svg?ce2e841e-45e5-474e-b0a5-7f13a0e1b285) no-repeat center center;
         background-size:contain;
     }
     .lightCss .contrast-dark {
-        background: url(../images/icons/light_darker_32.svg?7db259cc-a9ce-4c14-ab92-b41e64c3b876) no-repeat center center;
+        background: url(../images/icons/light_darker_32.svg?21887cb9-8cc5-4ff7-8f70-80381f41169b) no-repeat center center;
         background-size:contain;
     }
     .lightCss .full-screen {
         font-family:Cardo;
-        background: url(../images/icons/light_fullscreen_32.svg?573e295b-e599-4974-876b-672806d5f9f4) no-repeat center center;
+        background: url(../images/icons/light_fullscreen_32.svg?2ded22f3-5e9b-415e-88ea-74a469dbb0f8) no-repeat center center;
         background-size:contain;
     }
 
     /* Dark */
     .darkCss [data-state='pause'] {
-        background: url(../images/icons/dark_stop_32.svg?078f3b33-5017-40ba-9f89-be92b3876cf2) no-repeat center center;
+        background: url(../images/icons/dark_stop_32.svg?ab318040-5981-4cf9-ab60-c5a162f25939) no-repeat center center;
         background-size:contain;
     }
     .darkCss [data-state='play'] {
-        background: url(../images/icons/dark_play_32.svg?1e2186bf-d900-4b81-b280-f43b4e392c16) no-repeat center center;
+        background: url(../images/icons/dark_play_32.svg?b4ff0057-5878-4366-a72e-b1fa5d9ae5dd) no-repeat center center;
         background-size:contain;
     }
     .darkCss .speed-inc {
-        background: url(../images/icons/dark_faster_32.svg?cdb448c3-46be-496e-bf3a-2db61a4c8b9a) no-repeat center center;
+        background: url(../images/icons/dark_faster_32.svg?d001b0d9-3d1e-4f4a-9d88-4d195a61bc07) no-repeat center center;
         background-size:contain;
     }
     .darkCss .speed-dec {
-        background: url(../images/icons/dark_slower_32.svg?87989014-210c-48ca-9716-1c6fe6ef2656) no-repeat center center;
+        background: url(../images/icons/dark_slower_32.svg?15ae1fc9-8f17-4caa-a48c-255db71b0e03) no-repeat center center;
         background-size:contain;
     }
     .darkCss .font-inc {
-        background: url(../images/icons/dark_bigger_32.svg?6f5390e4-84b8-4b23-8e0c-786d9c4c182d) no-repeat center center;
+        background: url(../images/icons/dark_bigger_32.svg?293dae5a-d60a-4b81-86b4-4ec4846b1ffc) no-repeat center center;
         background-size:contain;
     }
     .darkCss .font-dec {
-        background: url(../images/icons/dark_smaller_32.svg?9c927b53-79e3-4d68-8205-15591db958ea) no-repeat center center;
+        background: url(../images/icons/dark_smaller_32.svg?5d9bdbbe-4cce-4765-a531-64c7c3d2962f) no-repeat center center;
         background-size:contain;
     }
     .darkCss .contrast-light {
-        background: url(../images/icons/dark_lighter_32.svg?0b7ef0a3-5a68-4fbc-a6ff-2768e7a861a0) no-repeat center center;
+        background: url(../images/icons/dark_lighter_32.svg?06d5a885-9008-4121-a1dc-b5ac94ef5467) no-repeat center center;
         background-size:contain;
     }
     .darkCss .contrast-dark {
-        background: url(../images/icons/dark_darker_32.svg?1e088273-0f65-46e2-a65a-b721821a746f) no-repeat center center;
+        background: url(../images/icons/dark_darker_32.svg?2afdad40-d63a-4593-894c-425d43c53d29) no-repeat center center;
         background-size:contain;
     }
     .darkCss .full-screen {
-        background: url(../images/icons/dark_fullscreen_32.svg?feb35d78-6693-4cbf-a353-f5a3521dce67) no-repeat center center;
+        background: url(../images/icons/dark_fullscreen_32.svg?2ac959e7-6357-43f2-a366-2ed50c41fefd) no-repeat center center;
         background-size:contain;
     }
 

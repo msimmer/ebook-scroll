@@ -32,6 +32,7 @@ $.extend(App, {
             return that;
         },
         resizeStopped: function() {
+            var that = App;
             that.layout.countPages();
             that.layout.adjustFramePosition();
         },

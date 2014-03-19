@@ -89,16 +89,12 @@ $.extend(App, {
         },
         speedIncrement: function() {
             var that = App;
-            that.events.stopScrolling();
             that.readerData.scrollSpeed -= 10;
-            that.events.startScrolling();
             that.updateUserPreferences();
         },
         speedDecrement: function() {
             var that = App;
-            that.events.stopScrolling();
             that.readerData.scrollSpeed += 10;
-            that.events.startScrolling();
             that.updateUserPreferences();
         },
         isChapterEnd: function() {

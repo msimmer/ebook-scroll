@@ -7,7 +7,7 @@
         <![CDATA[
         @font-face {
         font-family: Cardo;
-        src: url('Cardo-Regular.ttf');
+        src: url('Cardo-Regular.svg');
         }
         ]]>
     </style>
