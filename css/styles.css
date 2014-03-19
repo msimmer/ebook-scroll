@@ -43,6 +43,7 @@
 }
 /* IE */
  body {
+    font-family: Cardo;
     scrollbar-base-color: transparent;
     scrollbar-base-color: transparent;
     scrollbar-3dlight-color: transparent;
@@ -93,6 +94,9 @@ a {
     color:black;
     display: none;
 }
+ul.controls{
+    min-width: 67px;
+}
 ul.controls, ul.components {
     list-style: none;
     margin:0;
@@ -137,8 +141,6 @@ main {
     left:0;
     background: white;
     overflow: scroll;
-    /* font-size-adjust variables */
-    /*max-width: 600px;*/
     max-height: 200px;
 }
 main a, main a:link, main a:active, main a:visited {
@@ -175,83 +177,84 @@ section#page{
 */
 /* Light */
     .lightCss [data-state='pause'] {
-        background: url(../images/icons/light_stop_32.svg) no-repeat center center;
+        background: url(../images/icons/light_stop_32.svg?80653d95-f4eb-4187-b714-584ad4a2e54a) no-repeat center center;
         background-size:contain;
     }
     .lightCss [data-state='play'] {
-        background: url(../images/icons/light_play_32.svg) no-repeat center center;
+        background: url(../images/icons/light_play_32.svg?9fa80f2e-e0d8-427a-bfa0-4ba262a634f4) no-repeat center center;
         background-size:contain;
     }
     .lightCss .speed-inc {
-        background: url(../images/icons/light_faster_32.svg) no-repeat center center;
+        background: url(../images/icons/light_faster_32.svg?2e188311-dd68-46cf-8df5-b3afd4f9cbac) no-repeat center center;
         background-size:contain;
     }
     .lightCss .speed-dec {
-        background: url(../images/icons/light_slower_32.svg) no-repeat center center;
+        background: url(../images/icons/light_slower_32.svg?93db3c77-ee47-4590-a122-be3eaa20af60) no-repeat center center;
         background-size:contain;
     }
     .lightCss .font-inc {
-        background: url(../images/icons/light_bigger_32.svg) no-repeat center center;
+        background: url(../images/icons/light_bigger_32.svg?cd368fa7-3132-46a9-91d1-209200678ba1) no-repeat center center;
         background-size:contain;
     }
     .lightCss .font-dec {
-        background: url(../images/icons/light_smaller_32.svg) no-repeat center center;
+        background: url(../images/icons/light_smaller_32.svg?255394f4-6797-469c-a643-fdce00bde1e7) no-repeat center center;
         background-size:contain;
     }
     .lightCss .contrast-light {
-        background: url(../images/icons/light_lighter_32.svg) no-repeat center center;
+        background: url(../images/icons/light_lighter_32.svg?2c926f49-a85d-49bc-a3f5-8727b31d5d79) no-repeat center center;
         background-size:contain;
     }
     .lightCss .contrast-dark {
-        background: url(../images/icons/light_darker_32.svg) no-repeat center center;
+        background: url(../images/icons/light_darker_32.svg?d51bdf67-8aac-4bef-bbf9-c81eae6e09f8) no-repeat center center;
         background-size:contain;
     }
     .lightCss .full-screen {
-        background: url(../images/icons/light_fullscreen_32.svg) no-repeat center center;
+        font-family:Cardo;
+        background: url(../images/icons/light_fullscreen_32.svg?61efaf75-fbbc-4e3d-9028-4417742602e8) no-repeat center center;
         background-size:contain;
     }
 
     /* Dark */
     .darkCss [data-state='pause'] {
-        background: url(../images/icons/dark_stop_32.svg) no-repeat center center;
+        background: url(../images/icons/dark_stop_32.svg?edc9fc56-02df-41f5-bb08-600f653b9780) no-repeat center center;
         background-size:contain;
     }
     .darkCss [data-state='play'] {
-        background: url(../images/icons/dark_play_32.svg) no-repeat center center;
+        background: url(../images/icons/dark_play_32.svg?4d48497c-366e-4dd5-a63a-321f81760d41) no-repeat center center;
         background-size:contain;
     }
     .darkCss .speed-inc {
-        background: url(../images/icons/dark_faster_32.svg) no-repeat center center;
+        background: url(../images/icons/dark_faster_32.svg?1c1fc314-7f38-4621-8cc7-914d03551fee) no-repeat center center;
         background-size:contain;
     }
     .darkCss .speed-dec {
-        background: url(../images/icons/dark_slower_32.svg) no-repeat center center;
+        background: url(../images/icons/dark_slower_32.svg?f70489e6-7b2b-49c0-bb5d-297522d4f919) no-repeat center center;
         background-size:contain;
     }
     .darkCss .font-inc {
-        background: url(../images/icons/dark_bigger_32.svg) no-repeat center center;
+        background: url(../images/icons/dark_bigger_32.svg?eb4daa2d-872c-4f34-91e2-352e3278522e) no-repeat center center;
         background-size:contain;
     }
     .darkCss .font-dec {
-        background: url(../images/icons/dark_smaller_32.svg) no-repeat center center;
+        background: url(../images/icons/dark_smaller_32.svg?5cb38a1e-df8f-434f-907c-6e9941d887bc) no-repeat center center;
         background-size:contain;
     }
     .darkCss .contrast-light {
-        background: url(../images/icons/dark_lighter_32.svg) no-repeat center center;
+        background: url(../images/icons/dark_lighter_32.svg?f9988605-7640-4baf-8680-d2315f867c27) no-repeat center center;
         background-size:contain;
     }
     .darkCss .contrast-dark {
-        background: url(../images/icons/dark_darker_32.svg) no-repeat center center;
+        background: url(../images/icons/dark_darker_32.svg?2d1674b5-3f23-4dbb-a321-72c059bba0b4) no-repeat center center;
         background-size:contain;
     }
     .darkCss .full-screen {
-        background: url(../images/icons/dark_fullscreen_32.svg) no-repeat center center;
+        background: url(../images/icons/dark_fullscreen_32.svg?a7e78893-5e19-421f-ae22-eff15f1fea65) no-repeat center center;
         background-size:contain;
     }
 
 /**
 *
-* Media Queries
+* JS applied Media Queries
 *
 * iPad portrait -> landscape
 *
@@ -275,44 +278,6 @@ nav.mobile ul.controls li:last-child:after{
     display: inline-block;
     width: 100%;
 }
-nav.mobile ul.controls li a{
-    /*padding:0 50px;*/
-}
-nav.mobile ul.controls li:first-child a{
-    /*padding:0 50px 0 0;*/
-}
-nav.mobile ul.controls li:last-child a{
-    /*padding:0 0 0 50px;*/
-}
-
-@media screen and (min-width: 481px) and (max-width: 1024px) {
-    body:before{
-        position: fixed;
-        content: 'iPad portrait -> landscape';
-        visibility: visible;
-        color: black;
-        background: white;
-        display: none;
-    }
-}
-
-/**
-*
-* Mobile phones -> iPad portrait
-*
-*/
-
-@media screen and (min-width: 320px) and (max-width: 481px) {
-    body:before{
-        position: fixed;
-        content: 'Mobile phones -> iPad portrait';
-        visibility: visible;
-        color: black;
-        background: white;
-    }
-
-}
-
 
 /**
 *
@@ -328,27 +293,28 @@ ul.controls, nav.mobile ul.controls, .runner-help, .runner-page-count{
     display: none;
     visibility: hidden;
 }
-.preload-images {
+/*.preload-images {
     width: 0;
     height: 0;
     display: none;
     visibility: hidden;
-    background: url(../images/icons/light_stop_32.svg) no-repeat -9999px -9999px,
-                url(../images/icons/light_play_32.svg) no-repeat -9999px -9999px,
-                url(../images/icons/light_faster_32.svg) no-repeat -9999px -9999px,
-                url(../images/icons/light_slower_32.svg) no-repeat -9999px -9999px,
-                url(../images/icons/light_bigger_32.svg) no-repeat -9999px -9999px,
-                url(../images/icons/light_smaller_32.svg) no-repeat -9999px -9999px,
-                url(../images/icons/light_lighter_32.svg) no-repeat -9999px -9999px,
-                url(../images/icons/light_darker_32.svg) no-repeat -9999px -9999px,
-                url(../images/icons/light_fullscreen_32.svg) no-repeat -9999px -9999px,
-                url(../images/icons/dark_stop_32.svg) no-repeat -9999px -9999px,
-                url(../images/icons/dark_play_32.svg) no-repeat -9999px -9999px,
-                url(../images/icons/dark_faster_32.svg) no-repeat -9999px -9999px,
-                url(../images/icons/dark_slower_32.svg) no-repeat -9999px -9999px,
-                url(../images/icons/dark_bigger_32.svg) no-repeat -9999px -9999px,
-                url(../images/icons/dark_smaller_32.svg) no-repeat -9999px -9999px,
-                url(../images/icons/dark_lighter_32.svg) no-repeat -9999px -9999px,
-                url(../images/icons/dark_darker_32.svg) no-repeat -9999px -9999px,
-                url(../images/icons/dark_fullscreen_32.svg) no-repeat -9999px -9999px;
+    background: url(../images/icons/light_stop_32.svg?c03611ff-d7e5-4872-8cfa-fe30aa1477b4 -9999px -9999px,
+                url(../images/icons/light_play_32.svg?94a1145f-19a1-40cc-9b97-c76495c449c2 -9999px -9999px,
+                url(../images/icons/light_faster_32.svg?68c38e11-1bfc-4b88-9a93-6d684cf07eac -9999px -9999px,
+                url(../images/icons/light_slower_32.svg?ae502830-3167-4ade-975e-4404c535d9c8 -9999px -9999px,
+                url(../images/icons/light_bigger_32.svg?2ca2d5b1-5590-457c-86aa-fae9a63e595d -9999px -9999px,
+                url(../images/icons/light_smaller_32.svg?93e8eb68-0bc0-49a0-84db-4130692bf805 -9999px -9999px,
+                url(../images/icons/light_lighter_32.svg?8647f7ef-26b0-440b-9f84-e87ba95fe2f0 -9999px -9999px,
+                url(../images/icons/light_darker_32.svg?3eca3f76-9b15-4976-8683-38a30a9691b1 -9999px -9999px,
+                url(../images/icons/light_fullscreen_32.svg?aad16e08-cfaa-4b55-b2fa-d4f11bd81286 -9999px -9999px,
+                url(../images/icons/dark_stop_32.svg?d50be392-b890-41f9-bb91-1039b463b04c -9999px -9999px,
+                url(../images/icons/dark_play_32.svg?b692b33d-2d35-4bc4-8ca6-065cf5ff9903 -9999px -9999px,
+                url(../images/icons/dark_faster_32.svg?948bd57b-b189-40a0-b761-12a466cee816 -9999px -9999px,
+                url(../images/icons/dark_slower_32.svg?04d22e24-c82f-409b-9c04-049cc8a9e34e -9999px -9999px,
+                url(../images/icons/dark_bigger_32.svg?70163b41-41ae-4dc5-914f-6148810ea24f -9999px -9999px,
+                url(../images/icons/dark_smaller_32.svg?bc96a92c-7b96-4bcc-b3da-550a0041100d -9999px -9999px,
+                url(../images/icons/dark_lighter_32.svg?7c034e68-bf77-4175-a0ec-9ea567265a2c -9999px -9999px,
+                url(../images/icons/dark_darker_32.svg?e39c5de6-6701-49b7-a036-7ac73eb3f7df -9999px -9999px,
+                url(../images/icons/dark_fullscreen_32.svg?25fa7382-c478-4cc4-bdff-94dbf21a1f37 -9999px -9999px;
 }
+*/

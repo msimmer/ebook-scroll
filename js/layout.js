@@ -32,7 +32,6 @@ $.extend(App, {
             return that;
         },
         resizeStopped: function() {
-            var that = App;
             that.layout.countPages();
             that.layout.adjustFramePosition();
         },
@@ -57,6 +56,9 @@ $.extend(App, {
         },
         setFrameWidth: function() {
             var that = App;
+
+            if (that.isMobile()) return;
+
             var targetWidth = that.layout.targetContainerWidth();
             that.el.css({
                 'max-width': targetWidth
@@ -73,13 +75,14 @@ $.extend(App, {
                 h = $(window).height() / 2,
                 w = $(window).width() / 2,
                 frameMidH = frame.height() / 2,
-                frameMidW = frame.width() / 2;
+                frameMidW = frame.width() / 2,
+                isMobile = that.isMobile();
 
             var targetWidth = that.layout.targetContainerWidth(),
                 smallScreen = targetWidth >= $(window).width(),
                 mobileCss = {},
                 mobileCss = {
-                    top: h - frameMidH - 30,
+                    top: h - frameMidH,
                     left: 0,
                     marginTop: 0,
                     marginRight: 25,
@@ -96,7 +99,7 @@ $.extend(App, {
                     marginLeft: 0
                 };
 
-            if (smallScreen) {
+            if (smallScreen || isMobile) {
                 frame.css(mobileCss);
             } else {
                 frame.css(desktopCss);
@@ -106,20 +109,21 @@ $.extend(App, {
 
             return that;
         },
-        adjustNavPosition:function(){
+        adjustNavPosition: function() {
             var that = App;
             var frame = that.el,
                 nav = $('nav'),
                 ctrl = nav.find('.controls'),
                 ctrlH = 180, // .controls height before mobile layout abstract
-                overlap = frame.position().left <= 115; // initial sidebar width + margin
+                overlap = frame.position().left <= 115, // initial sidebar width + margin
+                isMobile = that.isMobile();
 
-            if (overlap) {
+            if (overlap || isMobile) {
                 nav.addClass('mobile');
                 nav.css({
                     width: frame.width()
                 });
-            } else {
+            } else if (!overlap && !isMobile) {
                 nav.removeClass('mobile');
                 nav.css({
                     top: ($(window).height() / 2) - (ctrlH / 2) - 30,

@@ -1,0 +1,61 @@
+/*iPad in landscape*/
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+    body:before{
+        content: 'iPad in landscape';
+        background: white;
+        color:black;
+        position: fixed;
+        top:0;
+        left:0;
+        display: none;
+    }
+
+    .mobile-portrait-only{
+        display: none!important;
+    }
+
+}
+
+/*iPhone 5 in landscape*/
+@media only screen and (min-device-width : 320px) and (max-device-width : 568px) and (orientation : landscape) {
+    body:before{
+        content: 'iPhone 5 in landscape';
+        background: white;
+        color:black;
+        position: fixed;
+        top:0;
+        left:0;
+        display: none;
+    }
+
+    main#main{
+        top: 30px!important;
+    }
+
+    .mobile-portrait-only{
+        display: none!important;
+    }
+
+}
+
+/*iPhone 2G-4S in landscape*/
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : landscape) {
+    body:before{
+        content: 'iPhone 2G-4S in landscape';
+        background: white;
+        color:black;
+        position: fixed;
+        top:0;
+        left:0;
+        display: none;
+    }
+
+    main#main{
+        margin-top: 30px!important;
+    }
+
+    .mobile-portrait-only{
+        display: none!important;
+    }
+
+}

@@ -6,6 +6,8 @@ $(function() {
     app.init();
 
     // window events
+    window.addEventListener('orientationchange', app.events.orientationHasChanged);
+
     $(window).on('resize', function() {
         var intrvl;
         intrvl = setInterval(function() {

@@ -113,7 +113,7 @@ $.extend(App, {
         },
         fontIncrement: function() {
             var that = App;
-            var size = (that.readerData.fSize <= that.readerData.maxFontSize) ? that.readerData.fSize + 10 : that.readerData.fSize;
+            var size = (that.readerData.fSize < that.readerData.maxFontSize()) ? that.readerData.fSize + 10 : that.readerData.fSize;
             that.el.css('font-size', size + '%');
             that.layout.adjustFramePosition();
             that.updatedReaderData('fSize', size);
@@ -122,7 +122,7 @@ $.extend(App, {
         },
         fontDecrement: function() {
             var that = App;
-            var size = (that.readerData.fSize >= that.readerData.minFontSize) ? that.readerData.fSize - 10 : that.readerData.fSize;
+            var size = (that.readerData.fSize > that.readerData.minFontSize()) ? that.readerData.fSize - 10 : that.readerData.fSize;
             that.el.css('font-size', size + '%');
             that.layout.adjustFramePosition();
             that.updatedReaderData('fSize', size);
@@ -168,6 +168,34 @@ $.extend(App, {
                 e.stopPropagation();
                 target.attr('target', '_blank');
             }
+        },
+        orientationHasChanged: function() {
+            var that = App;
+
+            if (App.debug) {
+                switch (window.orientation) {
+                    case -90:
+                    case 90:
+                        console.log('Orientation has changed to landscape');
+                        break;
+                    default:
+                        console.log('Orientation has changed to portrait');
+                        break;
+                }
+            }
+
+            setTimeout(function() {
+                if (pageYOffset) {
+                    window.scrollTo(0, 1);
+                }
+            }, 1);
+            if (that.readerData.isScrolling) {
+                that.events.stopScrolling();
+                setTimeout(function() {
+                    that.events.startScrolling();
+                }, 500);
+            }
         }
+
     }
 });

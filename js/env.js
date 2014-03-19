@@ -1,6 +1,9 @@
 App = {
     el: $('main'),
     debug: true,
+    isMobile: function() {
+        return navigator.userAgent.match(/(Mobile|iPad|Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini)/i) ? true : false;
+    },
     readerData: {
         // App data
         components: [], // (array) ordered list of ebook chapters pulled from <spine>
@@ -13,8 +16,12 @@ App = {
         // User data
         defaultFontSize: 18, // (int) default body font-size in px
         fSize: 100, // (int) percent of main's font-size, default 100%
-        maxFontSize: 180, // (int) max font size in %
-        minFontSize: 70, // (int) min font size in %
+        maxFontSize: function() {
+            return App.isMobile() ? 110 : 160; // (int) max font size in %
+        },
+        minFontSize: function() {
+            return App.isMobile() ? 50 : 70; // (int) min font size in %
+        },
         contrast: 'light', // (str) light or dark
 
         // Reader data
@@ -74,7 +81,7 @@ App = {
             that.el.html(content);
             that.readerData.currentPage = url;
             that.updateLocalStorage('clientBook', 'currentPage', url);
-        }).then(function(){
+        }).then(function() {
             that.layout.adjustFramePosition();
             that.layout.countPages();
         });

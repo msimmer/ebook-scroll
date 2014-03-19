@@ -49,9 +49,9 @@ $.extend(App, {
 
             setTimeout(function() {
                 $('ul.controls, nav.mobile ul.controls, .runner-help, .runner-page-count').fadeIn(400);
-            }, 10);
+            }, 10); // set computed delay
 
-            that.events.startScrolling();
+            // that.events.startScrolling();
 
         });
 

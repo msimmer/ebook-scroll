@@ -9,16 +9,18 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>
-    </title>
+    <title></title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" />
+    <link href='http://fonts.googleapis.com/css?family=Cardo' rel='stylesheet' type='text/css'>
     <link type="text/css" rel="stylesheet" href='css/styles.css' />
+    <link type="text/css" rel="stylesheet" href='css/media-queries-portrait.css' />
+    <link type="text/css" rel="stylesheet" href='css/media-queries-landscape.css' />
 </head>
 
 <body>
     <div class="preload-images"></div>
-    <nav>
+    <nav class='mobile-portrait-only'>
         <ul class="chapters"></ul>
         <ul class="controls">
             <li>
@@ -42,7 +44,7 @@
         </ul>
     </nav>
     <main id='main'></main>
-    <footer>
+    <footer class='mobile-portrait-only'>
         <p class="runner-help"><a href="#">?</a>
         </p>
         <p class="runner-page-count">
