@@ -72,6 +72,7 @@ $.extend(App, {
         },
         startScrolling: function() {
             var that = App;
+            var playBtn = $('.controls').find('.play-btn').attr('data-state', 'pause');
             window.clearInterval(that.readerData.scrollInt);
             that.readerData.scrollInt = setInterval(function() {
                 that.el.scrollTop(that.el.scrollTop() + 1);
