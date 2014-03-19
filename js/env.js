@@ -9,12 +9,14 @@ App = {
         lastPage: null, // (string) url
         scrollPosition: {}, // (obj) containing src: (str) url, pos: (int) main.scrollTop()
         endPosition: null,
+
         // User data
         defaultFontSize: 18, // (int) default body font-size in px
         fSize: 100, // (int) percent of main's font-size, default 100%
         maxFontSize: 180, // (int) max font size in %
         minFontSize: 70, // (int) min font size in %
         contrast: 'light', // (str) light or dark
+
         // Reader data
         scrollSpeed: 60, // (int) scroll speed
         isScrolling: false, // (bool) true/false
@@ -56,7 +58,7 @@ App = {
         var that = this;
         that.updatedReaderData('currentPage', url);
         var promisePageLoad = $.get(url).success(function(data) {
-            if (App.debug) console.log('success');
+            if (App.debug) console.log('Chapter loaded');
         }).error(function(x, s, r) {
             if (App.debug) console.log('Error: ' + ' ' + r);
         });

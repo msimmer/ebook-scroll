@@ -117,7 +117,6 @@ $.extend(App, {
             that.el.css('font-size', size + '%');
             that.layout.adjustFramePosition();
             that.updatedReaderData('fSize', size);
-            console.log(that.readerData.fSize);
             that.updateUserPreferences();
             return that;
         },

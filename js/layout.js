@@ -72,18 +72,21 @@ $.extend(App, {
                 h = $(window).height() / 2,
                 w = $(window).width() / 2,
                 frameMidH = frame.height() / 2,
-                frameMidW = frame.width() / 2;
+                frameMidW = frame.width() / 2,
+                ctrl = nav.find('.controls'),
+                ctrlH = ctrl.height();
 
-            nav.css({
-                top: h - frameMidH - 30
-            });
-
-            var overlap = (frame.width() + nav.width() * 3) >= $(window).width();
+            var overlap = frame.position().left <= 115; // initial sidebar width + margin
 
             if (overlap) {
-                nav.addClass('mobile');
+                nav.addClass('mobile').css({
+                    width: frame.width()
+                });
             } else {
-                nav.removeClass('mobile');
+                nav.removeClass('mobile').css({
+                    top: (nav.height() / 2) - (ctrlH / 2) - 30,
+                    width: 66
+                });
             }
 
             var targetWidth = that.layout.targetContainerWidth(),

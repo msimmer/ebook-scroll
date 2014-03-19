@@ -82,6 +82,7 @@ nav {
     position: absolute;
     margin:0 25px;
     height: 100%;
+    width: 66px;
 }
 a {
     text-decoration: none;
@@ -254,8 +255,8 @@ main a, main a:link, main a:active, main a:visited {
 nav.mobile{
     top:0!important;
     text-align: justify;
-    margin:25px 0;
-    width: 100%;
+    margin:25px auto 0 auto;
+    position: relative;
 }
 nav.mobile ul.controls{
     display: inline;
