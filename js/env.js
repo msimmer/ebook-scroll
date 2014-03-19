@@ -74,7 +74,6 @@ App = {
             that.el.html(content);
             that.readerData.currentPage = url;
             that.updateLocalStorage('clientBook', 'currentPage', url);
-
         }).then(function(){
             that.layout.adjustFramePosition();
             that.layout.countPages();

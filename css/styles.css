@@ -175,77 +175,77 @@ section#page{
 */
 /* Light */
     .lightCss [data-state='pause'] {
-        background: url(../images/icons/light_stop_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat center center;
+        background: url(../images/icons/light_stop_32.svg?f8630e82-1a06-4ec8-b7b5-ab128d7c95a7) no-repeat center center;
         background-size:contain;
     }
     .lightCss [data-state='play'] {
-        background: url(../images/icons/light_play_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat center center;
+        background: url(../images/icons/light_play_32.svg?5ebf0ed2-556a-4950-b999-f1dc5a1f8137) no-repeat center center;
         background-size:contain;
     }
     .lightCss .speed-inc {
-        background: url(../images/icons/light_faster_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat center center;
+        background: url(../images/icons/light_faster_32.svg?02b5c8ee-62e5-4d8b-84a5-98b96146d703) no-repeat center center;
         background-size:contain;
     }
     .lightCss .speed-dec {
-        background: url(../images/icons/light_slower_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat center center;
+        background: url(../images/icons/light_slower_32.svg?b42ee35a-8385-4062-a134-0cd57b6e5f71) no-repeat center center;
         background-size:contain;
     }
     .lightCss .font-inc {
-        background: url(../images/icons/light_bigger_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat center center;
+        background: url(../images/icons/light_bigger_32.svg?1376e497-8e55-4741-b7e3-c49e863e456c) no-repeat center center;
         background-size:contain;
     }
     .lightCss .font-dec {
-        background: url(../images/icons/light_smaller_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat center center;
+        background: url(../images/icons/light_smaller_32.svg?d87fd08b-4c3c-493e-b40f-d200a36fe9e8) no-repeat center center;
         background-size:contain;
     }
     .lightCss .contrast-light {
-        background: url(../images/icons/light_lighter_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat center center;
+        background: url(../images/icons/light_lighter_32.svg?de0967a8-91b7-4e40-8d99-cad99a1bb104) no-repeat center center;
         background-size:contain;
     }
     .lightCss .contrast-dark {
-        background: url(../images/icons/light_darker_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat center center;
+        background: url(../images/icons/light_darker_32.svg?ca480779-f940-4962-8988-caabc32aba3a) no-repeat center center;
         background-size:contain;
     }
     .lightCss .full-screen {
-        background: url(../images/icons/light_fullscreen_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat center center;
+        background: url(../images/icons/light_fullscreen_32.svg?84d13cce-92a2-4602-b58d-6de61c0fb2cf) no-repeat center center;
         background-size:contain;
     }
 
     /* Dark */
     .darkCss [data-state='pause'] {
-        background: url(../images/icons/dark_stop_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat center center;
+        background: url(../images/icons/dark_stop_32.svg?5ca27e45-74b1-4502-9f0a-becf1661eab2) no-repeat center center;
         background-size:contain;
     }
     .darkCss [data-state='play'] {
-        background: url(../images/icons/dark_play_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat center center;
+        background: url(../images/icons/dark_play_32.svg?67fabdfb-d2f1-4427-925d-d22433dc24a9) no-repeat center center;
         background-size:contain;
     }
     .darkCss .speed-inc {
-        background: url(../images/icons/dark_faster_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat center center;
+        background: url(../images/icons/dark_faster_32.svg?3761f417-bbc8-4fbc-8197-7df2c09be8ca) no-repeat center center;
         background-size:contain;
     }
     .darkCss .speed-dec {
-        background: url(../images/icons/dark_slower_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat center center;
+        background: url(../images/icons/dark_slower_32.svg?1fc1751a-ac7f-498c-a247-bdb278f07ea6) no-repeat center center;
         background-size:contain;
     }
     .darkCss .font-inc {
-        background: url(../images/icons/dark_bigger_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat center center;
+        background: url(../images/icons/dark_bigger_32.svg?9ad3c444-628a-4797-bbb8-7ab820c0c8a5) no-repeat center center;
         background-size:contain;
     }
     .darkCss .font-dec {
-        background: url(../images/icons/dark_smaller_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat center center;
+        background: url(../images/icons/dark_smaller_32.svg?d2908fa8-ff6d-48ce-b302-88b92e1f9596) no-repeat center center;
         background-size:contain;
     }
     .darkCss .contrast-light {
-        background: url(../images/icons/dark_lighter_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat center center;
+        background: url(../images/icons/dark_lighter_32.svg?9bcac036-7e1b-430b-a5ae-e61ef3d27366) no-repeat center center;
         background-size:contain;
     }
     .darkCss .contrast-dark {
-        background: url(../images/icons/dark_darker_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat center center;
+        background: url(../images/icons/dark_darker_32.svg?a449c7a5-cc5b-472c-8de1-8fd33810f614) no-repeat center center;
         background-size:contain;
     }
     .darkCss .full-screen {
-        background: url(../images/icons/dark_fullscreen_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat center center;
+        background: url(../images/icons/dark_fullscreen_32.svg?938863d2-e703-4cab-8e92-6255bc627114) no-repeat center center;
         background-size:contain;
     }
 
@@ -333,28 +333,22 @@ ul.controls, nav.mobile ul.controls, .runner-help, .runner-page-count{
     height: 0;
     display: none;
     visibility: hidden;
-    background: url(../images/icons/light_stop_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat -9999px -9999px,
-                url(../images/icons/light_play_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat -9999px -9999px,
-                url(../images/icons/light_faster_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat -9999px -9999px,
-                url(../images/icons/light_slower_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat -9999px -9999px,
-                url(../images/icons/light_bigger_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat -9999px -9999px,
-                url(../images/icons/light_smaller_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat -9999px -9999px,
-                url(../images/icons/light_lighter_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat -9999px -9999px,
-                url(../images/icons/light_darker_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat -9999px -9999px,
-                url(../images/icons/light_fullscreen_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat -9999px -9999px,
-                url(../images/icons/dark_stop_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat -9999px -9999px,
-                url(../images/icons/dark_play_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat -9999px -9999px,
-                url(../images/icons/dark_faster_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat -9999px -9999px,
-                url(../images/icons/dark_slower_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat -9999px -9999px,
-                url(../images/icons/dark_bigger_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat -9999px -9999px,
-                url(../images/icons/dark_smaller_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat -9999px -9999px,
-                url(../images/icons/dark_lighter_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat -9999px -9999px,
-                url(../images/icons/dark_darker_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat -9999px -9999px,
-                url(../images/icons/dark_fullscreen_32.svg?592aa83d-0eae-442f-a354-9cd2d1f5daec) no-repeat -9999px -9999px,
-
-                url(../images/icons/lrg1.jpg) no-repeat -9999px -9999px,
-                url(../images/icons/lrg2.jpg) no-repeat -9999px -9999px,
-                url(../images/icons/lrg3.jpg) no-repeat -9999px -9999px,
-                url(../images/icons/lrg4.jpg) no-repeat -9999px -9999px,
-                url(../images/icons/lrg5.jpg) no-repeat -9999px -9999px;
+    background: url(../images/icons/light_stop_32.svg?004e6930-3006-41de-a734-2c2cc2fde140) no-repeat -9999px -9999px,
+                url(../images/icons/light_play_32.svg?edbb6989-c889-4bcd-b24d-c6949648c5c6) no-repeat -9999px -9999px,
+                url(../images/icons/light_faster_32.svg?143cff64-2fd7-44b0-b38f-a791a3e1859a) no-repeat -9999px -9999px,
+                url(../images/icons/light_slower_32.svg?eff07e55-28cb-4293-bc79-9051fa62f8bd) no-repeat -9999px -9999px,
+                url(../images/icons/light_bigger_32.svg?6b2650e5-67ef-47f5-9831-df761c4b616b) no-repeat -9999px -9999px,
+                url(../images/icons/light_smaller_32.svg?9c433f30-479a-4735-81ba-0dad418c574e) no-repeat -9999px -9999px,
+                url(../images/icons/light_lighter_32.svg?819c0d73-10ba-4ac6-9861-7cd7c6d5e0f6) no-repeat -9999px -9999px,
+                url(../images/icons/light_darker_32.svg?be88de0e-7fe6-4b58-a0e6-e76afd2c71fc) no-repeat -9999px -9999px,
+                url(../images/icons/light_fullscreen_32.svg?5dc06fd4-27c7-456d-aebf-d9a07f5edd44) no-repeat -9999px -9999px,
+                url(../images/icons/dark_stop_32.svg?6877ab4e-a11f-4b2f-8c74-5329ba1663c7) no-repeat -9999px -9999px,
+                url(../images/icons/dark_play_32.svg?10a9016c-d8f3-4d99-ac86-7d89737792c1) no-repeat -9999px -9999px,
+                url(../images/icons/dark_faster_32.svg?a62e425f-468b-4ef0-8959-fe348e40f30c) no-repeat -9999px -9999px,
+                url(../images/icons/dark_slower_32.svg?6d6b263c-1c12-477c-922e-9f2e4bdad6f2) no-repeat -9999px -9999px,
+                url(../images/icons/dark_bigger_32.svg?9156c643-cff8-4406-80c3-983e1034c9fd) no-repeat -9999px -9999px,
+                url(../images/icons/dark_smaller_32.svg?719376e1-d5f1-4e6a-ab9e-73eb89e71484) no-repeat -9999px -9999px,
+                url(../images/icons/dark_lighter_32.svg?377dbf3f-916f-42ec-a47e-fa7158da7242) no-repeat -9999px -9999px,
+                url(../images/icons/dark_darker_32.svg?c16fec27-66ea-4fec-ab52-7a2e181989e4) no-repeat -9999px -9999px,
+                url(../images/icons/dark_fullscreen_32.svg?261ff86c-4fa5-4d63-ac5f-7b57610713de) no-repeat -9999px -9999px;
 }

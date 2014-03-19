@@ -1,8 +1,19 @@
 App = App || {};
 $.extend(App, {
     init: function() {
+
         var that = this;
         that.bindEventHandlers();
+
+        // get local storage or set it if it's === null
+        that.getLocation();
+        that.getUserPreferences();
+
+        // build DOM
+        that.removeElementStyles(); // remove contrast color
+        that.setDomElements(); // add contrast color
+        that.setStyles(); // add fontsize, line-height
+
         var jsonUrl = 'data/bookData.json',
             chapters = $('.chapters');
 
@@ -30,24 +41,17 @@ $.extend(App, {
         });
         $.when(promiseJSON).then(function(data) {
 
-            // get local storage or set it if it's === null
-            that.getLocation();
-            that.getUserPreferences();
-
-            // build DOM
-            that.removeElementStyles(); // remove contrast color
-            that.setDomElements(); // add contrast color
-            that.setStyles(); // add fontsize, line-height
-
             // load the last page read, or the first page if local storage wasn't set
             that.loadChapter(that.readerData.currentPage);
 
             // if local storage already existed, return to last reading position
             that.goToPreviousLocation();
 
-            $('ul.controls, nav.mobile ul.controls, .runner-help, .runner-page-count').fadeIn(400);
+            setTimeout(function() {
+                $('ul.controls, nav.mobile ul.controls, .runner-help, .runner-page-count').fadeIn(400);
+            }, 10);
 
-            console.log('when called');
+            that.events.startScrolling();
 
         });
 
