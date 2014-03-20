@@ -19,8 +19,8 @@ $(function() {
         return function() {
             if (writeComplete) return;
             writeComplete = true;
-            // app.saveLocation();
-            // app.updateUserPreferences();
+            app.saveLocation();
+            app.updateUserPreferences();
         }
     }());
 
