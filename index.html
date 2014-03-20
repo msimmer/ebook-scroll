@@ -12,9 +12,11 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" />
-    <link type="text/css" rel="stylesheet" href='css/styles.css?beedcd39-13f1-49fe-8e68-cf57e8956573' />
-    <link type="text/css" rel="stylesheet" href='css/media-queries-portrait.css?995c4a57-4db3-44c8-a62c-76a737c98e85' />
-    <link type="text/css" rel="stylesheet" href='css/media-queries-landscape.css?e283d0ab-144e-42a1-9fda-e0fd06d6d6e1' />
+    <link type="text/css" rel="stylesheet" href='css/window-ui.css?c33cb0d5-5d8b-491f-ab6e-f610179be8f1' />
+    <link type="text/css" rel="stylesheet" href='css/styles.css?4ae17b3c-ca22-4a2f-9cf1-1cac49d00f24' />
+    <link type="text/css" rel="stylesheet" href='css/media-queries-portrait.css?d30eaf54-ae4b-437b-a10b-b1e2cad25e7e' />
+    <link type="text/css" rel="stylesheet" href='css/media-queries-landscape.css?b9e7f2c1-c958-461f-b540-1b698c9245ce' />
+    <link type="text/css" rel="stylesheet" href='css/scroll-pane.css?c560ad72-7708-4ce0-84e3-3efbe61dfc04' />
 </head>
 
 <body>
@@ -145,6 +147,7 @@
     <!-- vendor -->
     <script type="text/javascript" src='vendor/jquery.js'></script>
     <script type="text/javascript" src='vendor/requestAnimationFrame.js'></script>
+    <script type="text/javascript" src='vendor/scrollPane.js'></script>
     <!-- // vendor -->
     <!-- app -->
     <script type="text/javascript" src='js/env.js'></script>
@@ -154,6 +157,23 @@
     <script type="text/javascript" src='js/init.js'></script>
     <script type="text/javascript" src='js/load.js'></script>
     <!-- // app -->
+    <script type="text/javascript">
+        $(function(){
+            // $('main').jScrollPane();
+        });
+    </script>
+    <script type="text/javascript">
+        $(function(){
+            $.each($('img, script, style'), function(i,o){
+                var $this = $(o);
+                if ($this.is('[src]')){
+                    $this.attr('src', $this.attr('src')+'?=cache'+Math.round(Math.random()*100000));
+                } else if($this.is('[href]')){
+                    $this.attr('href', $this.attr('href')+'?=cache'+Math.round(Math.random()*100000));
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

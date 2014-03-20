@@ -17,10 +17,10 @@ App = {
         defaultFontSize: 18, // (int) default body font-size in px
         fSize: 100, // (int) percent of main's font-size, default 100%
         maxFontSize: function() {
-            return App.isMobile() ? 110 : 160; // (int) max font size in %
+            return App.isMobile() ? 120 : 160; // (int) max font size in %
         },
         minFontSize: function() {
-            return App.isMobile() ? 50 : 70; // (int) min font size in %
+            return App.isMobile() ? 40 : 80; // (int) min font size in %
         },
         contrast: 'light', // (str) light or dark
 

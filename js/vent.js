@@ -91,14 +91,14 @@ $.extend(App, {
         speedIncrement: function() {
             var that = App;
             that.events.stopScrolling();
-            that.readerData.scrollSpeed -= 10;
+            that.readerData.scrollSpeed -= 20;
             that.events.startScrolling();
             that.updateUserPreferences();
         },
         speedDecrement: function() {
             var that = App;
             that.events.stopScrolling();
-            that.readerData.scrollSpeed += 10;
+            that.readerData.scrollSpeed += 20;
             that.events.startScrolling();
             that.updateUserPreferences();
         },
@@ -114,7 +114,7 @@ $.extend(App, {
         },
         fontIncrement: function() {
             var that = App;
-            var size = that.readerData.fSize < that.readerData.maxFontSize() ? that.readerData.fSize + 10 : that.readerData.fSize;
+            var size = that.readerData.fSize < that.readerData.maxFontSize() ? that.readerData.fSize + 20 : that.readerData.fSize;
             that.el.css('font-size', size + '%');
             that.layout.adjustFramePosition();
             that.updatedReaderData('fSize', size);
@@ -123,7 +123,7 @@ $.extend(App, {
         },
         fontDecrement: function() {
             var that = App;
-            var size = that.readerData.fSize > that.readerData.minFontSize() ? that.readerData.fSize - 10 : that.readerData.fSize;
+            var size = that.readerData.fSize > that.readerData.minFontSize() ? that.readerData.fSize - 20 : that.readerData.fSize;
             that.el.css('font-size', size + '%');
             that.layout.adjustFramePosition();
             that.updatedReaderData('fSize', size);
