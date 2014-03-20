@@ -132,13 +132,15 @@ $.extend(App, {
         },
         contrastToggle: function(e) {
             var that = App;
-            var contrast = e && e.target ? $(e.target).attr('data-contrast') : e,
+            var contrast = e && e.currentTarget ? $(e.currentTarget).attr('data-contrast') : e,
                 html = $('html');
 
             if (contrast === 'dark') {
+                console.log('is dark');
                 html.addClass('darkCss');
                 html.removeClass('lightCss');
             } else if (contrast === 'light') {
+                console.log('is light');
                 html.addClass('lightCss');
                 html.removeClass('darkCss');
             }
@@ -149,7 +151,7 @@ $.extend(App, {
         },
         embeddedLinkClick: function(e) {
             var that = App;
-            var target = $(e.target),
+            var target = $(e.currentTarget),
                 href = target.attr('href'),
                 ext = href.match(/^http/);
 
@@ -190,12 +192,14 @@ $.extend(App, {
                     window.scrollTo(0, 1);
                 }
             }, 1);
+
             if (that.readerData.isScrolling) {
                 that.events.stopScrolling();
                 setTimeout(function() {
                     that.events.startScrolling();
                 }, 500);
             }
+
         }
 
     }
