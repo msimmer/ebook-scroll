@@ -116,15 +116,14 @@ $.extend(App, {
                 nav = $('nav'),
                 ctrl = nav.find('.controls'),
                 ctrlH = 180, // .controls height before mobile layout abstract
-                overlap = frame.position().left <= 115, // initial sidebar width + margin
-                isMobile = that.isMobile();
+                overlap = frame.position().left <= 115; // initial sidebar width + margin
 
-            if (overlap || isMobile) {
+            if (overlap || that.isMobile()) {
                 nav.addClass('mobile');
                 nav.css({
                     width: frame.width()
                 });
-            } else if (!overlap && !isMobile) {
+            } else if (!overlap && !that.isMobile()) {
                 nav.removeClass('mobile');
                 nav.css({
                     top: ($(window).height() / 2) - (ctrlH / 2) - 30,

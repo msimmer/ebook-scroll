@@ -2,7 +2,7 @@ App = {
     el: $('main'),
     debug: true,
     isMobile: function() {
-        return navigator.userAgent.match(/(Mobile|iPad|Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini)/i) ? true : false;
+        return navigator.userAgent.match(/(Mobile|iPad|iPhone|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini)/i) ? true : false;
     },
     readerData: {
         // App data
@@ -45,7 +45,7 @@ App = {
     updateLocalStorage: function(obj, prop, attr, nestedAttr) {
         if (localStorage.getItem(obj) === null) return this; // localstorage was not added on page load or was removed
         if (prop === null || attr === null) {
-            // throw 'updateLocalStorage() null argument';
+            throw 'updateLocalStorage() null argument';
         }
         var that = this;
         var parsedObj = JSON.parse(localStorage.getItem(obj));
