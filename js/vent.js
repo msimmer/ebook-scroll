@@ -68,7 +68,6 @@ $.extend(App, {
             } else if (that.readerData.isScrolling === true) {
                 that.events.stopScrolling();
             }
-            return that;
         },
         startScrolling: function() {
             var that = App;
@@ -119,7 +118,6 @@ $.extend(App, {
             that.layout.adjustFramePosition();
             that.updatedReaderData('fSize', size);
             that.updateUserPreferences();
-            return that;
         },
         fontDecrement: function() {
             var that = App;
@@ -128,7 +126,6 @@ $.extend(App, {
             that.layout.adjustFramePosition();
             that.updatedReaderData('fSize', size);
             that.updateUserPreferences();
-            return that;
         },
         contrastToggle: function(e) {
             var that = App;
@@ -147,7 +144,6 @@ $.extend(App, {
 
             that.updatedReaderData('contrast', contrast);
             that.updateUserPreferences();
-            return that;
         },
         embeddedLinkClick: function(e) {
             var that = App;

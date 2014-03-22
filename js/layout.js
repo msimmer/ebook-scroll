@@ -28,8 +28,6 @@ $.extend(App, {
                     that.events.isChapterEnd();
                 }
             }
-
-            return that;
         },
         resizeStopped: function() {
             var that = App;
@@ -53,7 +51,6 @@ $.extend(App, {
                 'height': targetHeight,
                 'max-height': targetHeight
             });
-            return that;
         },
         setFrameWidth: function() {
             var that = App;
@@ -64,7 +61,6 @@ $.extend(App, {
             that.el.css({
                 'max-width': targetWidth
             });
-            return that;
         },
         adjustFramePosition: function() {
             var that = App;
@@ -108,7 +104,6 @@ $.extend(App, {
 
             this.adjustNavPosition();
 
-            return that;
         },
         adjustNavPosition: function() {
             var that = App;
@@ -130,9 +125,6 @@ $.extend(App, {
                     width: 66
                 });
             }
-
-            return that;
-
         }
     }
 });

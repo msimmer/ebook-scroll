@@ -37,25 +37,24 @@ App = {
     getFromLocalStorage: function(obj, prop, attr) {
         var that = this;
         var parsedObj = JSON.parse(localStorage.getItem(obj));
-        if (attr !== 'null' && typeof attr !== 'undefined') {
+        if (attr !== undefined) {
             return parsedObj[prop][attr];
         }
         return parsedObj[prop];
     },
     updateLocalStorage: function(obj, prop, attr, nestedAttr) {
         if (localStorage.getItem(obj) === null) return this; // localstorage was not added on page load or was removed
-        if (prop === null || attr === null) {
-            throw 'updateLocalStorage() null argument';
+        if (prop === undefined || attr === undefined) {
+            throw 'updateLocalStorage() undefined argument';
         }
         var that = this;
         var parsedObj = JSON.parse(localStorage.getItem(obj));
-        if (typeof nestedAttr !== 'undefined') {
+        if (nestedAttr !== undefined) {
             parsedObj[prop][attr] = nestedAttr;
-        } else if (typeof nestedAttr === 'undefined') {
+        } else if (nestedAttr === undefined) {
             parsedObj[prop] = attr;
         }
         localStorage.setItem(obj, JSON.stringify(parsedObj));
-        return that;
     },
     setDomElements: function() {
         var that = this;
@@ -100,7 +99,6 @@ App = {
             that.readerData.currentPage,
             that.readerData.scrollPosition[that.readerData.currentPage]
         );
-        return that;
     },
     getUserPreferences: function() {
         var that = this;
@@ -115,7 +113,6 @@ App = {
             };
             localStorage.setItem('userPreferences', JSON.stringify(userPreferences));
         }
-        return that;
     },
     updateUserPreferences: function() {
         if (App.debug) console.log('Updating user preferences');
@@ -126,7 +123,6 @@ App = {
             scrollSpeed: that.readerData.scrollSpeed
         };
         localStorage.setItem('userPreferences', JSON.stringify(userPreferences));
-        return that;
     },
     goToPreviousLocation: function() {
         var that = this;
@@ -134,7 +130,6 @@ App = {
         setTimeout(function() {
             that.el.scrollTop(pos);
         }, 50);
-        return that;
     },
     getLocation: function() {
         var that = this;
@@ -152,9 +147,8 @@ App = {
             clientBook.scrollPosition[that.readerData.firstPage] = 0;
             localStorage.setItem('clientBook', JSON.stringify(clientBook));
         }
-        return that;
     },
     goToNextChapter: function() {
-        return this;
+        return;
     }
 }

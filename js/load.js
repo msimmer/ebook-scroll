@@ -25,7 +25,7 @@ $(function() {
     }());
 
     $(document).on('touchmove', function(e) {
-        if (!$(e.target).parents().is('main')) {
+        if (!$(e.target).parents().is(app.el)) {
             e.preventDefault();
         }
     });
