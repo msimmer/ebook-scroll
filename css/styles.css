@@ -81,7 +81,7 @@ ul.components li a {
     width: 100%;
 }
 ul.chapters {
-    display: none;
+    /*display: none;*/
 }
 ul.chapters li {
     margin: 0 10px;

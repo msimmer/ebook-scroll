@@ -45,7 +45,7 @@ App = {
     updateLocalStorage: function(obj, prop, attr, nestedAttr) {
         if (localStorage.getItem(obj) === null) return this; // localstorage was not added on page load or was removed
         if (prop === undefined || attr === undefined) {
-            throw 'updateLocalStorage() undefined argument';
+            throw 'Error: App.updateLocalStorage() undefined argument';
         }
         var that = this;
         var parsedObj = JSON.parse(localStorage.getItem(obj));
@@ -59,29 +59,6 @@ App = {
     setDomElements: function() {
         var that = this;
         that.events.contrastToggle(that.readerData.contrast);
-    },
-    loadChapter: function(url) {
-        if (App.debug) console.log('Current page is ' + url);
-        var that = this;
-        that.updatedReaderData('currentPage', url);
-        var promisePageLoad = $.get(url);
-        return $.when(promisePageLoad).done(function(data) {
-            var content = $('<section/>', {
-                id: 'page',
-                css: {
-                    margin: 0,
-                    padding: 0,
-                    border: 0
-                }
-            }).html(data);
-            that.el.html(content);
-            that.readerData.currentPage = url;
-            that.updateLocalStorage('clientBook', 'currentPage', url);
-            if (App.debug) console.log('Local storage updated');
-        }).then(function() {
-            that.layout.adjustFramePosition();
-            that.layout.countPages();
-        });
     },
     saveLocation: function() {
         if (App.debug) console.log('Saving current location');
@@ -147,6 +124,30 @@ App = {
             clientBook.scrollPosition[that.readerData.firstPage] = 0;
             localStorage.setItem('clientBook', JSON.stringify(clientBook));
         }
+    },
+    loadChapter: function(url) {
+        if (App.debug) console.log('Current page is ' + url);
+        var that = this;
+        that.updatedReaderData('currentPage', url);
+        var promisePageLoad = $.get(url);
+        return $.when(promisePageLoad).done(function(data) {
+            var content = $('<section/>', {
+                id: 'page',
+                css: {
+                    margin: 0,
+                    padding: 0,
+                    border: 0
+                }
+            }).html(data);
+            that.el.html(content);
+            that.readerData.currentPage = url;
+            that.updateLocalStorage('clientBook', 'currentPage', url);
+            if (App.debug) console.log('Local storage updated');
+        }).then(function() {
+            that.layout.adjustFramePosition();
+            that.layout.countPages();
+            that.goToPreviousLocation();
+        });
     },
     goToNextChapter: function() {
         return;

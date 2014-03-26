@@ -133,11 +133,9 @@ $.extend(App, {
                 html = $('html');
 
             if (contrast === 'dark') {
-                console.log('is dark');
                 html.addClass('darkCss');
                 html.removeClass('lightCss');
             } else if (contrast === 'light') {
-                console.log('is light');
                 html.addClass('lightCss');
                 html.removeClass('darkCss');
             }
