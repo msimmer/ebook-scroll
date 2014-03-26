@@ -1,4 +1,11 @@
-define(['jquery', 'reader', 'settings', 'env'], function($, Reader, Settings, Env) {
+define([
+    'jquery',
+    'reader',
+    'settings',
+    'env',
+    'vents',
+    'styles'
+], function($, Reader, Settings, Env, Vents, Styles) {
     'use strict';
 
     return function Layout() {
@@ -6,7 +13,9 @@ define(['jquery', 'reader', 'settings', 'env'], function($, Reader, Settings, En
         var reader = Reader,
             settings = Settings,
             env = Env,
-            self = this; // keep logical scope
+            vents = Vents,
+            styles = Styles,
+            self = this;
 
         this.targetContainerWidth = function() {
             var w = parseInt(settings.el.css('font-size'), 10) * 25;
@@ -106,6 +115,48 @@ define(['jquery', 'reader', 'settings', 'env'], function($, Reader, Settings, En
                     width: 66
                 });
             }
+
+        },
+
+        this.setDomElements = function() {
+            vents.contrastToggle(reader.contrast);
+        },
+
+        this.removeElementStyles = function() {
+            var that = this;
+            var textCss = {};
+            var textCss = {
+                fontSize: '',
+                lineHeight: '',
+                color: '',
+                textDecoration: '',
+                backgroundColor: 'transparent'
+            };
+            $.each(styles.textElements, function(i, o) {
+                settings.el.find(o).css(textCss);
+            });
+        },
+
+        this.setStyles = function() {
+
+            $.each(styles.baseStyles, function(i, o) {
+                settings.el.find(i).css('font-size', o.fSize);
+            });
+
+            var mainCss = {};
+            var mainCss = {
+                'font-size': settings.fSize + '%',
+                'line-height': '1.2'
+            };
+
+            settings.el.css(mainCss);
+
+            $('html,body,main').css({
+                '-webkit-transition': 'background-color 150ms ease-out', // contrast toggle
+                '-moz-transition': 'background-color 150ms ease-out',
+                '-o-transition': 'background-color 150ms ease-out',
+                'transition': 'background-color 150ms ease-out'
+            });
 
         }
 

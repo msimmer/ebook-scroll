@@ -18,6 +18,8 @@ require(['jquery', 'app'], function($, App) {
 
         var app = new App();
 
+        app.init();
+
         if (app.settings.debug) console.log(app);
 
     });

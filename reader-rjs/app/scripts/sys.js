@@ -1,11 +1,15 @@
-define(['jquery', 'reader', 'settings'], function($, Reader, Settings) {
+define([
+    'jquery',
+    'reader',
+    'settings'
+], function($, Reader, Settings) {
     'use strict';
 
     return function Sys() {
 
         var reader = Reader,
             settings = Settings,
-            self = this; // keep logical scope
+            self = this;
 
         this.updatedReaderData = function(prop, attr) {
 
