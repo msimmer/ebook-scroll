@@ -1,41 +1,21 @@
 define([
     'jquery',
     'reader',
-    'settings'
-], function($, Reader, Settings) {
+    'settings',
+    'layout'
+], function($, Reader, Settings, Layout) {
     'use strict';
 
     return function Sys() {
 
         var reader = Reader,
             settings = Settings,
+            layout = Layout,
             self = this;
 
         this.updatedReaderData = function(prop, attr) {
 
             reader[prop] = attr;
-
-        },
-
-        this.saveLocation = function() {
-
-            // if (settings.debug) console.log('Saving current location');
-
-            self.updatedReaderData(
-                'clientBook',
-                'scrollPosition',
-                reader.currentPage,
-                reader.scrollPosition[reader.currentPage]
-            );
-
-            reader.scrollPosition[reader.currentPage] = settings.el.scrollTop();
-
-            self.updateLocalStorage(
-                'clientBook',
-                'scrollPosition',
-                reader.currentPage,
-                reader.scrollPosition[reader.currentPage]
-            );
 
         },
 
@@ -67,6 +47,28 @@ define([
             //     }
             //     return o;
             // }
+
+        },
+
+        this.saveLocation = function() {
+
+            if (settings.debug) console.log('Saving current location');
+
+            self.updatedReaderData(
+                'clientBook',
+                'scrollPosition',
+                reader.currentPage,
+                reader.scrollPosition[reader.currentPage]
+            );
+
+            reader.scrollPosition[reader.currentPage] = settings.el.scrollTop();
+
+            self.updateLocalStorage(
+                'clientBook',
+                'scrollPosition',
+                reader.currentPage,
+                reader.scrollPosition[reader.currentPage]
+            );
 
         },
 
@@ -153,12 +155,77 @@ define([
             }
         },
 
+        this.countPages = function() {
+
+            if (settings.debug) console.log('Counting pages');
+
+            var main = settings.el,
+                frameH = main.height(),
+                page = main.find('#page'),
+                pageH = page.height(),
+                totalPageIndicator = $('.total-page-count'),
+                currentPageIndicator = $('.current-page-count');
+
+            function getCurrentPage() {
+                return Math.round((-(page.offset().top - main.offset().top) / frameH) + 1);
+            }
+
+            totalPageIndicator.html(Math.round(pageH / frameH));
+            currentPageIndicator.html(getCurrentPage());
+
+            if (main.height() - page.height() >= -main.scrollTop()) {
+                if (reader.currentPage === reader.lastPage) {
+                    self.isBookEnd();
+                } else if (reader.currentPage !== reader.lastPage) {
+                    self.isChapterEnd();
+                }
+            }
+
+        }
+
         this.goToPreviousLocation = function() {
 
             var pos = self.getFromLocalStorage('clientBook', 'scrollPosition', reader.currentPage);
             setTimeout(function() {
                 settings.el.scrollTop(pos);
             }, 50);
+        },
+
+        this.loadChapter = function(url) {
+
+            if (settings.debug) console.log('Current page is ' + url);
+
+            self.updatedReaderData('currentPage', url);
+
+            var promisePageLoad = $.get(url);
+
+            return $.when(promisePageLoad).done(function(data) {
+
+                var content = $('<section/>', {
+                    id: 'page',
+                    css: {
+                        margin: 0,
+                        padding: 0,
+                        border: 0
+                    }
+                }).html(data);
+
+                settings.el.html(content);
+
+                reader.currentPage = url;
+
+                self.updateLocalStorage('clientBook', 'currentPage', url);
+
+                if (App.debug) console.log('Local storage updated');
+
+            }).then(function() {
+
+                layout.adjustFramePosition();
+
+                self.countPages();
+                self.goToPreviousLocation();
+
+            });
         },
 
         this.goToNextChapter = function() {

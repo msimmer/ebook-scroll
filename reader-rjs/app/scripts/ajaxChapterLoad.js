@@ -1,7 +1,14 @@
-require(['jquery', 'reader', 'settings', 'ajaxBookData'], function($, Reader, Settings, AjaxBookData) {
+require([
+    'jquery',
+    'reader',
+    'settings',
+    'sys',
+    'ajaxBookData'
+], function($, Reader, Settings, Sys, AjaxBookData) {
 
     var
         ajaxBookData = AjaxBookData,
+        sys = new Sys(),
         reader = Reader,
         settings = Settings;
 
@@ -34,9 +41,10 @@ require(['jquery', 'reader', 'settings', 'ajaxBookData'], function($, Reader, Se
                 click: function(e) {
 
                     e.preventDefault();
+
                     sys.saveLocation();
 
-                    // that.loadChapter(o.src);
+                    sys.loadChapter(o.src);
 
                     sys.goToPreviousLocation();
 
