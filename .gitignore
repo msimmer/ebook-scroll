@@ -1,2 +1,7 @@
-.DS_Store
-todo
+node_modules
+dist
+.tmp
+.sass-cache
+app/bower_components
+test/bower_components
+v-0.1
