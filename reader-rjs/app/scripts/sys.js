@@ -19,7 +19,7 @@ define([
 
         this.saveLocation = function() {
 
-            if (settings.debug) console.log('Saving current location');
+            // if (settings.debug) console.log('Saving current location');
 
             self.updatedReaderData(
                 'clientBook',
@@ -95,7 +95,7 @@ define([
 
         this.updateUserPreferences = function() {
 
-            if (settings.debug) console.log('Updating user preferences');
+            // if (settings.debug) console.log('Updating user preferences');
 
             var userPreferences = {
                 fSize: reader.fSize,

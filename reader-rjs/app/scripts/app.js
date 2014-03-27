@@ -6,8 +6,10 @@ define([
     'sys',
     'layout',
     'styles',
-    'vents'
-], function($, Env, Reader, Settings, Sys, Layout, Styles, Vents) {
+    'vents',
+    'ajaxCall',
+    'ajaxBookData'  // not `required` to allow retrieval
+], function($, Env, Reader, Settings, Sys, Layout, Styles, Vents, AjaxCall) {
     'use strict';
 
     return function App() {
@@ -21,6 +23,7 @@ define([
         this.env = Env,
         this.styles = Styles
         this.vents = new Vents(),
+        this.ajaxCall = AjaxCall,
 
         this.init = function() {
 
@@ -34,7 +37,7 @@ define([
 
                 intrvl = setInterval(function() {
                     clearInterval(intrvl);
-                    self.env.resizeStopped();
+                    self.vents.resizeStopped();
                 }, 50);
 
             });
@@ -48,8 +51,8 @@ define([
                     if (writeComplete) return;
 
                     writeComplete = true;
-                    // self.sys.saveLocation();
-                    // self.sys.updateUserPreferences();
+                    self.sys.saveLocation();
+                    self.sys.updateUserPreferences();
 
                 }
 
