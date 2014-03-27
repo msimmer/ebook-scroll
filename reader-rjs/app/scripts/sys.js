@@ -21,7 +21,7 @@ define([
         this.updateLocalStorage = function(obj, prop, attr, nestedAttr) {
         // this.updateLocalStorage = function() {
 
-                console.log('updateLocalStorage()');
+            console.log('updateLocalStorage()');
 
             // var obj = arguments[0];
 
