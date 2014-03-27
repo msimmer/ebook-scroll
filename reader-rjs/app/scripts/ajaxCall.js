@@ -1,4 +1,7 @@
-define(['jquery', 'settings'], function($, Settings) {
+define([
+    'jquery',
+    'settings'
+], function($, Settings) {
 
     var settings = Settings;
 

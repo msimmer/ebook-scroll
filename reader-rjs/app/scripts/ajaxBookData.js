@@ -1,4 +1,8 @@
-define(['jquery', 'reader', 'ajaxCall'], function($, Reader, AjaxCall) {
+define([
+    'jquery',
+    'reader',
+    'ajaxCall'
+], function($, Reader, AjaxCall) {
 
     var
         ajaxCall = AjaxCall,
@@ -11,6 +15,8 @@ define(['jquery', 'reader', 'ajaxCall'], function($, Reader, AjaxCall) {
         method: 'get',
         successCallback: function(data) {
             reader.components = data;
+            reader.firstPage = data[0].src;
+            reader.lastPage = data[data.length - 1].src;
         }
 
     });

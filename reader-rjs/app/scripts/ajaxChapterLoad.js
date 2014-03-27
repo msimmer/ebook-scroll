@@ -3,13 +3,15 @@ require([
     'reader',
     'settings',
     'sys',
-    'ajaxBookData'
-], function($, Reader, Settings, Sys, AjaxBookData) {
+    'ajaxBookData',
+    'chapter'
+], function($, Reader, Settings, Sys, AjaxBookData, Chapter) {
 
     var
         ajaxBookData = AjaxBookData,
         sys = new Sys(),
         reader = Reader,
+        chapter = Chapter,
         settings = Settings;
 
     $.when(ajaxBookData).then(
@@ -20,21 +22,6 @@ require([
 
         $.each(data, function(i, o) {
 
-            switch (i) {
-
-                case 0:
-                    reader.firstPage = o.src;
-                    break;
-
-                case data.length - 1:
-                    reader.lastPage = o.src;
-                    break;
-
-                default:
-                    break;
-
-            };
-
             $('<a/>', {
                 text: o.title,
                 href: o.src,
@@ -44,7 +31,7 @@ require([
 
                     sys.saveLocation();
 
-                    sys.loadChapter(o.src);
+                    new chapter(o.src);
 
                     sys.goToPreviousLocation();
 
@@ -53,6 +40,7 @@ require([
         });
 
         // if (settings.debug) console.log('JSON data added to DOM');
+
     }
 
 });

@@ -12,7 +12,11 @@ require.config({
     }
 });
 
-require(['jquery', 'app'], function($, App) {
+require([
+    'jquery',
+    'app',
+    'chapter'
+], function($, App, Chapter) {
 
     $(document).ready(function() {
 
@@ -20,7 +24,9 @@ require(['jquery', 'app'], function($, App) {
 
         app.init();
 
-        if (app.settings.debug) console.log(app);
+        new Chapter(app.reader.currentPage);
+
+        // if (app.settings.debug) console.log(app);
 
     });
 

@@ -13,18 +13,30 @@ define([
             layout = Layout,
             self = this;
 
-        this.updatedReaderData = function(prop, attr) {
+        this.updatedReaderData = function() {
 
-            reader[prop] = attr;
-
+            reader[arguments[0]] = arguments[1];
         },
 
         this.updateLocalStorage = function(obj, prop, attr, nestedAttr) {
+        // this.updateLocalStorage = function() {
+
+            console.log('updateLocalStorage()');
+
+            // var obj = arguments[0];
+
+            // if (localStorage.getItem(obj) === null) {
+            //     console.log('localstorage obj null');
+            //     return;
+            // }
+
+
+
 
             if (localStorage.getItem(obj) === null) return; // localstorage was not added on page load or was removed
 
             if (prop === undefined || attr === undefined) {
-                throw 'Error: App.updateLocalStorage() undefined argument';
+                throw 'Error: sys.updateLocalStorage() undefined argument';
             }
 
             var parsedObj = JSON.parse(localStorage.getItem(obj));
@@ -141,6 +153,8 @@ define([
 
             } else {
 
+                console.log(reader.firstPage);
+
                 var clientBook = {
                     currentPage: reader.firstPage,
                     scrollPosition: {}
@@ -185,47 +199,12 @@ define([
 
         this.goToPreviousLocation = function() {
 
+            if (settings.debug) console.log('goToPreviousLocation()');
+
             var pos = self.getFromLocalStorage('clientBook', 'scrollPosition', reader.currentPage);
             setTimeout(function() {
                 settings.el.scrollTop(pos);
             }, 50);
-        },
-
-        this.loadChapter = function(url) {
-
-            if (settings.debug) console.log('Current page is ' + url);
-
-            self.updatedReaderData('currentPage', url);
-
-            var promisePageLoad = $.get(url);
-
-            return $.when(promisePageLoad).done(function(data) {
-
-                var content = $('<section/>', {
-                    id: 'page',
-                    css: {
-                        margin: 0,
-                        padding: 0,
-                        border: 0
-                    }
-                }).html(data);
-
-                settings.el.html(content);
-
-                reader.currentPage = url;
-
-                self.updateLocalStorage('clientBook', 'currentPage', url);
-
-                if (App.debug) console.log('Local storage updated');
-
-            }).then(function() {
-
-                layout.adjustFramePosition();
-
-                self.countPages();
-                self.goToPreviousLocation();
-
-            });
         },
 
         this.goToNextChapter = function() {

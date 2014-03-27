@@ -8,7 +8,8 @@ define([
 
     return function Vents() {
 
-        var settings = Settings,
+        var
+            settings = Settings,
             reader = Reader,
             layout = Layout,
             sys = Sys,
@@ -23,13 +24,8 @@ define([
             '.font-dec, click': 'fontDecrement',
             '.contrast-toggle, click': 'contrastToggle',
             '.full-screen, click': 'toggleFullScreen',
-            'main a, click': 'embeddedLinkClick',
-            '#btn, click': 'alerter'
+            'main a, click': 'embeddedLinkClick'
 
-        },
-
-        this.alerter = function() {
-            console.log(this);
         },
 
         this.bindEventHandlers = function() {
@@ -224,8 +220,8 @@ define([
             }
 
             function routeInternalLink(url) {
-                that.loadChapter(url);
-                that.saveLocation();
+                sys.loadChapter(url);
+                sys.saveLocation();
             }
 
             function routeExternalLink(url) {

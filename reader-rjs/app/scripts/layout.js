@@ -119,7 +119,7 @@ define([
         },
 
         this.setDomElements = function() {
-            vents.contrastToggle(reader.contrast);
+            // vents.contrastToggle(reader.contrast);
         },
 
         this.removeElementStyles = function() {
