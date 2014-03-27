@@ -29,7 +29,7 @@ define([
 
         this.setFrameHeight = function() {
 
-            var targetHeight = that.layout.targetContainerHeight();
+            var targetHeight = self.targetContainerHeight();
 
             settings.el.css({
                 'height': targetHeight,
@@ -42,7 +42,7 @@ define([
 
             if (env.isMobile()) return;
 
-            var targetWidth = that.layout.targetContainerWidth();
+            var targetWidth = self.targetContainerWidth();
 
             settings.el.css({
                 'max-width': targetWidth
@@ -123,7 +123,7 @@ define([
         },
 
         this.removeElementStyles = function() {
-            var that = this;
+
             var textCss = {};
             var textCss = {
                 fontSize: '',
@@ -132,9 +132,11 @@ define([
                 textDecoration: '',
                 backgroundColor: 'transparent'
             };
+
             $.each(styles.textElements, function(i, o) {
                 settings.el.find(o).css(textCss);
             });
+
         },
 
         this.setStyles = function() {

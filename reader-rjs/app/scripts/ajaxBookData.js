@@ -1,21 +1,18 @@
-require(['jquery', 'ajaxCall', 'reader'], function($, AjaxCall, Reader) { // not declared in app, data retrieved via ajaxCall
+define(['jquery', 'reader', 'ajaxCall'], function($, Reader, AjaxCall) {
 
-    var ajaxCall = AjaxCall,
+    var
+    ajaxCall = AjaxCall,
         reader = Reader;
 
-    $.when(ajaxCall).then(
+    ajaxCall.getData({
 
-        ajaxCall.getData({
+        url: 'data/bookData.json',
+        dataType: 'json',
+        method: 'get',
+        successCallback: function(data) {
+            reader.components = data;
+        }
 
-            apiURL: 'data/bookData.json',
-            dataType: 'json',
-            method: 'get',
-            successCallback: function(data) {
-                reader.components = data;
-            }
-
-        })
-    );
-
+    });
 
 });

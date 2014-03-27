@@ -1,25 +1,27 @@
-define(['jquery'], function($) {
+define(['jquery', 'settings'], function($, Settings) {
 
-    function getData(options) {
+    var settings = Settings;
+
+    function getData(opts) {
 
         $.ajax({
-            url: options.apiURL,
-            dataType: options.format,
-            method: options.method,
-            jsonpCallback: options.jsonpCallback,
-            success: options.successCallback,
-            error: function(x, t, s) {
-                console.log(s);
+            url: opts.url,
+            dataType: opts.format,
+            method: opts.method,
+            jsonpCallback: opts.jsonpCallback,
+            success: opts.successCallback || function(data) {
+                if (settings.debug) console.log(data);
             },
-            timeout: options.timeout
+            error: opts.errorCallback || function(x, t, s) {
+                if (settings.debug) console.log(t + ' ' + s);
+            },
+            timeout: opts.timeout
         });
 
     }
 
     return {
-
         getData: getData
-
-    }
+    };
 
 });

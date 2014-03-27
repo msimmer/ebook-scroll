@@ -86,7 +86,7 @@ define([
             window.clearInterval(self.listenForPageChangeInterval);
 
             self.listenForPageChangeInterval = setInterval(function() {
-                layout.countPages();
+                self.countPages();
             }, intrvl);
 
         },
@@ -265,8 +265,39 @@ define([
 
         this.resizeStopped = function() {
 
-            layout.countPages();
+            self.countPages();
             layout.adjustFramePosition();
+
+        },
+
+        this.countPages = function(){
+
+            if (settings.debug) console.log('Counting pages');
+
+            var frameH = that.el.height(),
+                page = that.el.find('section#page'),
+                pageH = page.height(),
+                totalPageIndicator = $('.total-page-count'),
+                currentPageIndicator = $('.current-page-count'),
+                q = Math.round(pageH / frameH);
+
+            function getCurrentPage() {
+                return Math.round((-(page.offset().top - that.el.offset().top) / frameH) + 1);
+            }
+
+            totalPageIndicator.html(q);
+            currentPageIndicator.html(getCurrentPage());
+
+            var main = settings.el,
+                page = main.find('#page');
+
+            if (main.height() - page.height() >= -main.scrollTop()) {
+                if (reader.currentPage === reader.lastPage) {
+                    self.isBookEnd();
+                } else if (reader.currentPage !== reader.lastPage) {
+                    self.isChapterEnd();
+                }
+            }
 
         }
 

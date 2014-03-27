@@ -9,6 +9,7 @@ define([
     var Settings = {
 
         el: $('main'),
+        chapters: $('.chapters'),
         debug: true,
 
         // synchs with localstorage user data
@@ -27,8 +28,7 @@ define([
 
         // synchs with localstorage reader data
         scrollSpeed: 60,                            // (int) scroll speed
-        scrollInt: null                             //(function) stores current scrollInterval
-
+        scrollInt: null                             // (function) stores current scrollInterval
 
     };
 

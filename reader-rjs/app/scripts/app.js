@@ -8,22 +8,24 @@ define([
     'styles',
     'vents',
     'ajaxCall',
-    'ajaxBookData'  // not `required` to allow retrieval
-], function($, Env, Reader, Settings, Sys, Layout, Styles, Vents, AjaxCall) {
+    'ajaxBookData',     // no need to pass as var
+    'ajaxChapterLoad'   // no need to pass as var
+], function($, Env, Reader, Settings, Sys, Layout, Styles, Vents, AjaxCall, AjaxBookData, AjaxChapterLoad) {
     'use strict';
 
     return function App() {
 
         var self = this; // keep logical scope
 
-        this.reader = Reader,
-        this.settings = Settings,
-        this.sys = new Sys(),
-        this.layout = new Layout(),
-        this.env = Env,
-        this.styles = Styles
-        this.vents = new Vents(),
-        this.ajaxCall = AjaxCall,
+        this.layout     = new Layout(),
+        this.sys        = new Sys(),
+        this.vents      = new Vents(),
+
+        this.ajaxCall   = AjaxCall,
+        this.reader     = Reader,
+        this.settings   = Settings,
+        this.env        = Env,
+        this.styles     = Styles,
 
         this.init = function() {
 
