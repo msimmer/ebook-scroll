@@ -41,6 +41,7 @@ define([
 
             layout.adjustFramePosition();
 
+            sys.getUserPreferences();
             sys.countPages();
             sys.goToPreviousLocation();
 

@@ -34,7 +34,7 @@ define([
 
             // get local storage or set it if it's === null
             this.sys.getLocation();
-            this.sys.getUserPreferences();
+            // this.sys.getUserPreferences();
 
             // build DOM
             this.layout.removeElementStyles(); // remove initial colors, background

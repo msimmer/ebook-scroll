@@ -127,7 +127,7 @@ define([
 
                 var obj = JSON.parse(localStorage.getItem('userPreferences'));
 
-                $.extend(reader, obj);
+                $.extend(reader.settings, obj);
 
             } else {
 
@@ -195,7 +195,7 @@ define([
                 }
             }
 
-        }
+        },
 
         this.goToPreviousLocation = function() {
 

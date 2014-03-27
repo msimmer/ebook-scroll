@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -8,19 +8,52 @@
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title></title>
+    <title>rjs</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" />
-    <link type="text/css" rel="stylesheet" href='css/window-ui.css?c33cb0d5-5d8b-491f-ab6e-f610179be8f1' />
-    <link type="text/css" rel="stylesheet" href='css/styles.css?4ae17b3c-ca22-4a2f-9cf1-1cac49d00f24' />
-    <link type="text/css" rel="stylesheet" href='css/media-queries-portrait.css?d30eaf54-ae4b-437b-a10b-b1e2cad25e7e' />
-    <link type="text/css" rel="stylesheet" href='css/media-queries-landscape.css?b9e7f2c1-c958-461f-b540-1b698c9245ce' />
-    <link type="text/css" rel="stylesheet" href='css/scroll-pane.css?c560ad72-7708-4ce0-84e3-3efbe61dfc04' />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+
+    <style type="text/css">
+    .chapters{
+        list-style: none;
+        position: fixed;
+        top:0;
+        left:0;
+        margin:20px;
+    }
+    nav.mobile-portrait-only{
+        display: block!important;
+    }
+    nav.mobile{
+        display: block!important;
+    }
+    </style>
+
+    <!-- build:js scripts/vendor/modernizr.js -->
+    <script src="bower_components/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
+    <script>
+    window.app = {
+        dev: true,
+        version: '1.0'
+    };
+    </script>
+
 </head>
 
 <body>
-    <div class="images-preload"></div>
+    <!--[if lt IE 10]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <div class="preload-images"></div>
     <nav class='mobile-portrait-only'>
         <ul class="chapters"></ul>
         <ul class="controls">
@@ -30,19 +63,17 @@
                         <rect x="0.5" y="0.5" fill='#333' stroke="#fff" stroke-miterlimit="10" width="31" height="31" />
                         <polygon fill="#fff" points="12,8.18 23.506,16.315 12,24.451 " />
                     </svg>
-                    <svg class='svg-dark pause' version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
-                        <rect x="1" y="1" fill="none" stroke="#fff" stroke-width="2" stroke-miterlimit="10" width="62" height="62"/>
-                        <rect x="1" y="7.438" fill="none" width="62" height="51.125"/>
-                        <text transform="matrix(1 0 0 1 19.373 55.6172)" fill='#fff' font-family="'Cardo'" font-size="60">||</text>
+                    <svg class='svg-dark pause' version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" xml:space="preserve">
+                        <rect x="0.5" y="0.5" fill="none" stroke="#fff" stroke-miterlimit="10" width="31" height="31" />
+                        <rect x="8" y="8" width="16" height="16" fill='#fff' />
                     </svg>
                     <svg class='svg-light play' version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" xml:space="preserve">
                         <rect x="0.5" y="0.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="31" height="31" />
                         <polygon points="12,8.18 23.506,16.315 12,24.451 " />
                     </svg>
-                    <svg class='svg-light pause' version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
-                        <rect x="1" y="1" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" width="62" height="62"/>
-                        <rect x="1" y="7.438" fill="none" width="62" height="51.125"/>
-                        <text transform="matrix(1 0 0 1 19.373 55.6172)" font-family="'Cardo'" font-size="60">||</text>
+                    <svg class='svg-light pause' version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" xml:space="preserve">
+                        <rect x="0.5" y="0.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="31" height="31" />
+                        <rect x="8" y="8" width="16" height="16" />
                     </svg>
                 </a>
             </li>
@@ -144,36 +175,9 @@
             <span class='current-page-count'></span>/<span class='total-page-count'></span>
         </p>
     </footer>
-    <!-- vendor -->
-    <script type="text/javascript" src='vendor/jquery.js'></script>
-    <script type="text/javascript" src='vendor/requestAnimationFrame.js'></script>
-    <script type="text/javascript" src='vendor/scrollPane.js'></script>
-    <!-- // vendor -->
-    <!-- app -->
-    <script type="text/javascript" src='js/env.js'></script>
-    <script type="text/javascript" src='js/style.js'></script>
-    <script type="text/javascript" src='js/layout.js'></script>
-    <script type="text/javascript" src='js/vent.js'></script>
-    <script type="text/javascript" src='js/init.js'></script>
-    <script type="text/javascript" src='js/load.js'></script>
-    <!-- // app -->
-    <script type="text/javascript">
-        $(function(){
-            // $('main').jScrollPane();
-        });
-    </script>
-    <script type="text/javascript">
-        $(function(){
-            $.each($('img, script, style'), function(i,o){
-                var $this = $(o);
-                if ($this.is('[src]')){
-                    $this.attr('src', $this.attr('src')+'?=cache'+Math.round(Math.random()*100000));
-                } else if($this.is('[href]')){
-                    $this.attr('href', $this.attr('href')+'?=cache'+Math.round(Math.random()*100000));
-                }
-            });
-        });
-    </script>
+    <!-- build:js({app,.tmp}) scripts/main.js -->
+    <script data-main="scripts/main" src="bower_components/requirejs/require.js"></script>
+    <!-- endbuild -->
 </body>
 
 </html>
