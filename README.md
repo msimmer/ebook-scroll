@@ -1,4 +1,4 @@
-# reader-scroll
+# ebook-scroll
 
 ## An auto-scrolling e-reader in your browser.
 
