@@ -12,6 +12,11 @@ define([
         settings = Settings,
         reader = Reader;
 
+        // sys = Sys,
+        // layout = Layout;
+        // settings = Settings,
+        // reader = Reader;
+
     return function LoadChapter(url) {
 
         // if (settings.debug) console.log('Current page is ' + url);
@@ -41,7 +46,6 @@ define([
 
             layout.adjustFramePosition();
 
-            sys.getUserPreferences();
             sys.countPages();
             sys.goToPreviousLocation();
 

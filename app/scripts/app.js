@@ -3,15 +3,15 @@ define([
     'env',
     'reader',
     'settings',
-    'sys',
-    'layout',
     'styles',
+    'layout',
+    'sys',
     'vents',
     'ajaxCall',
     'chapter',
     'ajaxBookData',     // no need to pass as var
     'ajaxChapterLoad'   // no need to pass as var
-], function($, Env, Reader, Settings, Sys, Layout, Styles, Vents, AjaxCall, Chapter, AjaxBookData, AjaxChapterLoad) {
+], function($, Env, Reader, Settings, Styles, Layout, Sys, Vents, AjaxCall, Chapter, AjaxBookData, AjaxChapterLoad) {
     'use strict';
 
     return function App() {
@@ -34,7 +34,7 @@ define([
 
             // get local storage or set it if it's === null
             this.sys.getLocation();
-            // this.sys.getUserPreferences();
+            this.sys.getUserPreferences();
 
             // build DOM
             this.layout.removeElementStyles(); // remove initial colors, background

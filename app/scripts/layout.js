@@ -3,9 +3,11 @@ define([
     'reader',
     'settings',
     'env',
-    'vents',
+    // 'vents',
     'styles'
-], function($, Reader, Settings, Env, Vents, Styles) {
+], function($, Reader, Settings, Env,
+    // Vents,
+     Styles) {
     'use strict';
 
     return function Layout() {
@@ -13,7 +15,7 @@ define([
         var reader = Reader,
             settings = Settings,
             env = Env,
-            vents = Vents,
+            // vents = Vents,
             styles = Styles,
             self = this;
 

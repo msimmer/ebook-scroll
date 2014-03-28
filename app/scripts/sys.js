@@ -15,13 +15,17 @@ define([
 
         this.updatedReaderData = function() {
 
-            reader[arguments[0]] = arguments[1];
+            return reader[arguments[0]] = arguments[1];
+        },
+
+        this.updateUserData = function() {
+
+            return settings[arguments[0]] = arguments[1];
+
         },
 
         this.updateLocalStorage = function(obj, prop, attr, nestedAttr) {
-        // this.updateLocalStorage = function() {
-
-            console.log('updateLocalStorage()');
+            // this.updateLocalStorage = function() {
 
             // var obj = arguments[0];
 
@@ -29,9 +33,6 @@ define([
             //     console.log('localstorage obj null');
             //     return;
             // }
-
-
-
 
             if (localStorage.getItem(obj) === null) return; // localstorage was not added on page load or was removed
 
@@ -109,12 +110,12 @@ define([
 
         this.updateUserPreferences = function() {
 
-            // if (settings.debug) console.log('Updating user preferences');
+            if (settings.debug) console.log('Updating user preferences');
 
             var userPreferences = {
-                fSize: reader.fSize,
-                contrast: reader.contrast,
-                scrollSpeed: reader.scrollSpeed
+                fSize: settings.fSize,
+                contrast: settings.contrast,
+                scrollSpeed: settings.scrollSpeed
             };
 
             localStorage.setItem('userPreferences', JSON.stringify(userPreferences));
@@ -123,18 +124,20 @@ define([
 
         this.getUserPreferences = function() {
 
+            if (settings.debug) console.log('Getting User Preferences');
+
             if (localStorage.getItem('userPreferences') !== null) {
 
                 var obj = JSON.parse(localStorage.getItem('userPreferences'));
 
-                $.extend(reader.settings, obj);
+                $.extend(settings, obj);
 
             } else {
 
                 var userPreferences = {
-                    fSize: reader.fSize,
-                    contrast: reader.contrast,
-                    scrollSpeed: reader.scrollSpeed
+                    fSize: settings.fSize,
+                    contrast: settings.contrast,
+                    scrollSpeed: settings.scrollSpeed
                 };
 
                 localStorage.setItem('userPreferences', JSON.stringify(userPreferences));
@@ -152,8 +155,6 @@ define([
                 $.extend(reader.scrollPosition, obj.scrollPosition);
 
             } else {
-
-                console.log(reader.firstPage);
 
                 var clientBook = {
                     currentPage: reader.firstPage,
@@ -199,7 +200,7 @@ define([
 
         this.goToPreviousLocation = function() {
 
-            if (settings.debug) console.log('goToPreviousLocation()');
+            if (settings.debug) console.log('Going to previous location');
 
             var pos = self.getFromLocalStorage('clientBook', 'scrollPosition', reader.currentPage);
             setTimeout(function() {

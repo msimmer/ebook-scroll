@@ -12,7 +12,7 @@ define([
             settings = Settings,
             reader = Reader,
             layout = Layout,
-            sys = Sys,
+            sys = new Sys(),
             self = this;
 
         this.eventHandlers = {
@@ -201,7 +201,7 @@ define([
                 html.removeClass('darkCss');
             }
 
-            sys.updatedReaderData('contrast', contrast);
+            sys.updateUserData('contrast', contrast);
             sys.updateUserPreferences();
 
         },
