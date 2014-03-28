@@ -1,5 +1,5 @@
 # ebook-scroll
 
-## An auto-scrolling e-reader in your browser.
+## An Auto-Scrolling Ebook Reader in Your Browser.
 
 Built on RequireJS. Updates coming soon.
