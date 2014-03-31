@@ -27,8 +27,9 @@ define([
         contrast: 'light',                          // (str) light or dark
 
         // synchs with localstorage reader data
-        scrollSpeed: 60,                            // (int) scroll speed
-        scrollInt: null                             // (function) stores current scrollInterval
+        scrollSpeed: 30,                            // (int) scroll speed
+        scrollInt: null,                            // (function) stores current scrollInterval
+        scrollTimeout: null                         // (function) stores current rFA setTimeout
 
     };
 

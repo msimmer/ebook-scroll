@@ -14,7 +14,7 @@ define([
             reader = Reader,
             layout = new Layout(),
             sys = new Sys(),
-            rFA = RequestAnimationFrame,
+            rFA = new RequestAnimationFrame(),
             self = this;
 
         this.eventHandlers = {
@@ -103,11 +103,14 @@ define([
 
             var playBtn = $('.controls').find('.play-btn').attr('data-state', 'pause');
 
-            window.clearInterval(settings.scrollInt);
+            cancelAnimationFrame(settings.scrollInt);
+            window.clearTimeout(settings.scrollTimeout);
 
-            settings.scrollInt = setInterval(function() {
+            settings.scrollTimeout = setTimeout(function() {
                 settings.el.scrollTop(settings.el.scrollTop() + 1);
-            }, settings.scrollSpeed);
+                settings.scrollInt = requestAnimationFrame(self.startScrolling);
+            }, 60);
+            // }, 1000 / settings.scrollSpeed);
 
             reader.isScrolling = true;
 
@@ -121,7 +124,8 @@ define([
 
             if (settings.debug) console.log('Stopped');
 
-            window.clearInterval(settings.scrollInt);
+            cancelAnimationFrame(settings.scrollInt);
+            window.clearTimeout(settings.scrollTimeout);
             window.clearInterval(self.listenForPageChangeInterval);
 
             reader.isScrolling = false;
@@ -130,9 +134,13 @@ define([
 
         this.speedIncrement = function() {
 
+            if (settings.scrollSpeed >= 250) return;
+
             self.stopScrolling();
-            settings.scrollSpeed -= 20;
+            settings.scrollSpeed += 10;
             self.startScrolling();
+
+            console.log(settings.scrollSpeed);
 
             sys.updateUserPreferences();
 
@@ -140,9 +148,13 @@ define([
 
         this.speedDecrement = function() {
 
+            if (settings.scrollSpeed <= 10) return;
+
             self.stopScrolling();
-            settings.scrollSpeed += 20;
+            settings.scrollSpeed -= 10;
             self.startScrolling();
+
+            console.log(settings.scrollSpeed);
 
             sys.updateUserPreferences();
 
