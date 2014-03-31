@@ -8,7 +8,7 @@ require([
 ], function($, Reader, Settings, Sys, AjaxBookData, Chapter) {
 
     var
-        ajaxBookData = AjaxBookData,
+    ajaxBookData = AjaxBookData,
         sys = new Sys(),
         reader = Reader,
         chapter = Chapter,
@@ -22,21 +22,21 @@ require([
 
         $.each(data, function(i, o) {
 
-            $('<a/>', {
-                text: o.title,
-                href: o.src,
-                click: function(e) {
-
-                    e.preventDefault();
-
-                    sys.saveLocation();
-
-                    new chapter(o.src);
-
-                    sys.goToPreviousLocation();
-
+            $('<li/>', {
+                html: {
+                    $('<a/>', {
+                        text: o.title,
+                        href: o.src,
+                        click: function(e) {
+                            e.preventDefault();
+                            sys.saveLocation();
+                            new chapter(o.src);
+                            sys.goToPreviousLocation();
+                        }
+                    });
                 }
-            }).appendTo($('<li/>').appendTo(settings.chapters));
+            }).appendTo(settings.chapters);
+
         });
 
         // if (settings.debug) console.log('JSON data added to DOM');
