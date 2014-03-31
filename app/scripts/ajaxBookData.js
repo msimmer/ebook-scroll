@@ -4,8 +4,7 @@ define([
     'ajaxCall'
 ], function($, Reader, AjaxCall) {
 
-    var
-        ajaxCall = AjaxCall,
+    var ajaxCall = AjaxCall,
         reader = Reader;
 
     ajaxCall.getData({

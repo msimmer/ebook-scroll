@@ -6,26 +6,18 @@ define([
     'layout'
 ], function($, Settings, Reader, Sys, Layout) {
 
-    var
-        sys = new Sys(),
+    var sys = new Sys(),
         layout = new Layout();
         settings = Settings,
         reader = Reader;
 
-        // sys = Sys,
-        // layout = Layout;
-        // settings = Settings,
-        // reader = Reader;
-
     return function LoadChapter(url) {
-
-        // if (settings.debug) console.log('Current page is ' + url);
 
         var promisePageLoad = $.get(url);
 
         return $.when(promisePageLoad)
 
-            .then(function(data) {
+        .then(function(data) {
 
             var content = $('<section/>', {
                 id: 'page',
@@ -44,12 +36,14 @@ define([
         })
             .then(function() {
 
-            layout.adjustFramePosition();
+                layout.adjustFramePosition();
 
-            sys.countPages();
-            sys.goToPreviousLocation();
+                sys.countPages();
+                sys.goToPreviousLocation();
 
-        });
+            });
+
+        if (settings.debug) console.log('Current page is ' + url);
 
     }
 

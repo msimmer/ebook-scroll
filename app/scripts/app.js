@@ -16,7 +16,7 @@ define([
 
     return function App() {
 
-        var self = this; // keep logical scope
+        var self = this;
 
         this.layout     = new Layout(),
         this.sys        = new Sys(),

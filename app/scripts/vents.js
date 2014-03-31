@@ -8,10 +8,9 @@ define([
 
     return function Vents() {
 
-        var
-            settings = Settings,
+        var settings = Settings,
             reader = Reader,
-            layout = Layout,
+            layout = new Layout(),
             sys = new Sys(),
             self = this;
 
@@ -170,7 +169,7 @@ define([
 
             layout.adjustFramePosition();
 
-            sys.updatedReaderData('fSize', size);
+            sys.updateUserData('fSize', size);
             sys.updateUserPreferences();
 
         },
@@ -183,7 +182,7 @@ define([
 
             layout.adjustFramePosition();
 
-            sys.updatedReaderData('fSize', size);
+            sys.updateUserData('fSize', size);
             sys.updateUserPreferences();
 
         },
