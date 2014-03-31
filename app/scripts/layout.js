@@ -3,11 +3,8 @@ define([
     'reader',
     'settings',
     'env',
-    // 'vents',
     'styles'
-], function($, Reader, Settings, Env,
-    // Vents,
-     Styles) {
+], function($, Reader, Settings, Env, Styles) {
     'use strict';
 
     return function Layout() {
@@ -15,7 +12,6 @@ define([
         var reader = Reader,
             settings = Settings,
             env = Env,
-            // vents = Vents,
             styles = Styles,
             self = this;
 
@@ -118,10 +114,6 @@ define([
                 });
             }
 
-        },
-
-        this.setDomElements = function() {
-            // vents.contrastToggle(reader.contrast);
         },
 
         this.removeElementStyles = function() {

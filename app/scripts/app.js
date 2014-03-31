@@ -9,8 +9,8 @@ define([
     'vents',
     'ajaxCall',
     'chapter',
-    'ajaxBookData',     // no need to pass as var
-    'ajaxChapterLoad'   // no need to pass as var
+    'ajaxBookData',
+    'ajaxChapterLoad'
 ], function($, Env, Reader, Settings, Styles, Layout, Sys, Vents, AjaxCall, Chapter, AjaxBookData, AjaxChapterLoad) {
     'use strict';
 
@@ -32,14 +32,14 @@ define([
 
             self.vents.bindEventHandlers();
 
-            // get local storage or set it if it's === null
+            // get local storage or set it if it's null
             this.sys.getLocation();
             this.sys.getUserPreferences();
 
-            // build DOM
-            this.layout.removeElementStyles(); // remove initial colors, background
-            this.layout.setDomElements(); // add reader styles
-            this.layout.setStyles(); // add fontsize, line-height
+            // set/reset DOM
+            this.layout.removeElementStyles();
+            this.vents.contrastToggle(self.settings.contrast);
+            this.layout.setStyles();
 
             window.addEventListener('orientationchange', self.vents.orientationHasChanged);
 

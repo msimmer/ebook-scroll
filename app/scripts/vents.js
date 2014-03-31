@@ -5,6 +5,7 @@ define([
     'layout',
     'sys'
 ], function($, Settings, Reader, Layout, Sys) {
+    'use strict';
 
     return function Vents() {
 

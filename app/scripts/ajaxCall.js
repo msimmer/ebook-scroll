@@ -2,6 +2,7 @@ define([
     'jquery',
     'settings'
 ], function($, Settings) {
+    'use strict';
 
     var settings = Settings;
 

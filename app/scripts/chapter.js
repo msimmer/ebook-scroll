@@ -5,9 +5,10 @@ define([
     'sys',
     'layout'
 ], function($, Settings, Reader, Sys, Layout) {
+    'use strict';
 
     var sys = new Sys(),
-        layout = new Layout();
+        layout = new Layout(),
         settings = Settings,
         reader = Reader;
 

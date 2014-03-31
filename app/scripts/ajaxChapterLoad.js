@@ -6,6 +6,7 @@ require([
     'ajaxBookData',
     'chapter'
 ], function($, Reader, Settings, Sys, AjaxBookData, Chapter) {
+    'use strict';
 
     var ajaxBookData = AjaxBookData,
         sys = new Sys(),

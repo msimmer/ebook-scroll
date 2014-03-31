@@ -1,27 +1,22 @@
 define([
     'jquery',
     'reader',
-    'settings',
-    'layout'
-], function($, Reader, Settings, Layout) {
+    'settings'
+], function($, Reader, Settings) {
     'use strict';
 
     return function Sys() {
 
         var reader = Reader,
             settings = Settings,
-            layout = Layout,
             self = this;
 
         this.updatedReaderData = function() {
-
             return reader[arguments[0]] = arguments[1];
         },
 
         this.updateUserData = function() {
-
             return settings[arguments[0]] = arguments[1];
-
         },
 
         this.updateLocalStorage = function(obj, prop, attr, nestedAttr) {
@@ -32,6 +27,17 @@ define([
             // if (localStorage.getItem(obj) === null) {
             //     console.log('localstorage obj null');
             //     return;
+            // }
+
+            // refactor ->
+            //
+            // function foo(obj) {
+            //     var a = arguments,
+            //         o = {};
+            //     for (var i in a[0]) {
+            //         o[i] = obj[i];
+            //     }
+            //     return o;
             // }
 
             if (localStorage.getItem(obj) === null) return; // localstorage was not added on page load or was removed
@@ -49,17 +55,6 @@ define([
             }
 
             localStorage.setItem(obj, JSON.stringify(parsedObj));
-
-            // refactor ->
-            //
-            // function foo(obj) {
-            //     var a = arguments,
-            //         o = {};
-            //     for (var i in a[0]) {
-            //         o[i] = obj[i];
-            //     }
-            //     return o;
-            // }
 
         },
 
@@ -134,13 +129,7 @@ define([
 
             } else {
 
-                var userPreferences = {
-                    fSize: settings.fSize,
-                    contrast: settings.contrast,
-                    scrollSpeed: settings.scrollSpeed
-                };
-
-                localStorage.setItem('userPreferences', JSON.stringify(userPreferences));
+                self.updateUserPreferences();
 
             }
         },

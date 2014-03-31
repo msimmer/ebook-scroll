@@ -17,6 +17,7 @@ require([
     'app',
     'chapter'
 ], function($, App, Chapter) {
+    'use strict';
 
     $(document).ready(function() {
 
@@ -25,8 +26,6 @@ require([
         app.init();
 
         new Chapter(app.reader.currentPage);
-
-        // if (app.settings.debug) console.log(app);
 
     });
 
