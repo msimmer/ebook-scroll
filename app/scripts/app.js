@@ -41,6 +41,10 @@ define([
             this.vents.contrastToggle(self.settings.contrast);
             this.layout.setStyles();
 
+            setTimeout(function(){
+                self.vents.startScrolling();
+            }, 100);
+
             window.addEventListener('orientationchange', self.vents.orientationHasChanged);
 
             window.onunload = window.onbeforeunload = (function() {

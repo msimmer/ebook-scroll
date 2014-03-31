@@ -3,8 +3,9 @@ define([
     'settings',
     'reader',
     'layout',
-    'sys'
-], function($, Settings, Reader, Layout, Sys) {
+    'sys',
+    'vendor/requestAnimationFrame'
+], function($, Settings, Reader, Layout, Sys, RequestAnimationFrame) {
     'use strict';
 
     return function Vents() {
@@ -13,6 +14,7 @@ define([
             reader = Reader,
             layout = new Layout(),
             sys = new Sys(),
+            rFA = RequestAnimationFrame,
             self = this;
 
         this.eventHandlers = {
