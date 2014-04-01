@@ -4,7 +4,7 @@ define([
     'reader',
     'layout',
     'sys',
-    'vendor/requestAnimationFrame'
+    'requestAnimationFrame'
 ], function($, Settings, Reader, Layout, Sys, RequestAnimationFrame) {
     'use strict';
 
