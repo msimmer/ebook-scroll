@@ -10,7 +10,7 @@ define([
 
         el: $('main'),
         chapters: $('.chapters'),
-        debug: false,
+        debug: true,
 
         // synchs with localstorage user data
         defaultFontSize: 18,                        // (int) default body font-size in px

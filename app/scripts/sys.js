@@ -159,34 +159,6 @@ define([
             }
         },
 
-        this.countPages = function() {
-
-            if (settings.debug) console.log('Counting pages');
-
-            var main = settings.el,
-                frameH = main.height(),
-                page = main.find('#page'),
-                pageH = page.height(),
-                totalPageIndicator = $('.total-page-count'),
-                currentPageIndicator = $('.current-page-count');
-
-            function getCurrentPage() {
-                return Math.round((-(page.offset().top - main.offset().top) / frameH) + 1);
-            }
-
-            totalPageIndicator.html(Math.round(pageH / frameH));
-            currentPageIndicator.html(getCurrentPage());
-
-            if (main.height() - page.height() >= -main.scrollTop()) {
-                if (reader.currentPage === reader.lastPage) {
-                    self.isBookEnd();
-                } else if (reader.currentPage !== reader.lastPage) {
-                    self.isChapterEnd();
-                }
-            }
-
-        },
-
         this.goToPreviousLocation = function() {
 
             if (settings.debug) console.log('Going to previous location');

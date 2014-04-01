@@ -18,15 +18,15 @@ define([
 
         var self = this;
 
-        this.layout     = new Layout(),
-        this.sys        = new Sys(),
-        this.vents      = new Vents(),
+        this.layout = new Layout(),
+        this.sys = new Sys(),
+        this.vents = new Vents(),
 
-        this.ajaxCall   = AjaxCall,
-        this.reader     = Reader,
-        this.settings   = Settings,
-        this.env        = Env,
-        this.styles     = Styles,
+        this.ajaxCall = AjaxCall,
+        this.reader = Reader,
+        this.settings = Settings,
+        this.env = Env,
+        this.styles = Styles,
 
         this.init = function() {
 
@@ -41,7 +41,7 @@ define([
             this.vents.contrastToggle(self.settings.contrast);
             this.layout.setStyles();
 
-            setTimeout(function(){
+            setTimeout(function() {
                 self.vents.startScrolling();
             }, 100);
 
@@ -57,8 +57,10 @@ define([
 
                     writeComplete = true;
 
-                    self.sys.saveLocation();
-                    self.sys.updateUserPreferences();
+                    if (!settings.debug) {
+                        self.sys.saveLocation();
+                        self.sys.updateUserPreferences();
+                    }
 
                 }
 

@@ -38,8 +38,7 @@ define([
             .then(function() {
 
                 layout.adjustFramePosition();
-
-                sys.countPages();
+                vents.countPages();
                 sys.goToPreviousLocation();
 
             });
