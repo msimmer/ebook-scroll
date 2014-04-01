@@ -109,8 +109,8 @@ define([
             settings.scrollTimeout = setTimeout(function() {
                 settings.el.scrollTop(settings.el.scrollTop() + 1);
                 settings.scrollInt = requestAnimationFrame(self.startScrolling);
-            }, 60);
-            // }, 1000 / settings.scrollSpeed);
+            // }, 60);
+            }, 1000 / settings.scrollSpeed);
 
             reader.isScrolling = true;
 
@@ -140,7 +140,7 @@ define([
             settings.scrollSpeed += 10;
             self.startScrolling();
 
-            console.log(settings.scrollSpeed);
+            if (settings.debug) console.log('Reading speed incremented to ' + settings.scrollSpeed);
 
             sys.updateUserPreferences();
 
@@ -154,7 +154,7 @@ define([
             settings.scrollSpeed -= 10;
             self.startScrolling();
 
-            console.log(settings.scrollSpeed);
+            if (settings.debug) console.log('Reading speed decremented to ' + settings.scrollSpeed);
 
             sys.updateUserPreferences();
 

@@ -57,7 +57,7 @@ define([
 
                     writeComplete = true;
 
-                    if (!this.settings.debug) {
+                    if (!self.settings.debug) {
                         self.sys.saveLocation();
                         self.sys.updateUserPreferences();
                     }

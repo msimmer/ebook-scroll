@@ -3,13 +3,15 @@ define([
     'settings',
     'reader',
     'sys',
-    'layout'
-], function($, Settings, Reader, Sys, Layout) {
+    'layout',
+    'vents'
+], function($, Settings, Reader, Sys, Layout, Vents) {
     'use strict';
 
     var sys = new Sys(),
         layout = new Layout(),
         settings = Settings,
+        vents = new Vents(),
         reader = Reader;
 
     return function LoadChapter(url) {
