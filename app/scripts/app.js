@@ -7,7 +7,7 @@ define([
     'layout',
     'sys',
     'vents',
-    'ajaxCall',
+    'ajax/ajaxCall',
     'chapter',
     'ajax/ajaxBookData',
     'ajax/ajaxChapterLoad',
