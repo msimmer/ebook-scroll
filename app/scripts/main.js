@@ -19,8 +19,9 @@ require.config({
 require([
     'jquery',
     'app',
-    'chapter'
-], function($, App, Chapter) {
+    'chapter',
+    'shims/storage'
+], function($, App, Chapter, ShimStorage) {
     'use strict';
 
     $(document).ready(function() {
