@@ -2,13 +2,16 @@ var noCacheArgs = window.app.dev ? "cache=" + Math.round(Math.random() * 100000)
 
 require.config({
     urlArgs: noCacheArgs,
-    baseUrl:'scripts/',
+    baseUrl: 'scripts',
     paths: {
         jquery: '../bower_components/jquery/jquery'
     },
     shim: {
-        jquery: {
+        'jquery': {
             exports: '$'
+        },
+        'plugins/hoverIntent': {
+            deps:['jquery']
         }
     }
 });

@@ -408,7 +408,7 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('build', [
-        'clean:dist',
+        // 'clean:dist',
         'useminPrepare',
         'concurrent:dist',
         'autoprefixer',
@@ -418,7 +418,7 @@ module.exports = function (grunt) {
         'uglify',
         'copy:dist',
         'modernizr',
-        'rev',
+        // 'rev',
         'usemin',
         'htmlmin'
     ]);

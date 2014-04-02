@@ -9,9 +9,10 @@ define([
     'vents',
     'ajaxCall',
     'chapter',
-    'ajaxBookData',
-    'ajaxChapterLoad'
-], function($, Env, Reader, Settings, Styles, Layout, Sys, Vents, AjaxCall, Chapter, AjaxBookData, AjaxChapterLoad) {
+    'ajax/ajaxBookData',
+    'ajax/ajaxChapterLoad',
+    'plugins/hoverIntent'
+], function($, Env, Reader, Settings, Styles, Layout, Sys, Vents, AjaxCall, Chapter, AjaxBookData, AjaxChapterLoad, HoverIntent) {
     'use strict';
 
     return function App() {
@@ -41,10 +42,6 @@ define([
             this.vents.contrastToggle(self.settings.contrast);
             this.layout.setStyles();
 
-            setTimeout(function() {
-                self.vents.startScrolling();
-            }, 100);
-
             window.addEventListener('orientationchange', self.vents.orientationHasChanged);
 
             window.onunload = window.onbeforeunload = (function() {
@@ -66,6 +63,12 @@ define([
 
             }());
 
+            $(window).load(function() {
+                setTimeout(function() {
+                    self.vents.startScrolling();
+                }, 150);
+            });
+
             $(window).on('resize', function() {
 
                 var intrvl;
@@ -73,18 +76,37 @@ define([
                 intrvl = setInterval(function() {
                     clearInterval(intrvl);
                     self.vents.resizeStopped();
-                }, 50);
+                }, 200);
 
             });
 
             $(document).on('touchmove', function(e) {
 
                 if (!$(e.target).parents().is(self.settings.el)) {
-
                     e.preventDefault();
-
                 }
 
+            });
+
+            var wasScrolling,
+                isManuallyScrolling;
+
+            self.settings.el.hoverIntent({
+                over: function(e) {
+                    wasScrolling = self.reader.isScrolling;
+                    if (wasScrolling) self.vents.stopScrolling();
+                    isManuallyScrolling = clearInterval(isManuallyScrolling);
+                    isManuallyScrolling = setInterval(function(){
+                        self.vents.countPages();
+                    }, 80);
+                },
+                out: function() {
+                    if (wasScrolling) self.vents.startScrolling();
+                    isManuallyScrolling = clearInterval(isManuallyScrolling);
+                },
+                interval: 200,
+                sensitivity: 1,
+                timeout: 0
             });
 
         }
