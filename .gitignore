@@ -1,7 +1,12 @@
+.DS_Store
+.bowerrc
+.editorconfig
+.jshintrc
+Gruntfile.js
+bower.json
+package.json
 node_modules
 app
 test
 .tmp
 .sass-cache
-bower.json
-package.json
