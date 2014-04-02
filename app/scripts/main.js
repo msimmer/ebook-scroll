@@ -1,8 +1,6 @@
-var noCacheArgs = window.app.dev ? "cache=" + Math.round(Math.random() * 100000) : "";
-
 require.config({
-    urlArgs: noCacheArgs,
-    baseUrl: 'scripts',
+    // urlArgs: window.app.dev ? "cache=" + Math.round(Math.random() * 100000) : "",
+    // baseUrl: 'scripts',
     paths: {
         jquery: '../bower_components/jquery/jquery'
     },

@@ -1,4 +1,4 @@
-// Generated on 2014-03-20 using generator-webapp-rjs 0.4.8
+// Generated on 2014-03-31 using generator-webapp-rjs 0.4.8
 'use strict';
 
 // # Globbing
@@ -55,7 +55,7 @@ module.exports = function (grunt) {
                 },
                 files: [
                     '<%= yeoman.app %>/{,*/}*.html',
-                    '.tmp/styles/{,*/}*.css',
+                    'dist/styles/{,*/}*.css',
                     '<%= yeoman.app %>/images/{,*/}*'
                 ]
             }
@@ -73,7 +73,7 @@ module.exports = function (grunt) {
                 options: {
                     open: true,
                     base: [
-                        '.tmp',
+                        // 'dist',
                         '<%= yeoman.app %>'
                     ]
                 }
@@ -82,7 +82,7 @@ module.exports = function (grunt) {
                 options: {
                     port: 9001,
                     base: [
-                        '.tmp',
+                        'dist',
                         'test',
                         '<%= yeoman.app %>'
                     ]
@@ -153,7 +153,7 @@ module.exports = function (grunt) {
                 httpImagesPath: '/images',
                 httpGeneratedImagesPath: '/images/generated',
                 httpFontsPath: '/styles/fonts',
-                relativeAssets: false,
+                relativeAssets: true,
                 assetCacheBuster: false
             },
             dist: {
@@ -178,7 +178,7 @@ module.exports = function (grunt) {
                     expand: true,
                     cwd: '.tmp/styles/',
                     src: '{,*/}*.css',
-                    dest: '.tmp/styles/'
+                    dest: 'dist/styles/'
                 }]
             }
         },
@@ -272,12 +272,13 @@ module.exports = function (grunt) {
                 options: {
                     collapseBooleanAttributes: true,
                     collapseWhitespace: true,
-                    removeAttributeQuotes: true,
+                    removeAttributeQuotes: false,
                     removeCommentsFromCDATA: true,
                     removeEmptyAttributes: true,
-                    removeOptionalTags: true,
+                    removeOptionalTags: false,
                     removeRedundantAttributes: true,
-                    useShortDoctype: true
+                    useShortDoctype: true,
+                    keepClosingSlash:true
                 },
                 files: [{
                     expand: true,
@@ -295,7 +296,7 @@ module.exports = function (grunt) {
         //     dist: {
         //         files: {
         //             '<%= yeoman.dist %>/styles/main.css': [
-        //                 '.tmp/styles/{,*/}*.css',
+        //                 'dist/styles/{,*/}*.css',
         //                 '<%= yeoman.app %>/styles/{,*/}*.css'
         //             ]
         //         }
@@ -327,7 +328,8 @@ module.exports = function (grunt) {
                         '.htaccess',
                         'images/{,*/}*.webp',
                         '{,*/}*.html',
-                        'styles/fonts/{,*/}*.*'
+                        'styles/fonts/{,*/}*.*',
+                        'bower_components/bootstrap-sass/vendor/assets/fonts/bootstrap/*.*'
                     ]
                 }]
             },
@@ -337,7 +339,21 @@ module.exports = function (grunt) {
                 cwd: '<%= yeoman.app %>/styles',
                 dest: '.tmp/styles/',
                 src: '{,*/}*.css'
-            }
+            },
+            vendor: {
+                expand: true,
+                dot: true,
+                cwd: '<%= yeoman.app %>/bower_components',
+                dest: '.tmp/bower_components/',
+                src: ['**']
+            },
+            scripts: {
+                expand: true,
+                dot: true,
+                cwd: '<%= yeoman.app %>/scripts',
+                dest: '.tmp/scripts/',
+                src: ['**']
+            },
         },
 
 
@@ -366,6 +382,8 @@ module.exports = function (grunt) {
             dist: [
                 'compass',
                 'copy:styles',
+                'copy:vendor',
+                'copy:scripts',
                 'imagemin',
                 'svgmin'
             ]
@@ -408,7 +426,7 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('build', [
-        // 'clean:dist',
+        'clean:dist',
         'useminPrepare',
         'concurrent:dist',
         'autoprefixer',
@@ -418,7 +436,7 @@ module.exports = function (grunt) {
         'uglify',
         'copy:dist',
         'modernizr',
-        // 'rev',
+        'rev',
         'usemin',
         'htmlmin'
     ]);

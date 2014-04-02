@@ -10,7 +10,7 @@ define([
 
         el: $('main'),
         chapters: $('.chapters'),
-        debug: true,
+        debug: window.ebs && window.ebs.debug ? window.ebs.debug : false,
 
         // synchs with localstorage user data
         defaultFontSize: 18,                        // (int) default body font-size in px
