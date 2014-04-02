@@ -1,7 +1,7 @@
 define([
     'jquery',
     'reader',
-    'ajaxCall'
+    'ajax/ajaxCall'
 ], function($, Reader, AjaxCall) {
 
     var ajaxCall = AjaxCall,
