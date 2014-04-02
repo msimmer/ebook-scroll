@@ -1,0 +1,98 @@
+/* Webkit */
+
+/* line 2, ../../app/styles/window-ui.scss */
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* line 3, ../../app/styles/window-ui.scss */
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* line 4, ../../app/styles/window-ui.scss */
+
+::-webkit-scrollbar-track {
+  display: none;
+}
+
+/* line 5, ../../app/styles/window-ui.scss */
+
+::-webkit-scrollbar-track-piece {
+  display: none;
+}
+
+/* line 6, ../../app/styles/window-ui.scss */
+
+::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+/* line 7, ../../app/styles/window-ui.scss */
+
+::-webkit-scrollbar-corner {
+  display: none;
+}
+
+/* line 8, ../../app/styles/window-ui.scss */
+
+::-webkit-resizer {
+  display: none;
+}
+
+/* Moz */
+
+@-moz-document url-prefix(http://), url-prefix(https://)  {
+  /* line 11, ../../app/styles/window-ui.scss */
+
+  scrollbar {
+    -moz-appearance: none !important;
+    display: none !important;
+  }
+
+  /* line 15, ../../app/styles/window-ui.scss */
+
+  thumb,
+  scrollbarbutton {
+    -moz-appearance: none !important;
+    display: none !important;
+  }
+
+  /* line 19, ../../app/styles/window-ui.scss */
+
+  thumb:hover,
+  scrollbarbutton:hover {
+    -moz-appearance: none !important;
+    display: none !important;
+  }
+
+  /* line 23, ../../app/styles/window-ui.scss */
+
+  scrollbarbutton {
+    display: none !important;
+  }
+
+  /* line 26, ../../app/styles/window-ui.scss */
+
+  scrollbar[orient="vertical"] {
+    display: none !important;
+  }
+}
+
+/* IE */
+
+/* line 31, ../../app/styles/window-ui.scss */
+
+body {
+  scrollbar-base-color: transparent;
+  scrollbar-3dlight-color: transparent;
+  scrollbar-highlight-color: transparent;
+  scrollbar-track-color: transparent;
+  scrollbar-arrow-color: transparent;
+  scrollbar-shadow-color: transparent;
+  scrollbar-dark-shadow-color: transparent;
+  scrollbar-darkshadow-color: transparent;
+  scrollbar-face-color: transparent;
+}
