@@ -153,8 +153,9 @@ module.exports = function (grunt) {
                 httpImagesPath: '/images',
                 httpGeneratedImagesPath: '/images/generated',
                 httpFontsPath: '/styles/fonts',
-                relativeAssets: true,
-                assetCacheBuster: false
+                relativeAssets: false,
+                assetCacheBuster: false,
+                specify: '<%= yeoman.app%>/styles/main.scss'
             },
             dist: {
                 options: {

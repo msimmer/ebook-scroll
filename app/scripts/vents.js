@@ -5,7 +5,7 @@ define([
     'layout',
     'sys',
     'shims/requestAnimationFrame'
-], function($, Settings, Reader, Layout, Sys, RequestAnimationFrame) {
+], function($, Settings, Reader, Layout, Sys) {
     'use strict';
 
     return function Vents() {
@@ -14,7 +14,6 @@ define([
             reader = Reader,
             layout = new Layout(),
             sys = new Sys(),
-            rFA = new RequestAnimationFrame(),
             self = this;
 
         this.eventHandlers = {
@@ -34,7 +33,7 @@ define([
 
             $.each(self.eventHandlers, function(k, v) {
 
-                var split = k.split(","),
+                var split = k.split(','),
                     el = $.trim(split[0]),
                     trigger = $.trim(split[1]);
 
@@ -74,7 +73,9 @@ define([
 
         this.listenForPageChange = function() {
 
-            if (reader.isScrolling === false) return;
+            if (reader.isScrolling === false) {
+                return;
+            }
 
             var fontSize = $(settings.el.first('p')).css('font-size');
             var lineHeight = Math.floor(parseInt(fontSize.replace('px', '')) * 1.5);
@@ -101,15 +102,14 @@ define([
 
         this.startScrolling = function() {
 
-            var playBtn = $('.controls').find('.play-btn').attr('data-state', 'pause');
+            $('.controls').find('.play-btn').attr('data-state', 'pause');
 
-            cancelAnimationFrame(settings.scrollInt);
+            window.cancelAnimationFrame(settings.scrollInt);
             window.clearTimeout(settings.scrollTimeout);
 
             settings.scrollTimeout = setTimeout(function() {
                 settings.el.scrollTop(settings.el.scrollTop() + 1);
-                settings.scrollInt = requestAnimationFrame(self.startScrolling);
-            // }, 60);
+                settings.scrollInt = window.requestAnimationFrame(self.startScrolling);
             }, 1000 / settings.scrollSpeed);
 
             reader.isScrolling = true;
@@ -120,11 +120,13 @@ define([
 
         this.stopScrolling = function() {
 
-            var playBtn = $('.controls').find('.play-btn').attr('data-state', 'play');
+            $('.controls').find('.play-btn').attr('data-state', 'play');
 
-            if (settings.debug) console.log('Stopped');
+            if (settings.debug) {
+                console.log('Stopped');
+            }
 
-            cancelAnimationFrame(settings.scrollInt);
+            window.cancelAnimationFrame(settings.scrollInt);
             window.clearTimeout(settings.scrollTimeout);
             window.clearInterval(self.listenForPageChangeInterval);
 
@@ -134,13 +136,17 @@ define([
 
         this.speedIncrement = function() {
 
-            if (settings.scrollSpeed >= 250) return;
+            if (settings.scrollSpeed >= 250) {
+                return;
+            }
 
             self.stopScrolling();
             settings.scrollSpeed += 10;
             self.startScrolling();
 
-            if (settings.debug) console.log('Reading speed incremented to ' + settings.scrollSpeed);
+            if (settings.debug) {
+                console.log('Reading speed incremented to ' + settings.scrollSpeed);
+            }
 
             sys.updateUserPreferences();
 
@@ -148,13 +154,17 @@ define([
 
         this.speedDecrement = function() {
 
-            if (settings.scrollSpeed <= 10) return;
+            if (settings.scrollSpeed <= 10) {
+                return;
+            }
 
             self.stopScrolling();
             settings.scrollSpeed -= 10;
             self.startScrolling();
 
-            if (settings.debug) console.log('Reading speed decremented to ' + settings.scrollSpeed);
+            if (settings.debug) {
+                console.log('Reading speed decremented to ' + settings.scrollSpeed);
+            }
 
             sys.updateUserPreferences();
 
@@ -164,7 +174,9 @@ define([
 
             self.stopScrolling();
 
-            if (settings.debug) console.log('Chapter end');
+            if (settings.debug) {
+                console.log('Chapter end');
+            }
 
         },
 
@@ -172,7 +184,9 @@ define([
 
             self.stopScrolling();
 
-            if (settings.debug) console.log('Book end');
+            if (settings.debug) {
+                console.log('Book end');
+            }
 
         },
 
@@ -227,21 +241,14 @@ define([
                 ext = href.match(/^http/);
 
             if (ext) {
-                routeExternalLink(href);
+                e.stopPropagation();
+                self.stopScrolling();
+                target.attr('target', '_blank');
             } else {
-                e.preventDefault();
-                routeInternalLink(href);
-            }
-
-            function routeInternalLink(url) {
-                sys.loadChapter(url);
+                sys.loadChapter(href);
                 sys.saveLocation();
             }
 
-            function routeExternalLink(url) {
-                e.stopPropagation();
-                target.attr('target', '_blank');
-            }
         },
 
         this.orientationHasChanged = function() {
@@ -282,7 +289,9 @@ define([
 
         this.countPages = function() {
 
-            if (settings.debug) console.log('Counting pages');
+            if (settings.debug) {
+                console.log('Counting pages');
+            }
 
             var main = settings.el,
                 frameH = main.height(),
@@ -306,7 +315,7 @@ define([
                 }
             }
 
-        }
+        };
 
     };
 

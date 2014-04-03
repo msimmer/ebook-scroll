@@ -1,16 +1,14 @@
 define([
     'jquery',
-    'reader',
     'settings',
     'env',
     'styles'
-], function($, Reader, Settings, Env, Styles) {
+], function($, Settings, Env, Styles) {
     'use strict';
 
     return function Layout() {
 
-        var reader = Reader,
-            settings = Settings,
+        var settings = Settings,
             env = Env,
             styles = Styles,
             self = this;
@@ -38,7 +36,9 @@ define([
 
         this.setFrameWidth = function() {
 
-            if (env.isMobile()) return;
+            if (env.isMobile()) {
+                return;
+            }
 
             var targetWidth = self.targetContainerWidth();
 
@@ -63,7 +63,6 @@ define([
             var targetWidth = self.targetContainerWidth(),
                 smallScreen = targetWidth >= $(window).width(),
 
-                mobileCss = {},
                 mobileCss = {
                     top: h - frameMidH,
                     left: 0,
@@ -73,7 +72,6 @@ define([
                     marginLeft: 25
                 },
 
-                desktopCss = {},
                 desktopCss = {
                     top: h - frameMidH - 30,
                     left: w - frameMidW,
@@ -97,7 +95,6 @@ define([
 
             var frame = settings.el,
                 nav = $('nav'),
-                ctrl = nav.find('.controls'),
                 ctrlH = 180, // .controls height before mobile layout abstract
                 overlap = frame.position().left <= 115; // initial sidebar width + margin
 
@@ -118,7 +115,6 @@ define([
 
         this.removeElementStyles = function() {
 
-            var textCss = {};
             var textCss = {
                 fontSize: '',
                 lineHeight: '',
@@ -139,7 +135,6 @@ define([
                 settings.el.find(i).css('font-size', o.fSize);
             });
 
-            var mainCss = {};
             var mainCss = {
                 'font-size': settings.fSize + '%',
                 'line-height': '1.2'
@@ -154,7 +149,7 @@ define([
                 'transition': 'background-color 150ms ease-out'
             });
 
-        }
+        };
 
     };
 

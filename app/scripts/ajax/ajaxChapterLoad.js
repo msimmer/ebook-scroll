@@ -11,12 +11,7 @@ require([
     var ajaxBookData = AjaxBookData,
         sys = new Sys(),
         reader = Reader,
-        chapter = Chapter,
         settings = Settings;
-
-    $.when(ajaxBookData).then(
-        addJsonDataToDom(reader.components)
-    );
 
     function addJsonDataToDom(data) {
 
@@ -29,7 +24,7 @@ require([
                     click: function(e) {
                         e.preventDefault();
                         sys.saveLocation();
-                        new chapter(o.src);
+                        new Chapter(o.src);
                         sys.goToPreviousLocation();
                     }
                 })
@@ -37,8 +32,14 @@ require([
 
         });
 
-        if (settings.debug) console.log('JSON data added to DOM');
+        if (settings.debug) {
+            console.log('JSON data added to DOM');
+        }
 
     }
+
+    $.when(ajaxBookData).then(
+        addJsonDataToDom(reader.components)
+    );
 
 });

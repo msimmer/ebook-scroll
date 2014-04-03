@@ -1,18 +1,16 @@
 define([
     'jquery',
     'settings',
-    'reader',
     'sys',
     'layout',
     'vents'
-], function($, Settings, Reader, Sys, Layout, Vents) {
+], function($, Settings, Sys, Layout, Vents) {
     'use strict';
 
     var sys = new Sys(),
         layout = new Layout(),
         settings = Settings,
-        vents = new Vents(),
-        reader = Reader;
+        vents = new Vents();
 
     return function LoadChapter(url) {
 
@@ -36,6 +34,10 @@ define([
             sys.updatedReaderData('currentPage', url);
             sys.updateLocalStorage('clientBook', 'currentPage', url);
 
+            if (settings.debug) {
+                console.log('Current page is ' + url);
+            }
+
         })
             .then(function() {
 
@@ -45,8 +47,6 @@ define([
 
             });
 
-        if (settings.debug) console.log('Current page is ' + url);
-
-    }
+    };
 
 });

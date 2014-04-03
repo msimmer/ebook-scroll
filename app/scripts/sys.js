@@ -40,7 +40,9 @@ define([
             //     return o;
             // }
 
-            if (localStorage.getItem(obj) === null) return; // localstorage was not added on page load or was removed
+            if (localStorage.getItem(obj) === null) { // localstorage was not added on page load or was removed
+                return;
+            }
 
             if (prop === undefined || attr === undefined) {
                 throw 'Error: sys.updateLocalStorage() undefined argument';
@@ -60,7 +62,9 @@ define([
 
         this.saveLocation = function() {
 
-            if (settings.debug) console.log('Saving current location');
+            if (settings.debug) {
+                console.log('Saving current location');
+            }
 
             self.updatedReaderData(
                 'clientBook',
@@ -105,7 +109,9 @@ define([
 
         this.updateUserPreferences = function() {
 
-            if (settings.debug) console.log('Updating user preferences');
+            if (settings.debug) {
+                console.log('Updating user preferences');
+            }
 
             var userPreferences = {
                 fSize: settings.fSize,
@@ -119,7 +125,9 @@ define([
 
         this.getUserPreferences = function() {
 
-            if (settings.debug) console.log('Getting User Preferences');
+            if (settings.debug) {
+                console.log('Getting User Preferences');
+            }
 
             if (localStorage.getItem('userPreferences') !== null) {
 
@@ -157,11 +165,14 @@ define([
                 localStorage.setItem('clientBook', JSON.stringify(clientBook));
 
             }
+
         },
 
         this.goToPreviousLocation = function() {
 
-            if (settings.debug) console.log('Going to previous location');
+            if (settings.debug) {
+                console.log('Going to previous location');
+            }
 
             var pos = self.getFromLocalStorage('clientBook', 'scrollPosition', reader.currentPage);
             setTimeout(function() {
@@ -170,9 +181,9 @@ define([
         },
 
         this.goToNextChapter = function() {
-            return;
-        }
+            // return;
+        };
 
-    }
+    };
 
 });

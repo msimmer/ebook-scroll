@@ -14,10 +14,14 @@ define([
             method: opts.method,
             jsonpCallback: opts.jsonpCallback,
             success: opts.successCallback || function(data) {
-                if (settings.debug) console.log(data);
+                if (settings.debug) {
+                    console.log(data);
+                }
             },
             error: opts.errorCallback || function(x, t, s) {
-                if (settings.debug) console.log(t + ' ' + s);
+                if (settings.debug) {
+                    console.log(t + ' ' + s);
+                }
             },
             timeout: opts.timeout
         });

@@ -4,33 +4,22 @@ define([
 ], function($, Env) {
     'use strict';
 
-    var env = Env;
-
     var Settings = {
-
         el: $('main'),
         chapters: $('.chapters'),
-        debug: window.ebs && window.ebs.debug ? window.ebs.debug : false,
-
-        // synchs with localstorage user data
-        defaultFontSize: 18,                        // (int) default body font-size in px
-        fSize: 100,                                 // (int) percent of main's font-size, default 100%
-
+        debug: false,
+        defaultFontSize: 18,
+        fSize: 100,
         maxFontSize: function() {
-            return env.isMobile() ? 120 : 160;      // (int) max font size in %
+            return Env.isMobile() ? 120 : 160;
         },
-
         minFontSize: function() {
-            return env.isMobile() ? 40 : 80;        // (int) min font size in %
+            return Env.isMobile() ? 40 : 80;
         },
-
-        contrast: 'light',                          // (str) light or dark
-
-        // synchs with localstorage reader data
-        scrollSpeed: 30,                            // (int) scroll speed
-        scrollInt: null,                            // (function) stores current scrollInterval
-        scrollTimeout: null                         // (function) stores current rFA setTimeout
-
+        contrast: 'light',
+        scrollSpeed: 30,
+        scrollInt: null,
+        scrollTimeout: null
     };
 
     return Settings;

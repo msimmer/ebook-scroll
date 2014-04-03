@@ -3,8 +3,7 @@ define([
 ], function(Settings) {
     'use strict';
 
-    var settings = Settings,
-        self = this;
+    var settings = Settings;
 
     var Styles = {
 

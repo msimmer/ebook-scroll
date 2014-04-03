@@ -3,6 +3,7 @@ define([
     'reader',
     'ajax/ajaxCall'
 ], function($, Reader, AjaxCall) {
+    'use strict';
 
     var ajaxCall = AjaxCall,
         reader = Reader;
