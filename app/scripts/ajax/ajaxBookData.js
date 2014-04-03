@@ -8,13 +8,14 @@ define([
     var ajaxCall = AjaxCall,
         reader = Reader;
 
-    ajaxCall.getData({
+    return ajaxCall.getData({
 
         url: 'data/bookData.json',
         dataType: 'json',
         method: 'get',
         successCallback: function(data) {
             reader.components = data;
+            reader.currentPage = data[0].src;
             reader.firstPage = data[0].src;
             reader.lastPage = data[data.length - 1].src;
         }

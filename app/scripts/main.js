@@ -54,8 +54,6 @@ require([
 
         app.init();
 
-        new Chapter(app.reader.currentPage);
-
     });
 
 });

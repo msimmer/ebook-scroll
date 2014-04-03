@@ -330,7 +330,8 @@ module.exports = function (grunt) {
                         'images/{,*/}*.webp',
                         '{,*/}*.html',
                         'styles/fonts/{,*/}*.*',
-                        'bower_components/bootstrap-sass/vendor/assets/fonts/bootstrap/*.*'
+                        'bower_components/bootstrap-sass/vendor/assets/fonts/bootstrap/*.*',
+                        'data/*.*'
                     ]
                 }]
             },

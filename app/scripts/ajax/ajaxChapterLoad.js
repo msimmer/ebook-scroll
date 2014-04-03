@@ -3,9 +3,9 @@ require([
     'reader',
     'settings',
     'sys',
-    'ajax/ajaxBookData',
-    'chapter'
-], function($, Reader, Settings, Sys, AjaxBookData, Chapter) {
+    'chapter',
+    'ajax/ajaxBookData'
+], function($, Reader, Settings, Sys, Chapter, AjaxBookData) {
     'use strict';
 
     var ajaxBookData = AjaxBookData,
@@ -14,6 +14,8 @@ require([
         settings = Settings;
 
     function addJsonDataToDom(data) {
+
+        new Chapter(reader.currentPage);
 
         $.each(data, function(i, o) {
 
@@ -38,7 +40,7 @@ require([
 
     }
 
-    $.when(ajaxBookData).then(
+    $.when(ajaxBookData).done(
         addJsonDataToDom(reader.components)
     );
 

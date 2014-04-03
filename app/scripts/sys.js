@@ -144,7 +144,11 @@ define([
 
         this.getLocation = function() {
 
+            console.log('get location');
+
             if (localStorage.getItem('clientBook') !== null) {
+
+                console.log('not null');
 
                 var obj = JSON.parse(localStorage.getItem('clientBook'));
                 reader.currentPage = obj.currentPage;
@@ -152,6 +156,8 @@ define([
                 $.extend(reader.scrollPosition, obj.scrollPosition);
 
             } else {
+
+                console.log('is null');
 
                 var clientBook = {
                     currentPage: reader.firstPage,

@@ -37,11 +37,9 @@ define([
                 $.extend(this.settings, options);
             }
 
-            // get local storage or set it if it's null
             this.sys.getLocation();
             this.sys.getUserPreferences();
 
-            // set/reset DOM
             this.layout.removeElementStyles();
             this.vents.contrastToggle(self.settings.contrast);
             this.layout.setStyles();
@@ -65,6 +63,8 @@ define([
                     if (!self.settings.debug) {
                         self.sys.saveLocation();
                         self.sys.updateUserPreferences();
+                    } else {
+                        localStorage.clear();
                     }
 
                 };
