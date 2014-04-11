@@ -7,7 +7,8 @@ define([
     'layout',
     'sys',
     'vents',
-    'plugins/hoverIntent'
+    'plugins/hoverIntent',
+    'plugins/touchSwipe'
 ], function($, Env, Reader, Settings, Styles, Layout, Sys, Vents) {
     'use strict';
 
@@ -36,6 +37,8 @@ define([
 
             window.onunload = window.onbeforeunload = (function() {
 
+                $('html, body').scrollTop(0, 0);
+
                 var writeComplete = false;
 
                 return function() {
@@ -49,7 +52,7 @@ define([
                     if (!self.settings.debug) {
                         self.sys.saveLocation();
                         self.sys.updateUserPreferences();
-                    } else {
+                    } else if (self.settings.debug && self.settings.clearStorage) {
                         localStorage.clear();
                     }
 
@@ -76,6 +79,7 @@ define([
 
             });
 
+            // hoverIntent methods
             var wasScrolling,
                 isManuallyScrolling;
 
@@ -101,6 +105,39 @@ define([
                 timeout: 0
             });
 
+            // touchSwipe methods
+            if (self.env.isMobile) {
+                $('body').swipe({
+                    swipe: function(event, direction, distance, duration, fingerCount) {
+
+                        if (fingerCount !== 2) {
+                            return
+                        };
+
+                        switch (direction) {
+                            case 'up':
+                                self.vents.speedIncrement();
+                                break;
+                            case 'down':
+                                self.vents.speedDecrement();
+                                break;
+                            default:
+                                break;
+                        }
+
+                    },
+                    pinchIn: function() {
+                        self.vents.fontIncrement();
+                    },
+                    pinchOut: function() {
+                        self.vents.fontDecrement();
+                    },
+
+                    threshold: 0,
+                    fingers: 2
+                });
+            }
+
             // bootstrap
             var retrieveJsonData = $.ajax({
 
@@ -114,7 +151,7 @@ define([
                     self.sys.updatedReaderData('lastPage', data[data.length - 1].src);
                 },
                 error: function(x, t, s) {
-                    console.log(x + ' ' + t);
+                    log(x + ' ' + t);
                 }
 
             });
@@ -139,7 +176,7 @@ define([
                 });
 
                 if (self.settings.debug) {
-                    console.log('JSON data added to DOM');
+                    log('JSON data added to DOM');
                 }
 
             }
@@ -167,7 +204,7 @@ define([
                         self.sys.updateLocalStorage('clientBook', 'currentPage', pageUrl);
 
                         if (self.settings.debug) {
-                            console.log('Current page is ' + pageUrl);
+                            log('Current page is ' + pageUrl);
                         }
                     });
 

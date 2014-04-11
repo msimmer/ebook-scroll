@@ -5,9 +5,12 @@ define([
     'use strict';
 
     var Settings = {
+        debug: false,
+        clearStorage: false,
+
         el: $('main'),
         chapters: $('.chapters'),
-        debug: false,
+
         defaultFontSize: 18,
         fSize: 100,
         maxFontSize: function() {
@@ -16,6 +19,7 @@ define([
         minFontSize: function() {
             return Env.isMobile() ? 40 : 80;
         },
+
         contrast: 'light',
         scrollSpeed: 30,
         scrollInt: null,

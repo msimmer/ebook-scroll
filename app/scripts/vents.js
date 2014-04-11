@@ -23,7 +23,8 @@ define([
             '.speed-dec, click': 'speedDecrement',
             '.font-inc, click': 'fontIncrement',
             '.font-dec, click': 'fontDecrement',
-            '.contrast-toggle, click': 'contrastToggle',
+            '.contrast-dark, click': 'contrastToggle',
+            '.contrast-light, click': 'contrastToggle',
             '.full-screen, click': 'toggleFullScreen',
             'main a, click': 'embeddedLinkClick'
 
@@ -31,13 +32,24 @@ define([
 
         this.bindEventHandlers = function() {
 
-            $.each(self.eventHandlers, function(k, v) {
+            var that = this;
 
-                var split = k.split(','),
-                    el = $.trim(split[0]),
-                    trigger = $.trim(split[1]);
+            $.each(that.eventHandlers, function(k, v) {
 
-                $(document).delegate(el, trigger, self[v]);
+                var eArr = k.split(','),
+                    fArr = v.split(','),
+                    elem = $.trim(eArr[0]),
+                    trig = $.trim(eArr[1]),
+                    func = $.trim(fArr[0]),
+                    args = fArr.slice(1);
+
+                $(elem).on(trig, function(e) {
+                    if (e && e.originalEvent !== undefined) {
+                        args.push(e);
+                        e.preventDefault();
+                    };
+                    that[func].apply(that, args);
+                });
 
             });
 
@@ -123,7 +135,7 @@ define([
             $('.controls').find('.play-btn').attr('data-state', 'play');
 
             if (settings.debug) {
-                console.log('Stopped');
+                log('Stopped');
             }
 
             window.cancelAnimationFrame(settings.scrollInt);
@@ -145,7 +157,7 @@ define([
             self.startScrolling();
 
             if (settings.debug) {
-                console.log('Reading speed incremented to ' + settings.scrollSpeed);
+                log('Reading speed incremented to ' + settings.scrollSpeed);
             }
 
             sys.updateUserPreferences();
@@ -163,7 +175,7 @@ define([
             self.startScrolling();
 
             if (settings.debug) {
-                console.log('Reading speed decremented to ' + settings.scrollSpeed);
+                log('Reading speed decremented to ' + settings.scrollSpeed);
             }
 
             sys.updateUserPreferences();
@@ -175,7 +187,7 @@ define([
             self.stopScrolling();
 
             if (settings.debug) {
-                console.log('Chapter end');
+                log('Chapter end');
             }
 
         },
@@ -185,7 +197,7 @@ define([
             self.stopScrolling();
 
             if (settings.debug) {
-                console.log('Book end');
+                log('Book end');
             }
 
         },
@@ -257,10 +269,10 @@ define([
                 switch (window.orientation) {
                     case -90:
                     case 90:
-                        console.log('Orientation has changed to landscape');
+                        log('Orientation has changed to landscape');
                         break;
                     default:
-                        console.log('Orientation has changed to portrait');
+                        log('Orientation has changed to portrait');
                         break;
                 }
             }
@@ -290,7 +302,7 @@ define([
         this.countPages = function() {
 
             if (settings.debug) {
-                console.log('Counting pages');
+                log('Counting pages');
             }
 
             var main = settings.el,

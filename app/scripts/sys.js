@@ -19,26 +19,7 @@ define([
             return settings[arguments[0]] = arguments[1];
         },
 
-        this.updateLocalStorage = function(obj, prop, attr, nestedAttr) {
-            // this.updateLocalStorage = function() {
-
-            // var obj = arguments[0];
-
-            // if (localStorage.getItem(obj) === null) {
-            //     console.log('localstorage obj null');
-            //     return;
-            // }
-
-            // refactor ->
-            //
-            // function foo(obj) {
-            //     var a = arguments,
-            //         o = {};
-            //     for (var i in a[0]) {
-            //         o[i] = obj[i];
-            //     }
-            //     return o;
-            // }
+        this.updateLocalStorage = function(obj, prop, attr, nestedAttr) { // TODO: refactor
 
             if (localStorage.getItem(obj) === null) { // localstorage was not added on page load or was removed
                 return;
@@ -63,7 +44,7 @@ define([
         this.saveLocation = function() {
 
             if (settings.debug) {
-                console.log('Saving current location');
+                log('Saving current location');
             }
 
             self.updatedReaderData(
@@ -84,7 +65,7 @@ define([
 
         },
 
-        this.getFromLocalStorage = function(obj, prop, attr) {
+        this.getFromLocalStorage = function(obj, prop, attr) { // TODO: refactor
 
             var parsedObj = JSON.parse(localStorage.getItem(obj));
 
@@ -94,23 +75,12 @@ define([
 
             return parsedObj[prop];
 
-            // refactor ->
-            //
-            // function foo(obj) {
-            //     var a = arguments,
-            //         o = {};
-            //     for (var i in a[0]) {
-            //         o[i] = obj[i];
-            //     }
-            //     return o;
-            // }
-
         },
 
         this.updateUserPreferences = function() {
 
             if (settings.debug) {
-                console.log('Updating user preferences');
+                log('Updating user preferences');
             }
 
             var userPreferences = {
@@ -126,7 +96,7 @@ define([
         this.getUserPreferences = function() {
 
             if (settings.debug) {
-                console.log('Getting User Preferences');
+                log('Getting User Preferences');
             }
 
             if (localStorage.getItem('userPreferences') !== null) {
@@ -143,8 +113,6 @@ define([
         },
 
         this.getLocation = function() {
-
-            console.log('get location');
 
             if (localStorage.getItem('clientBook') !== null) {
 
@@ -173,7 +141,7 @@ define([
         this.goToPreviousLocation = function() {
 
             if (settings.debug) {
-                console.log('Going to previous location');
+                log('Going to previous location');
             }
 
             var pos = self.getFromLocalStorage('clientBook', 'scrollPosition', reader.currentPage);
@@ -183,7 +151,7 @@ define([
         },
 
         this.goToNextChapter = function() {
-            // return;
+            return;
         };
 
     };
