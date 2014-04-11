@@ -18,15 +18,15 @@ define([
 
         this.eventHandlers = {
 
-            '.play-btn, click': 'playPause',
-            '.speed-inc, click': 'speedIncrement',
-            '.speed-dec, click': 'speedDecrement',
-            '.font-inc, click': 'fontIncrement',
-            '.font-dec, click': 'fontDecrement',
-            '.contrast-dark, click': 'contrastToggle',
-            '.contrast-light, click': 'contrastToggle',
-            '.full-screen, click': 'toggleFullScreen',
-            'main a, click': 'embeddedLinkClick'
+            '.play-btn, click':         'playPause',
+            '.speed-inc, click':        'speedIncrement',
+            '.speed-dec, click':        'speedDecrement',
+            '.font-inc, click':         'fontIncrement',
+            '.font-dec, click':         'fontDecrement',
+            '.contrast-dark, click':    'contrastToggle',
+            '.contrast-light, click':   'contrastToggle',
+            '.full-screen, click':      'toggleFullScreen',
+            'main a, click':            'embeddedLinkClick'
 
         },
 
@@ -47,7 +47,7 @@ define([
                     if (e && e.originalEvent !== undefined) {
                         args.push(e);
                         e.preventDefault();
-                    };
+                    }
                     that[func].apply(that, args);
                 });
 
@@ -204,7 +204,7 @@ define([
 
         this.fontIncrement = function() {
 
-            var size = settings.fSize < settings.maxFontSize() ? settings.fSize + 20 : settings.fSize;
+            var size = settings.fSize < settings.maxFontSize() ? settings.fSize + 10 : settings.fSize;
 
             settings.el.css('font-size', size + '%');
 
@@ -217,7 +217,7 @@ define([
 
         this.fontDecrement = function() {
 
-            var size = settings.fSize > settings.minFontSize() ? settings.fSize - 20 : settings.fSize;
+            var size = settings.fSize > settings.minFontSize() ? settings.fSize - 10 : settings.fSize;
 
             settings.el.css('font-size', size + '%');
 
@@ -278,6 +278,7 @@ define([
             }
 
             setTimeout(function() {
+                layout.adjustFramePosition();
                 if (pageYOffset) {
                     window.scrollTo(0, 0, 1);
                 }

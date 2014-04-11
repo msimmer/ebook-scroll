@@ -1,20 +1,44 @@
-// /*iPad in landscape*/
-// @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
-//     body:before{
-//         content: 'iPad in landscape';
-//         background: white;
-//         color:black;
-//         position: fixed;
-//         top:0;
-//         left:0;
-//         display: none;
-//     }
+/*iPad in landscape*/
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+    body:before{
+        content: 'iPad in landscape';
+        background: white;
+        color:black;
+        position: fixed;
+        top:0;
+        left:0;
+        display: none;
+    }
+    // nav.mobile{
+    //     position: absolute;
+    //     margin:0 25px;
+    //     height: 100%;
+    //     width: 67px;
+    // }
+    // nav.mobile ul.controls{
+    //     min-width: 75px;
+    //     list-style: none;
+    //     margin:0;
+    //     padding:0;
+    //     top: 0;
+    //     right:0;
+    // }
+    // nav.mobile ul.controls li{
+    //     display: block;
+    // }
+    // nav.mobile ul.controls li:last-child:after{
+    //     display: none;
+    // }
 
-//     .mobile-portrait-only{
-//         display: none!important;
-//     }
 
+// ul.controls li a {
+//     position: relative;
+//     display: inline-block;
+//     height: 30px;
+//     width: 30px;
 // }
+
+}
 
 // /*iPhone 5 in landscape*/
 // @media only screen and (min-device-width : 320px) and (max-device-width : 568px) and (orientation : landscape) {

@@ -8,7 +8,7 @@ define([
     'sys',
     'vents',
     'plugins/hoverIntent',
-    'plugins/touchSwipe'
+    'plugins/jGestures'
 ], function($, Env, Reader, Settings, Styles, Layout, Sys, Vents) {
     'use strict';
 
@@ -72,70 +72,71 @@ define([
             });
 
             $(document).on('touchmove', function(e) {
-
                 if (!$(e.target).parents().is(self.settings.el)) {
                     e.preventDefault();
                 }
-
             });
 
             // hoverIntent methods
-            var wasScrolling,
-                isManuallyScrolling;
+            if (!self.env.isMobile()) {
+                var wasScrolling,
+                    isManuallyScrolling;
 
-            self.settings.el.hoverIntent({
-                over: function() {
+                self.settings.el.hoverIntent({
+                    over: function() {
+                        wasScrolling = self.reader.isScrolling;
+                        log(self.settings.el);
+                        self.settings.el.toggleClass('show-scroll-bar', wasScrolling);
+                        if (wasScrolling) {
+                            self.vents.stopScrolling();
+                        }
+                        isManuallyScrolling = clearInterval(isManuallyScrolling);
+                        isManuallyScrolling = setInterval(function() {
+                            self.vents.countPages();
+                        }, this.interval / 2);
+                    },
+                    out: function() {
+                        self.settings.el.toggleClass('show-scroll-bar', !wasScrolling);
+                        if (wasScrolling) {
+                            self.vents.startScrolling();
+                        }
+                        isManuallyScrolling = clearInterval(isManuallyScrolling);
+                    },
+                    interval: 200,
+                    sensitivity: 1,
+                    timeout: 0
+                });
+
+            }
+
+            if (self.env.isMobile()) {
+
+                self.settings.el.css('overflow-y', 'hidden');
+                self.settings.el.on('touchstart', function() {
                     wasScrolling = self.reader.isScrolling;
                     if (wasScrolling) {
                         self.vents.stopScrolling();
+                        self.settings.el.css('overflow-y', 'scroll');
+                        self.settings.el.toggleClass('show-scroll-bar', wasScrolling);
                     }
-                    isManuallyScrolling = clearInterval(isManuallyScrolling);
-                    isManuallyScrolling = setInterval(function() {
-                        self.vents.countPages();
-                    }, 80);
-                },
-                out: function() {
-                    if (wasScrolling) {
-                        self.vents.startScrolling();
-                    }
-                    isManuallyScrolling = clearInterval(isManuallyScrolling);
-                },
-                interval: 200,
-                sensitivity: 1,
-                timeout: 0
-            });
 
-            // touchSwipe methods
-            if (self.env.isMobile) {
-                $('body').swipe({
-                    swipe: function(event, direction, distance, duration, fingerCount) {
+                    // else if (!wasScrolling) {
+                    //     self.vents.startScrolling();
+                    //     self.settings.el.css('overflow-y', 'hidden');
+                    //     self.settings.el.toggleClass('show-scroll-bar', wasScrolling);
+                    // }
+                });
 
-                        if (fingerCount !== 2) {
-                            return
-                        };
-
-                        switch (direction) {
-                            case 'up':
-                                self.vents.speedIncrement();
-                                break;
-                            case 'down':
-                                self.vents.speedDecrement();
-                                break;
-                            default:
-                                break;
-                        }
-
-                    },
-                    pinchIn: function() {
+                // jGestures methods
+                $('body').on({
+                    pinchopen: function() {
                         self.vents.fontIncrement();
                     },
-                    pinchOut: function() {
+                    pinchclose: function() {
                         self.vents.fontDecrement();
-                    },
-
-                    threshold: 0,
-                    fingers: 2
+                    }
                 });
+
             }
 
             // bootstrap

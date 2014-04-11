@@ -1,14 +1,9 @@
-@font-face {
-    font-family: 'Cardo';
-    src: url(/styles/fonts/Cardo-Regular.ttf);
-    font-weight:400;
-}
 html, body, div, hr, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
     margin:0;
     padding:0;
     border:0;
     vertical-align:baseline;
-    font-family: Cardo;
+    font-family: 'Cardo';
 }
 html, body {
     font-size: 24px;
@@ -49,7 +44,7 @@ a {
     //display: none;
 }
 ul.controls{
-    min-width: 67px;
+    min-width: 75px;
 }
 ul.controls, ul.components {
     list-style: none;
@@ -70,7 +65,6 @@ ul.controls li a {
     display: inline-block;
     height: 30px;
     width: 30px;
-    margin:0;
 }
 ul.controls li a:first-child{
     margin-top:0;
@@ -95,7 +89,7 @@ main {
     bottom:0;
     left:0;
     background: white;
-    overflow-y: scroll;
+    overflow-y: hidden;
     overflow-x: hidden;
     max-height: 200px;
 }
@@ -178,17 +172,26 @@ section#page{
     display: block;
     height: 100%;
 }
-
 /**
 *
-* JS applied Media Queries
-*
-* iPad portrait -> landscape
+* misc.
 *
 */
+.hidden {
+    width: 0;
+    height: 0;
+    display: none;
+    visibility: hidden;
+}
+.show-scroll-bar{
+    overflow-y: scroll;
+}
 
+/**
+* base mobile styles
+*/
 nav.mobile{
-    top:0!important;
+    top:0;
     text-align: justify;
     margin:25px auto 0 auto;
     position: relative;
@@ -205,43 +208,3 @@ nav.mobile ul.controls li:last-child:after{
     display: inline-block;
     width: 100%;
 }
-
-/**
-*
-* misc.
-*
-*/
-ul.controls, nav.mobile ul.controls, .runner-help, .runner-page-count{
-    //display: none;
-}
-.hidden {
-    width: 0;
-    height: 0;
-    display: none;
-    visibility: hidden;
-}
-.preload-images {
-    width: 0;
-    height: 0;
-    display: none;
-    visibility: hidden;
-    // background: url(../images/icons/light_stop_32.svg -9999px -9999px;
-    //             url(../images/icons/light_play_32.svg -9999px -9999px;
-    //             url(../images/icons/light_faster_32.svg -9999px -9999px;
-    //             url(../images/icons/light_slower_32.svg -9999px -9999px;
-    //             url(../images/icons/light_bigger_32.svg -9999px -9999px;
-    //             url(../images/icons/light_smaller_32.svg -9999px -9999px;
-    //             url(../images/icons/light_lighter_32.svg -9999px -9999px;
-    //             url(../images/icons/light_darker_32.svg -9999px -9999px;
-    //             url(../images/icons/light_fullscreen_32.svg -9999px -9999px;
-    //             url(../images/icons/dark_stop_32.svg -9999px -9999px;
-    //             url(../images/icons/dark_play_32.svg -9999px -9999px;
-    //             url(../images/icons/dark_faster_32.svg -9999px -9999px;
-    //             url(../images/icons/dark_slower_32.svg -9999px -9999px;
-    //             url(../images/icons/dark_bigger_32.svg -9999px -9999px;
-    //             url(../images/icons/dark_smaller_32.svg -9999px -9999px;
-    //             url(../images/icons/dark_lighter_32.svg -9999px -9999px;
-    //             url(../images/icons/dark_darker_32.svg -9999px -9999px;
-    //             url(../images/icons/dark_fullscreen_32.svg -9999px -9999px;
-}
-

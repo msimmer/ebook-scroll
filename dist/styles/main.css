@@ -1,14 +1,6 @@
 /*! http://meyerweb.com/eric/tools/css/reset/ v2.0 | 20110126 | License: none (public domain) */
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/reset-normalize\.scss;
-  }
-
-  line {
-    font-family: \000032;
-  }
-}
+/* line 2, reset-normalize.scss */
 
 html,
 body,
@@ -101,15 +93,7 @@ video {
 
 /* HTML5 display-role reset for older browsers */
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/reset-normalize\.scss;
-  }
-
-  line {
-    font-family: \000032;
-  }
-}
+/* line 2, reset-normalize.scss */
 
 article,
 aside,
@@ -125,59 +109,27 @@ section {
   display: block;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/reset-normalize\.scss;
-  }
-
-  line {
-    font-family: \000032;
-  }
-}
+/* line 2, reset-normalize.scss */
 
 body {
   line-height: 1;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/reset-normalize\.scss;
-  }
-
-  line {
-    font-family: \000032;
-  }
-}
+/* line 2, reset-normalize.scss */
 
 ol,
 ul {
   list-style: none;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/reset-normalize\.scss;
-  }
-
-  line {
-    font-family: \000032;
-  }
-}
+/* line 2, reset-normalize.scss */
 
 blockquote,
 q {
   quotes: none;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/reset-normalize\.scss;
-  }
-
-  line {
-    font-family: \000032;
-  }
-}
+/* line 2, reset-normalize.scss */
 
 blockquote:before,
 blockquote:after,
@@ -187,15 +139,7 @@ q:after {
   content: none;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/reset-normalize\.scss;
-  }
-
-  line {
-    font-family: \000032;
-  }
-}
+/* line 2, reset-normalize.scss */
 
 table {
   border-collapse: collapse;
@@ -204,59 +148,27 @@ table {
 
 /*! adapted from normalize.css v2.1.2 | MIT License | git.io/normalize */
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/reset-normalize\.scss;
-  }
-
-  line {
-    font-family: \000034;
-  }
-}
+/* line 4, reset-normalize.scss */
 
 a:focus {
   outline: 0;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/reset-normalize\.scss;
-  }
-
-  line {
-    font-family: \000034;
-  }
-}
+/* line 4, reset-normalize.scss */
 
 a:active,
 a:hover {
   outline: 0;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/reset-normalize\.scss;
-  }
-
-  line {
-    font-family: \000034;
-  }
-}
+/* line 4, reset-normalize.scss */
 
 b,
 strong {
   font-weight: 700;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/reset-normalize\.scss;
-  }
-
-  line {
-    font-family: \000034;
-  }
-}
+/* line 4, reset-normalize.scss */
 
 hr {
   -moz-box-sizing: content-box;
@@ -264,43 +176,19 @@ hr {
   height: 0;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/reset-normalize\.scss;
-  }
-
-  line {
-    font-family: \000034;
-  }
-}
+/* line 4, reset-normalize.scss */
 
 q {
   quotes: "\201C" "\201D" "\2018" "\2019";
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/reset-normalize\.scss;
-  }
-
-  line {
-    font-family: \000034;
-  }
-}
+/* line 4, reset-normalize.scss */
 
 small {
   font-size: 80%;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/reset-normalize\.scss;
-  }
-
-  line {
-    font-family: \000034;
-  }
-}
+/* line 4, reset-normalize.scss */
 
 sub,
 sup {
@@ -310,57 +198,25 @@ sup {
   vertical-align: baseline;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/reset-normalize\.scss;
-  }
-
-  line {
-    font-family: \000034;
-  }
-}
+/* line 4, reset-normalize.scss */
 
 sup {
   top: -.5em;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/reset-normalize\.scss;
-  }
-
-  line {
-    font-family: \000034;
-  }
-}
+/* line 4, reset-normalize.scss */
 
 sub {
   bottom: -.25em;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/reset-normalize\.scss;
-  }
-
-  line {
-    font-family: \000034;
-  }
-}
+/* line 4, reset-normalize.scss */
 
 img {
   border: 0;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/reset-normalize\.scss;
-  }
-
-  line {
-    font-family: \000034;
-  }
-}
+/* line 4, reset-normalize.scss */
 
 svg:not(:root) {
   overflow: hidden;
@@ -368,115 +224,59 @@ svg:not(:root) {
 
 /* Webkit */
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/window-ui\.scss;
-  }
+/* line 2, window-ui.scss */
 
-  line {
-    font-family: \000032;
-  }
-}
-
-::-webkit-scrollbar {
+:not(main)::-webkit-scrollbar {
   display: none;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/window-ui\.scss;
-  }
+/* line 3, window-ui.scss */
 
-  line {
-    font-family: \000033;
-  }
-}
-
-::-webkit-scrollbar-button {
+:not(main)::-webkit-scrollbar-button {
   display: none;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/window-ui\.scss;
-  }
+/* line 4, window-ui.scss */
 
-  line {
-    font-family: \000034;
-  }
-}
-
-::-webkit-scrollbar-track {
+:not(main)::-webkit-scrollbar-track {
   display: none;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/window-ui\.scss;
-  }
+/* line 5, window-ui.scss */
 
-  line {
-    font-family: \000035;
-  }
-}
-
-::-webkit-scrollbar-track-piece {
+:not(main)::-webkit-scrollbar-track-piece {
   display: none;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/window-ui\.scss;
-  }
+/* line 6, window-ui.scss */
 
-  line {
-    font-family: \000036;
-  }
-}
-
-::-webkit-scrollbar-thumb {
+:not(main)::-webkit-scrollbar-thumb {
   display: none;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/window-ui\.scss;
-  }
+/* line 7, window-ui.scss */
 
-  line {
-    font-family: \000037;
-  }
-}
-
-::-webkit-scrollbar-corner {
+:not(main)::-webkit-scrollbar-corner {
   display: none;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/window-ui\.scss;
-  }
+/* line 8, window-ui.scss */
 
-  line {
-    font-family: \000038;
-  }
-}
-
-::-webkit-resizer {
+:not(main)::-webkit-resizer {
   display: none;
 }
 
 /* Moz */
 
 @-moz-document url-prefix(http://), url-prefix(https://)  {
-  /* line 11, ../../app/styles/window-ui.scss */
+  /* line 12, window-ui.scss */
 
   scrollbar {
     -moz-appearance: none !important;
     display: none !important;
   }
 
-  /* line 15, ../../app/styles/window-ui.scss */
+  /* line 16, window-ui.scss */
 
   thumb,
   scrollbarbutton {
@@ -484,7 +284,7 @@ svg:not(:root) {
     display: none !important;
   }
 
-  /* line 19, ../../app/styles/window-ui.scss */
+  /* line 20, window-ui.scss */
 
   thumb:hover,
   scrollbarbutton:hover {
@@ -492,13 +292,13 @@ svg:not(:root) {
     display: none !important;
   }
 
-  /* line 23, ../../app/styles/window-ui.scss */
+  /* line 24, window-ui.scss */
 
   scrollbarbutton {
     display: none !important;
   }
 
-  /* line 26, ../../app/styles/window-ui.scss */
+  /* line 27, window-ui.scss */
 
   scrollbar[orient="vertical"] {
     display: none !important;
@@ -507,17 +307,9 @@ svg:not(:root) {
 
 /* IE */
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/window-ui\.scss;
-  }
+/* line 33, window-ui.scss */
 
-  line {
-    font-family: \0000331;
-  }
-}
-
-body {
+:not(main) {
   scrollbar-base-color: transparent;
   scrollbar-3dlight-color: transparent;
   scrollbar-highlight-color: transparent;
@@ -530,20 +322,33 @@ body {
 }
 
 @font-face {
-  font-family: 'Cardo';
-  src: url(/styles/fonts/Cardo-Regular.ttf);
+  font-family: "Cardo";
+  src: url(font-path("fonts/cardo-bold-webfont.eot"));
+  src: url(font-path("fonts/cardo-bold-webfont.eot?#iefix")) format("embedded-opentype"), url(font-path("fonts/cardo-bold-webfont.woff")) format("woff"), url(font-path("fonts/cardo-bold-webfont.ttf")) format("truetype"), url(font-path("fonts/cardo-bold-webfont.svg#Cardo")) format("svg");
   font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \000036;
-  }
+@font-face {
+  font-family: "Cardo";
+  src: url(font-path("fonts/cardo-bold-italic.eot"));
+  src: url(font-path("fonts/cardo-bold-italic.eot?#iefix")) format("embedded-opentype"), url(font-path("fonts/cardo-bold-italic.woff")) format("woff"), url(font-path("fonts/cardo-bold-italic.ttf")) format("truetype"), url(font-path("fonts/cardo-bold-italic.svg#Cardo")) format("svg");
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
 }
+
+@font-face {
+  font-family: "Cardo";
+  src: url(font-path("fonts/cardo-bold-regular.eot"));
+  src: url(font-path("fonts/cardo-bold-regular.eot?#iefix")) format("embedded-opentype"), url(font-path("fonts/cardo-bold-regular.woff")) format("woff"), url(font-path("fonts/cardo-bold-regular.ttf")) format("truetype"), url(font-path("fonts/cardo-bold-regular.svg#Cardo")) format("svg");
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+/* line 1, styles.scss */
 
 html,
 body,
@@ -631,18 +436,10 @@ video {
   padding: 0;
   border: 0;
   vertical-align: baseline;
-  font-family: Cardo;
+  font-family: 'Cardo';
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \0000313;
-  }
-}
+/* line 8, styles.scss */
 
 html,
 body {
@@ -655,15 +452,7 @@ body {
   width: 100%;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \0000322;
-  }
-}
+/* line 17, styles.scss */
 
 .lightCss a,
 .lightCss abbr,
@@ -800,15 +589,7 @@ body {
   color: black !important;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \0000323;
-  }
-}
+/* line 18, styles.scss */
 
 .darkCss a,
 .darkCss abbr,
@@ -945,43 +726,19 @@ body {
   color: #fefefe !important;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \0000324;
-  }
-}
+/* line 19, styles.scss */
 
 html.lightCSs {
   background-color: white !important;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \0000327;
-  }
-}
+/* line 22, styles.scss */
 
 html.darkCss {
   background-color: #333333 !important;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \0000330;
-  }
-}
+/* line 25, styles.scss */
 
 .darkCss body,
 .darkCss main,
@@ -990,29 +747,13 @@ html.darkCss {
   background-color: transparent !important;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \0000333;
-  }
-}
+/* line 28, styles.scss */
 
 body {
   -webkit-overflow-scrolling: touch;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \0000336;
-  }
-}
+/* line 31, styles.scss */
 
 nav {
   position: absolute;
@@ -1021,29 +762,13 @@ nav {
   width: 67px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \0000342;
-  }
-}
+/* line 37, styles.scss */
 
 a {
   text-decoration: none;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \0000345;
-  }
-}
+/* line 40, styles.scss */
 
 .site-title {
   margin: 25px;
@@ -1051,29 +776,13 @@ a {
   color: black;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \0000351;
-  }
-}
+/* line 46, styles.scss */
 
 ul.controls {
-  min-width: 67px;
+  min-width: 75px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \0000354;
-  }
-}
+/* line 49, styles.scss */
 
 ul.controls,
 ul.components {
@@ -1084,76 +793,35 @@ ul.components {
   right: 0;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \0000361;
-  }
-}
+/* line 56, styles.scss */
 
 ul.controls li {
   display: block;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \0000364;
-  }
-}
+/* line 59, styles.scss */
 
 ul.components li {
   width: 35px;
   height: 35px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \0000368;
-  }
-}
+/* line 63, styles.scss */
 
 ul.controls li a {
   position: relative;
   display: inline-block;
   height: 30px;
   width: 30px;
-  margin: 0;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \0000375;
-  }
-}
+/* line 69, styles.scss */
 
 ul.controls li a:first-child {
   margin-top: 0;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \0000378;
-  }
-}
+/* line 72, styles.scss */
 
 ul.components li a {
   display: block;
@@ -1161,29 +829,13 @@ ul.components li a {
   width: 100%;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \0000386;
-  }
-}
+/* line 80, styles.scss */
 
 ul.chapters li {
   margin: 0 10px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \0000389;
-  }
-}
+/* line 83, styles.scss */
 
 main {
   /* set adjustable font-size */
@@ -1194,20 +846,12 @@ main {
   bottom: 0;
   left: 0;
   background: white;
-  overflow-y: scroll;
+  overflow-y: hidden;
   overflow-x: hidden;
   max-height: 200px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \00003102;
-  }
-}
+/* line 96, styles.scss */
 
 main a,
 main a:link,
@@ -1217,15 +861,7 @@ main a:visited {
   text-decoration: underline !important;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \00003106;
-  }
-}
+/* line 100, styles.scss */
 
 section#page {
   margin: 0;
@@ -1233,15 +869,7 @@ section#page {
   border: 0;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \00003111;
-  }
-}
+/* line 105, styles.scss */
 
 .runner-help {
   position: absolute;
@@ -1252,30 +880,14 @@ section#page {
   text-decoration: none;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \00003119;
-  }
-}
+/* line 113, styles.scss */
 
 .runner-help a {
   /*color:black;*/
   text-decoration: none;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \00003123;
-  }
-}
+/* line 117, styles.scss */
 
 .runner-page-count {
   position: absolute;
@@ -1289,71 +901,31 @@ section#page {
 * icons
 */
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \00003135;
-  }
-}
+/* line 129, styles.scss */
 
 [data-state='play'] svg.play {
   display: block;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \00003138;
-  }
-}
+/* line 132, styles.scss */
 
 [data-state='play'] svg.pause {
   display: none;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \00003142;
-  }
-}
+/* line 136, styles.scss */
 
 [data-state='pause'] svg.play {
   display: none;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \00003145;
-  }
-}
+/* line 139, styles.scss */
 
 [data-state='pause'] svg.pause {
   display: block;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \00003149;
-  }
-}
+/* line 143, styles.scss */
 
 .darkCss .svg-light {
   position: absolute;
@@ -1364,15 +936,7 @@ section#page {
   height: 0;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \00003157;
-  }
-}
+/* line 151, styles.scss */
 
 .lightCss .svg-light {
   position: absolute;
@@ -1383,15 +947,7 @@ section#page {
   height: 100%;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \00003165;
-  }
-}
+/* line 159, styles.scss */
 
 .lightCss .svg-dark {
   position: absolute;
@@ -1402,15 +958,7 @@ section#page {
   height: 0;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \00003173;
-  }
-}
+/* line 167, styles.scss */
 
 .lightCss .svg-light {
   position: absolute;
@@ -1423,89 +971,11 @@ section#page {
 
 /**
 *
-* JS applied Media Queries
-*
-* iPad portrait -> landscape
-*
-*/
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \00003190;
-  }
-}
-
-nav.mobile {
-  top: 0 !important;
-  text-align: justify;
-  margin: 25px auto 0 auto;
-  position: relative;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \00003196;
-  }
-}
-
-nav.mobile ul.controls {
-  display: inline;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \00003199;
-  }
-}
-
-nav.mobile ul.controls li {
-  display: inline;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \00003202;
-  }
-}
-
-nav.mobile ul.controls li:last-child:after {
-  content: '.';
-  visibility: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-/**
-*
 * misc.
 *
 */
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
-
-  line {
-    font-family: \00003217;
-  }
-}
+/* line 180, styles.scss */
 
 .hidden {
   width: 0;
@@ -1514,19 +984,89 @@ nav.mobile ul.controls li:last-child:after {
   visibility: hidden;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/maxwellsimmer\/Sites\/sandbox\.dev\/ebook-scroll\/app\/styles\/styles\.scss;
-  }
+/* line 186, styles.scss */
 
-  line {
-    font-family: \00003223;
+.show-scroll-bar {
+  overflow-y: scroll;
+}
+
+/**
+* base mobile styles
+*/
+
+/* line 193, styles.scss */
+
+nav.mobile {
+  top: 0;
+  text-align: justify;
+  margin: 25px auto 0 auto;
+  position: relative;
+}
+
+/* line 199, styles.scss */
+
+nav.mobile ul.controls {
+  display: inline;
+}
+
+/* line 202, styles.scss */
+
+nav.mobile ul.controls li {
+  display: inline;
+}
+
+/* line 205, styles.scss */
+
+nav.mobile ul.controls li:last-child:after {
+  content: '.';
+  visibility: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+/*iPad in landscape*/
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+  /* line 3, media-queries-landscape.scss */
+
+  body:before {
+    content: 'iPad in landscape';
+    background: white;
+    color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
   }
 }
 
-.preload-images {
-  width: 0;
-  height: 0;
-  display: none;
-  visibility: hidden;
+/*iPad in portrait*/
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+  /* line 3, media-queries-portrait.scss */
+
+  body:before {
+    content: 'iPad in portrait';
+    background: white;
+    color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+  }
+
+  /* line 12, media-queries-portrait.scss */
+
+  main {
+    font-size: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: white;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    max-height: 200px;
+  }
 }

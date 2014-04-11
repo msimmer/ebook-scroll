@@ -14,10 +14,10 @@ define([
         defaultFontSize: 18,
         fSize: 100,
         maxFontSize: function() {
-            return Env.isMobile() ? 120 : 160;
+            return Env.isMobile() ? 100 : 160;
         },
         minFontSize: function() {
-            return Env.isMobile() ? 40 : 80;
+            return Env.isMobile() ? 50 : 70;
         },
 
         contrast: 'light',

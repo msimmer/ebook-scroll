@@ -1,13 +1,14 @@
 /* Webkit */
-::-webkit-scrollbar              {display: none;}
-::-webkit-scrollbar-button       {display: none;}
-::-webkit-scrollbar-track        {display: none;}
-::-webkit-scrollbar-track-piece  {display: none;}
-::-webkit-scrollbar-thumb        {display: none;}
-::-webkit-scrollbar-corner       {display: none;}
-::-webkit-resizer                {display: none;}
+:not(main)::-webkit-scrollbar              { display: none; }
+:not(main)::-webkit-scrollbar-button       { display: none; }
+:not(main)::-webkit-scrollbar-track        { display: none; }
+:not(main)::-webkit-scrollbar-track-piece  { display: none; }
+:not(main)::-webkit-scrollbar-thumb        { display: none; }
+:not(main)::-webkit-scrollbar-corner       { display: none; }
+:not(main)::-webkit-resizer                { display: none; }
+
 /* Moz */
- @-moz-document url-prefix(http://), url-prefix(https://) {
+@-moz-document url-prefix(http://), url-prefix(https://) {
     scrollbar {
         -moz-appearance: none !important;
         display: none !important;
@@ -27,8 +28,9 @@
         display: none !important;
     }
 }
+
 /* IE */
- body {
+:not(main) {
     scrollbar-base-color: transparent;
     scrollbar-3dlight-color: transparent;
     scrollbar-highlight-color: transparent;

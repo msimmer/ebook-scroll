@@ -1,18 +1,28 @@
-// /*iPad in portrait*/
-//  @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
-//     body:before {
-//         content:'iPad in portrait';
-//         background: white;
-//         color:black;
-//         position: fixed;
-//         top:0;
-//         left:0;
-//         display: none;
-//     }
-//     ul.controls li a.full-screen {
-//         display: none;
-//     }
-// }
+/*iPad in portrait*/
+ @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+    body:before {
+        content:'iPad in portrait';
+        background: white;
+        color:black;
+        position: fixed;
+        top:0;
+        left:0;
+        display: none;
+    }
+    main {
+        font-size: 100%;
+        position: absolute;
+        top:0;
+        right:0;
+        bottom:0;
+        left:0;
+        background: white;
+        overflow-y: hidden;
+        overflow-x: hidden;
+        max-height: 200px;
+    }
+}
+
 // /*iPhone 5 in portrait*/
 //  @media only screen and (min-device-width : 320px) and (max-device-width : 568px) and (orientation : portrait) {
 //     body:before {
@@ -28,6 +38,7 @@
 //         display: none;
 //     }
 // }
+
 // /*iPhone 2G-4S in portrait*/
 //  @media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) {
 //     body:before {
@@ -49,4 +60,25 @@
 //     ul.controls li a.full-screen {
 //         display: none;
 //     }
+// }
+
+
+// small devices
+// nav.mobile{
+//     top:0!important;
+//     text-align: justify;
+//     margin:25px auto 0 auto;
+//     position: relative;
+// }
+// nav.mobile ul.controls{
+//     display: inline;
+// }
+// nav.mobile ul.controls li{
+//     display: inline;
+// }
+// nav.mobile ul.controls li:last-child:after{
+//     content: '.';
+//     visibility: hidden;
+//     display: inline-block;
+//     width: 100%;
 // }

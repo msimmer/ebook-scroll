@@ -18,7 +18,7 @@ require.config({
         'plugins/hoverIntent': {
             deps: ['jquery']
         },
-        'plugins/touchSwipe.js': {
+        'plugins/jGestures.js': {
             deps: ['jquery']
         }
     }
@@ -29,7 +29,7 @@ require([
     'app',
     'env',
     'shims/storage'
-], function($, App, Env, ShimStorage) {
+], function($, App, Env) {
     'use strict';
 
     $(document).ready(function() {
@@ -40,28 +40,14 @@ require([
             debug: window.ebs && window.ebs.debug ? window.ebs.debug : false,
             clearStorage: window.ebs && window.ebs.clearStorage ? window.ebs.clearStorage : false,
 
-            // elements
-            el: $('main'),
-            chapters: $('.chapters'),
-
             // syncs with localstorage user data
             defaultFontSize: 18, // (int) default body font-size in px
             fSize: 100, // (int) percent of main's font-size, default 100%
 
-            maxFontSize: function() {
-                return Env.isMobile() ? 120 : 160; // (int) max font size in %
-            },
-
-            minFontSize: function() {
-                return Env.isMobile() ? 40 : 80; // (int) min font size in %
-            },
-
             contrast: 'light', // (str) light or dark
 
             // syncs with localstorage reader data
-            scrollSpeed: 30, // (int) scroll speed
-            scrollInt: null, // (fn) stores current scrollInterval
-            scrollTimeout: null // (fn) stores current rFA setTimeout
+            scrollSpeed: 30 // (int) scroll speed
 
         });
 

@@ -36,9 +36,9 @@ define([
 
         this.setFrameWidth = function() {
 
-            if (env.isMobile()) {
-                return;
-            }
+            // if (env.isMobile()) {
+            //     return;
+            // }
 
             var targetWidth = self.targetContainerWidth();
 
@@ -58,35 +58,12 @@ define([
                 w = $(window).width() / 2,
                 frameMidH = frame.height() / 2,
                 frameMidW = frame.width() / 2,
-                isMobile = env.isMobile();
-
-            var targetWidth = self.targetContainerWidth(),
-                smallScreen = targetWidth >= $(window).width(),
-
-                mobileCss = {
-                    top: h - frameMidH,
-                    left: 0,
-                    marginTop: 0,
-                    marginRight: 25,
-                    marginBottom: 0,
-                    marginLeft: 25
-                },
-
-                desktopCss = {
+                cssObj = {
                     top: h - frameMidH - 30,
-                    left: w - frameMidW,
-                    marginTop: 0,
-                    marginRight: 0,
-                    marginBottom: 0,
-                    marginLeft: 0
+                    left: w - frameMidW
                 };
 
-            if (smallScreen || isMobile) {
-                frame.css(mobileCss);
-            } else {
-                frame.css(desktopCss);
-            }
-
+            frame.css(cssObj);
             self.adjustNavPosition();
 
         },
@@ -98,12 +75,13 @@ define([
                 ctrlH = 180, // .controls height before mobile layout abstract
                 overlap = frame.position().left <= 115; // initial sidebar width + margin
 
-            if (overlap || env.isMobile()) {
+            if (overlap || env.orientation() === 'portrait') {
                 nav.addClass('mobile');
                 nav.css({
+                    top: 0,
                     width: frame.width()
                 });
-            } else if (!overlap && !env.isMobile()) {
+            } else if (!overlap) {
                 nav.removeClass('mobile');
                 nav.css({
                     top: ($(window).height() / 2) - (ctrlH / 2) - 30,
@@ -124,7 +102,7 @@ define([
             };
 
             $.each(styles.textElements, function(i, o) {
-                settings.el.find(o).css(textCss);
+                // settings.el.find(o).css(textCss);
             });
 
         },
@@ -132,12 +110,12 @@ define([
         this.setStyles = function() {
 
             $.each(styles.baseStyles, function(i, o) {
-                settings.el.find(i).css('font-size', o.fSize);
+                // settings.el.find(i).css('font-size', o.fSize);
             });
 
             var mainCss = {
                 'font-size': settings.fSize + '%',
-                'line-height': '1.2'
+                'line-height': '1.3'
             };
 
             settings.el.css(mainCss);
