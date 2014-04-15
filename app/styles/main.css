@@ -186,8 +186,8 @@ svg:not(:root) {
 
 @font-face {
   font-family: "Cardo";
-  src: url(font-path("fonts/cardo-bold-webfont.eot"));
-  src: url(font-path("fonts/cardo-bold-webfont.eot?#iefix")) format("embedded-opentype"), url(font-path("fonts/cardo-bold-webfont.woff")) format("woff"), url(font-path("fonts/cardo-bold-webfont.ttf")) format("truetype"), url(font-path("fonts/cardo-bold-webfont.svg#Cardo")) format("svg");
+  src: url("fonts/cardo-bold-webfont.eot");
+  src: url("fonts/cardo-bold-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/cardo-bold-webfont.woff") format("woff"), url("fonts/cardo-bold-webfont.ttf") format("truetype"), url("fonts/cardo-bold-webfont.svg#Cardo") format("svg");
   font-weight: 400;
   font-style: normal;
   font-stretch: normal;
@@ -195,8 +195,8 @@ svg:not(:root) {
 
 @font-face {
   font-family: "Cardo";
-  src: url(font-path("fonts/cardo-bold-italic.eot"));
-  src: url(font-path("fonts/cardo-bold-italic.eot?#iefix")) format("embedded-opentype"), url(font-path("fonts/cardo-bold-italic.woff")) format("woff"), url(font-path("fonts/cardo-bold-italic.ttf")) format("truetype"), url(font-path("fonts/cardo-bold-italic.svg#Cardo")) format("svg");
+  src: url("fonts/cardo-italic-webfont.eot");
+  src: url("fonts/cardo-italic-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/cardo-italic-webfont.woff") format("woff"), url("fonts/cardo-italic-webfont.ttf") format("truetype"), url("fonts/cardo-italic-webfont.svg#Cardo") format("svg");
   font-weight: 400;
   font-style: normal;
   font-stretch: normal;
@@ -204,8 +204,8 @@ svg:not(:root) {
 
 @font-face {
   font-family: "Cardo";
-  src: url(font-path("fonts/cardo-bold-regular.eot"));
-  src: url(font-path("fonts/cardo-bold-regular.eot?#iefix")) format("embedded-opentype"), url(font-path("fonts/cardo-bold-regular.woff")) format("woff"), url(font-path("fonts/cardo-bold-regular.ttf")) format("truetype"), url(font-path("fonts/cardo-bold-regular.svg#Cardo")) format("svg");
+  src: url("fonts/cardo-regular-webfont.eot");
+  src: url("fonts/cardo-regular-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/cardo-regular-webfont.woff") format("woff"), url("fonts/cardo-regular-webfont.ttf") format("truetype"), url("fonts/cardo-regular-webfont.svg#Cardo") format("svg");
   font-weight: 400;
   font-style: normal;
   font-stretch: normal;
@@ -238,7 +238,7 @@ html, body {
 
 /* line 18, styles.scss */
 .darkCss a, .darkCss abbr, .darkCss acronym, .darkCss address, .darkCss applet, .darkCss area, .darkCss article, .darkCss aside, .darkCss audio, .darkCss b, .darkCss base, .darkCss basefont, .darkCss bdi, .darkCss bdo, .darkCss bgsound, .darkCss big, .darkCss blink, .darkCss blockquote, .darkCss body, .darkCss br, .darkCss button, .darkCss canvas, .darkCss caption, .darkCss center, .darkCss cite, .darkCss code, .darkCss col, .darkCss colgroup, .darkCss content, .darkCss data, .darkCss datalist, .darkCss dd, .darkCss decorator, .darkCss del, .darkCss details, .darkCss dfn, .darkCss dir, .darkCss div, .darkCss dl, .darkCss dt, .darkCss element, .darkCss em, .darkCss embed, .darkCss fieldset, .darkCss figcaption, .darkCss figure, .darkCss font, .darkCss footer, .darkCss form, .darkCss frame, .darkCss frameset, .darkCss h1, .darkCss h2, .darkCss h3, .darkCss h4, .darkCss h5, .darkCss h6, .darkCss head, .darkCss header, .darkCss hgroup, .darkCss hr, .darkCss html, .darkCss i, .darkCss iframe, .darkCss img, .darkCss input, .darkCss ins, .darkCss isindex, .darkCss kbd, .darkCss keygen, .darkCss label, .darkCss legend, .darkCss li, .darkCss link, .darkCss listing, .darkCss main, .darkCss map, .darkCss mark, .darkCss marquee, .darkCss menu, .darkCss menuitem, .darkCss meter, .darkCss nav, .darkCss nobr, .darkCss noframes, .darkCss noscript, .darkCss object, .darkCss ol, .darkCss optgroup, .darkCss option, .darkCss output, .darkCss p, .darkCss param, .darkCss plaintext, .darkCss pre, .darkCss progress, .darkCss q, .darkCss rp, .darkCss rt, .darkCss ruby, .darkCss s, .darkCss samp, .darkCss section, .darkCss select, .darkCss shadow, .darkCss small, .darkCss source, .darkCss spacer, .darkCss span, .darkCss strike, .darkCss strong, .darkCss sub, .darkCss summary, .darkCss sup, .darkCss table, .darkCss tbody, .darkCss td, .darkCss template, .darkCss textarea, .darkCss tfoot, .darkCss th, .darkCss thead, .darkCss time, .darkCss title, .darkCss tr, .darkCss track, .darkCss tt, .darkCss u, .darkCss ul, .darkCss var, .darkCss video, .darkCss wbr {
-  color: #fefefe !important;
+  color: #333333 !important;
 }
 
 /* line 19, styles.scss */
@@ -248,7 +248,7 @@ html.lightCSs {
 
 /* line 22, styles.scss */
 html.darkCss {
-  background-color: #333333 !important;
+  background-color: #cccccc !important;
 }
 
 /* line 25, styles.scss */
