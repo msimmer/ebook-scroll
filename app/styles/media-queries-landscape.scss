@@ -9,77 +9,49 @@
         left:0;
         display: none;
     }
-    // nav.mobile{
-    //     position: absolute;
-    //     margin:0 25px;
-    //     height: 100%;
-    //     width: 67px;
-    // }
-    // nav.mobile ul.controls{
-    //     min-width: 75px;
-    //     list-style: none;
-    //     margin:0;
-    //     padding:0;
-    //     top: 0;
-    //     right:0;
-    // }
-    // nav.mobile ul.controls li{
-    //     display: block;
-    // }
-    // nav.mobile ul.controls li:last-child:after{
-    //     display: none;
-    // }
-
-
-// ul.controls li a {
-//     position: relative;
-//     display: inline-block;
-//     height: 30px;
-//     width: 30px;
-// }
 
 }
 
 // /*iPhone 5 in landscape*/
-// @media only screen and (min-device-width : 320px) and (max-device-width : 568px) and (orientation : landscape) {
-//     body:before{
-//         content: 'iPhone 5 in landscape';
-//         background: white;
-//         color:black;
-//         position: fixed;
-//         top:0;
-//         left:0;
-//         display: none;
-//     }
+@media only screen and (min-device-width : 320px) and (max-device-width : 568px) and (orientation : landscape) {
+    body:before{
+        content: 'iPhone 5 in landscape';
+        background: white;
+        color:black;
+        position: fixed;
+        top:0;
+        left:0;
+        display: none;
+    }
 
-//     main#main{
-//         top: 20px!important;
-//     }
+    main{
+        margin: 20px 10px 0;
+    }
 
-//     .mobile-portrait-only{
-//         display: none!important;
-//     }
+    .mobile-portrait-only{
+        display: none;
+    }
 
-// }
+}
 
 // /*iPhone 2G-4S in landscape*/
-// @media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : landscape) {
-//     body:before{
-//         content: 'iPhone 2G-4S in landscape';
-//         background: white;
-//         color:black;
-//         position: fixed;
-//         top:0;
-//         left:0;
-//         display: none;
-//     }
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : landscape) {
+    body:before{
+        content: 'iPhone 2G-4S in landscape';
+        background: white;
+        color:black;
+        position: fixed;
+        top:0;
+        left:0;
+        display: none;
+    }
 
-//     main#main{
-//         margin-top: 20px!important;
-//     }
+    main{
+        margin: 20px 10px 0;
+    }
 
-//     .mobile-portrait-only{
-//         display: none!important;
-//     }
+    .mobile-portrait-only{
+        display: none;
+    }
 
-// }
+}

@@ -507,6 +507,50 @@ nav.mobile ul.controls li:last-child:after {
     display: none;
   }
 }
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: landscape) {
+  /* line 17, media-queries-landscape.scss */
+  body:before {
+    content: 'iPhone 5 in landscape';
+    background: white;
+    color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+  }
+
+  /* line 27, media-queries-landscape.scss */
+  main {
+    margin: 20px 10px 0;
+  }
+
+  /* line 31, media-queries-landscape.scss */
+  .mobile-portrait-only {
+    display: none;
+  }
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: landscape) {
+  /* line 39, media-queries-landscape.scss */
+  body:before {
+    content: 'iPhone 2G-4S in landscape';
+    background: white;
+    color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+  }
+
+  /* line 49, media-queries-landscape.scss */
+  main {
+    margin: 20px 10px 0;
+  }
+
+  /* line 53, media-queries-landscape.scss */
+  .mobile-portrait-only {
+    display: none;
+  }
+}
 /*iPad in portrait*/
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
   /* line 3, media-queries-portrait.scss */
@@ -532,5 +576,59 @@ nav.mobile ul.controls li:last-child:after {
     overflow-y: hidden;
     overflow-x: hidden;
     max-height: 200px;
+  }
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: portrait) {
+  /* line 28, media-queries-portrait.scss */
+  body:before {
+    content: 'iPhone 5 in portrait';
+    background: white;
+    color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+  }
+
+  /* line 37, media-queries-portrait.scss */
+  nav.mobile {
+    top: 0 !important;
+    text-align: justify;
+    margin: 25px auto 0 auto;
+    position: relative;
+    width: 300px;
+    max-width: 300px;
+  }
+
+  /* line 45, media-queries-portrait.scss */
+  main {
+    margin: 30px 10px;
+  }
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: portrait) {
+  /* line 52, media-queries-portrait.scss */
+  body:before {
+    content: 'iPhone 2G-4S in portrait';
+    background: white;
+    color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+  }
+
+  /* line 61, media-queries-portrait.scss */
+  nav.mobile {
+    top: 0 !important;
+    text-align: justify;
+    margin: 25px auto 0 auto;
+    position: relative;
+    width: 300px;
+    max-width: 300px;
+  }
+
+  /* line 69, media-queries-portrait.scss */
+  main {
+    margin: 30px 10px;
   }
 }

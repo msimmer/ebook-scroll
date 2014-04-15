@@ -71,11 +71,11 @@ define([
 
             });
 
-            $(document).on('touchmove', function(e) {
-                if (!$(e.target).parents().is(self.settings.el)) {
-                    e.preventDefault();
-                }
-            });
+            // $(document).on('touchmove', function(e) {
+            //     if (!$(e.target).parents().is(self.settings.el)) {
+            //         e.preventDefault();
+            //     }
+            // });
 
             // hoverIntent methods
             if (!self.env.isMobile()) {
@@ -109,26 +109,18 @@ define([
 
             }
 
+            $(document).on('touchmove', function(e) {
+                if (!$(e.target).parents().is(self.settings.el)) {
+                    e.preventDefault();
+                }
+            });
+
             if (self.env.isMobile()) {
 
                 self.settings.el.css('overflow-y', 'hidden');
-                self.settings.el.on('touchstart', function() {
-                    wasScrolling = self.reader.isScrolling;
-                    if (wasScrolling) {
-                        self.vents.stopScrolling();
-                        self.settings.el.css('overflow-y', 'scroll');
-                        self.settings.el.toggleClass('show-scroll-bar', wasScrolling);
-                    }
-
-                    // else if (!wasScrolling) {
-                    //     self.vents.startScrolling();
-                    //     self.settings.el.css('overflow-y', 'hidden');
-                    //     self.settings.el.toggleClass('show-scroll-bar', wasScrolling);
-                    // }
-                });
 
                 // jGestures methods
-                $('body').on({
+                $(document).on({
                     pinchopen: function() {
                         self.vents.fontIncrement();
                     },
@@ -137,6 +129,20 @@ define([
                     }
                 });
 
+                var wasScrolling;
+                self.settings.el.on({
+                    touchstart: function() {
+                        wasScrolling = self.reader.isScrolling;
+                        if (wasScrolling) {
+                            self.vents.stopScrolling();
+                            self.settings.el.css('overflow-y', 'scroll');
+                            self.settings.el.toggleClass('show-scroll-bar', wasScrolling);
+                        }
+                        if (!wasScrolling) {
+                            // log('not scrolling');
+                        }
+                    }
+                });
             }
 
             // bootstrap

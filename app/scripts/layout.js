@@ -36,9 +36,9 @@ define([
 
         this.setFrameWidth = function() {
 
-            // if (env.isMobile()) {
-            //     return;
-            // }
+            if (env.isMobile()) {
+                return;
+            }
 
             var targetWidth = self.targetContainerWidth();
 
@@ -58,9 +58,10 @@ define([
                 w = $(window).width() / 2,
                 frameMidH = frame.height() / 2,
                 frameMidW = frame.width() / 2,
+                targetLeft = env.isMobile() ? 0 : w - frameMidW,
                 cssObj = {
                     top: h - frameMidH - 30,
-                    left: w - frameMidW
+                    left: targetLeft
                 };
 
             frame.css(cssObj);
@@ -73,20 +74,43 @@ define([
             var frame = settings.el,
                 nav = $('nav'),
                 ctrlH = 180, // .controls height before mobile layout abstract
-                overlap = frame.position().left <= 115; // initial sidebar width + margin
+                overlap = frame.position().left <= 115, // initial sidebar width + margin
+                orientation = env.orientation();
 
-            if (overlap || env.orientation() === 'portrait') {
+            if (overlap) {
                 nav.addClass('mobile');
                 nav.css({
                     top: 0,
                     width: frame.width()
                 });
-            } else if (!overlap) {
+            }
+
+            if (!overlap) {
                 nav.removeClass('mobile');
                 nav.css({
                     top: ($(window).height() / 2) - (ctrlH / 2) - 30,
                     width: 66
                 });
+            }
+
+            if (orientation === 'portrait') {
+                nav.addClass('mobile');
+                nav.css({
+                    top: 0,
+                    width: 300
+                });
+
+            }
+
+            if (orientation === 'landscape') {
+
+                log('landscape');
+                nav.removeClass('mobile');
+                nav.css({
+                    top: ($(window).height() / 2) - (ctrlH / 2) - 30,
+                    width: 66
+                });
+
             }
 
         },

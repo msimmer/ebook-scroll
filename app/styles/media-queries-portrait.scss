@@ -24,61 +24,49 @@
 }
 
 // /*iPhone 5 in portrait*/
-//  @media only screen and (min-device-width : 320px) and (max-device-width : 568px) and (orientation : portrait) {
-//     body:before {
-//         content:'iPhone 5 in portrait';
-//         background: white;
-//         color:black;
-//         position: fixed;
-//         top:0;
-//         left:0;
-//         display: none;
-//     }
-//     ul.controls li a.full-screen {
-//         display: none;
-//     }
-// }
+ @media only screen and (min-device-width : 320px) and (max-device-width : 568px) and (orientation : portrait) {
+    body:before {
+        content:'iPhone 5 in portrait';
+        background: white;
+        color:black;
+        position: fixed;
+        top:0;
+        left:0;
+        display: none;
+    }
+    nav.mobile{
+        top:0!important;
+        text-align: justify;
+        margin:25px auto 0 auto;
+        position: relative;
+        width: 300px;
+        max-width: 300px;
+    }
+    main{
+        margin:30px 10px;
+    }
+}
 
 // /*iPhone 2G-4S in portrait*/
-//  @media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) {
-//     body:before {
-//         content:'iPhone 2G-4S in portrait';
-//         background: white;
-//         color:black;
-//         position: fixed;
-//         top:0;
-//         left:0;
-//         display: none;
-//     }
-//     nav {
-//         max-width: 295px;
-//     }
-//     ul.controls li a {
-//         height: 28px;
-//         width: 28px;
-//     }
-//     ul.controls li a.full-screen {
-//         display: none;
-//     }
-// }
-
-
-// small devices
-// nav.mobile{
-//     top:0!important;
-//     text-align: justify;
-//     margin:25px auto 0 auto;
-//     position: relative;
-// }
-// nav.mobile ul.controls{
-//     display: inline;
-// }
-// nav.mobile ul.controls li{
-//     display: inline;
-// }
-// nav.mobile ul.controls li:last-child:after{
-//     content: '.';
-//     visibility: hidden;
-//     display: inline-block;
-//     width: 100%;
-// }
+ @media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) {
+    body:before {
+        content:'iPhone 2G-4S in portrait';
+        background: white;
+        color:black;
+        position: fixed;
+        top:0;
+        left:0;
+        display: none;
+    }
+    nav.mobile{
+        top:0!important;
+        text-align: justify;
+        margin:25px auto 0 auto;
+        position: relative;
+        width: 300px;
+        max-width: 300px;
+    }
+   main{
+        margin:30px 10px;
+    }
+}
