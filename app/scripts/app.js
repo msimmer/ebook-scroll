@@ -71,13 +71,13 @@ define([
 
             // hoverIntent methods
             if (!self.env.isMobile()) {
+
                 var wasScrolling,
                     isManuallyScrolling;
 
                 self.settings.el.hoverIntent({
                     over: function() {
                         wasScrolling = self.reader.isScrolling;
-                        log(self.settings.el);
                         self.settings.el.toggleClass('show-scroll-bar', wasScrolling);
                         if (wasScrolling) {
                             self.vents.stopScrolling();
@@ -85,7 +85,7 @@ define([
                         isManuallyScrolling = clearInterval(isManuallyScrolling);
                         isManuallyScrolling = setInterval(function() {
                             self.vents.countPages();
-                        }, this.interval / 2);
+                        }, this.interval * 4);
                     },
                     out: function() {
                         self.settings.el.toggleClass('show-scroll-bar', !wasScrolling);
@@ -101,6 +101,7 @@ define([
 
             }
 
+            // mobile listeners
             if (self.env.isMobile()) {
 
                 self.settings.el.css('overflow-y', 'scroll');

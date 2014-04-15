@@ -25,25 +25,29 @@ define([
 
         this.setFrameHeight = function() {
 
+            if ($(window).width() <= 480) {
+                return;
+            }
+
             var targetHeight = self.targetContainerHeight();
 
             settings.el.css({
-                'height': targetHeight,
-                'max-height': targetHeight
+                height: targetHeight,
+                maxHeight: targetHeight
             });
 
         },
 
         this.setFrameWidth = function() {
 
-            if (env.isMobile()) {
+            if ($(window).width() <= 480) {
                 return;
             }
 
             var targetWidth = self.targetContainerWidth();
 
             settings.el.css({
-                'max-width': targetWidth
+                maxWidth: targetWidth
             });
 
         },
@@ -54,13 +58,13 @@ define([
             self.setFrameWidth();
 
             var frame = settings.el,
-                h = $(window).height() / 2,
+                h = ($(window).width() <= 480) ? $(window).height() / 2 -30 : $(window).height() / 2,
                 w = $(window).width() / 2,
                 frameMidH = frame.height() / 2,
                 frameMidW = frame.width() / 2,
-                targetLeft = env.isMobile() ? 0 : w - frameMidW,
+                targetLeft = $(window).width() <= 480 ? 0 : w - frameMidW,
                 cssObj = {
-                    top: h - frameMidH - 30,
+                    top: h - frameMidH,
                     left: targetLeft
                 };
 
@@ -77,7 +81,7 @@ define([
                 overlap = frame.position().left <= 115, // initial sidebar width + margin
                 orientation = env.orientation();
 
-            if (overlap) {
+            if (overlap && $(window).width() > 480) {
                 nav.addClass('mobile');
                 nav.css({
                     top: 0,
@@ -85,71 +89,44 @@ define([
                 });
             }
 
-            if (!overlap) {
+            if (!overlap && $(window).width() > 480) {
                 nav.removeClass('mobile');
                 nav.css({
-                    top: ($(window).height() / 2) - (ctrlH / 2) - 30,
-                    width: 66
+                    top: ($(window).height() / 2) - (ctrlH / 2),
+                    width: 75
                 });
             }
 
-            if (orientation === 'portrait') {
+            if (orientation === 'portrait' && $(window).width() <= 480) {
                 nav.addClass('mobile');
                 nav.css({
                     top: 0,
                     width: 300
                 });
-
             }
 
-            if (orientation === 'landscape') {
-
-                log('landscape');
+            if (orientation === 'landscape' && $(window).width() <= 480) {
                 nav.removeClass('mobile');
                 nav.css({
-                    top: ($(window).height() / 2) - (ctrlH / 2) - 30,
-                    width: 66
+                    top: ($(window).height() / 2) - (ctrlH / 2),
+                    width: 75
                 });
-
             }
 
         },
 
         this.removeElementStyles = function() {
-
-            var textCss = {
-                fontSize: '',
-                lineHeight: '',
-                color: '',
-                textDecoration: '',
-                backgroundColor: 'transparent'
-            };
-
-            $.each(styles.textElements, function(i, o) {
-                // settings.el.find(o).css(textCss);
-            });
-
+            //
         },
 
         this.setStyles = function() {
 
-            $.each(styles.baseStyles, function(i, o) {
-                // settings.el.find(i).css('font-size', o.fSize);
-            });
-
             var mainCss = {
-                'font-size': settings.fSize + '%',
-                'line-height': '1.3'
+                fontSize: settings.fSize + '%',
+                lineHeight: '1.3'
             };
 
             settings.el.css(mainCss);
-
-            $('html,body,main').css({
-                '-webkit-transition': 'background-color 150ms ease-out', // contrast toggle
-                '-moz-transition': 'background-color 150ms ease-out',
-                '-o-transition': 'background-color 150ms ease-out',
-                'transition': 'background-color 150ms ease-out'
-            });
 
         };
 

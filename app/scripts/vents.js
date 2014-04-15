@@ -18,15 +18,15 @@ define([
 
         this.eventHandlers = {
 
-            '.play-btn, click':         'playPause',
-            '.speed-inc, click':        'speedIncrement',
-            '.speed-dec, click':        'speedDecrement',
-            '.font-inc, click':         'fontIncrement',
-            '.font-dec, click':         'fontDecrement',
-            '.contrast-dark, click':    'contrastToggle',
-            '.contrast-light, click':   'contrastToggle',
-            '.full-screen, click':      'toggleFullScreen',
-            'main a, click':            'embeddedLinkClick'
+            '.play-btn, click': 'playPause',
+            '.speed-inc, click': 'speedIncrement',
+            '.speed-dec, click': 'speedDecrement',
+            '.font-inc, click': 'fontIncrement',
+            '.font-dec, click': 'fontDecrement',
+            '.contrast-dark, click': 'contrastToggle',
+            '.contrast-light, click': 'contrastToggle',
+            '.full-screen, click': 'toggleFullScreen',
+            'main a, click': 'embeddedLinkClick'
 
         },
 
@@ -204,6 +204,10 @@ define([
 
         this.fontIncrement = function() {
 
+            if (settings.fSize === settings.maxFontSize()) {
+                return;
+            }
+
             var size = settings.fSize < settings.maxFontSize() ? settings.fSize + 10 : settings.fSize;
 
             settings.el.css('font-size', size + '%');
@@ -216,6 +220,10 @@ define([
         },
 
         this.fontDecrement = function() {
+
+            if (settings.fSize === settings.minFontSize()) {
+                return;
+            }
 
             var size = settings.fSize > settings.minFontSize() ? settings.fSize - 10 : settings.fSize;
 
@@ -303,7 +311,7 @@ define([
         this.countPages = function() {
 
             if (settings.debug) {
-                log('Counting pages');
+                // log('Counting pages');
             }
 
             var main = settings.el,
