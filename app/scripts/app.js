@@ -7,9 +7,9 @@ define([
     'layout',
     'sys',
     'vents',
-    'plugins/hoverIntent',
-    'plugins/jGestures'
-], function($, Env, Reader, Settings, Styles, Layout, Sys, Vents) {
+    'plugins/hammer',
+    'plugins/hoverIntent'
+], function($, Env, Reader, Settings, Styles, Layout, Sys, Vents, Hammer) {
     'use strict';
 
     return function App(options) {
@@ -61,21 +61,13 @@ define([
             }());
 
             $(window).on('resize', function() {
-
                 var intrvl;
-
                 intrvl = setInterval(function() {
                     clearInterval(intrvl);
                     self.vents.resizeStopped();
                 }, 200);
 
             });
-
-            // $(document).on('touchmove', function(e) {
-            //     if (!$(e.target).parents().is(self.settings.el)) {
-            //         e.preventDefault();
-            //     }
-            // });
 
             // hoverIntent methods
             if (!self.env.isMobile()) {
@@ -109,40 +101,91 @@ define([
 
             }
 
-            $(document).on('touchmove', function(e) {
-                if (!$(e.target).parents().is(self.settings.el)) {
-                    e.preventDefault();
-                }
-            });
-
             if (self.env.isMobile()) {
 
-                self.settings.el.css('overflow-y', 'hidden');
+                self.settings.el.css('overflow-y', 'scroll');
 
-                // jGestures methods
-                $(document).on({
-                    pinchopen: function() {
-                        self.vents.fontIncrement();
-                    },
-                    pinchclose: function() {
-                        self.vents.fontDecrement();
-                    }
-                });
+                var el = document.getElementsByTagName('body')[0],
+                    wasScrolling;
 
-                var wasScrolling;
-                self.settings.el.on({
-                    touchstart: function() {
-                        wasScrolling = self.reader.isScrolling;
-                        if (wasScrolling) {
-                            self.vents.stopScrolling();
-                            self.settings.el.css('overflow-y', 'scroll');
-                            self.settings.el.toggleClass('show-scroll-bar', wasScrolling);
+                Hammer(el).on(' \
+                    hold \
+                    doubletap \
+                    drag dragstart dragend dragup dragdown dragleft dragright \
+                    swipe swipeup swipedown swipeleft swiperight \
+                    transform transformstart transformend \
+                    rotate \
+                    pinch pinchin pinchout \
+                    touch hold release',
+                    function(e) {
+
+                        switch (e.type) {
+                            case 'doubletap':
+                                if (self.reader.isScrolling) {
+                                    self.vents.stopScrolling();
+                                } else {
+                                    self.vents.startScrolling();
+                                }
+                                break;
+
+                            case 'pinchin':
+                                self.vents.fontDecrement();
+                                break;
+
+                            case 'pinchout':
+                                self.vents.fontIncrement();
+                                break;
+
+                            default:
+                                break;
+
                         }
-                        if (!wasScrolling) {
-                            // log('not scrolling');
+
+                        if (e.srcElement.offsetParent == self.settings.el[0]) {
+
+                            switch (e.type) {
+
+                                case 'touch':
+                                    wasScrolling = self.reader.isScrolling;
+                                    self.vents.stopScrolling();
+                                    break;
+
+                                case 'hold':
+                                    self.vents.stopScrolling();
+                                    break;
+
+                                case 'release':
+                                    if (wasScrolling) {
+                                        setTimeout(function() {
+                                            self.vents.startScrolling();
+                                        }, 600);
+                                    }
+                                    break;
+
+                                default:
+                                    break;
+
+                            }
+
+                        } else if (!$(e.target).parents().is($('a'))) {
+
+                            e.gesture.preventDefault();
+
+                            switch (e.type) {
+                                case 'swipeup':
+                                case 'swipedown':
+                                case 'dragup':
+                                case 'dragup':
+                                    break;
+
+                                default:
+                                    break;
+                            }
+
                         }
-                    }
-                });
+
+                    });
+
             }
 
             // bootstrap

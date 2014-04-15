@@ -17,9 +17,6 @@ require.config({
         },
         'plugins/hoverIntent': {
             deps: ['jquery']
-        },
-        'plugins/jGestures.js': {
-            deps: ['jquery']
         }
     }
 });
