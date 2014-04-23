@@ -109,9 +109,12 @@ define([
 
                 var el = document.getElementsByTagName('body')[0],
                     frame = document.getElementById('main'),
-                    wasScrolling = self.reader.isScrolling;
+                    wasScrolling = self.reader.isScrolling,
+                    dist = 0,
+                    dir;
 
-                Hammer(el).on('touch pinchin pinchout', function(e) {
+                Hammer(el).on('dragright dragleft dragend touch pinchin pinchout', function(e) {
+
                     switch (e.type) {
                         case 'touch':
                             if ($(e.target).is('a') || $(e.target).parents().is($('a')) || $(e.target).is(frame) || $(e.target).parents().is(frame)) {
@@ -132,6 +135,33 @@ define([
                             if (wasScrolling) {
                                 self.vents.startScrolling();
                             }
+                            break;
+
+                        case 'dragright':
+                            dist = e.gesture.distance;
+                            dir = 'right';
+                            break;
+
+                        case 'dragleft':
+                            dist = e.gesture.distance;
+                            dir = 'left'
+                            break;
+
+                        case 'dragend':
+
+                            if (dist >= 100) {
+                                switch (dir) {
+                                    case 'left':
+                                        self.vents.speedDecrement();
+                                        break;
+                                    case 'right':
+                                        self.vents.speedIncrement();
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+
                             break;
                     }
                 });
