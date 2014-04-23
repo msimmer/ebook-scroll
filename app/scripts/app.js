@@ -105,87 +105,68 @@ define([
             if (self.env.isMobile()) {
 
                 self.settings.el.css('overflow-y', 'scroll');
+                self.settings.el.css('-webkit-overflow-scrolling', 'auto');
 
                 var el = document.getElementsByTagName('body')[0],
-                    wasScrolling;
+                    frame = document.getElementById('main'),
+                    wasScrolling = self.reader.isScrolling;
 
-                Hammer(el).on(' \
-                    hold \
-                    doubletap \
-                    drag dragstart dragend dragup dragdown dragleft dragright \
-                    swipe swipeup swipedown swipeleft swiperight \
-                    transform transformstart transformend \
-                    rotate \
-                    pinch pinchin pinchout \
-                    touch hold release',
-                    function(e) {
+                Hammer(el).on('touch pinchin pinchout', function(e) {
+                    switch (e.type) {
+                        case 'touch':
+                            if ($(e.target).is('a') || $(e.target).parents().is($('a')) || $(e.target).is(frame) || $(e.target).parents().is(frame)) {
+                                return;
+                            } else {
+                                e.gesture.preventDefault();
+                            }
+                            break;
+                        case 'pinchin':
+                            self.vents.fontDecrement();
+                            if (wasScrolling) {
+                                self.vents.startScrolling();
+                            }
+                            break;
 
-                        switch (e.type) {
-                            case 'doubletap':
-                                if (self.reader.isScrolling) {
-                                    self.vents.stopScrolling();
-                                } else {
+                        case 'pinchout':
+                            self.vents.fontIncrement();
+                            if (wasScrolling) {
+                                self.vents.startScrolling();
+                            }
+                            break;
+                    }
+                });
+
+                Hammer(frame).on('touch release', function(e) {
+
+                    e.gesture.stopPropagation();
+
+                    switch (e.type) {
+                        case 'touch':
+
+                            wasScrolling = self.reader.isScrolling;
+
+                            if (wasScrolling) {
+                                self.vents.stopScrolling();
+                            }
+
+                            console.log('touch');
+
+                            break;
+
+                        case 'release':
+
+                            if (wasScrolling) {
+                                setTimeout(function() {
                                     self.vents.startScrolling();
-                                }
-                                break;
-
-                            case 'pinchin':
-                                self.vents.fontDecrement();
-                                break;
-
-                            case 'pinchout':
-                                self.vents.fontIncrement();
-                                break;
-
-                            default:
-                                break;
-
-                        }
-
-                        if (e.srcElement.offsetParent == self.settings.el[0]) {
-
-                            switch (e.type) {
-
-                                case 'touch':
-                                    wasScrolling = self.reader.isScrolling;
-                                    self.vents.stopScrolling();
-                                    break;
-
-                                case 'hold':
-                                    self.vents.stopScrolling();
-                                    break;
-
-                                case 'release':
-                                    if (wasScrolling) {
-                                        setTimeout(function() {
-                                            self.vents.startScrolling();
-                                        }, 600);
-                                    }
-                                    break;
-
-                                default:
-                                    break;
-
+                                }, 400);
                             }
 
-                        } else if (!$(e.target).parents().is($('a'))) {
+                            console.log('release');
 
-                            e.gesture.preventDefault();
+                            break;
+                    }
 
-                            switch (e.type) {
-                                case 'swipeup':
-                                case 'swipedown':
-                                case 'dragup':
-                                case 'dragup':
-                                    break;
-
-                                default:
-                                    break;
-                            }
-
-                        }
-
-                    });
+                });
 
             }
 
