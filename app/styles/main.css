@@ -264,11 +264,6 @@ html.darkCss {
   background-color: transparent;
 }
 
-/* line 34, styles.scss */
-body {
-  -webkit-overflow-scrolling: touch;
-}
-
 /* line 37, styles.scss */
 nav {
   position: absolute;
@@ -353,26 +348,27 @@ main {
   overflow-x: hidden;
   max-height: 200px;
   line-height: 1.3;
+  -webkit-overflow-scrolling: auto !important;
 }
-/* line 102, styles.scss */
+/* line 103, styles.scss */
 main:hover {
   overflow-y: scroll;
 }
 
-/* line 106, styles.scss */
+/* line 107, styles.scss */
 main a, main a:link, main a:active, main a:visited {
   color: blue !important;
   text-decoration: underline !important;
 }
 
-/* line 110, styles.scss */
+/* line 111, styles.scss */
 section#page {
   margin: 0;
   padding: 0;
   border: 0;
 }
 
-/* line 115, styles.scss */
+/* line 116, styles.scss */
 .runner-help {
   position: absolute;
   bottom: 0;
@@ -382,13 +378,13 @@ section#page {
   text-decoration: none;
 }
 
-/* line 123, styles.scss */
+/* line 124, styles.scss */
 .runner-help a {
   /*color:black;*/
   text-decoration: none;
 }
 
-/* line 127, styles.scss */
+/* line 128, styles.scss */
 .runner-page-count {
   position: absolute;
   bottom: 0;
@@ -400,27 +396,27 @@ section#page {
 /**
 * icons
 */
-/* line 139, styles.scss */
+/* line 140, styles.scss */
 [data-state='play'] svg.play {
   display: block;
 }
 
-/* line 142, styles.scss */
+/* line 143, styles.scss */
 [data-state='play'] svg.pause {
   display: none;
 }
 
-/* line 146, styles.scss */
+/* line 147, styles.scss */
 [data-state='pause'] svg.play {
   display: none;
 }
 
-/* line 149, styles.scss */
+/* line 150, styles.scss */
 [data-state='pause'] svg.pause {
   display: block;
 }
 
-/* line 153, styles.scss */
+/* line 154, styles.scss */
 .darkCss .svg-light {
   position: absolute;
   top: 0;
@@ -430,7 +426,7 @@ section#page {
   height: 0;
 }
 
-/* line 161, styles.scss */
+/* line 162, styles.scss */
 .lightCss .svg-light {
   position: absolute;
   top: 0;
@@ -440,7 +436,7 @@ section#page {
   height: 100%;
 }
 
-/* line 169, styles.scss */
+/* line 170, styles.scss */
 .lightCss .svg-dark {
   position: absolute;
   top: 0;
@@ -450,7 +446,7 @@ section#page {
   height: 0;
 }
 
-/* line 177, styles.scss */
+/* line 178, styles.scss */
 .lightCss .svg-light {
   position: absolute;
   top: 0;
@@ -465,7 +461,7 @@ section#page {
 * misc.
 *
 */
-/* line 190, styles.scss */
+/* line 191, styles.scss */
 .hidden {
   width: 0;
   height: 0;
@@ -473,7 +469,7 @@ section#page {
   visibility: hidden;
 }
 
-/* line 196, styles.scss */
+/* line 197, styles.scss */
 .show-scroll-bar {
   overflow-y: scroll;
 }
@@ -481,7 +477,7 @@ section#page {
 /**
 * base mobile styles
 */
-/* line 203, styles.scss */
+/* line 204, styles.scss */
 nav.mobile {
   top: 0;
   text-align: justify;
@@ -489,17 +485,17 @@ nav.mobile {
   position: relative;
 }
 
-/* line 209, styles.scss */
+/* line 210, styles.scss */
 nav.mobile ul.controls {
   display: inline;
 }
 
-/* line 212, styles.scss */
+/* line 213, styles.scss */
 nav.mobile ul.controls li {
   display: inline;
 }
 
-/* line 215, styles.scss */
+/* line 216, styles.scss */
 nav.mobile ul.controls li:last-child:after {
   content: '.';
   visibility: hidden;

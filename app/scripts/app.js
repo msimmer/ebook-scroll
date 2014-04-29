@@ -105,7 +105,6 @@ define([
             if (self.env.isMobile()) {
 
                 self.settings.el.css('overflow-y', 'scroll');
-                self.settings.el.css('-webkit-overflow-scrolling', 'auto');
 
                 var el = document.getElementsByTagName('body')[0],
                     frame = document.getElementById('main'),
