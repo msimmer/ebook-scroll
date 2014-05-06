@@ -9,7 +9,7 @@ define([
     'vents',
     'plugins/hammer',
     'plugins/hoverIntent'
-], function($, Env, Reader, Settings, Styles, Layout, Sys, Vents, Hammer) {
+], function ($, Env, Reader, Settings, Styles, Layout, Sys, Vents, Hammer) {
     'use strict';
 
     return function App(options) {
@@ -25,7 +25,7 @@ define([
         this.env = Env,
         this.styles = Styles,
 
-        this.init = function() {
+        this.init = function () {
 
             self.vents.bindEventHandlers();
 
@@ -35,13 +35,13 @@ define([
 
             window.addEventListener('orientationchange', self.vents.orientationHasChanged);
 
-            window.onunload = window.onbeforeunload = (function() {
+            window.onunload = window.onbeforeunload = (function () {
 
                 $('html, body').scrollTop(0, 0);
 
                 var writeComplete = false;
 
-                return function() {
+                return function () {
 
                     if (writeComplete) {
                         return;
@@ -60,9 +60,9 @@ define([
 
             }());
 
-            $(window).on('resize', function() {
+            $(window).on('resize', function () {
                 var intrvl;
-                intrvl = setInterval(function() {
+                intrvl = setInterval(function () {
                     clearInterval(intrvl);
                     self.vents.resizeStopped();
                 }, 200);
@@ -76,18 +76,18 @@ define([
                     isManuallyScrolling;
 
                 self.settings.el.hoverIntent({
-                    over: function() {
+                    over: function () {
                         wasScrolling = self.reader.isScrolling;
                         self.settings.el.toggleClass('show-scroll-bar', wasScrolling);
                         if (wasScrolling) {
                             self.vents.stopScrolling();
                         }
                         isManuallyScrolling = clearInterval(isManuallyScrolling);
-                        isManuallyScrolling = setInterval(function() {
+                        isManuallyScrolling = setInterval(function () {
                             self.vents.countPages();
                         }, this.interval * 4);
                     },
-                    out: function() {
+                    out: function () {
                         self.settings.el.toggleClass('show-scroll-bar', !wasScrolling);
                         if (wasScrolling) {
                             self.vents.startScrolling();
@@ -108,91 +108,86 @@ define([
 
                 var el = document.getElementsByTagName('body')[0],
                     frame = document.getElementById('main'),
-                    wasScrolling = self.reader.isScrolling,
-                    dist = 0,
-                    dir;
+                    controls = document.getElementsByClassName('controls')[0],
+                    wasScrolling,
+                    dist,
+                    dir,
+                    options = {
+                        behavior: {
+                            contentZooming: 'none',
+                            touchAction: 'none',
+                            touchCallout: 'none',
+                            userDrag: 'none'
+                        },
+                        dragLockToAxis: true,
+                        dragBlockHorizontal: true
+                    },
+                    hammer = new Hammer(el, options);
 
-                Hammer(el).on('dragright dragleft dragend touch pinchin pinchout', function(e) {
+                hammer.on('touch release pinchin pinchout', function (e) {
 
-                    switch (e.type) {
-                        case 'touch':
-                            if ($(e.target).is('a') || $(e.target).parents().is($('a')) || $(e.target).is(frame) || $(e.target).parents().is(frame)) {
-                                return;
-                            } else {
-                                e.gesture.preventDefault();
-                            }
-                            break;
-                        case 'pinchin':
-                            self.vents.fontDecrement();
-                            if (wasScrolling) {
-                                self.vents.startScrolling();
-                            }
-                            break;
+                    var target = $(e.target);
 
-                        case 'pinchout':
-                            self.vents.fontIncrement();
-                            if (wasScrolling) {
-                                self.vents.startScrolling();
-                            }
-                            break;
+                    if (!target.parents().is(controls) && !target.is(frame) && !target.parents().is(frame)) {
 
-                        case 'dragright':
-                            dist = e.gesture.distance;
-                            dir = 'right';
-                            break;
+                        console.log(target);
 
-                        case 'dragleft':
-                            dist = e.gesture.distance;
-                            dir = 'left'
-                            break;
+                        e.preventDefault();
+                        e.stopPropagation();
+                        e.gesture.preventDefault();
+                        e.gesture.stopPropagation();
+                        e.gesture.stopDetect();
 
-                        case 'dragend':
+                    } else if (target.is(frame) || target.parents().is(frame)) {
 
-                            if (dist >= 100) {
-                                switch (dir) {
-                                    case 'left':
-                                        self.vents.speedDecrement();
-                                        break;
-                                    case 'right':
-                                        self.vents.speedIncrement();
-                                        break;
-                                    default:
-                                        break;
-                                }
-                            }
-
-                            break;
-                    }
-                });
-
-                Hammer(frame).on('touch release', function(e) {
-
-                    e.gesture.stopPropagation();
-
-                    switch (e.type) {
-                        case 'touch':
+                        if (e.type == 'touch') {
+                            e.stopPropagation();
+                            e.gesture.stopPropagation();
 
                             wasScrolling = self.reader.isScrolling;
+
+                            console.log('touch -- ' + wasScrolling);
 
                             if (wasScrolling) {
                                 self.vents.stopScrolling();
                             }
+                        } else if (e.type == 'release') {
 
-                            console.log('touch');
+                            e.gesture.stopPropagation();
 
-                            break;
-
-                        case 'release':
+                            console.log('release -- ' + wasScrolling);
 
                             if (wasScrolling) {
-                                setTimeout(function() {
+                                setTimeout(function () {
                                     self.vents.startScrolling();
                                 }, 400);
                             }
 
-                            console.log('release');
+                        } else if (e.type == 'pinchin') {
 
-                            break;
+                            e.stopPropagation();
+                            e.gesture.stopPropagation();
+
+                            self.vents.fontDecrement();
+                            if (wasScrolling) {
+                                self.vents.startScrolling();
+                            }
+
+                            e.gesture.stopDetect();
+
+                        } else if (e.type == 'pinchout') {
+
+                            e.stopPropagation();
+                            e.gesture.stopPropagation();
+
+                            self.vents.fontIncrement();
+                            if (wasScrolling) {
+                                self.vents.startScrolling();
+                            }
+
+                            e.gesture.stopDetect();
+                        }
+
                     }
 
                 });
@@ -205,13 +200,13 @@ define([
                 url: 'data/bookData.json',
                 dataType: 'json',
                 method: 'get',
-                success: function(data) {
+                success: function (data) {
                     self.sys.updatedReaderData('components', data);
                     self.sys.updatedReaderData('currentPage', data[0].src);
                     self.sys.updatedReaderData('firstPage', data[0].src);
                     self.sys.updatedReaderData('lastPage', data[data.length - 1].src);
                 },
-                error: function(x, t, s) {
+                error: function (x, t, s) {
                     log(x + ' ' + t);
                 }
 
@@ -219,13 +214,13 @@ define([
 
             function addJsonDataToDom(data) {
 
-                $.each(data, function(i, o) {
+                $.each(data, function (i, o) {
 
                     $('<li/>', {
                         html: $('<a/>', {
                             text: o.title,
                             href: o.src,
-                            click: function(e) {
+                            click: function (e) {
                                 e.preventDefault();
                                 self.sys.saveLocation();
                                 loadChapter(o.src);
@@ -249,7 +244,7 @@ define([
                     url: pageUrl,
                     async: false
                 })
-                    .then(function(data) {
+                    .then(function (data) {
                         var content = $('<section/>', {
                             id: 'page',
                             css: {
@@ -272,21 +267,21 @@ define([
             }
 
             $.when(retrieveJsonData)
-                .then(function(data) {
+                .then(function (data) {
                     self.sys.getLocation();
                     self.sys.getUserPreferences();
                     addJsonDataToDom(self.reader.components);
                 })
-                .then(function() {
+                .then(function () {
                     loadChapter(self.reader.currentPage);
                 })
-                .done(function() {
-                    self.layout.adjustFramePosition();
+                .done(function () {
                     self.sys.goToPreviousLocation();
                     self.vents.countPages();
                     self.layout.removeElementStyles();
                     self.vents.contrastToggle(self.settings.contrast);
                     self.layout.setStyles();
+                    self.layout.adjustFramePosition();
                     self.vents.startScrolling();
                 });
 

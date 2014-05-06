@@ -1,17 +1,11 @@
 fiktion reader:
-- mobile:
-    - pinch out: font increment
-    - pinch in: font decrement
-    - 2 fingers drag up: speed increment
-    - 2 fingers drag down: speed decrement
-    - pause when a reader holds a finger on the screen
 
 - allow for multiple books
 
+- mobile styles
+    pngs fallback
+    frame size adjust
+    count pages mobile
+- update readme
 
-bugs:
-
-- mobile styles are sometimes applied to the reader in desktop mode (this was the issue at the launch of the reader where the controls disappeared)
-- the text jitters when you scroll it manually
-- text sometimes overlaps the controls on small screens
-- the reading frame is sometimes not vertically centred on mobile phones in landscape
+swipe left/right -> speed adjust

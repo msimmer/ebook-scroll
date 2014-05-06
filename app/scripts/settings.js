@@ -13,9 +13,10 @@ define([
 
         defaultFontSize: 18,
         fSize: 100,
+        fSizeIncrement: 5,
 
         maxFontSize: function() {
-            return Env.isMobile() ? 100 : 150;
+            return Env.isMobile() ? 130 : 150;
         },
         minFontSize: function() {
             return Env.isMobile() ? 50 : 70;

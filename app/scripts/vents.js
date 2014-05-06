@@ -208,7 +208,7 @@ define([
                 return;
             }
 
-            var size = settings.fSize < settings.maxFontSize() ? settings.fSize + 10 : settings.fSize;
+            var size = settings.fSize < settings.maxFontSize() ? settings.fSize + settings.fSizeIncrement : settings.fSize;
 
             settings.el.css('font-size', size + '%');
 
@@ -225,7 +225,7 @@ define([
                 return;
             }
 
-            var size = settings.fSize > settings.minFontSize() ? settings.fSize - 10 : settings.fSize;
+            var size = settings.fSize > settings.minFontSize() ? settings.fSize - settings.fSizeIncrement : settings.fSize;
 
             settings.el.css('font-size', size + '%');
 
