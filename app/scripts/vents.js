@@ -311,7 +311,7 @@ define([
         this.countPages = function() {
 
             if (settings.debug) {
-                // log('Counting pages');
+                log('Counting pages');
             }
 
             var main = settings.el,
@@ -324,6 +324,8 @@ define([
             function getCurrentPage() {
                 return Math.round((-(page.offset().top - main.offset().top) / frameH) + 1);
             }
+
+            console.log('countPages -- ' + getCurrentPage());
 
             totalPageIndicator.html(Math.round(pageH / frameH));
             currentPageIndicator.html(getCurrentPage());
