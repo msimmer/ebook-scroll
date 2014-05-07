@@ -5,7 +5,7 @@ define([
     'layout',
     'sys',
     'shims/requestAnimationFrame'
-], function($, Settings, Reader, Layout, Sys) {
+], function ($, Settings, Reader, Layout, Sys) {
     'use strict';
 
     return function Vents() {
@@ -30,11 +30,11 @@ define([
 
         },
 
-        this.bindEventHandlers = function() {
+        this.bindEventHandlers = function () {
 
             var that = this;
 
-            $.each(that.eventHandlers, function(k, v) {
+            $.each(that.eventHandlers, function (k, v) {
 
                 var eArr = k.split(','),
                     fArr = v.split(','),
@@ -43,7 +43,7 @@ define([
                     func = $.trim(fArr[0]),
                     args = fArr.slice(1);
 
-                $(elem).on(trig, function(e) {
+                $(elem).on(trig, function (e) {
                     if (e && e.originalEvent !== undefined) {
                         args.push(e);
                         e.preventDefault();
@@ -55,7 +55,7 @@ define([
 
         },
 
-        this.toggleFullScreen = function() {
+        this.toggleFullScreen = function () {
 
             if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
                 if (document.documentElement.requestFullscreen) {
@@ -81,28 +81,27 @@ define([
 
         },
 
-        this.listenForPageChangeInterval = null, // storing setInterval
+        this.listenForPageChangeInterval = null,
 
-        this.listenForPageChange = function() {
+        this.listenForPageChange = function () {
 
-            if (reader.isScrolling === false) {
+            if (!reader.isScrolling) {
                 return;
             }
 
-            var fontSize = $(settings.el.first('p')).css('font-size');
-            var lineHeight = Math.floor(parseInt(fontSize.replace('px', '')) * 1.5);
-
-            var intrvl = (lineHeight * settings.el.height()) * (settings.scrollSpeed / 30);
+            var lineHeight = Math.floor(parseInt($(settings.el.first('p')).css('line-height'), 10)),
+                containerH = Math.floor(settings.el.height()),
+                intrvl = Math.floor((lineHeight * containerH) / settings.scrollSpeed + 1) * 100;
 
             window.clearInterval(self.listenForPageChangeInterval);
 
-            self.listenForPageChangeInterval = setInterval(function() {
+            self.listenForPageChangeInterval = setInterval(function () {
                 self.countPages();
             }, intrvl);
 
         },
 
-        this.playPause = function() {
+        this.playPause = function () {
 
             var playBtn = $('.controls').find('.play-btn'),
                 isScrolling = reader.isScrolling;
@@ -112,17 +111,28 @@ define([
 
         },
 
-        this.startScrolling = function() {
+        this.requestAnim = null,
+        this.ct = 0,
+        this.skip = null,
+
+        this.readScroll = function () {
+
+            self.ct++;
+            if (self.ct < self.skip) {
+                self.requestAnim = window.requestAnimationFrame(self.readScroll);
+                return;
+            }
+            settings.el.scrollTop(settings.el.scrollTop() + 1);
+            self.ct = 0;
+            self.requestAnim = window.requestAnimationFrame(self.readScroll);
+
+        },
+
+        this.startScrolling = function () {
 
             $('.controls').find('.play-btn').attr('data-state', 'pause');
 
-            window.cancelAnimationFrame(settings.scrollInt);
-            window.clearTimeout(settings.scrollTimeout);
-
-            settings.scrollTimeout = setTimeout(function() {
-                settings.el.scrollTop(settings.el.scrollTop() + 1);
-                settings.scrollInt = window.requestAnimationFrame(self.startScrolling);
-            }, 1000 / settings.scrollSpeed);
+            self.readScroll();
 
             reader.isScrolling = true;
 
@@ -130,7 +140,7 @@ define([
 
         },
 
-        this.stopScrolling = function() {
+        this.stopScrolling = function () {
 
             $('.controls').find('.play-btn').attr('data-state', 'play');
 
@@ -138,19 +148,29 @@ define([
                 log('Stopped');
             }
 
-            window.cancelAnimationFrame(settings.scrollInt);
-            window.clearTimeout(settings.scrollTimeout);
+            window.cancelAnimationFrame(self.requestAnim);
             window.clearInterval(self.listenForPageChangeInterval);
 
             reader.isScrolling = false;
 
         },
 
-        this.speedIncrement = function() {
+        this.speedIncrement = function () {
 
-            if (settings.scrollSpeed >= 250) {
+            if (settings.scrollSpeed === 110) {
                 return;
             }
+
+            var s = function () {
+                var v = 100 - settings.scrollSpeed,
+                    n = v.toString().slice(-2),
+                    r = parseInt(n, 10),
+                    x = r * 6 / 60;
+                log('x --- ' + x);
+                return x;
+            }
+
+            self.skip = s();
 
             self.stopScrolling();
             settings.scrollSpeed += 10;
@@ -164,11 +184,25 @@ define([
 
         },
 
-        this.speedDecrement = function() {
+        this.speedDecrement = function () {
 
-            if (settings.scrollSpeed <= 10) {
+            if (settings.scrollSpeed === 0) {
+                log('at 0 --');
                 return;
             }
+
+            var s = function () {
+                var v = 100 - settings.scrollSpeed,
+                    n = v.toString().slice(-2),
+                    r = parseInt(n, 10),
+                    x = r * 6 / 60;
+                log('x --- ' + x);
+                return x;
+            }
+
+            self.skip = s();
+
+            log(self.skip);
 
             self.stopScrolling();
             settings.scrollSpeed -= 10;
@@ -182,7 +216,7 @@ define([
 
         },
 
-        this.isChapterEnd = function() {
+        this.isChapterEnd = function () {
 
             self.stopScrolling();
 
@@ -192,7 +226,7 @@ define([
 
         },
 
-        this.isBookEnd = function() {
+        this.isBookEnd = function () {
 
             self.stopScrolling();
 
@@ -202,7 +236,7 @@ define([
 
         },
 
-        this.fontIncrement = function() {
+        this.fontIncrement = function () {
 
             if (settings.fSize === settings.maxFontSize()) {
                 return;
@@ -219,7 +253,7 @@ define([
 
         },
 
-        this.fontDecrement = function() {
+        this.fontDecrement = function () {
 
             if (settings.fSize === settings.minFontSize()) {
                 return;
@@ -236,7 +270,7 @@ define([
 
         },
 
-        this.contrastToggle = function(e) {
+        this.contrastToggle = function (e) {
 
             var contrast = e && e.currentTarget ? $(e.currentTarget).attr('data-contrast') : e,
                 html = $('html');
@@ -254,7 +288,7 @@ define([
 
         },
 
-        this.embeddedLinkClick = function(e) {
+        this.embeddedLinkClick = function (e) {
 
             var target = $(e.currentTarget),
                 href = target.attr('href'),
@@ -271,21 +305,21 @@ define([
 
         },
 
-        this.orientationHasChanged = function() {
+        this.orientationHasChanged = function () {
 
             if (settings.debug) {
                 switch (window.orientation) {
-                    case -90:
-                    case 90:
-                        log('Orientation has changed to landscape');
-                        break;
-                    default:
-                        log('Orientation has changed to portrait');
-                        break;
+                case -90:
+                case 90:
+                    log('Orientation has changed to landscape');
+                    break;
+                default:
+                    log('Orientation has changed to portrait');
+                    break;
                 }
             }
 
-            setTimeout(function() {
+            setTimeout(function () {
                 layout.adjustFramePosition();
                 if (pageYOffset) {
                     window.scrollTo(0, 0, 1);
@@ -294,21 +328,21 @@ define([
 
             if (reader.isScrolling) {
                 self.stopScrolling();
-                setTimeout(function() {
+                setTimeout(function () {
                     self.startScrolling();
                 }, 500);
             }
 
         },
 
-        this.resizeStopped = function() {
+        this.resizeStopped = function () {
 
             self.countPages();
             layout.adjustFramePosition();
 
         },
 
-        this.countPages = function() {
+        this.countPages = function () {
 
             if (settings.debug) {
                 log('Counting pages');

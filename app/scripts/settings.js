@@ -23,7 +23,7 @@ define([
         },
 
         contrast: 'light',
-        scrollSpeed: 30,
+        scrollSpeed: 80,
         scrollInt: null,
         scrollTimeout: null
     };

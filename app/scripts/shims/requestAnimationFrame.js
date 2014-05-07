@@ -1,4 +1,4 @@
-define(function() {
+define(function () {
 
     // Adapted from https://gist.github.com/paulirish/1579671 which derived from
     // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
@@ -10,7 +10,7 @@ define(function() {
     // MIT license
 
     if (!Date.now)
-        Date.now = function() {
+        Date.now = function () {
             return new Date().getTime();
         };
 
@@ -23,10 +23,10 @@ define(function() {
     if (/iP(ad|hone|od).*OS 6/.test(window.navigator.userAgent) // iOS6 is buggy
         || !window.requestAnimationFrame || !window.cancelAnimationFrame) {
         var lastTime = 0;
-        window.requestAnimationFrame = function(callback) {
+        window.requestAnimationFrame = function (callback) {
             var now = Date.now();
             var nextTime = Math.max(lastTime + 16, now);
-            return setTimeout(function() {
+            return setTimeout(function () {
                 callback(lastTime = nextTime);
             }, nextTime - now);
         };

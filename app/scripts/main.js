@@ -44,7 +44,7 @@ require([
             contrast: 'light', // (str) light or dark
 
             // syncs with localstorage reader data
-            scrollSpeed: 30 // (int) scroll speed
+            scrollSpeed: 80 // (int) scroll speed 1-100%
 
         });
 

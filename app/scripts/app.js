@@ -154,6 +154,7 @@ define([
                         } else if (e.type == 'release') {
 
                             e.gesture.stopPropagation();
+                            self.vents.countPages();
 
                             console.log('release -- ' + wasScrolling);
 
@@ -188,6 +189,9 @@ define([
                             e.gesture.stopDetect();
                         }
 
+                    } else if (target.parents().is(controls)) {
+                        e.stopPropagation();
+                        e.gesture.stopPropagation();
                     }
 
                 });
