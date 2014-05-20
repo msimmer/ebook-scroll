@@ -145,7 +145,7 @@ define([
             $('.controls').find('.play-btn').attr('data-state', 'play');
 
             if (settings.debug) {
-                log('Stopped');
+                console.log('Stopped');
             }
 
             window.cancelAnimationFrame(self.requestAnim);
@@ -157,9 +157,7 @@ define([
 
         this.speedIncrement = function () {
 
-            console.log('increment speed: ' + settings.scrollSpeed);
-
-            if (settings.scrollSpeed === 110) {
+            if (settings.scrollSpeed >= 110) {
                 return;
             }
 
@@ -168,7 +166,7 @@ define([
                     n = v.toString().slice(-2),
                     r = parseInt(n, 10),
                     x = r * 6 / 60;
-                log('x --- ' + x);
+                console.log('x --- ' + x);
                 return x;
             }
 
@@ -179,7 +177,7 @@ define([
             self.startScrolling();
 
             if (settings.debug) {
-                log('Reading speed incremented to ' + settings.scrollSpeed);
+                console.log('Reading speed incremented to ' + settings.scrollSpeed + 10);
             }
 
             sys.updateUserPreferences();
@@ -188,35 +186,33 @@ define([
 
         this.speedDecrement = function () {
 
-            console.log('decrement speed: ' + settings.scrollSpeed);
+             // console.log('decrement speed: ' + settings.scrollSpeed);
 
-            if (settings.scrollSpeed === 0) {
-                log('at 0 --');
-                return;
-            }
+             // if (settings.scrollSpeed <= 10) {
+             //    console.log('at 0 --');
+             //     return;
+             // }
 
-            var s = function () {
-                var v = 100 - settings.scrollSpeed,
-                    n = v.toString().slice(-2),
-                    r = parseInt(n, 10),
-                    x = r * 6 / 60;
-                log('x --- ' + x);
-                return x;
-            }
+             // var s = function () {
+             //     var v = 100 - settings.scrollSpeed,
+             //         n = v.toString().slice(-2),
+             //         r = parseInt(n, 10),
+             //         x = r * 6 / 60;
+             //    console.log('x --- ' + x);
+             //     return x;
+             // }
 
-            self.skip = s();
+             // self.skip = s();
 
-            log(self.skip);
+             // self.stopScrolling();
+             // settings.scrollSpeed -= 10;
+             // self.startScrolling();
 
-            self.stopScrolling();
-            settings.scrollSpeed -= 10;
-            self.startScrolling();
+             // if (settings.debug) {
+             //    console.log('Reading speed decremented to ' + settings.scrollSpeed);
+             // }
 
-            if (settings.debug) {
-                log('Reading speed decremented to ' + settings.scrollSpeed);
-            }
-
-            sys.updateUserPreferences();
+             // sys.updateUserPreferences();
 
         },
 
@@ -225,7 +221,7 @@ define([
             self.stopScrolling();
 
             if (settings.debug) {
-                log('Chapter end');
+                console.log('Chapter end');
             }
 
         },
@@ -235,7 +231,7 @@ define([
             self.stopScrolling();
 
             if (settings.debug) {
-                log('Book end');
+                console.log('Book end');
             }
 
         },
@@ -315,10 +311,10 @@ define([
                 switch (window.orientation) {
                 case -90:
                 case 90:
-                    log('Orientation has changed to landscape');
+                    console.log('Orientation has changed to landscape');
                     break;
                 default:
-                    log('Orientation has changed to portrait');
+                    console.log('Orientation has changed to portrait');
                     break;
                 }
             }
@@ -349,7 +345,7 @@ define([
         this.countPages = function () {
 
             if (settings.debug) {
-                log('Counting pages');
+                console.log('Counting pages');
             }
 
             var main = settings.el,

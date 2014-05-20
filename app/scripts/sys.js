@@ -44,7 +44,7 @@ define([
         this.saveLocation = function() {
 
             if (settings.debug) {
-                log('Saving current location');
+                console.log('Saving current location');
             }
 
             self.updatedReaderData(
@@ -80,7 +80,7 @@ define([
         this.updateUserPreferences = function() {
 
             if (settings.debug) {
-                log('Updating user preferences');
+                console.log('Updating user preferences');
             }
 
             var userPreferences = {
@@ -96,7 +96,7 @@ define([
         this.getUserPreferences = function() {
 
             if (settings.debug) {
-                log('Getting User Preferences');
+                console.log('Getting User Preferences');
             }
 
             if (localStorage.getItem('userPreferences') !== null) {
@@ -141,7 +141,7 @@ define([
         this.goToPreviousLocation = function() {
 
             if (settings.debug) {
-                log('Going to previous location');
+                console.log('Going to previous location');
             }
 
             var pos = self.getFromLocalStorage('clientBook', 'scrollPosition', reader.currentPage);

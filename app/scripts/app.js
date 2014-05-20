@@ -33,6 +33,8 @@ define([
                 $.extend(this.settings, options);
             }
 
+            console.log('start speed: ' + self.settings.scrollSpeed);
+
             window.addEventListener('orientationchange', self.vents.orientationHasChanged);
 
             window.onunload = window.onbeforeunload = (function () {
@@ -211,7 +213,7 @@ define([
                     self.sys.updatedReaderData('lastPage', data[data.length - 1].src);
                 },
                 error: function (x, t, s) {
-                    log(x + ' ' + t);
+                    console.log(x + ' ' + t);
                 }
 
             });
@@ -236,7 +238,7 @@ define([
                 });
 
                 if (self.settings.debug) {
-                    log('JSON data added to DOM');
+                    console.log('JSON data added to DOM');
                 }
 
             }
@@ -264,7 +266,7 @@ define([
                         self.sys.updateLocalStorage('clientBook', 'currentPage', pageUrl);
 
                         if (self.settings.debug) {
-                            log('Current page is ' + pageUrl);
+                            console.log('Current page is ' + pageUrl);
                         }
                     });
 
@@ -284,8 +286,8 @@ define([
                     self.vents.countPages();
                     self.layout.removeElementStyles();
                     self.vents.contrastToggle(self.settings.contrast);
-                    self.layout.setStyles();
                     self.layout.adjustFramePosition();
+                    self.layout.setStyles();
                     self.vents.startScrolling();
                 });
 

@@ -1,12 +1,3 @@
-// http://paulirish.com/2009/log-a-lightweight-wrapper-for-consolelog/
-window.log = function() {
-    log.history = log.history || []; // store logs to an array for reference
-    log.history.push(arguments);
-    if (this.console) {
-        console.log(Array.prototype.slice.call(arguments));
-    }
-};
-
 require.config({
     paths: {
         jquery: '../bower_components/jquery/jquery'
@@ -34,8 +25,8 @@ require([
         var app = new App({
 
             // dev
-            debug: window.ebs && window.ebs.debug ? window.ebs.debug : false,
-            clearStorage: window.ebs && window.ebs.clearStorage ? window.ebs.clearStorage : false,
+            debug: !! window.ebs && window.ebs.debug,
+            clearStorage: !! window.ebs && window.ebs.clearStorage,
 
             // syncs with localstorage user data
             defaultFontSize: 18, // (int) default body font-size in px
@@ -44,7 +35,7 @@ require([
             contrast: 'light', // (str) light or dark
 
             // syncs with localstorage reader data
-            scrollSpeed: 80 // (int) scroll speed 1-100%
+            scrollSpeed: 50 // (int) scroll speed 1-100%
 
         });
 

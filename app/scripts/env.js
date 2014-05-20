@@ -11,18 +11,16 @@ define(function() {
             switch (window.orientation) {
                 case 0:
                 case 180:
-                    log('Orientation is currently portrait');
+                    console.log('Orientation is currently portrait');
                     return 'portrait';
                 case 90:
                 case -90:
-                    log('Orientation is currently landscape');
+                    console.log('Orientation is currently landscape');
                     return 'landscape';
                 default:
-                    log('Defaulted to null');
                     return null;
             }
         }
-
 
     };
 
