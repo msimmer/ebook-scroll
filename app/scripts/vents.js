@@ -115,6 +115,16 @@ define([
         this.requestAnim = null,
         this.ct = 0,
         this.skip = null,
+        this.getSkipInterval = function () {
+            var v = 100 - settings.scrollSpeed,
+                n = v.toString().slice(-2),
+                r = parseInt(n, 10),
+                x = r * 6 / 90;
+
+            self.skip = x;
+            console.log(self.skip);
+
+        },
 
         this.readScroll = function () {
 
@@ -132,6 +142,10 @@ define([
         this.startScrolling = function () {
 
             $('.controls').find('.play-btn').attr('data-state', 'pause');
+
+            if (self.skip == null) {
+                self.getSkipInterval();
+            }
 
             self.readScroll();
             self.listenForPageChange();
@@ -157,23 +171,13 @@ define([
 
         this.speedIncrement = function () {
 
-            if (settings.scrollSpeed >= 110) {
+            if (settings.scrollSpeed >= 100) {
                 return;
             }
 
-            var s = function () {
-                var v = 100 - settings.scrollSpeed,
-                    n = v.toString().slice(-2),
-                    r = parseInt(n, 10),
-                    x = r * 6 / 60;
-                console.log('x --- ' + x);
-                return x;
-            }
-
-            self.skip = s();
-
             self.stopScrolling();
             settings.scrollSpeed += 10;
+            self.getSkipInterval();
             self.startScrolling();
 
             if (settings.debug) {
@@ -188,24 +192,14 @@ define([
 
             console.log('decrement speed: ' + settings.scrollSpeed);
 
-            if (settings.scrollSpeed <= 40) {
+            if (settings.scrollSpeed <= 50) {
                 console.log('at 0 --');
                 return;
             }
 
-            var s = function () {
-                var v = 100 - settings.scrollSpeed,
-                    n = v.toString().slice(-2),
-                    r = parseInt(n, 10),
-                    x = r * 6 / 60;
-                console.log('x --- ' + x);
-                return x;
-            }
-
-            self.skip = s();
-
             self.stopScrolling();
             settings.scrollSpeed -= 10;
+            self.getSkipInterval();
             self.startScrolling();
 
             if (settings.debug) {
