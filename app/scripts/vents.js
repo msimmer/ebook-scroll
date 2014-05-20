@@ -133,9 +133,7 @@ define([
             $('.controls').find('.play-btn').attr('data-state', 'pause');
 
             self.readScroll();
-
             reader.isScrolling = true;
-
             self.listenForPageChange();
 
         },
