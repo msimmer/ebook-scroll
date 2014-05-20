@@ -157,6 +157,8 @@ define([
 
         this.speedIncrement = function () {
 
+            console.log('increment speed: ' + settings.scrollSpeed);
+
             if (settings.scrollSpeed === 110) {
                 return;
             }
@@ -185,6 +187,8 @@ define([
         },
 
         this.speedDecrement = function () {
+
+            console.log('decrement speed: ' + settings.scrollSpeed);
 
             if (settings.scrollSpeed === 0) {
                 log('at 0 --');
