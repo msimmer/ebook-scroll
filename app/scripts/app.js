@@ -29,9 +29,9 @@ define([
 
             self.vents.bindEventHandlers();
 
-            if (options) {
-                $.extend(this.settings, options);
-            }
+            // if (options) {
+            //     $.extend(this.settings, options);
+            // }
 
             console.log('start speed: ' + self.settings.scrollSpeed);
 
@@ -84,9 +84,15 @@ define([
                         if (wasScrolling) {
                             self.vents.stopScrolling();
                         }
+                        var ct = 0;
                         isManuallyScrolling = clearInterval(isManuallyScrolling);
                         isManuallyScrolling = setInterval(function () {
-                            self.vents.countPages();
+                            ct += 1;
+                            if (ct < 500) {
+                                self.vents.countPages();
+                            } else {
+                                clearInterval(isManuallyScrolling);
+                            }
                         }, this.interval * 4);
                     },
                     out: function () {
@@ -246,10 +252,10 @@ define([
             function loadChapter(pageUrl) {
 
                 return $.ajax({
-                    type: 'get',
-                    url: pageUrl,
-                    async: false
-                })
+                        type: 'get',
+                        url: pageUrl,
+                        async: false
+                    })
                     .then(function (data) {
                         var content = $('<section/>', {
                             id: 'page',
@@ -274,21 +280,54 @@ define([
 
             $.when(retrieveJsonData)
                 .then(function (data) {
-                    self.sys.getLocation();
-                    self.sys.getUserPreferences();
                     addJsonDataToDom(self.reader.components);
                 })
                 .then(function () {
-                    loadChapter(self.reader.currentPage);
+                    self.sys.getLocation();
+                    self.sys.getUserPreferences();
                 })
-                .done(function () {
+                .then(function () {
+                    loadChapter(self.reader.currentPage);
                     self.sys.goToPreviousLocation();
-                    self.vents.countPages();
                     self.layout.removeElementStyles();
-                    self.vents.contrastToggle(self.settings.contrast);
-                    self.layout.adjustFramePosition();
                     self.layout.setStyles();
-                    self.vents.startScrolling();
+                })
+                .then(function () {
+                    self.layout.adjustFramePosition();
+                    self.vents.contrastToggle(self.settings.contrast);
+                })
+                .then(function () {
+
+                    var pages = 0,
+                        ct = 0,
+                        pageCountTimeout,
+                        intrvl;
+
+                    (function () {
+                        intrvl = setInterval(function () {
+                            ct += 1;
+                            if ($('#page').length) {
+                                pages += 1;
+                                pageCountTimeout = setTimeout(function () {
+                                    if (pages == $('#page').find('p').length && ct < 1000 || pages != $('#page').find('p').length && ct >= 1000) {
+                                        clearInterval(intrvl);
+                                        clearTimeout(pageCountTimeout);
+                                        self.vents.countPages();
+                                        $('.controls, .runner-help, .runner-page-count, #page').animate({
+                                            opacity:1
+                                        }, 200);
+                                        $('.spinner').fadeOut(200, function(){
+                                            setTimeout(function(){
+                                                self.vents.startScrolling();
+                                            }, 50);
+                                        });
+                                    } else if (pages != $('#page').find('p').length && ct < 1000) {
+                                        clearTimeout(pageCountTimeout);
+                                    }
+                                }, 10);
+                            }
+                        }, 50);
+                    })();
                 });
 
         };

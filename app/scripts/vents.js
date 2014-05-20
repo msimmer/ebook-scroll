@@ -88,6 +88,7 @@ define([
             if (!reader.isScrolling) {
                 return;
             }
+            console.log('foo');
 
             var lineHeight = Math.floor(parseInt($(settings.el.first('p')).css('line-height'), 10)),
                 containerH = Math.floor(settings.el.height()),
@@ -133,8 +134,9 @@ define([
             $('.controls').find('.play-btn').attr('data-state', 'pause');
 
             self.readScroll();
-            reader.isScrolling = true;
             self.listenForPageChange();
+
+            reader.isScrolling = true;
 
         },
 
@@ -184,33 +186,33 @@ define([
 
         this.speedDecrement = function () {
 
-             // console.log('decrement speed: ' + settings.scrollSpeed);
+            console.log('decrement speed: ' + settings.scrollSpeed);
 
-             // if (settings.scrollSpeed <= 10) {
-             //    console.log('at 0 --');
-             //     return;
-             // }
+            if (settings.scrollSpeed <= 40) {
+                console.log('at 0 --');
+                return;
+            }
 
-             // var s = function () {
-             //     var v = 100 - settings.scrollSpeed,
-             //         n = v.toString().slice(-2),
-             //         r = parseInt(n, 10),
-             //         x = r * 6 / 60;
-             //    console.log('x --- ' + x);
-             //     return x;
-             // }
+            var s = function () {
+                var v = 100 - settings.scrollSpeed,
+                    n = v.toString().slice(-2),
+                    r = parseInt(n, 10),
+                    x = r * 6 / 60;
+                console.log('x --- ' + x);
+                return x;
+            }
 
-             // self.skip = s();
+            self.skip = s();
 
-             // self.stopScrolling();
-             // settings.scrollSpeed -= 10;
-             // self.startScrolling();
+            self.stopScrolling();
+            settings.scrollSpeed -= 10;
+            self.startScrolling();
 
-             // if (settings.debug) {
-             //    console.log('Reading speed decremented to ' + settings.scrollSpeed);
-             // }
+            if (settings.debug) {
+                console.log('Reading speed decremented to ' + settings.scrollSpeed);
+            }
 
-             // sys.updateUserPreferences();
+            sys.updateUserPreferences();
 
         },
 

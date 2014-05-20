@@ -23,9 +23,9 @@ define([
         },
 
         contrast: 'light',
-        scrollSpeed: 80,
-        scrollInt: null,
-        scrollTimeout: null
+        scrollSpeed: 60
+        // scrollInt: null,
+        // scrollTimeout: null
     };
 
     return Settings;
