@@ -85,10 +85,9 @@ define([
 
         this.listenForPageChange = function () {
 
-            if (!reader.isScrolling) {
-                return;
-            }
-            console.log('foo');
+            // if (!reader.isScrolling) {
+            //     return;
+            // }
 
             var lineHeight = Math.floor(parseInt($(settings.el.first('p')).css('line-height'), 10)),
                 containerH = Math.floor(settings.el.height()),

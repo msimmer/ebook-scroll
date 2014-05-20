@@ -572,9 +572,14 @@ nav.mobile ul.controls li:last-child:after {
     left: 0;
     display: none;
   }
+
+  /* line 13, media-queries-landscape.scss */
+  ul.controls li a.full-screen {
+    display: none;
+  }
 }
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: landscape) {
-  /* line 17, media-queries-landscape.scss */
+  /* line 21, media-queries-landscape.scss */
   body:before {
     content: 'iPhone 5 in landscape';
     background: white;
@@ -585,18 +590,23 @@ nav.mobile ul.controls li:last-child:after {
     display: none;
   }
 
-  /* line 27, media-queries-landscape.scss */
+  /* line 31, media-queries-landscape.scss */
   main {
     margin: 20px 10px 0;
   }
 
-  /* line 31, media-queries-landscape.scss */
+  /* line 35, media-queries-landscape.scss */
   .mobile-portrait-only {
+    display: none;
+  }
+
+  /* line 39, media-queries-landscape.scss */
+  ul.controls li a.full-screen {
     display: none;
   }
 }
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: landscape) {
-  /* line 39, media-queries-landscape.scss */
+  /* line 47, media-queries-landscape.scss */
   body:before {
     content: 'iPhone 2G-4S in landscape';
     background: white;
@@ -607,13 +617,18 @@ nav.mobile ul.controls li:last-child:after {
     display: none;
   }
 
-  /* line 49, media-queries-landscape.scss */
+  /* line 57, media-queries-landscape.scss */
   main {
     margin: 20px 10px 0;
   }
 
-  /* line 53, media-queries-landscape.scss */
+  /* line 61, media-queries-landscape.scss */
   .mobile-portrait-only {
+    display: none;
+  }
+
+  /* line 65, media-queries-landscape.scss */
+  ul.controls li a.full-screen {
     display: none;
   }
 }
@@ -643,9 +658,14 @@ nav.mobile ul.controls li:last-child:after {
     overflow-x: hidden;
     max-height: 200px;
   }
+
+  /* line 24, media-queries-portrait.scss */
+  ul.controls li a.full-screen {
+    display: none;
+  }
 }
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: portrait) {
-  /* line 28, media-queries-portrait.scss */
+  /* line 31, media-queries-portrait.scss */
   body:before {
     content: 'iPhone 5 in portrait';
     background: white;
@@ -656,7 +676,7 @@ nav.mobile ul.controls li:last-child:after {
     display: none;
   }
 
-  /* line 37, media-queries-portrait.scss */
+  /* line 40, media-queries-portrait.scss */
   nav.mobile {
     top: 0 !important;
     text-align: justify;
@@ -666,13 +686,18 @@ nav.mobile ul.controls li:last-child:after {
     max-width: 300px;
   }
 
-  /* line 45, media-queries-portrait.scss */
+  /* line 48, media-queries-portrait.scss */
   main {
     margin: 30px 10px;
   }
+
+  /* line 51, media-queries-portrait.scss */
+  ul.controls li a.full-screen {
+    display: none;
+  }
 }
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: portrait) {
-  /* line 52, media-queries-portrait.scss */
+  /* line 58, media-queries-portrait.scss */
   body:before {
     content: 'iPhone 2G-4S in portrait';
     background: white;
@@ -683,7 +708,7 @@ nav.mobile ul.controls li:last-child:after {
     display: none;
   }
 
-  /* line 61, media-queries-portrait.scss */
+  /* line 67, media-queries-portrait.scss */
   nav.mobile {
     top: 0 !important;
     text-align: justify;
@@ -693,8 +718,13 @@ nav.mobile ul.controls li:last-child:after {
     max-width: 300px;
   }
 
-  /* line 69, media-queries-portrait.scss */
+  /* line 75, media-queries-portrait.scss */
   main {
     margin: 30px 10px;
+  }
+
+  /* line 78, media-queries-portrait.scss */
+  ul.controls li a.full-screen {
+    display: none;
   }
 }

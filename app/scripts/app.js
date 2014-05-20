@@ -132,13 +132,13 @@ define([
                     },
                     hammer = new Hammer(el, options);
 
-                hammer.on('touch release pinchin pinchout', function (e) {
+                hammer.on('touch release pinchin pinchout dragright dragleft dragend', function (e) {
 
                     var target = $(e.target);
 
                     if (!target.parents().is(controls) && !target.is(frame) && !target.parents().is(frame)) {
 
-                        console.log(target);
+                        // console.log(target);
 
                         e.preventDefault();
                         e.stopPropagation();
@@ -195,6 +195,26 @@ define([
                             }
 
                             e.gesture.stopDetect();
+
+                        } else if (e.type == 'dragend'){
+
+                            e.preventDefault();
+                            e.stopPropagation();
+                            e.gesture.preventDefault();
+                            e.gesture.stopPropagation();
+
+                            if (e.gesture.distance >= 70 && e.gesture.direction == 'right') {
+
+                                e.gesture.stopDetect();
+                                self.vents.speedIncrement();
+
+                            } else if (e.gesture.distance >= 70 && e.gesture.direction == 'left') {
+
+                                e.gesture.stopDetect();
+                                self.vents.speedDecrement();
+
+                            }
+
                         }
 
                     } else if (target.parents().is(controls)) {
