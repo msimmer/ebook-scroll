@@ -24,8 +24,8 @@ require([
 
         var app = new App({
 
-            debug: false
-            clearStorage: true
+            debug: false,
+            clearStorage: true,
             scrollSpeed: 50,
 
         });
