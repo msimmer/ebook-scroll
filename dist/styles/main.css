@@ -321,6 +321,61 @@ svg:not(:root) {
   scrollbar-face-color: transparent;
 }
 
+/* Spinner */
+
+/* line 68, window-ui.scss */
+
+.spinner {
+  width: 30px;
+  height: 30px;
+  background-color: #000;
+  /* margin: 100px auto; */
+  -webkit-animation: rotateplane 1.5s infinite ease-in-out;
+  animation: rotateplane 1.2s infinite ease-in-out;
+  top: 47%;
+  position: absolute;
+  left: 50%;
+  margin-left: -15px;
+  display: block;
+}
+
+@-webkit-keyframes rotateplane {
+  /* line 83, window-ui.scss */
+  0% {
+    -webkit-transform: perspective(120px);
+  }
+
+  /* line 84, window-ui.scss */
+  50% {
+    -webkit-transform: perspective(120px) rotateY(180deg);
+  }
+
+  /* line 85, window-ui.scss */
+  100% {
+    -webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg);
+  }
+}
+
+@keyframes rotateplane {
+  /* line 89, window-ui.scss */
+  0% {
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+  }
+
+  /* line 92, window-ui.scss */
+  50% {
+    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+  }
+
+  /* line 95, window-ui.scss */
+  100% {
+    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+  }
+}
+
 @font-face {
   font-family: "Cardo";
   src: url("fonts/cardo-bold-webfont.eot");
@@ -782,9 +837,10 @@ a {
 
 ul.controls {
   min-width: 75px;
+  opacity: .3;
 }
 
-/* line 55, styles.scss */
+/* line 56, styles.scss */
 
 ul.controls,
 ul.components {
@@ -795,20 +851,20 @@ ul.components {
   right: 0;
 }
 
-/* line 62, styles.scss */
+/* line 63, styles.scss */
 
 ul.controls li {
   display: block;
 }
 
-/* line 65, styles.scss */
+/* line 66, styles.scss */
 
 ul.components li {
   width: 35px;
   height: 35px;
 }
 
-/* line 69, styles.scss */
+/* line 70, styles.scss */
 
 ul.controls li a {
   position: relative;
@@ -817,13 +873,13 @@ ul.controls li a {
   width: 30px;
 }
 
-/* line 75, styles.scss */
+/* line 76, styles.scss */
 
 ul.controls li a:first-child {
   margin-top: 0;
 }
 
-/* line 78, styles.scss */
+/* line 79, styles.scss */
 
 ul.components li a {
   display: block;
@@ -831,13 +887,13 @@ ul.components li a {
   width: 100%;
 }
 
-/* line 86, styles.scss */
+/* line 87, styles.scss */
 
 ul.chapters li {
   margin: 0 10px;
 }
 
-/* line 89, styles.scss */
+/* line 90, styles.scss */
 
 main {
   /* set adjustable font-size */
@@ -855,13 +911,13 @@ main {
   -webkit-overflow-scrolling: auto !important;
 }
 
-/* line 103, styles.scss */
+/* line 104, styles.scss */
 
 main:hover {
   overflow-y: scroll;
 }
 
-/* line 107, styles.scss */
+/* line 108, styles.scss */
 
 main a,
 main a:link,
@@ -871,15 +927,16 @@ main a:visited {
   text-decoration: underline !important;
 }
 
-/* line 111, styles.scss */
+/* line 112, styles.scss */
 
 section#page {
   margin: 0;
   padding: 0;
   border: 0;
+  opacity: .3;
 }
 
-/* line 116, styles.scss */
+/* line 118, styles.scss */
 
 .runner-help {
   position: absolute;
@@ -888,16 +945,17 @@ section#page {
   margin: 25px;
   padding: 0;
   text-decoration: none;
+  opacity: .3;
 }
 
-/* line 124, styles.scss */
+/* line 127, styles.scss */
 
 .runner-help a {
   /*color:black;*/
   text-decoration: none;
 }
 
-/* line 128, styles.scss */
+/* line 131, styles.scss */
 
 .runner-page-count {
   position: absolute;
@@ -905,37 +963,38 @@ section#page {
   right: 0;
   margin: 25px;
   padding: 0;
+  opacity: .3;
 }
 
 /**
 * icons
 */
 
-/* line 140, styles.scss */
+/* line 144, styles.scss */
 
 [data-state='play'] svg.play {
   display: block;
 }
 
-/* line 143, styles.scss */
+/* line 147, styles.scss */
 
 [data-state='play'] svg.pause {
   display: none;
 }
 
-/* line 147, styles.scss */
+/* line 151, styles.scss */
 
 [data-state='pause'] svg.play {
   display: none;
 }
 
-/* line 150, styles.scss */
+/* line 154, styles.scss */
 
 [data-state='pause'] svg.pause {
   display: block;
 }
 
-/* line 154, styles.scss */
+/* line 158, styles.scss */
 
 .darkCss .svg-light {
   position: absolute;
@@ -946,7 +1005,7 @@ section#page {
   height: 0;
 }
 
-/* line 162, styles.scss */
+/* line 166, styles.scss */
 
 .lightCss .svg-light {
   position: absolute;
@@ -957,7 +1016,7 @@ section#page {
   height: 100%;
 }
 
-/* line 170, styles.scss */
+/* line 174, styles.scss */
 
 .lightCss .svg-dark {
   position: absolute;
@@ -968,7 +1027,7 @@ section#page {
   height: 0;
 }
 
-/* line 178, styles.scss */
+/* line 182, styles.scss */
 
 .lightCss .svg-light {
   position: absolute;
@@ -985,7 +1044,7 @@ section#page {
 *
 */
 
-/* line 191, styles.scss */
+/* line 195, styles.scss */
 
 .hidden {
   width: 0;
@@ -994,7 +1053,7 @@ section#page {
   visibility: hidden;
 }
 
-/* line 197, styles.scss */
+/* line 201, styles.scss */
 
 .show-scroll-bar {
   overflow-y: scroll;
@@ -1004,7 +1063,7 @@ section#page {
 * base mobile styles
 */
 
-/* line 204, styles.scss */
+/* line 208, styles.scss */
 
 nav.mobile {
   top: 0;
@@ -1013,22 +1072,22 @@ nav.mobile {
   position: relative;
 }
 
-/* line 210, styles.scss */
+/* line 214, styles.scss */
 
 nav.mobile ul.controls {
   display: inline;
 }
 
-/* line 213, styles.scss */
+/* line 217, styles.scss */
 
 nav.mobile ul.controls li {
   display: inline;
 }
 
-/* line 216, styles.scss */
+/* line 220, styles.scss */
 
 nav.mobile ul.controls li:last-child:after {
-  content: '.';
+  content: ' ';
   visibility: hidden;
   display: inline-block;
   width: 100%;
@@ -1048,10 +1107,16 @@ nav.mobile ul.controls li:last-child:after {
     left: 0;
     display: none;
   }
+
+  /* line 13, media-queries-landscape.scss */
+
+  ul.controls li a.full-screen {
+    display: none;
+  }
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: landscape) {
-  /* line 17, media-queries-landscape.scss */
+  /* line 21, media-queries-landscape.scss */
 
   body:before {
     content: 'iPhone 5 in landscape';
@@ -1063,21 +1128,27 @@ nav.mobile ul.controls li:last-child:after {
     display: none;
   }
 
-  /* line 27, media-queries-landscape.scss */
+  /* line 31, media-queries-landscape.scss */
 
   main {
     margin: 20px 10px 0;
   }
 
-  /* line 31, media-queries-landscape.scss */
+  /* line 35, media-queries-landscape.scss */
 
   .mobile-portrait-only {
+    display: none;
+  }
+
+  /* line 39, media-queries-landscape.scss */
+
+  ul.controls li a.full-screen {
     display: none;
   }
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: landscape) {
-  /* line 39, media-queries-landscape.scss */
+  /* line 47, media-queries-landscape.scss */
 
   body:before {
     content: 'iPhone 2G-4S in landscape';
@@ -1089,15 +1160,21 @@ nav.mobile ul.controls li:last-child:after {
     display: none;
   }
 
-  /* line 49, media-queries-landscape.scss */
+  /* line 57, media-queries-landscape.scss */
 
   main {
     margin: 20px 10px 0;
   }
 
-  /* line 53, media-queries-landscape.scss */
+  /* line 61, media-queries-landscape.scss */
 
   .mobile-portrait-only {
+    display: none;
+  }
+
+  /* line 65, media-queries-landscape.scss */
+
+  ul.controls li a.full-screen {
     display: none;
   }
 }
@@ -1131,10 +1208,16 @@ nav.mobile ul.controls li:last-child:after {
     overflow-x: hidden;
     max-height: 200px;
   }
+
+  /* line 24, media-queries-portrait.scss */
+
+  ul.controls li a.full-screen {
+    display: none;
+  }
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: portrait) {
-  /* line 28, media-queries-portrait.scss */
+  /* line 31, media-queries-portrait.scss */
 
   body:before {
     content: 'iPhone 5 in portrait';
@@ -1146,7 +1229,7 @@ nav.mobile ul.controls li:last-child:after {
     display: none;
   }
 
-  /* line 37, media-queries-portrait.scss */
+  /* line 40, media-queries-portrait.scss */
 
   nav.mobile {
     top: 0 !important;
@@ -1157,15 +1240,21 @@ nav.mobile ul.controls li:last-child:after {
     max-width: 300px;
   }
 
-  /* line 45, media-queries-portrait.scss */
+  /* line 48, media-queries-portrait.scss */
 
   main {
     margin: 30px 10px;
   }
+
+  /* line 51, media-queries-portrait.scss */
+
+  ul.controls li a.full-screen {
+    display: none;
+  }
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: portrait) {
-  /* line 52, media-queries-portrait.scss */
+  /* line 58, media-queries-portrait.scss */
 
   body:before {
     content: 'iPhone 2G-4S in portrait';
@@ -1177,7 +1266,7 @@ nav.mobile ul.controls li:last-child:after {
     display: none;
   }
 
-  /* line 61, media-queries-portrait.scss */
+  /* line 67, media-queries-portrait.scss */
 
   nav.mobile {
     top: 0 !important;
@@ -1188,9 +1277,15 @@ nav.mobile ul.controls li:last-child:after {
     max-width: 300px;
   }
 
-  /* line 69, media-queries-portrait.scss */
+  /* line 75, media-queries-portrait.scss */
 
   main {
     margin: 30px 10px;
+  }
+
+  /* line 78, media-queries-portrait.scss */
+
+  ul.controls li a.full-screen {
+    display: none;
   }
 }
