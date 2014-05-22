@@ -368,7 +368,17 @@ module.exports = function (grunt) {
 
         removelogging: {
             dist: {
-                src: 'dist/**/*.js'
+                src: 'dist/**/*.js',
+                options: {
+                    methods:[
+                        'console.log',
+                        'console.debug',
+                        'console.info',
+                        'console.warn',
+                        'console.error',
+                        'console.clear'
+                    ]
+                }
             }
         }
 
