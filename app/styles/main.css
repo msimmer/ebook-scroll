@@ -554,7 +554,7 @@ nav.mobile ul.controls li {
 
 /* line 220, styles.scss */
 nav.mobile ul.controls li:last-child:after {
-  content: '.';
+  content: ' ';
   visibility: hidden;
   display: inline-block;
   width: 100%;

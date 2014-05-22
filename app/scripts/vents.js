@@ -4,7 +4,7 @@ define([
     'reader',
     'layout',
     'sys',
-    'shims/requestAnimationFrame'
+    'animateScroll'
 ], function ($, Settings, Reader, Layout, Sys) {
     'use strict';
 
@@ -85,10 +85,6 @@ define([
 
         this.listenForPageChange = function () {
 
-            // if (!reader.isScrolling) {
-            //     return;
-            // }
-
             var lineHeight = Math.floor(parseInt($(settings.el.first('p')).css('line-height'), 10)),
                 containerH = Math.floor(settings.el.height()),
                 intrvl = Math.floor((lineHeight * containerH) / settings.scrollSpeed + 1) * 100;
@@ -112,29 +108,31 @@ define([
         },
 
         this.requestAnim = null,
+
         this.ct = 0,
+
         this.skip = null,
+
         this.getSkipInterval = function () {
             var v = 100 - settings.scrollSpeed,
                 n = v.toString().slice(-2),
                 r = parseInt(n, 10),
-                x = r * 6 / 90;
+                x = r * 5 / 50;
 
             self.skip = x;
-            console.log(self.skip);
 
         },
 
         this.readScroll = function () {
 
             self.ct++;
-            if (self.ct < self.skip) {
-                self.requestAnim = window.requestAnimationFrame(self.readScroll);
+            if (self.ct < self.skip) { // skip the animation every `self.skip` frame
+                self.requestAnim = window.animateScroll(self.readScroll);
                 return;
             }
-            settings.el.scrollTop(settings.el.scrollTop() + 1);
             self.ct = 0;
-            self.requestAnim = window.requestAnimationFrame(self.readScroll);
+            settings.el.scrollTop(settings.el.scrollTop() + 1); // run the animation
+            self.requestAnim = window.animateScroll(self.readScroll);
 
         },
 
@@ -161,7 +159,7 @@ define([
                 console.log('Stopped');
             }
 
-            window.cancelAnimationFrame(self.requestAnim);
+            window.cancelScroll(self.requestAnim);
             window.clearInterval(self.listenForPageChangeInterval);
 
             reader.isScrolling = false;
@@ -171,41 +169,40 @@ define([
         this.speedIncrement = function () {
 
             if (settings.scrollSpeed >= 100) {
+                console.log('at 100% --');
                 return;
+            } else {
+                self.stopScrolling();
+                settings.scrollSpeed += 10;
+                self.getSkipInterval();
+                self.startScrolling();
+
+                if (settings.debug) {
+                    console.log('Reading speed incremented to ' + settings.scrollSpeed);
+                }
+
+                sys.updateUserPreferences();
             }
-
-            self.stopScrolling();
-            settings.scrollSpeed += 10;
-            self.getSkipInterval();
-            self.startScrolling();
-
-            if (settings.debug) {
-                console.log('Reading speed incremented to ' + settings.scrollSpeed + 10);
-            }
-
-            sys.updateUserPreferences();
 
         },
 
         this.speedDecrement = function () {
 
-            console.log('decrement speed: ' + settings.scrollSpeed);
-
-            if (settings.scrollSpeed <= 50) {
-                console.log('at 0 --');
+            if (settings.scrollSpeed <= 10) {
+                console.log('at 0% --');
                 return;
+            } else {
+                self.stopScrolling();
+                settings.scrollSpeed -= 10;
+                self.getSkipInterval();
+                self.startScrolling();
+
+                if (settings.debug) {
+                    console.log('Reading speed decremented to ' + settings.scrollSpeed);
+                }
+
+                sys.updateUserPreferences();
             }
-
-            self.stopScrolling();
-            settings.scrollSpeed -= 10;
-            self.getSkipInterval();
-            self.startScrolling();
-
-            if (settings.debug) {
-                console.log('Reading speed decremented to ' + settings.scrollSpeed);
-            }
-
-            sys.updateUserPreferences();
 
         },
 
@@ -338,7 +335,19 @@ define([
         this.countPages = function () {
 
             if (settings.debug) {
-                console.log('Counting pages');
+                var intrvl,
+                    ct;
+                intrvl = setInterval(function () {
+                    ct++;
+                    if ($('#page').length) {
+                        clearInterval(intrvl);
+                        console.log('Reading location is -- ' + getCurrentPage());
+                    }
+                    if (ct >= 1000) {
+                        clearInterval(intrvl);
+                        console.log('Reading location timed out.');
+                    }
+                }, 10);
             }
 
             var main = settings.el,
@@ -351,8 +360,6 @@ define([
             function getCurrentPage() {
                 return Math.round((-(page.offset().top - main.offset().top) / frameH) + 1);
             }
-
-            console.log('countPages -- ' + getCurrentPage());
 
             totalPageIndicator.html(Math.round(pageH / frameH));
             currentPageIndicator.html(getCurrentPage());

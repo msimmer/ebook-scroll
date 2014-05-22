@@ -14,7 +14,8 @@ define([
 
     return function App(options) {
 
-        var self = this;
+        var self = this,
+            opts = options;
 
         this.layout = new Layout(),
         this.sys = new Sys(),
@@ -29,17 +30,24 @@ define([
 
             self.vents.bindEventHandlers();
 
-            // if (options) {
-            //     $.extend(this.settings, options);
-            // }
+            if (opts) {
+                $.extend(this.settings, opts);
+            }
 
-            console.log('start speed: ' + self.settings.scrollSpeed);
+            if (self.settings.clearStorage && !localStorage.refreshed) {
+                localStorage.clear();
+                localStorage.setItem('refreshed', true);
+                window.location.href = window.location.href;
+            } else if (self.settings.clearStorage && localStorage.refreshed) {
+                localStorage.removeItem('refreshed');
+            }
+
 
             window.addEventListener('orientationchange', self.vents.orientationHasChanged);
 
             window.onunload = window.onbeforeunload = (function () {
 
-                $('html, body').scrollTop(0, 0);
+                $('html, body').scrollTop(0);
 
                 var writeComplete = false;
 
@@ -51,11 +59,9 @@ define([
 
                     writeComplete = true;
 
-                    if (!self.settings.debug) {
+                    if (!self.settings.clearStorage) {
                         self.sys.saveLocation();
                         self.sys.updateUserPreferences();
-                    } else if (self.settings.debug && self.settings.clearStorage) {
-                        localStorage.clear();
                     }
 
                 };
@@ -137,8 +143,6 @@ define([
                     var target = $(e.target);
 
                     if (!target.parents().is(controls) && !target.is(frame) && !target.parents().is(frame)) {
-
-                        // console.log(target);
 
                         e.preventDefault();
                         e.stopPropagation();
@@ -239,7 +243,7 @@ define([
                     self.sys.updatedReaderData('lastPage', data[data.length - 1].src);
                 },
                 error: function (x, t, s) {
-                    console.log(x + ' ' + t);
+                    console.log(t + ': ' + s);
                 }
 
             });

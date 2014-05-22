@@ -218,7 +218,7 @@ nav.mobile ul.controls li{
     display: inline;
 }
 nav.mobile ul.controls li:last-child:after{
-    content: '.';
+    content: ' ';
     visibility: hidden;
     display: inline-block;
     width: 100%;
