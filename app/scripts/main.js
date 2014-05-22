@@ -17,10 +17,10 @@ require([
     'app',
     'env',
     'shims/storage'
-], function ($, App, Env) {
+], function ($, App) {
     'use strict';
 
-    $(document).ready(function () {
+    $(function () {
 
         var app = new App({
 

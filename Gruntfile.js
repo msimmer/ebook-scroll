@@ -15,6 +15,10 @@ module.exports = function (grunt) {
     // Time how long tasks take. Can help when optimizing build times
     require('time-grunt')(grunt);
 
+    // load custom tasks
+    // https://github.com/ehynds/grunt-remove-logging
+    grunt.loadNpmTasks("grunt-remove-logging");
+
     // Define the configuration for all the tasks
     grunt.initConfig({
 
@@ -126,7 +130,6 @@ module.exports = function (grunt) {
             ]
         },
 
-
         // Mocha testing framework configuration options
         mocha: {
             all: {
@@ -136,9 +139,6 @@ module.exports = function (grunt) {
                 }
             }
         },
-
-
-
 
         // Compiles Sass to CSS and generates necessary files if requested
         compass: {
@@ -191,7 +191,7 @@ module.exports = function (grunt) {
             app: {
                 html: '<%= yeoman.app %>/index.html',
                 ignorePath: '<%= yeoman.app %>/',
-                exclude: [ '<%= yeoman.app %>/bower_components/bootstrap-sass/vendor/assets/javascripts/bootstrap.js' ]
+                exclude: ['<%= yeoman.app %>/bower_components/bootstrap-sass/vendor/assets/javascripts/bootstrap.js']
             }
         },
 
@@ -214,7 +214,6 @@ module.exports = function (grunt) {
                 }
             }
         },
-
 
         // Renames files for browser caching purposes
         rev: {
@@ -281,7 +280,7 @@ module.exports = function (grunt) {
                     removeOptionalTags: false,
                     removeRedundantAttributes: true,
                     useShortDoctype: true,
-                    keepClosingSlash:true
+                    keepClosingSlash: true
                 },
                 files: [{
                     expand: true,
@@ -303,7 +302,8 @@ module.exports = function (grunt) {
                     src: [
                         '*.{ico,png,txt}',
                         '.htaccess',
-                        'images/{,*/}*.webp',
+                        'images/{,*/}*.*',
+                        // 'images/{,*/}*.webp',
                         '{,*/}*.html',
                         'styles/fonts/{,*/}*.*',
                         'bower_components/bootstrap-sass/vendor/assets/fonts/bootstrap/*.*',
@@ -333,7 +333,6 @@ module.exports = function (grunt) {
                 src: ['**']
             },
         },
-
 
         // Generates a custom Modernizr build that includes only the tests you
         // reference in your app
@@ -365,9 +364,15 @@ module.exports = function (grunt) {
                 'imagemin',
                 'svgmin'
             ]
-        }
-    });
+        },
 
+        removelogging: {
+            dist: {
+                src: 'dist/**/*.js'
+            }
+        }
+
+    });
 
     grunt.registerTask('serve', function (target) {
         if (target === 'dist') {
