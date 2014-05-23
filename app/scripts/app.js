@@ -342,7 +342,7 @@ define([
                                         }, 200);
                                         $('.spinner').fadeOut(200, function(){
                                             setTimeout(function(){
-                                                self.vents.startScrolling();
+                                                // self.vents.startScrolling();
                                             }, 50);
                                         });
                                     } else if (pages != $('#page').find('p').length && ct < 1000) {
