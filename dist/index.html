@@ -17,6 +17,38 @@
         <style type="text/css">
             .chapters{ display: none!important; }
         </style>
+        <style type="text/css">
+            .search-wrapper{
+                position: absolute;
+                right: 0;
+                margin:30px;
+            }
+            .input-wrapper{
+                height: 32px;
+            }
+            #userInput {
+                width: 400px;
+                float:left;
+                clear:right;
+                margin:-3px 0;
+                padding:6px 6px 6px 0;
+                border-bottom:1px solid black;
+                opacity: 0;
+            }
+            #userInput:focus{
+                outline: none;
+            }
+            #search{
+                padding:0;
+                margin:0;
+                height:32px;
+                width:32px;
+                border:1px solid black;
+                background:transparent url(images/search-icon.png) no-repeat center;
+                background-size: contain;
+                display: inline-block;
+            }
+        </style>
         <noscript>
             <style type="text/css">
                 nav,.ul,main,div,footer{display: none!important;}
@@ -41,6 +73,12 @@
         <noscript>
             <p class="warn">Please enable JavaScript in your browser to use the reader.</p>
         </noscript>
+        <div class="search-wrapper">
+            <div class="input-wrapper">
+                <a href="#" id="search"></a>
+                <div id="userInput" contenteditable=""></div>
+            </div>
+        </div>
         <nav class="mobile-portrait-only">
         <ul class="chapters"></ul>
         <ul class="controls">
@@ -163,6 +201,6 @@
         <span class="current-page-count"></span>/<span class="total-page-count"></span>
         </p>
     </footer>
-    <script data-main="scripts/82930cbc.main" src="bower_components/requirejs/require.js"></script>
+    <script data-main="scripts/2fca7a21.main" src="bower_components/requirejs/require.js"></script>
 </body>
 </html>
