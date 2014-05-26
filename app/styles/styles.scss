@@ -223,3 +223,50 @@ nav.mobile ul.controls li:last-child:after{
     display: inline-block;
     width: 100%;
 }
+
+/**
+* Search bar
+*/
+.search-wrapper{
+    position: absolute;
+    right: 0;
+    margin:30px;
+    opacity: .3;
+}
+.input-wrapper{
+    height: 32px;
+}
+#userInput {
+    width: 400px;
+    float:left;
+    clear:right;
+    margin:-3px 0;
+    padding:6px 6px 6px 0;
+    border-bottom:1px solid black;
+    opacity: 0;
+}
+#userInput:focus{
+    outline: none;
+}
+#search{
+    padding:0;
+    margin:0;
+    height:32px;
+    width:32px;
+    border:1px solid black;
+    background:transparent url(../images/search-icon.png) no-repeat center;
+    background-size: contain;
+    display: inline-block;
+}
+#search-close{
+    padding:0;
+    margin:0;
+    height:32px;
+    width:32px;
+    border:1px solid black;
+    background:transparent url(../images/search-close-icon.png) no-repeat 1px -10px;
+    background-size: cover;
+    display: inline-block;
+    border-right:0;
+    opacity: 0;
+}

@@ -12,42 +12,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <link rel="stylesheet" href="styles/d41d8cd9.vendor.css">
-        <link rel="stylesheet" href="styles/c7bd848f.main.css">
+        <link rel="stylesheet" href="styles/vendor.css">
+        <link rel="stylesheet" href="styles/main.css">
         <style type="text/css">
             .chapters{ display: none!important; }
-        </style>
-        <style type="text/css">
-            .search-wrapper{
-                position: absolute;
-                right: 0;
-                margin:30px;
-            }
-            .input-wrapper{
-                height: 32px;
-            }
-            #userInput {
-                width: 400px;
-                float:left;
-                clear:right;
-                margin:-3px 0;
-                padding:6px 6px 6px 0;
-                border-bottom:1px solid black;
-                opacity: 0;
-            }
-            #userInput:focus{
-                outline: none;
-            }
-            #search{
-                padding:0;
-                margin:0;
-                height:32px;
-                width:32px;
-                border:1px solid black;
-                background:transparent url(images/search-icon.png) no-repeat center;
-                background-size: contain;
-                display: inline-block;
-            }
         </style>
         <noscript>
             <style type="text/css">
@@ -67,7 +35,7 @@
                 }
             </style>
         </noscript>
-        <script src="scripts/vendor/c9ea6662.modernizr.js"></script>
+        <script src="scripts/vendor/modernizr.js"></script>
     </head>
     <body>
         <noscript>
@@ -75,7 +43,7 @@
         </noscript>
         <div class="search-wrapper">
             <div class="input-wrapper">
-                <a href="#" id="search"></a>
+                <a href="#" id="search-close"></a><a href="#" id="search"></a>
                 <div id="userInput" contenteditable=""></div>
             </div>
         </div>
@@ -83,7 +51,7 @@
         <ul class="chapters"></ul>
         <ul class="controls">
             <li>
-                <a class="play-btn" data-state="pause" href="#">
+                <a class="play-btn" data-state="play" href="#">
                 <svg class="svg-dark play" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="0 0 32 32" enable-background="new 0 0 32 32" xml:space="preserve">
                 <rect x="0.5" y="0.5" fill="#CCCCCC" stroke="#000000" stroke-miterlimit="10" width="31" height="31"></rect>
                 <polygon fill="#000000" points="12,8.18 23.506,16.315 12,24.451 "></polygon>
@@ -201,6 +169,6 @@
         <span class="current-page-count"></span>/<span class="total-page-count"></span>
         </p>
     </footer>
-    <script data-main="scripts/2fca7a21.main" src="bower_components/requirejs/require.js"></script>
+    <script data-main="scripts/main" src="bower_components/requirejs/require.js"></script>
 </body>
 </html>

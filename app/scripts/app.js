@@ -8,7 +8,8 @@ define([
     'sys',
     'vents',
     'plugins/hammer',
-    'plugins/hoverIntent'
+    'plugins/hoverIntent',
+    'plugins/searchField'
 ], function ($, Env, Reader, Settings, Styles, Layout, Sys, Vents, Hammer) {
     'use strict';
 
@@ -337,7 +338,7 @@ define([
                                         clearInterval(intrvl);
                                         clearTimeout(pageCountTimeout);
                                         self.vents.countPages();
-                                        $('.controls, .runner-help, .runner-page-count, #page').animate({
+                                        $('.controls, .runner-help, .runner-page-count, #page, .search-wrapper').animate({
                                             opacity:1
                                         }, 200);
                                         $('.spinner').fadeOut(200, function(){
