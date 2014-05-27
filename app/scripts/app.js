@@ -43,7 +43,6 @@ define([
                 localStorage.removeItem('refreshed');
             }
 
-
             window.addEventListener('orientationchange', self.vents.orientationHasChanged);
 
             window.onunload = window.onbeforeunload = (function () {
@@ -87,7 +86,9 @@ define([
                 self.settings.el.hoverIntent({
                     over: function () {
                         wasScrolling = self.reader.isScrolling;
-                        self.settings.el.toggleClass('show-scroll-bar', wasScrolling);
+                        if (!$('show-scroll-bar').length) {
+                            self.settings.el.addClass('show-scroll-bar');
+                        }
                         if (wasScrolling) {
                             self.vents.stopScrolling();
                         }
@@ -103,7 +104,9 @@ define([
                         }, this.interval * 4);
                     },
                     out: function () {
-                        self.settings.el.toggleClass('show-scroll-bar', !wasScrolling);
+                        if ($('.show-scroll-bar').length && !$('#userInput').is(':focus')) {
+                            self.settings.el.removeClass('show-scroll-bar');
+                        }
                         if (wasScrolling) {
                             self.vents.startScrolling();
                         }
@@ -201,7 +204,7 @@ define([
 
                             e.gesture.stopDetect();
 
-                        } else if (e.type == 'dragend'){
+                        } else if (e.type == 'dragend') {
 
                             e.preventDefault();
                             e.stopPropagation();
@@ -339,10 +342,10 @@ define([
                                         clearTimeout(pageCountTimeout);
                                         self.vents.countPages();
                                         $('.controls, .runner-help, .runner-page-count, #page, .search-wrapper').animate({
-                                            opacity:1
+                                            opacity: 1
                                         }, 200);
-                                        $('.spinner').fadeOut(200, function(){
-                                            setTimeout(function(){
+                                        $('.spinner').fadeOut(200, function () {
+                                            setTimeout(function () {
                                                 // self.vents.startScrolling();
                                             }, 50);
                                         });

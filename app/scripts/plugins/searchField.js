@@ -1,13 +1,23 @@
-(function (window, $, undefined) {
+define([
+    'jquery',
+    'env',
+    'reader',
+    'settings',
+    'vents'
+], function ($, Env, Reader, Settings, Vents) {
+    'use strict';
 
-    var $searchWrapper = $('.search-wrapper'),
+    var env = Env,
+        reader = Reader,
+        settings = Settings,
+        vents = new Vents(),
+        $searchWrapper = $('.search-wrapper'),
         $input = $('#userInput'),
         $searchBtn = $('#search'),
         $closeBtn = $('#search-close');
 
     function addRemoveSearchBar() {
-        if ($('.mobile').length) {
-        // if (app.env.isMobile() || $('.mobile').length) {
+        if (env.isMobile() || $('.mobile').length) {
             $searchWrapper.hide();
         } else {
             $searchWrapper.show();
@@ -38,6 +48,9 @@
         }
     }
 
+    var wasScrolling,
+        isManuallyScrolling;
+
     $input.on({
         mouseenter: function () {
             $input
@@ -49,24 +62,18 @@
                 opacity: 1
             });
         },
-        mouseleave: function () {
-            if ($input.text() == '') {
-                setTimeout(function () {
-                    $input.css({
-                        opacity: 0
-                    });
-                    $closeBtn.css({
-                        opacity: 0
-                    });
-                }, 1000);
-            }
-        },
         focus: function () {
+
+            if (!$('.show-scroll-bar').length) {
+                settings.el.addClass('show-scroll-bar');
+            }
+
             $(document).on('keydown', function (e) {
                 if (e.which == 13) {
-                    $searchBtn.click();
                     e.preventDefault();
+                    $searchBtn.click();
                 } else if (e.which == 27) {
+                    e.preventDefault();
                     $input.css({
                         opacity: 0
                     });
@@ -85,6 +92,9 @@
                     $closeBtn.css({
                         opacity: 0
                     });
+                    if ($('.show-scroll-bar').length) {
+                        settings.el.removeClass('show-scroll-bar');
+                    }
                 }, 1000);
             }
         }
@@ -92,9 +102,11 @@
 
     $searchBtn.on({
         mouseenter: function () {
-            $input.css({
-                opacity: 1
-            });
+            $input
+                .focus()
+                .css({
+                    opacity: 1
+                });
             $closeBtn.css({
                 opacity: 1
             });
@@ -108,9 +120,11 @@
 
     $closeBtn.on('click', function (e) {
         e.preventDefault();
-        $input.css({
-            opacity: 0
-        });
+        $input
+            .blur()
+            .css({
+                opacity: 0
+            });
         $closeBtn.css({
             opacity: 0
         });
@@ -121,7 +135,7 @@
             });
         setTimeout(function () {
             $input.css({
-                height: 'auto'
+                height: 32
             })
         }, 1000);
     });
@@ -131,5 +145,8 @@
     });
 
     addRemoveSearchBar();
+});
 
-})(window, jQuery);
+// (function (window, $, undefined) {
+
+// })(window, jQuery);

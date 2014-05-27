@@ -579,24 +579,22 @@ nav.mobile ul.controls li:last-child:after {
 /* line 239, styles.scss */
 #userInput {
   width: 400px;
-  margin: 0;
-  padding: 0;
+  margin: 1px 0 0 0;
   border-bottom: 1px solid #000;
   opacity: 0;
-  right: 0;
-  position: relative;
   display: inline-block;
-  top: -10px;
-  padding: 6px;
+  padding: 0;
   text-align: left;
+  height: 32px;
+  float: left;
 }
 
-/* line 259, styles.scss */
+/* line 250, styles.scss */
 #userInput:focus {
   outline: none;
 }
 
-/* line 262, styles.scss */
+/* line 253, styles.scss */
 #search {
   padding: 0;
   margin: 0;
@@ -610,7 +608,7 @@ nav.mobile ul.controls li:last-child:after {
   right: 0;
 }
 
-/* line 282, styles.scss */
+/* line 265, styles.scss */
 #search-close {
   padding: 0;
   margin: 0;
