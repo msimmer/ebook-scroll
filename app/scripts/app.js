@@ -241,10 +241,18 @@ define([
                 dataType: 'json',
                 method: 'get',
                 success: function (data) {
-                    self.sys.updatedReaderData('components', data);
-                    self.sys.updatedReaderData('currentPage', data[0].src);
-                    self.sys.updatedReaderData('firstPage', data[0].src);
-                    self.sys.updatedReaderData('lastPage', data[data.length - 1].src);
+                    $.each(data, function (i) {
+                        if ('fiktion.' + this.uuid === window.uuid) {
+                            self.settings.bookId = 'fiktion.' + this.uuid;
+                            var components = this.components;
+                            self.sys.updatedReaderData('components', components);
+                            self.sys.updatedReaderData('currentPage', components[0].src);
+                            self.sys.updatedReaderData('firstPage', components[0].src);
+                            self.sys.updatedReaderData('lastPage', components[components.length - 1].src);
+                        } else if (i === data.length - 1 && 'fiktion.' + this.uuid !== window.uuid) {
+                            // couldn't find bookId
+                        }
+                    });
                 },
                 error: function (x, t, s) {
                     console.log(t + ': ' + s);
@@ -297,7 +305,7 @@ define([
                         self.settings.el.html(content);
 
                         self.sys.updatedReaderData('currentPage', pageUrl);
-                        self.sys.updateLocalStorage('clientBook', 'currentPage', pageUrl);
+                        self.sys.updateLocalStorage('fiktion.' + self.settings.bookId, 'currentPage', pageUrl);
 
                         if (self.settings.debug) {
                             console.log('Current page is ' + pageUrl);

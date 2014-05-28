@@ -131,11 +131,13 @@ define([
         $input
             .text('')
             .css({
-                height: 0
+                height: 0,
+                'border-bottom':0
             });
         setTimeout(function () {
             $input.css({
-                height: 32
+                height: 32,
+                'border-bottom':'1px solid #000000'
             })
         }, 1000);
     });

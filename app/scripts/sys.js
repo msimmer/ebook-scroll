@@ -2,24 +2,24 @@ define([
     'jquery',
     'reader',
     'settings'
-], function($, Reader, Settings) {
+], function ($, Reader, Settings) {
     'use strict';
 
     return function Sys() {
 
-        var reader = Reader,
-            settings = Settings,
-            self = this;
+        var self = this,
+            reader = Reader,
+            settings = Settings;
 
-        this.updatedReaderData = function() {
+        this.updatedReaderData = function () {
             return reader[arguments[0]] = arguments[1];
         },
 
-        this.updateUserData = function() {
+        this.updateUserData = function () {
             return settings[arguments[0]] = arguments[1];
         },
 
-        this.updateLocalStorage = function(obj, prop, attr, nestedAttr) { // TODO: refactor
+        this.updateLocalStorage = function (obj, prop, attr, nestedAttr) { // TODO: refactor
 
             if (localStorage.getItem(obj) === null) { // localstorage was not added on page load or was removed
                 return;
@@ -41,14 +41,14 @@ define([
 
         },
 
-        this.saveLocation = function() {
+        this.saveLocation = function () {
 
             if (settings.debug) {
                 console.log('Saving current location');
             }
 
             self.updatedReaderData(
-                'clientBook',
+                settings.bookId,
                 'scrollPosition',
                 reader.currentPage,
                 reader.scrollPosition[reader.currentPage]
@@ -57,7 +57,7 @@ define([
             reader.scrollPosition[reader.currentPage] = settings.el.scrollTop();
 
             self.updateLocalStorage(
-                'clientBook',
+                settings.bookId,
                 'scrollPosition',
                 reader.currentPage,
                 reader.scrollPosition[reader.currentPage]
@@ -65,7 +65,7 @@ define([
 
         },
 
-        this.getFromLocalStorage = function(obj, prop, attr) { // TODO: refactor
+        this.getFromLocalStorage = function (obj, prop, attr) { // TODO: refactor
 
             var parsedObj = JSON.parse(localStorage.getItem(obj));
 
@@ -77,7 +77,7 @@ define([
 
         },
 
-        this.updateUserPreferences = function() {
+        this.updateUserPreferences = function () {
 
             if (settings.debug) {
                 console.log('Updating user preferences');
@@ -93,7 +93,7 @@ define([
 
         },
 
-        this.getUserPreferences = function() {
+        this.getUserPreferences = function () {
 
             if (settings.debug) {
                 console.log('Getting User Preferences');
@@ -112,11 +112,13 @@ define([
             }
         },
 
-        this.getLocation = function() {
+        this.getLocation = function () {
 
-            if (localStorage.getItem('clientBook') !== null) {
+            var bookId = settings.bookId;
 
-                var obj = JSON.parse(localStorage.getItem('clientBook'));
+            if (localStorage.getItem(bookId) !== null) {
+
+                var obj = JSON.parse(localStorage.getItem(bookId));
                 reader.currentPage = obj.currentPage;
 
                 $.extend(reader.scrollPosition, obj.scrollPosition);
@@ -124,6 +126,7 @@ define([
             } else {
 
                 var clientBook = {
+                    bookId: window.uuid,
                     currentPage: reader.firstPage,
                     scrollPosition: {}
                 };
@@ -132,25 +135,25 @@ define([
                 reader.scrollPosition[reader.firstPage] = 0;
                 clientBook.scrollPosition[reader.firstPage] = 0;
 
-                localStorage.setItem('clientBook', JSON.stringify(clientBook));
+                localStorage.setItem(window.uuid, JSON.stringify(clientBook));
 
             }
 
         },
 
-        this.goToPreviousLocation = function() {
+        this.goToPreviousLocation = function () {
 
             if (settings.debug) {
                 console.log('Going to previous location');
             }
 
-            var pos = self.getFromLocalStorage('clientBook', 'scrollPosition', reader.currentPage);
-            setTimeout(function() {
+            var pos = self.getFromLocalStorage(settings.bookId, 'scrollPosition', reader.currentPage);
+            setTimeout(function () {
                 settings.el.scrollTop(pos);
             }, 50);
         },
 
-        this.goToNextChapter = function() {
+        this.goToNextChapter = function () {
             return;
         };
 

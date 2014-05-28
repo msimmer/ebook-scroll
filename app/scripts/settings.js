@@ -1,21 +1,22 @@
 define([
     'jquery',
     'env'
-], function($, Env) {
+], function ($, Env) {
     'use strict';
 
     var Settings = {
         debug: false,
         clearStorage: false,
+        bookId: null,
         el: $('main'),
         chapters: $('.chapters'),
         defaultFontSize: 18,
         fSize: 100,
         fSizeIncrement: 5,
-        maxFontSize: function() {
+        maxFontSize: function () {
             return Env.isMobile() ? 130 : 150;
         },
-        minFontSize: function() {
+        minFontSize: function () {
             return Env.isMobile() ? 50 : 70;
         },
         contrast: 'light',

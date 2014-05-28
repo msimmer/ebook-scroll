@@ -18,12 +18,14 @@ require.config({
 require([
     'jquery',
     'app',
-    'env',
     'shims/storage'
 ], function ($, App) {
-    'use strict';
+    // 'use strict';
 
     $(function () {
+
+        // window.uuid = 'fiktion.' + localStorage.getItem('fiktion.referrer');
+        window.uuid = 'fiktion.' + '21a7619e-ec78-4694-97c9-88a173795996';
 
         var app = new App({
 
