@@ -261,7 +261,7 @@ define([
                             self.sys.updatedReaderData('firstPage', components[0].src);
                             self.sys.updatedReaderData('lastPage', components[components.length - 1].src);
                         } else if (i === data.length - 1 && 'fiktion.' + this.uuid !== window.uuid) {
-                            // couldn't find bookId
+                            console.log('Could not find UUID');
                         }
                     });
                 },
