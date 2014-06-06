@@ -6,7 +6,7 @@ define([
     var Styles = {
         baseStyles: {
             body:   {'fSize': settings.defaultFontSize + 'px'},
-            h1:     {'fSize': '2.3em'},
+            h1:     {'fSize': '3.2em'},
             h2:     {'fSize': '1.7em'},
             h3:     {'fSize': '1.3em'},
             h4:     {'fSize': '1.1em'},

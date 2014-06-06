@@ -218,6 +218,8 @@ define([
 
         this.isBookEnd = function () {
 
+            console.log('book end');
+
             self.stopScrolling();
 
             if (settings.debug) {
@@ -268,9 +270,15 @@ define([
             if (contrast === 'dark') {
                 html.addClass('darkCss');
                 html.removeClass('lightCss');
+                $('#shadow-top, #shadow-bottom')
+                    .addClass('shadow-dark')
+                    .removeClass('shadow-light');
             } else if (contrast === 'light') {
                 html.addClass('lightCss');
                 html.removeClass('darkCss');
+                $('#shadow-top, #shadow-bottom')
+                    .addClass('shadow-light')
+                    .removeClass('shadow-dark');
             }
 
             sys.updateUserData('contrast', contrast);
@@ -364,7 +372,7 @@ define([
             totalPageIndicator.html(Math.round(pageH / frameH));
             currentPageIndicator.html(getCurrentPage());
 
-            if (main.height() - page.height() >= -main.scrollTop()) {
+            if (main.height() - page.height() >= -main.scrollTop() - 1) {
                 if (reader.currentPage === reader.lastPage) {
                     self.isBookEnd();
                 } else if (reader.currentPage !== reader.lastPage) {

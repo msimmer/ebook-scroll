@@ -20,7 +20,7 @@ define([
             return Env.isMobile() ? 50 : 70;
         },
         contrast: 'light',
-        scrollSpeed: 60,
+        scrollSpeed: 10,
     };
 
     return Settings;

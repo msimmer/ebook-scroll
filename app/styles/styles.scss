@@ -59,7 +59,7 @@ ul.controls, ul.components {
     right:0;
 }
 ul.controls li{
-    display: block;
+    margin:3px 0;
 }
 ul.components li {
     width: 35px;
@@ -100,34 +100,6 @@ main {
     max-height: 200px;
     line-height: 1.3;
     -webkit-overflow-scrolling:auto!important;
-    // &:before{
-    //     content:' ';
-    //     display:block;
-    //     position:fixed;
-    //     width:100%;
-    //     height:30px;
-    //     background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
-    //     background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
-    //     background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
-    //     background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
-    //     background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C */
-    //     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
-    // }
-    // &:after{
-    //     content:' ';
-    //     display:block;
-    //     position:fixed;
-    //     width:100%;
-    //     height:15%;
-    //     bottom: 0;
-    //     background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); /* FF3.6+ */
-    // background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
-    // background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
-    // background: -o-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
-    // background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* IE10+ */
-    // background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C */
-    // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
-    // }
     &:hover{
         overflow-y: scroll;
     }
@@ -168,52 +140,43 @@ section#page{
 * icons
 */
 
-[data-state='play'] svg.play{
-    display: block;
+.play-btn[data-state='play']{
+    background: transparent url(../images/play_64.png) no-repeat center;
+    background-size: contain;
 }
-[data-state='play'] svg.pause{
-    display: none;
+.play-btn[data-state='pause']{
+    background: transparent url(../images/stop_64.png) no-repeat center;
+    background-size: contain;
+}
+.speed-inc{
+    background: transparent url(../images/faster_64.png) no-repeat center;
+    background-size: contain;
+}
+.speed-dec{
+    background: transparent url(../images/slower_64.png) no-repeat center;
+    background-size: contain;
+}
+.font-inc{
+    background: transparent url(../images/bigger_64.png) no-repeat center;
+    background-size: contain;
+}
+.font-dec{
+    background: transparent url(../images/smaller_64.png) no-repeat center;
+    background-size: contain;
+}
+.contrast-light{
+    background: transparent url(../images/lighter_64.png) no-repeat center;
+    background-size: contain;
+}
+.contrast-dark{
+    background: transparent url(../images/darker_64.png) no-repeat center;
+    background-size: contain;
+}
+.full-screen{
+    background: transparent url(../images/fullscreen_64.png) no-repeat center;
+    background-size: contain;
 }
 
-[data-state='pause'] svg.play{
-    display: none;
-}
-[data-state='pause'] svg.pause{
-    display: block;
-}
-
-.darkCss .svg-light{
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    display: none;
-    height: 0;
-}
-.lightCss .svg-light{
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    display: block;
-    height: 100%;
-}
-.lightCss .svg-dark{
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    display: none;
-    height: 0;
-}
-.lightCss .svg-light{
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    display: block;
-    height: 100%;
-}
 /**
 *
 * misc.
@@ -279,25 +242,23 @@ nav.mobile ul.controls li:last-child:after{
 }
 #search{
     padding: 0;
-    margin: 0 0 0 5px;
+    margin: 0;
     height: 32px;
     width: 32px;
-    background: transparent url(../images/search-icon.png) no-repeat center;
+    background: transparent url(../images/find_64.png) no-repeat center;
     background-size: contain;
     display: inline-block;
     position: relative;
     right: 0;
-    @include box-shadow(4px, 4px, 6px, rgba(0,0,0,0.5));
 }
 #search-close{
     padding: 0;
-    margin: 0 0 0 5px;
+    margin: 0 0 0 12px;
     height: 32px;
     width: 32px;
-    background: transparent url(../images/search-close-icon.png) no-repeat 1px -10px;
-    background-size: cover;
+    background: transparent url(../images/close_64.png) no-repeat center;
+    background-size: contain;
     display: inline-block;
     border-right: 0;
     opacity: 0;
-    @include box-shadow(4px, 4px, 6px, rgba(0,0,0,0.5));
 }

@@ -1,5 +1,5 @@
 [{
-    "uuid":"21a7619e-ec78-4694-97c9-88a173795996",
+    "uuid": "21a7619e-ec78-4694-97c9-88a173795996",
     "components": [{
         "title": "Chapter 1",
         "src": "components/page-1.html"
@@ -9,5 +9,17 @@
     }, {
         "title": "Chapter 3",
         "src": "components/page-3.html"
+    }]
+}, {
+    "uuid": "fdbeeb28-6e83-4d3d-b96b-3bbd8c2d49c4",
+    "components": [{
+        "title": "Über den Reader",
+        "src": "components/fdbeeb28-6e83-4d3d-b96b-3bbd8c2d49c4/Text/ueber-den-reader.html"
+    }]
+}, {
+    "uuid": "c343c5e3-728f-44c5-915d-5146abc97097",
+    "components": [{
+        "title": "Alff",
+        "src": "components/c343c5e3-728f-44c5-915d-5146abc97097/Text/alff.html"
     }]
 }]

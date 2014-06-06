@@ -128,16 +128,7 @@ define([
         $closeBtn.css({
             opacity: 0
         });
-        $input
-            .text('')
-            .css({
-                height: 0
-            });
-        setTimeout(function () {
-            $input.css({
-                height: 32
-            })
-        }, 1000);
+        $input.text('');
     });
 
     $(window).resize(function () {

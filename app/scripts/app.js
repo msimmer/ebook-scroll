@@ -343,18 +343,13 @@ define([
                     self.layout.adjustFramePosition();
                     self.vents.contrastToggle(self.settings.contrast);
 
-                    var prefix = self.env.prefix().css,
-                        shadowHeight = 30,
-                        bgTop = prefix + 'linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%)',
-                        bgBottom = prefix + 'linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%)', // filters for
+                    var shadowHeight = 50,
                         shadowTop = $('<div/>', {
                             id: 'shadow-top',
+                            class: 'shadow-' + self.settings.contrast,
                             css: {
-                                'content': ' ',
-                                'display': 'block',
                                 'position': 'fixed',
                                 'height': shadowHeight,
-                                'background': bgTop,
                                 'width': self.settings.el.width(),
                                 'left': self.settings.el.offset().left,
                                 'top': self.settings.el.offset().top,
@@ -362,17 +357,15 @@ define([
                         }),
                         shadowBottom = $('<div/>', {
                             id: 'shadow-bottom',
+                            class: 'shadow-' + self.settings.contrast,
                             css: {
-                                'content': ' ',
-                                'display': 'block',
                                 'position': 'fixed',
                                 'height': shadowHeight,
-                                'background': bgBottom,
                                 'width': self.settings.el.width(),
                                 'left': self.settings.el.offset().left,
                                 'top': self.settings.el.offset().top + self.settings.el.height() - shadowHeight,
                             }
-                        });;
+                        });
 
                     self.settings.el.append(shadowTop);
                     self.settings.el.append(shadowBottom);
@@ -380,7 +373,7 @@ define([
                 })
                 .then(function () {
 
-                    var pages = 0,
+                    var limit = 60000,
                         ct = 0,
                         pageCountTimeout,
                         intrvl;
@@ -389,9 +382,9 @@ define([
                         intrvl = setInterval(function () {
                             ct += 1;
                             if ($('#page').length) {
-                                pages += 1;
                                 pageCountTimeout = setTimeout(function () {
-                                    if (pages == $('#page').find('p').length && ct < 15000 || pages != $('#page').find('p').length && ct >= 15000) {
+                                    pages = $('#page').find('p').length; // fix this
+                                    if (pages == $('#page').find('p').length && ct < limit || pages != $('#page').find('p').length && ct >= limit) {
                                         clearInterval(intrvl);
                                         clearTimeout(pageCountTimeout);
                                         self.vents.countPages();
@@ -400,10 +393,11 @@ define([
                                         }, 200);
                                         $('.spinner').fadeOut(200, function () {
                                             setTimeout(function () {
-                                                // self.vents.startScrolling();
+                                                self.vents.startScrolling();
                                             }, 50);
                                         });
-                                    } else if (pages != $('#page').find('p').length && ct < 15000) {
+                                    } else if (pages != $('#page').find('p').length && ct < limit) {
+                                        // continue counting
                                         clearTimeout(pageCountTimeout);
                                     }
                                 }, 10);
