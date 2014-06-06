@@ -517,6 +517,374 @@ main {
 
 /* line 23, styles.scss */
 
+html.lightCSs {
+  background-color: #fff;
+}
+
+/* line 26, styles.scss */
+
+html.darkCss {
+  background-color: #ccc;
+}
+
+/* line 29, styles.scss */
+
+.darkCss body,
+.darkCss main,
+.lightCss body,
+.lightCss main {
+  background-color: transparent;
+}
+
+/* line 35, styles.scss */
+
+nav {
+  position: absolute;
+  margin: 0 25px;
+  height: 0;
+  width: 67px;
+}
+
+/* line 41, styles.scss */
+
+a {
+  text-decoration: none;
+}
+
+/* line 44, styles.scss */
+
+.site-title {
+  margin: 25px;
+  padding: 0;
+  color: black;
+}
+
+/* line 50, styles.scss */
+
+ul.controls {
+  min-width: 75px;
+  opacity: .3;
+}
+
+/* line 54, styles.scss */
+
+ul.controls,
+ul.components {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  right: 0;
+}
+
+/* line 61, styles.scss */
+
+ul.controls li {
+  display: block;
+}
+
+/* line 64, styles.scss */
+
+ul.components li {
+  width: 35px;
+  height: 35px;
+}
+
+/* line 68, styles.scss */
+
+ul.controls li a {
+  position: relative;
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* line 78, styles.scss */
+
+ul.components li a {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+/* line 86, styles.scss */
+
+ul.chapters li {
+  margin: 0 10px;
+}
+
+/* line 89, styles.scss */
+
+main {
+  /* set adjustable font-size */
+  font-size: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: white;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  max-height: 200px;
+  line-height: 1.3;
+  -webkit-overflow-scrolling: auto !important;
+}
+
+/* line 131, styles.scss */
+
+main:hover {
+  overflow-y: scroll;
+}
+
+/* line 135, styles.scss */
+
+main a,
+main a:link,
+main a:active,
+main a:visited {
+  color: blue !important;
+  text-decoration: underline !important;
+}
+
+/* line 139, styles.scss */
+
+section#page {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  opacity: .3;
+}
+
+/* line 145, styles.scss */
+
+.runner-help {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 25px;
+  padding: 0;
+  text-decoration: none;
+  opacity: .3;
+}
+
+/* line 154, styles.scss */
+
+.runner-help a {
+  /*color:black;*/
+  text-decoration: none;
+}
+
+/* line 158, styles.scss */
+
+.runner-page-count {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 25px;
+  padding: 0;
+  opacity: .3;
+}
+
+/**
+* icons
+*/
+
+/* line 171, styles.scss */
+
+[data-state='play'] svg.play {
+  display: block;
+}
+
+/* line 174, styles.scss */
+
+[data-state='play'] svg.pause {
+  display: none;
+}
+
+/* line 178, styles.scss */
+
+[data-state='pause'] svg.play {
+  display: none;
+}
+
+/* line 181, styles.scss */
+
+[data-state='pause'] svg.pause {
+  display: block;
+}
+
+/* line 185, styles.scss */
+
+.darkCss .svg-light {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  display: none;
+  height: 0;
+}
+
+/* line 193, styles.scss */
+
+.lightCss .svg-light {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: block;
+  height: 100%;
+}
+
+/* line 201, styles.scss */
+
+.lightCss .svg-dark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  display: none;
+  height: 0;
+}
+
+/* line 209, styles.scss */
+
+.lightCss .svg-light {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: block;
+  height: 100%;
+}
+
+/**
+*
+* misc.
+*
+*/
+
+/* line 222, styles.scss */
+
+.hidden {
+  width: 0;
+  height: 0;
+  display: none;
+  visibility: hidden;
+}
+
+/* line 228, styles.scss */
+
+.show-scroll-bar {
+  overflow-y: scroll;
+}
+
+/**
+* base mobile styles
+*/
+
+/* line 235, styles.scss */
+
+nav.mobile {
+  top: 0;
+  text-align: justify;
+  margin: 25px auto 0 auto;
+  position: relative;
+}
+
+/* line 241, styles.scss */
+
+nav.mobile ul.controls {
+  display: inline;
+}
+
+/* line 244, styles.scss */
+
+nav.mobile ul.controls li {
+  display: inline;
+}
+
+/* line 247, styles.scss */
+
+nav.mobile ul.controls li:last-child:after {
+  content: ' ';
+  visibility: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+/**
+* Search bar
+*/
+
+/* line 257, styles.scss */
+
+.search-wrapper {
+  position: absolute;
+  right: 0;
+  margin: 30px;
+  opacity: .3;
+}
+
+/* line 263, styles.scss */
+
+.input-wrapper {
+  height: 32px;
+}
+
+/* line 266, styles.scss */
+
+#userInput {
+  width: 300px;
+  margin: 1px 0 0 0;
+  opacity: 0;
+  display: inline-block;
+  padding: 0;
+  text-align: left;
+  height: 32px;
+  float: left;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* line 277, styles.scss */
+
+#userInput:focus {
+  outline: none;
+}
+
+/* line 280, styles.scss */
+
+#search {
+  padding: 0;
+  margin: 0 0 0 5px;
+  height: 32px;
+  width: 32px;
+  background: transparent url(../images/search-icon.png) no-repeat center;
+  background-size: contain;
+  display: inline-block;
+  position: relative;
+  right: 0;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* line 292, styles.scss */
+
+#search-close {
+  padding: 0;
+  margin: 0 0 0 5px;
+  height: 32px;
+  width: 32px;
+  background: transparent url(../images/search-close-icon.png) no-repeat 1px -10px;
+  background-size: cover;
+  display: inline-block;
+  border-right: 0;
+  opacity: 0;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* line 1, page-styles.scss */
+
 .lightCss a,
 .lightCss abbr,
 .lightCss acronym,
@@ -652,7 +1020,7 @@ main {
   color: black !important;
 }
 
-/* line 24, styles.scss */
+/* line 2, page-styles.scss */
 
 .darkCss a,
 .darkCss abbr,
@@ -787,379 +1155,6 @@ main {
 .darkCss video,
 .darkCss wbr {
   color: black !important;
-}
-
-/* line 25, styles.scss */
-
-html.lightCSs {
-  background-color: #fff;
-}
-
-/* line 28, styles.scss */
-
-html.darkCss {
-  background-color: #ccc;
-}
-
-/* line 31, styles.scss */
-
-.darkCss body,
-.darkCss main,
-.lightCss body,
-.lightCss main {
-  background-color: transparent;
-}
-
-/* line 37, styles.scss */
-
-nav {
-  position: absolute;
-  margin: 0 25px;
-  height: 100%;
-  width: 67px;
-}
-
-/* line 43, styles.scss */
-
-a {
-  text-decoration: none;
-}
-
-/* line 46, styles.scss */
-
-.site-title {
-  margin: 25px;
-  padding: 0;
-  color: black;
-}
-
-/* line 52, styles.scss */
-
-ul.controls {
-  min-width: 75px;
-  opacity: .3;
-}
-
-/* line 56, styles.scss */
-
-ul.controls,
-ul.components {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  top: 0;
-  right: 0;
-}
-
-/* line 63, styles.scss */
-
-ul.controls li {
-  display: block;
-}
-
-/* line 66, styles.scss */
-
-ul.components li {
-  width: 35px;
-  height: 35px;
-}
-
-/* line 70, styles.scss */
-
-ul.controls li a {
-  position: relative;
-  display: inline-block;
-  height: 30px;
-  width: 30px;
-}
-
-/* line 76, styles.scss */
-
-ul.controls li a:first-child {
-  margin-top: 0;
-}
-
-/* line 79, styles.scss */
-
-ul.components li a {
-  display: block;
-  height: 100%;
-  width: 100%;
-}
-
-/* line 87, styles.scss */
-
-ul.chapters li {
-  margin: 0 10px;
-}
-
-/* line 90, styles.scss */
-
-main {
-  /* set adjustable font-size */
-  font-size: 100%;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: white;
-  overflow-y: hidden;
-  overflow-x: hidden;
-  max-height: 200px;
-  line-height: 1.3;
-  -webkit-overflow-scrolling: auto !important;
-}
-
-/* line 104, styles.scss */
-
-main:hover {
-  overflow-y: scroll;
-}
-
-/* line 108, styles.scss */
-
-main a,
-main a:link,
-main a:active,
-main a:visited {
-  color: blue !important;
-  text-decoration: underline !important;
-}
-
-/* line 112, styles.scss */
-
-section#page {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  opacity: .3;
-}
-
-/* line 118, styles.scss */
-
-.runner-help {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  margin: 25px;
-  padding: 0;
-  text-decoration: none;
-  opacity: .3;
-}
-
-/* line 127, styles.scss */
-
-.runner-help a {
-  /*color:black;*/
-  text-decoration: none;
-}
-
-/* line 131, styles.scss */
-
-.runner-page-count {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin: 25px;
-  padding: 0;
-  opacity: .3;
-}
-
-/**
-* icons
-*/
-
-/* line 144, styles.scss */
-
-[data-state='play'] svg.play {
-  display: block;
-}
-
-/* line 147, styles.scss */
-
-[data-state='play'] svg.pause {
-  display: none;
-}
-
-/* line 151, styles.scss */
-
-[data-state='pause'] svg.play {
-  display: none;
-}
-
-/* line 154, styles.scss */
-
-[data-state='pause'] svg.pause {
-  display: block;
-}
-
-/* line 158, styles.scss */
-
-.darkCss .svg-light {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  display: none;
-  height: 0;
-}
-
-/* line 166, styles.scss */
-
-.lightCss .svg-light {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  display: block;
-  height: 100%;
-}
-
-/* line 174, styles.scss */
-
-.lightCss .svg-dark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  display: none;
-  height: 0;
-}
-
-/* line 182, styles.scss */
-
-.lightCss .svg-light {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  display: block;
-  height: 100%;
-}
-
-/**
-*
-* misc.
-*
-*/
-
-/* line 195, styles.scss */
-
-.hidden {
-  width: 0;
-  height: 0;
-  display: none;
-  visibility: hidden;
-}
-
-/* line 201, styles.scss */
-
-.show-scroll-bar {
-  overflow-y: scroll;
-}
-
-/**
-* base mobile styles
-*/
-
-/* line 208, styles.scss */
-
-nav.mobile {
-  top: 0;
-  text-align: justify;
-  margin: 25px auto 0 auto;
-  position: relative;
-}
-
-/* line 214, styles.scss */
-
-nav.mobile ul.controls {
-  display: inline;
-}
-
-/* line 217, styles.scss */
-
-nav.mobile ul.controls li {
-  display: inline;
-}
-
-/* line 220, styles.scss */
-
-nav.mobile ul.controls li:last-child:after {
-  content: ' ';
-  visibility: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-/**
-* Search bar
-*/
-
-/* line 230, styles.scss */
-
-.search-wrapper {
-  position: absolute;
-  right: 0;
-  margin: 30px;
-  opacity: .3;
-}
-
-/* line 236, styles.scss */
-
-.input-wrapper {
-  height: 32px;
-}
-
-/* line 239, styles.scss */
-
-#userInput {
-  width: 400px;
-  margin: 1px 0 0 0;
-  border-bottom: 1px solid #000;
-  opacity: 0;
-  display: inline-block;
-  padding: 0;
-  text-align: left;
-  height: 32px;
-  float: left;
-}
-
-/* line 250, styles.scss */
-
-#userInput:focus {
-  outline: none;
-}
-
-/* line 253, styles.scss */
-
-#search {
-  padding: 0;
-  margin: 0;
-  height: 32px;
-  width: 32px;
-  border: 1px solid #000;
-  background: transparent url(../images/search-icon.png) no-repeat center;
-  background-size: contain;
-  display: inline-block;
-  position: relative;
-  right: 0;
-}
-
-/* line 265, styles.scss */
-
-#search-close {
-  padding: 0;
-  margin: 0;
-  height: 32px;
-  width: 32px;
-  border: 1px solid #000;
-  background: transparent url(../images/search-close-icon.png) no-repeat 1px -10px;
-  background-size: cover;
-  display: inline-block;
-  border-right: 0;
-  opacity: 0;
 }
 
 /*iPad in landscape*/

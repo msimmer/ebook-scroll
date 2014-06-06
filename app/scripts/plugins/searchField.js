@@ -131,13 +131,11 @@ define([
         $input
             .text('')
             .css({
-                height: 0,
-                'border-bottom':0
+                height: 0
             });
         setTimeout(function () {
             $input.css({
-                height: 32,
-                'border-bottom':'1px solid #000000'
+                height: 32
             })
         }, 1000);
     });
@@ -148,7 +146,3 @@ define([
 
     addRemoveSearchBar();
 });
-
-// (function (window, $, undefined) {
-
-// })(window, jQuery);

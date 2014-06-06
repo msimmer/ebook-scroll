@@ -75,6 +75,17 @@ define([
                     self.vents.resizeStopped();
                 }, 200);
 
+                // $('#shadow-top').css({
+                //     'width': self.settings.el.width(),
+                //     'left': self.settings.el.offset().left,
+                //     'top': self.settings.el.offset().top
+                // });
+                // $('#shadow-bottom').css({
+                //     'width': self.settings.el.width(),
+                //     'left': self.settings.el.offset().left,
+                //     'top': self.settings.el.offset().top + self.settings.el.height() - $('#shadow-bottom').height()
+                // });
+
             });
 
             // hoverIntent methods
@@ -331,6 +342,41 @@ define([
                 .then(function () {
                     self.layout.adjustFramePosition();
                     self.vents.contrastToggle(self.settings.contrast);
+
+                    var prefix = self.env.prefix().css,
+                        shadowHeight = 30,
+                        bgTop = prefix + 'linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%)',
+                        bgBottom = prefix + 'linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%)', // filters for
+                        shadowTop = $('<div/>', {
+                            id: 'shadow-top',
+                            css: {
+                                'content': ' ',
+                                'display': 'block',
+                                'position': 'fixed',
+                                'height': shadowHeight,
+                                'background': bgTop,
+                                'width': self.settings.el.width(),
+                                'left': self.settings.el.offset().left,
+                                'top': self.settings.el.offset().top,
+                            }
+                        }),
+                        shadowBottom = $('<div/>', {
+                            id: 'shadow-bottom',
+                            css: {
+                                'content': ' ',
+                                'display': 'block',
+                                'position': 'fixed',
+                                'height': shadowHeight,
+                                'background': bgBottom,
+                                'width': self.settings.el.width(),
+                                'left': self.settings.el.offset().left,
+                                'top': self.settings.el.offset().top + self.settings.el.height() - shadowHeight,
+                            }
+                        });;
+
+                    self.settings.el.append(shadowTop);
+                    self.settings.el.append(shadowBottom);
+
                 })
                 .then(function () {
 
@@ -345,7 +391,7 @@ define([
                             if ($('#page').length) {
                                 pages += 1;
                                 pageCountTimeout = setTimeout(function () {
-                                    if (pages == $('#page').find('p').length && ct < 1000 || pages != $('#page').find('p').length && ct >= 1000) {
+                                    if (pages == $('#page').find('p').length && ct < 15000 || pages != $('#page').find('p').length && ct >= 15000) {
                                         clearInterval(intrvl);
                                         clearTimeout(pageCountTimeout);
                                         self.vents.countPages();
@@ -357,7 +403,7 @@ define([
                                                 // self.vents.startScrolling();
                                             }, 50);
                                         });
-                                    } else if (pages != $('#page').find('p').length && ct < 1000) {
+                                    } else if (pages != $('#page').find('p').length && ct < 15000) {
                                         clearTimeout(pageCountTimeout);
                                     }
                                 }, 10);

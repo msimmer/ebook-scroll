@@ -3,7 +3,7 @@ define([
     'settings',
     'env',
     'styles'
-], function($, Settings, Env, Styles) {
+], function ($, Settings, Env, Styles) {
     'use strict';
 
     return function Layout() {
@@ -13,17 +13,17 @@ define([
             styles = Styles,
             self = this;
 
-        this.targetContainerWidth = function() {
+        this.targetContainerWidth = function () {
             var w = parseInt(settings.el.css('font-size'), 10) * 25;
             return w;
         },
 
-        this.targetContainerHeight = function() {
+        this.targetContainerHeight = function () {
             var h = parseInt(settings.el.css('line-height'), 10) * 9;
             return h;
         },
 
-        this.setFrameHeight = function() {
+        this.setFrameHeight = function () {
 
             if ($(window).width() <= 480) {
                 return;
@@ -38,7 +38,7 @@ define([
 
         },
 
-        this.setFrameWidth = function() {
+        this.setFrameWidth = function () {
 
             if ($(window).width() <= 480) {
                 return;
@@ -52,13 +52,13 @@ define([
 
         },
 
-        this.adjustFramePosition = function() {
+        this.adjustFramePosition = function () {
 
             self.setFrameHeight();
             self.setFrameWidth();
 
             var frame = settings.el,
-                h = ($(window).width() <= 480) ? $(window).height() / 2 -30 : $(window).height() / 2,
+                h = ($(window).width() <= 480) ? $(window).height() / 2 - 30 : $(window).height() / 2,
                 w = $(window).width() / 2,
                 frameMidH = frame.height() / 2,
                 frameMidW = frame.width() / 2,
@@ -71,13 +71,26 @@ define([
             frame.css(cssObj);
             self.adjustNavPosition();
 
+            if ($('#shadow-top').length && $('#shadow-bottom').length) {
+                $('#shadow-top').css({
+                    'width': frame.width(),
+                    'left': frame.offset().left,
+                    'top': frame.offset().top
+                });
+                $('#shadow-bottom').css({
+                    'width': frame.width(),
+                    'left': frame.offset().left,
+                    'top': frame.offset().top + frame.height() - $('#shadow-bottom').height()
+                });
+            }
+
         },
 
-        this.adjustNavPosition = function() {
+        this.adjustNavPosition = function () {
 
             var frame = settings.el,
                 nav = $('nav'),
-                ctrlH = 180, // .controls height before mobile layout abstract
+                ctrlH = $('.controls').height(), // .controls height before mobile layout abstract
                 overlap = frame.position().left <= 115, // initial sidebar width + margin
                 orientation = env.orientation();
 
@@ -115,11 +128,11 @@ define([
 
         },
 
-        this.removeElementStyles = function() {
+        this.removeElementStyles = function () {
             //
         },
 
-        this.setStyles = function() {
+        this.setStyles = function () {
 
             var mainCss = {
                 fontSize: settings.fSize + '%',
