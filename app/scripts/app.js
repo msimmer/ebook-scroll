@@ -138,11 +138,15 @@ define([
                 var el = document.getElementsByTagName('body')[0],
                     frame = document.getElementById('main'),
                     controls = document.getElementsByClassName('controls')[0],
-                    wasScrolling,
+                    wasScrolling = self.reader.isScrolling,
+                    doubleTapped = false,
+                    wasHolding = false,
+                    touchTimer,
                     dist,
                     dir,
                     options = {
                         behavior: {
+                            doubleTapInterval: 200,
                             contentZooming: 'none',
                             touchAction: 'none',
                             touchCallout: 'none',
@@ -153,9 +157,13 @@ define([
                     },
                     hammer = new Hammer(el, options);
 
-                hammer.on('touch release pinchin pinchout dragright dragleft dragend', function (e) {
+                hammer.on('touch release pinchin pinchout dragright dragleft dragend doubletap', function (e) {
 
                     var target = $(e.target);
+
+                    doubleTapped = false;
+                    // wasHolding = false;
+                    clearTimeout(touchTimer);
 
                     if (!target.parents().is(controls) && !target.is(frame) && !target.parents().is(frame)) {
 
@@ -167,28 +175,46 @@ define([
 
                     } else if (target.is(frame) || target.parents().is(frame)) {
 
-                        if (e.type == 'touch') {
+                        if (e.type == 'doubletap') {
+
+                            doubleTapped = true;
+
                             e.stopPropagation();
                             e.gesture.stopPropagation();
 
                             wasScrolling = self.reader.isScrolling;
 
-                            console.log('touch -- ' + wasScrolling);
-
                             if (wasScrolling) {
                                 self.vents.stopScrolling();
+                            } else {
+                                self.vents.startScrolling();
                             }
-                        } else if (e.type == 'release') {
+
+                        } else if (e.type == 'touch') {
+
+                            touchTimer = setTimeout(function () {
+                                e.stopPropagation();
+                                e.gesture.stopPropagation();
+
+                                wasScrolling = self.reader.isScrolling;
+                                wasHolding = true;
+
+                                if (wasScrolling && !doubleTapped) {
+                                    self.vents.stopScrolling();
+                                }
+                            }, 250);
+
+                        } else if (e.type == 'release' && wasHolding) {
 
                             e.gesture.stopPropagation();
                             self.vents.countPages();
 
-                            console.log('release -- ' + wasScrolling);
-
-                            if (wasScrolling) {
+                            if (wasScrolling && wasHolding) {
                                 setTimeout(function () {
+                                    wasHolding = false;
                                     self.vents.startScrolling();
-                                }, 400);
+                                }, 200);
+
                             }
 
                         } else if (e.type == 'pinchin') {
@@ -266,7 +292,7 @@ define([
                     });
                 },
                 error: function (x, t, s) {
-                    console.log(t + ': ' + s);
+                    console.log('Error: ' + t + ': ' + s);
                 }
 
             });
@@ -383,7 +409,7 @@ define([
                             ct += 1;
                             if ($('#page').length) {
                                 pageCountTimeout = setTimeout(function () {
-                                    pages = $('#page').find('p').length; // fix this
+                                    var pages = $('#page').find('p').length; // fix this
                                     if (pages == $('#page').find('p').length && ct < limit || pages != $('#page').find('p').length && ct >= limit) {
                                         clearInterval(intrvl);
                                         clearTimeout(pageCountTimeout);
