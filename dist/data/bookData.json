@@ -1,13 +1,5 @@
 [{
-    "uuid": "04bcc04a-d0cd-4bca-8870-06a9b08358e9",
-    // "title": "General Fine Arts Volume 1, Issue 1",
-    // "author": "General Fine Arts",
-    // "cover": "public/books/general-fine-arts-issue-1-vol-1/OEBPS/Images/cover.jpg",
-    // "download": {
-    //     "mobi": "public/downloads/gfa-1-1.mobi",
-    //     "epub": "public/downloads/gfa-1-1.epub",
-    //     "pdf": "public/downloads/gfa-1-1.pdf"
-    // },
+    "uuid":"21a7619e-ec78-4694-97c9-88a173795996",
     "components": [{
         "title": "Chapter 1",
         "src": "components/page-1.html"
@@ -18,12 +10,4 @@
         "title": "Chapter 3",
         "src": "components/page-3.html"
     }]
-    // "chapters": [{
-        // "title": "Chapter 1",
-        // "src": "public/books/general-fine-arts-issue-1-vol-1/OEBPS/Text/titlepage.html"
-    // }],
-    // "metadata": {
-        // "title": "General Fine Arts Volume 1, Issue 1",
-        // "creator": "General Fine Arts"
-    // }
 }]
