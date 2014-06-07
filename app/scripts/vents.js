@@ -220,11 +220,14 @@ define([
 
         },
 
+        this.hasEnded = false,
+
         this.isBookEnd = function () {
 
-            console.log('book end');
-
             self.stopScrolling();
+            self.hasEnded = true;
+
+            console.log('isbookend has ended --' + self.hasEnded);
 
             if (settings.debug) {
                 console.log('Book end');
@@ -345,23 +348,6 @@ define([
         },
 
         this.countPages = function () {
-
-            if (settings.debug) {
-                var intrvl,
-                    ct;
-                intrvl = setInterval(function () {
-                    ct++;
-                    if ($('#page').length) {
-                        clearInterval(intrvl);
-                        console.log('Reading location is -- ' + getCurrentPage());
-                    }
-                    if (ct >= 1000) {
-                        clearInterval(intrvl);
-                        console.log('Reading location timed out.');
-                    }
-                }, 10);
-            }
-
             var main = settings.el,
                 frameH = main.height(),
                 page = main.find('#page'),
@@ -376,12 +362,32 @@ define([
             totalPageIndicator.html(Math.round(pageH / frameH));
             currentPageIndicator.html(getCurrentPage());
 
-            if (main.height() - page.height() >= -main.scrollTop() - 1) {
+            if (getCurrentPage() >= Math.round(pageH / frameH)) {
                 if (reader.currentPage === reader.lastPage) {
                     self.isBookEnd();
                 } else if (reader.currentPage !== reader.lastPage) {
                     self.isChapterEnd();
                 }
+            } else {
+                self.hasEnded = false;
+            }
+
+            console.log('has ended countPages --' + self.hasEnded);
+
+            if (settings.debug) {
+                var intrvl,
+                    ct;
+                intrvl = setInterval(function () {
+                    ct++;
+                    if (page.length) {
+                        clearInterval(intrvl);
+                        console.log('Reading location is -- ' + getCurrentPage());
+                    }
+                    if (ct >= 1000) {
+                        clearInterval(intrvl);
+                        console.log('Reading location timed out.');
+                    }
+                }, 10);
             }
 
         };

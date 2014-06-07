@@ -126,7 +126,7 @@ define([
             } else {
 
                 var clientBook = {
-                    bookId: window.uuid,
+                    bookId: window.ebookAppData.uuid,
                     currentPage: reader.firstPage,
                     scrollPosition: {}
                 };
@@ -135,7 +135,7 @@ define([
                 reader.scrollPosition[reader.firstPage] = 0;
                 clientBook.scrollPosition[reader.firstPage] = 0;
 
-                localStorage.setItem(window.uuid, JSON.stringify(clientBook));
+                localStorage.setItem(window.ebookAppData.uuid, JSON.stringify(clientBook));
 
             }
 

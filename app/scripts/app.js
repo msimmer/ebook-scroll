@@ -84,7 +84,9 @@ define([
                     isManuallyScrolling;
 
                 self.settings.el.hoverIntent({
-                    over: function () {
+                    over: function () { // TODO -- only `return` on hover in and out if isBookEnd
+                        // self.vents.countPages();
+                        // if (self.vents.hasEnded) return;
                         wasScrolling = self.reader.isScrolling;
                         if (!$('show-scroll-bar').length) {
                             self.settings.el.addClass('show-scroll-bar');
@@ -104,6 +106,8 @@ define([
                         }, this.interval * 4);
                     },
                     out: function () {
+                        // self.vents.countPages();
+                        // if (self.vents.hasEnded) return;
                         if ($('.show-scroll-bar').length && !$('#userInput').is(':focus')) {
                             self.settings.el.removeClass('show-scroll-bar');
                         }
@@ -207,7 +211,7 @@ define([
                                 }
                             }
 
-                            setTimeout(function(){
+                            setTimeout(function () {
                                 $('body,html').scrollTop(0);
                             }, 0);
 
@@ -273,14 +277,14 @@ define([
                 method: 'get',
                 success: function (data) {
                     $.each(data, function (i) {
-                        if ('fiktion.' + this.uuid === window.uuid) {
+                        if ('fiktion.' + this.uuid === window.ebookAppData.uuid) {
                             self.settings.bookId = 'fiktion.' + this.uuid;
                             var components = this.components;
                             self.sys.updatedReaderData('components', components);
                             self.sys.updatedReaderData('currentPage', components[0].src);
                             self.sys.updatedReaderData('firstPage', components[0].src);
                             self.sys.updatedReaderData('lastPage', components[components.length - 1].src);
-                        } else if (i === data.length - 1 && 'fiktion.' + this.uuid !== window.uuid) {
+                        } else if (i === data.length - 1 && 'fiktion.' + this.uuid !== window.ebookAppData.uuid) {
                             console.log('Could not find UUID');
                         }
                     });
@@ -317,6 +321,16 @@ define([
             }
 
             function loadChapter(pageUrl) {
+
+                if (pageUrl === null) {
+                    var pathArray = window.location.href.split('/'),
+                        protocol = pathArray[0],
+                        host = pathArray[2],
+                        url = protocol + '//' + host,
+                        notFound = url + '/404';
+                    window.location.href = notFound;
+                    return false;
+                }
 
                 return $.ajax({
                         type: 'get',
