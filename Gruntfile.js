@@ -303,11 +303,11 @@ module.exports = function (grunt) {
                         '*.{ico,png,txt}',
                         '.htaccess',
                         'images/{,*/}*.*',
-                        // 'images/{,*/}*.webp',
                         '{,*/}*.html',
                         'styles/fonts/{,*/}*.*',
                         'bower_components/bootstrap-sass/vendor/assets/fonts/bootstrap/*.*',
-                        'data/*.*'
+                        'data/*.*',
+                        'components/**/*.*'
                     ]
                 }]
             },
