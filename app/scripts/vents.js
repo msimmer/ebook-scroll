@@ -138,31 +138,35 @@ define([
 
         this.startScrolling = function () {
 
-            $('.controls').find('.play-btn').attr('data-state', 'pause');
+            if (!reader.isScrolling) {
+                $('.controls').find('.play-btn').attr('data-state', 'pause');
 
-            if (self.skip == null) {
-                self.getSkipInterval();
+                if (self.skip == null) {
+                    self.getSkipInterval();
+                }
+
+                self.readScroll();
+                self.listenForPageChange();
+
+                reader.isScrolling = true;
             }
-
-            self.readScroll();
-            self.listenForPageChange();
-
-            reader.isScrolling = true;
 
         },
 
         this.stopScrolling = function () {
 
-            $('.controls').find('.play-btn').attr('data-state', 'play');
+            if (reader.isScrolling) {
+                $('.controls').find('.play-btn').attr('data-state', 'play');
 
-            if (settings.debug) {
-                console.log('Stopped');
+                if (settings.debug) {
+                    console.log('Stopped');
+                }
+
+                window.cancelScroll(self.requestAnim);
+                window.clearInterval(self.listenForPageChangeInterval);
+
+                reader.isScrolling = false;
             }
-
-            window.cancelScroll(self.requestAnim);
-            window.clearInterval(self.listenForPageChangeInterval);
-
-            reader.isScrolling = false;
 
         },
 

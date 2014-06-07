@@ -75,17 +75,6 @@ define([
                     self.vents.resizeStopped();
                 }, 200);
 
-                // $('#shadow-top').css({
-                //     'width': self.settings.el.width(),
-                //     'left': self.settings.el.offset().left,
-                //     'top': self.settings.el.offset().top
-                // });
-                // $('#shadow-bottom').css({
-                //     'width': self.settings.el.width(),
-                //     'left': self.settings.el.offset().left,
-                //     'top': self.settings.el.offset().top + self.settings.el.height() - $('#shadow-bottom').height()
-                // });
-
             });
 
             // hoverIntent methods
@@ -157,15 +146,14 @@ define([
                     },
                     hammer = new Hammer(el, options);
 
-                hammer.on('touch release pinchin pinchout dragright dragleft dragend doubletap', function (e) {
+                hammer.on('touch release pinchin pinchout dragend doubletap', function (e) {
 
                     var target = $(e.target);
 
                     doubleTapped = false;
-                    // wasHolding = false;
                     clearTimeout(touchTimer);
 
-                    if (!target.parents().is(controls) && !target.is(frame) && !target.parents().is(frame)) {
+                    if (!target.is('.control-btn') && !target.is(frame) && !target.parents().is(frame)) {
 
                         e.preventDefault();
                         e.stopPropagation();
@@ -190,7 +178,7 @@ define([
                                 self.vents.startScrolling();
                             }
 
-                        } else if (e.type == 'touch') {
+                        } else if (e.type == 'touch' && e.gesture.touches.length < 2) {
 
                             touchTimer = setTimeout(function () {
                                 e.stopPropagation();
@@ -204,18 +192,24 @@ define([
                                 }
                             }, 250);
 
-                        } else if (e.type == 'release' && wasHolding) {
+                        } else if (e.type == 'release') {
 
-                            e.gesture.stopPropagation();
-                            self.vents.countPages();
+                            if (wasHolding) {
+                                e.gesture.stopPropagation();
+                                self.vents.countPages();
 
-                            if (wasScrolling && wasHolding) {
-                                setTimeout(function () {
-                                    wasHolding = false;
-                                    self.vents.startScrolling();
-                                }, 200);
+                                if (wasScrolling && wasHolding) {
+                                    setTimeout(function () {
+                                        wasHolding = false;
+                                        self.vents.startScrolling();
+                                    }, 200);
 
+                                }
                             }
+
+                            setTimeout(function(){
+                                $('body,html').scrollTop(0);
+                            }, 0);
 
                         } else if (e.type == 'pinchin') {
 
@@ -241,7 +235,7 @@ define([
 
                             e.gesture.stopDetect();
 
-                        } else if (e.type == 'dragend') {
+                        } else if (e.type == 'dragend' && e.gesture.touches.length < 2) {
 
                             e.preventDefault();
                             e.stopPropagation();
