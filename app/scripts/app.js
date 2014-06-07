@@ -213,14 +213,8 @@ define([
 
                         } else if (e.type == 'pinchin') {
 
-                            // e.stopPropagation();
-                            // e.gesture.stopPropagation();
-
-                            e.preventDefault();
                             e.stopPropagation();
-                            e.gesture.preventDefault();
                             e.gesture.stopPropagation();
-                            e.gesture.stopDetect();
 
                             self.vents.fontDecrement();
                             if (wasScrolling) {
@@ -231,14 +225,8 @@ define([
 
                         } else if (e.type == 'pinchout') {
 
-                            // e.stopPropagation();
-                            // e.gesture.stopPropagation();
-
-                            e.preventDefault();
                             e.stopPropagation();
-                            e.gesture.preventDefault();
                             e.gesture.stopPropagation();
-                            e.gesture.stopDetect();
 
                             self.vents.fontIncrement();
                             if (wasScrolling) {
