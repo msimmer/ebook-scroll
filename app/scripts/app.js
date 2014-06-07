@@ -270,30 +270,38 @@ define([
             }
 
             // bootstrap
-            var retrieveJsonData = $.ajax({
+            var pathArray = window.location.href.split('/'),
+                protocol = pathArray[0],
+                host = pathArray[2],
+                siteUrl = protocol + '//' + host,
+                retrieveJsonData = $.ajax({
 
-                url: 'data/bookData.json',
-                dataType: 'json',
-                method: 'get',
-                success: function (data) {
-                    $.each(data, function (i) {
-                        if ('fiktion.' + this.uuid === window.ebookAppData.uuid) {
-                            self.settings.bookId = 'fiktion.' + this.uuid;
-                            var components = this.components;
-                            self.sys.updatedReaderData('components', components);
-                            self.sys.updatedReaderData('currentPage', components[0].src);
-                            self.sys.updatedReaderData('firstPage', components[0].src);
-                            self.sys.updatedReaderData('lastPage', components[components.length - 1].src);
-                        } else if (i === data.length - 1 && 'fiktion.' + this.uuid !== window.ebookAppData.uuid) {
-                            console.log('Could not find UUID');
-                        }
-                    });
-                },
-                error: function (x, t, s) {
-                    console.log('Error: ' + t + ': ' + s);
-                }
+                    url: siteUrl + '/wp-content/themes/Fiktion/data/bookData.json',
+                    dataType: 'json',
+                    method: 'get',
+                    success: function (data) {
+                        $.each(data, function (i) {
+                            if (this.uuid === window.ebookAppData.uuid) {
+                                self.settings.bookId = this.uuid;
+                                var components = this.components;
+                                self.sys.updatedReaderData('components', components);
+                                self.sys.updatedReaderData('currentPage', components[0].src);
+                                self.sys.updatedReaderData('firstPage', components[0].src);
+                                self.sys.updatedReaderData('lastPage', components[components.length - 1].src);
 
-            });
+                                console.log(components);
+
+                            }
+                            // else if (i === data.length - 1 && 'fiktion.' + this.uuid !== window.ebookAppData.uuid) {
+                            // console.log('Could not find UUID');
+                            // }
+                        });
+                    },
+                    error: function (x, t, s) {
+                        console.log('Error: ' + t + ': ' + s);
+                    }
+
+                });
 
             function addJsonDataToDom(data) {
 
@@ -323,13 +331,13 @@ define([
             function loadChapter(pageUrl) {
 
                 if (pageUrl === null) {
-                    var pathArray = window.location.href.split('/'),
-                        protocol = pathArray[0],
-                        host = pathArray[2],
-                        url = protocol + '//' + host,
-                        notFound = url + '/404';
-                    window.location.href = notFound;
-                    return false;
+                    // var pathArray = window.location.href.split('/'),
+                    //     protocol = pathArray[0],
+                    //     host = pathArray[2],
+                    //     siteUrl = protocol + '//' + host,
+                    //     notFound = siteUrl + '/404';
+                    // window.location.href = notFound;
+                    // return false;
                 }
 
                 return $.ajax({
@@ -350,7 +358,7 @@ define([
                         self.settings.el.html(content);
 
                         self.sys.updatedReaderData('currentPage', pageUrl);
-                        self.sys.updateLocalStorage('fiktion.' + self.settings.bookId, 'currentPage', pageUrl);
+                        self.sys.updateLocalStorage(self.settings.bookId, 'currentPage', pageUrl);
 
                         if (self.settings.debug) {
                             console.log('Current page is ' + pageUrl);
