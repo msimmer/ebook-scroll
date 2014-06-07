@@ -25,11 +25,13 @@ define([
 
         this.setFrameHeight = function () {
 
-            if ($(window).width() <= 480) {
+            if (env.orientation() === 'landscape' && env.isMobile()) {
+                var targetHeight = 250;
+            } else if (env.orientation() !== 'landscape' && !env.isMobile() && $(window).width >= 480) {
+                var targetHeight = self.targetContainerHeight();
+            } else {
                 return;
             }
-
-            var targetHeight = self.targetContainerHeight();
 
             settings.el.css({
                 height: targetHeight,
@@ -57,18 +59,27 @@ define([
             self.setFrameHeight();
             self.setFrameWidth();
 
-            var frame = settings.el,
-                h = ($(window).width() <= 480) ? $(window).height() / 2 - 30 : $(window).height() / 2,
-                w = $(window).width() / 2,
-                frameMidH = frame.height() / 2,
-                frameMidW = frame.width() / 2,
-                targetLeft = $(window).width() <= 480 ? 0 : w - frameMidW,
-                cssObj = {
-                    top: h - frameMidH,
-                    left: targetLeft
-                };
+            var frame = settings.el;
 
-            frame.css(cssObj);
+            if (env.orientation() === 'landscape' && env.isMobile()) {
+                frame.css({
+                    top: 10,
+                    left: 0
+                });
+            } else {
+                var h = ($(window).width() <= 480) ? $(window).height() / 2 - 30 : $(window).height() / 2,
+                    w = $(window).width() / 2,
+                    frameMidH = frame.height() / 2,
+                    frameMidW = frame.width() / 2,
+                    targetLeft = $(window).width() <= 480 ? 0 : w - frameMidW,
+                    cssObj = {
+                        top: h - frameMidH,
+                        left: targetLeft
+                    };
+
+                frame.css(cssObj);
+            }
+
             self.adjustNavPosition();
 
             if ($('#shadow-top').length && $('#shadow-bottom').length) {
@@ -82,6 +93,12 @@ define([
                     'left': frame.offset().left,
                     'top': frame.offset().top + frame.height() - $('#shadow-bottom').height()
                 });
+            }
+
+            if (env.isMobile()) {
+                setTimeout(function () {
+                    $('body,html').scrollTop(0);
+                }, 0);
             }
 
         },
@@ -120,10 +137,6 @@ define([
 
             if (orientation === 'landscape' && $(window).width() <= 480) {
                 nav.removeClass('mobile');
-                nav.css({
-                    top: ($(window).height() / 2) - (ctrlH / 2),
-                    width: 75
-                });
             }
 
         },

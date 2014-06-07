@@ -211,14 +211,16 @@ define([
                                 }
                             }
 
-                            setTimeout(function () {
-                                $('body,html').scrollTop(0);
-                            }, 0);
-
                         } else if (e.type == 'pinchin') {
 
+                            // e.stopPropagation();
+                            // e.gesture.stopPropagation();
+
+                            e.preventDefault();
                             e.stopPropagation();
+                            e.gesture.preventDefault();
                             e.gesture.stopPropagation();
+                            e.gesture.stopDetect();
 
                             self.vents.fontDecrement();
                             if (wasScrolling) {
@@ -229,8 +231,14 @@ define([
 
                         } else if (e.type == 'pinchout') {
 
+                            // e.stopPropagation();
+                            // e.gesture.stopPropagation();
+
+                            e.preventDefault();
                             e.stopPropagation();
+                            e.gesture.preventDefault();
                             e.gesture.stopPropagation();
+                            e.gesture.stopDetect();
 
                             self.vents.fontIncrement();
                             if (wasScrolling) {
@@ -276,7 +284,8 @@ define([
                 siteUrl = protocol + '//' + host,
                 retrieveJsonData = $.ajax({
 
-                    url: siteUrl + '/wp-content/themes/Fiktion/data/bookData.json',
+                    url: 'data/bookData.json',
+                    // url: siteUrl + '/wp-content/themes/Fiktion/data/bookData.json',
                     dataType: 'json',
                     method: 'get',
                     success: function (data) {
@@ -288,17 +297,13 @@ define([
                                 self.sys.updatedReaderData('currentPage', components[0].src);
                                 self.sys.updatedReaderData('firstPage', components[0].src);
                                 self.sys.updatedReaderData('lastPage', components[components.length - 1].src);
-
-                                console.log(components);
-
+                            } else {
+                                return;
                             }
-                            // else if (i === data.length - 1 && 'fiktion.' + this.uuid !== window.ebookAppData.uuid) {
-                            // console.log('Could not find UUID');
-                            // }
                         });
                     },
                     error: function (x, t, s) {
-                        console.log('Error: ' + t + ': ' + s);
+                        console.log(t + ': ' + s);
                     }
 
                 });
