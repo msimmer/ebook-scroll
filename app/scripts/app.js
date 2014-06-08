@@ -84,9 +84,7 @@ define([
                     isManuallyScrolling;
 
                 self.settings.el.hoverIntent({
-                    over: function () { // TODO -- only `return` on hover in and out if isBookEnd
-                        // self.vents.countPages();
-                        // if (self.vents.hasEnded) return;
+                    over: function () {
                         wasScrolling = self.reader.isScrolling;
                         if (!$('show-scroll-bar').length) {
                             self.settings.el.addClass('show-scroll-bar');
@@ -106,8 +104,6 @@ define([
                         }, this.interval * 4);
                     },
                     out: function () {
-                        // self.vents.countPages();
-                        // if (self.vents.hasEnded) return;
                         if ($('.show-scroll-bar').length && !$('#userInput').is(':focus')) {
                             self.settings.el.removeClass('show-scroll-bar');
                         }
@@ -270,31 +266,31 @@ define([
                 protocol = pathArray[0],
                 host = pathArray[2],
                 siteUrl = protocol + '//' + host,
-                retrieveJsonData = $.ajax({
+                JSONUrl = (self.settings.dev) ? 'data/bookData.json' : siteUrl + '/wp-content/themes/Fiktion/data/bookData.json';
 
-                    url: 'data/bookData.json',
-                    // url: siteUrl + '/wp-content/themes/Fiktion/data/bookData.json',
-                    dataType: 'json',
-                    method: 'get',
-                    success: function (data) {
-                        $.each(data, function (i) {
-                            if (this.uuid === window.ebookAppData.uuid) {
-                                self.settings.bookId = this.uuid;
-                                var components = this.components;
-                                self.sys.updatedReaderData('components', components);
-                                self.sys.updatedReaderData('currentPage', components[0].src);
-                                self.sys.updatedReaderData('firstPage', components[0].src);
-                                self.sys.updatedReaderData('lastPage', components[components.length - 1].src);
-                            } else {
-                                return;
-                            }
-                        });
-                    },
-                    error: function (x, t, s) {
+            var retrieveJsonData = $.ajax({
+                url: JSONUrl,
+                dataType: 'json',
+                method: 'get',
+                success: function (data) {
+                    $.each(data, function (i) {
+                        if (this.uuid === window.ebookAppData.uuid) {
+                            self.settings.bookId = this.uuid;
+                            var components = this.components;
+                            self.sys.updatedReaderData('components', components);
+                            self.sys.updatedReaderData('currentPage', components[0].src);
+                            self.sys.updatedReaderData('firstPage', components[0].src);
+                            self.sys.updatedReaderData('lastPage', components[components.length - 1].src);
+                        }
+                    });
+                },
+                error: function (x, t, s) {
+                    if (self.settings.debug) {
                         console.log(t + ': ' + s);
                     }
+                }
 
-                });
+            });
 
             function addJsonDataToDom(data) {
 
@@ -324,13 +320,9 @@ define([
             function loadChapter(pageUrl) {
 
                 if (pageUrl === null) {
-                    // var pathArray = window.location.href.split('/'),
-                    //     protocol = pathArray[0],
-                    //     host = pathArray[2],
-                    //     siteUrl = protocol + '//' + host,
-                    //     notFound = siteUrl + '/404';
-                    // window.location.href = notFound;
-                    // return false;
+                    var notFound = siteUrl + '/404';
+                    window.location.href = notFound;
+                    return false;
                 }
 
                 return $.ajax({

@@ -5,8 +5,11 @@ define([
     'use strict';
 
     var Settings = {
+        dev: false,
         debug: false,
+        version:1.0,
         clearStorage: false,
+        local:false,
         bookId: null,
         el: $('main'),
         chapters: $('.chapters'),

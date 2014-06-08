@@ -61,7 +61,7 @@ define([
 
             var frame = settings.el;
 
-            if (env.orientation() === 'landscape' && env.isMobile()) {
+            if ($(window).width() <= 568 && env.orientation() === 'landscape' && env.isMobile()) { // size for iPhone 5 and smaller
                 frame.css({
                     top: 10,
                     left: 0

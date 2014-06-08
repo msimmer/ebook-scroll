@@ -25,15 +25,15 @@ define([
                 return;
             }
 
-            if (prop === undefined || attr === undefined) {
+            if (typeof prop === 'undefined' || typeof attr === 'undefined') {
                 throw 'Error: sys.updateLocalStorage() undefined argument';
             }
 
             var parsedObj = JSON.parse(localStorage.getItem(obj));
 
-            if (nestedAttr !== undefined) {
+            if (typeof nestedAttr !== 'undefined') {
                 parsedObj[prop][attr] = nestedAttr;
-            } else if (nestedAttr === undefined) {
+            } else if (typeof nestedAttr === 'undefined') {
                 parsedObj[prop] = attr;
             }
 
@@ -69,7 +69,7 @@ define([
 
             var parsedObj = JSON.parse(localStorage.getItem(obj));
 
-            if (attr !== undefined) {
+            if (typeof attr !== 'undefined') {
                 return parsedObj[prop][attr];
             }
 

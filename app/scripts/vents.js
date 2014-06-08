@@ -44,7 +44,7 @@ define([
                     args = fArr.slice(1);
 
                 $(elem).on(trig, function (e) {
-                    if (e && e.originalEvent !== undefined) {
+                    if (e && typeof e.originalEvent !== 'undefined') {
                         args.push(e);
                         e.preventDefault();
                     }
@@ -227,8 +227,6 @@ define([
             self.stopScrolling();
             self.hasEnded = true;
 
-            console.log('isbookend has ended --' + self.hasEnded);
-
             if (settings.debug) {
                 console.log('Book end');
             }
@@ -371,8 +369,6 @@ define([
             } else {
                 self.hasEnded = false;
             }
-
-            console.log('has ended countPages --' + self.hasEnded);
 
             if (settings.debug) {
                 var intrvl,
