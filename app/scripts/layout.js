@@ -19,19 +19,16 @@ define([
         },
 
         this.targetContainerHeight = function () {
+            if (env.isMobile() && env.orientation() === 'landscape' && $(window).width() <= 568) {
+                return 250;
+            }
             var h = parseInt(settings.el.css('line-height'), 10) * 9;
             return h;
         },
 
         this.setFrameHeight = function () {
 
-            if (env.orientation() === 'landscape' && env.isMobile()) {
-                var targetHeight = 250;
-            } else if (env.orientation() !== 'landscape' && !env.isMobile() && $(window).width >= 480) {
-                var targetHeight = self.targetContainerHeight();
-            } else {
-                return;
-            }
+            var targetHeight = self.targetContainerHeight();
 
             settings.el.css({
                 height: targetHeight,
