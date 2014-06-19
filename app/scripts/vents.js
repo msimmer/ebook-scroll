@@ -172,11 +172,10 @@ define([
 
         this.speedIncrement = function () {
 
+            self.stopScrolling();
+
             if (settings.scrollSpeed < 100) {
-                self.stopScrolling();
                 settings.scrollSpeed += 10;
-                self.getSkipInterval();
-                self.startScrolling();
 
                 if (settings.debug) {
                     console.log('Reading speed incremented to ' + settings.scrollSpeed);
@@ -185,15 +184,17 @@ define([
                 sys.updateUserPreferences();
             }
 
+            self.getSkipInterval();
+            self.startScrolling();
+
         },
 
         this.speedDecrement = function () {
 
-            if (settings.scrollSpeed > 0) {
-                self.stopScrolling();
+            self.stopScrolling();
+
+            if (settings.scrollSpeed > 10) {
                 settings.scrollSpeed -= 10;
-                self.getSkipInterval();
-                self.startScrolling();
 
                 if (settings.debug) {
                     console.log('Reading speed decremented to ' + settings.scrollSpeed);
@@ -201,6 +202,9 @@ define([
 
                 sys.updateUserPreferences();
             }
+
+            self.getSkipInterval();
+            self.startScrolling();
 
         },
 

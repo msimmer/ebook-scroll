@@ -28,7 +28,7 @@ require([
 
             dev: true,
             debug: true,
-            clearStorage: false,
+            clearStorage: true,
             scrollSpeed: 10
 
         });

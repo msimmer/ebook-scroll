@@ -193,7 +193,7 @@ define([
                                 if (wasScrolling && !doubleTapped) {
                                     self.vents.stopScrolling();
                                 }
-                            }, 250);
+                            }, 150);
 
                         } else if (e.type == 'release') {
 

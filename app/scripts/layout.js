@@ -22,6 +22,9 @@ define([
             if (env.isMobile() && env.orientation() === 'landscape' && $(window).width() <= 568) {
                 return 250;
             }
+            if (env.isMobile() && env.orientation() === 'portrait' && $(window).width() <= 320) {
+                return 280;
+            }
             var h = parseInt(settings.el.css('line-height'), 10) * 9;
             return h;
         },
