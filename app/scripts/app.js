@@ -32,7 +32,6 @@ define([
             self.vents.bindEventHandlers();
 
             if (opts) {
-                console.log(opts);
                 $.extend(this.settings, opts);
             }
 
@@ -77,8 +76,6 @@ define([
                 }, 200);
 
             });
-
-            console.log('is mobile: ' + self.env.isMobile());
 
             // hoverIntent methods
             if (!self.env.isMobile()) {
@@ -273,6 +270,10 @@ define([
 
             var retrieveJsonData = $.ajax({
                 url: JSONUrl,
+                cache: false,
+                headers: {
+                    'If-Modified-Since': 'Sat, 01 Jan 2000 00:00:01 GMT'
+                },
                 dataType: 'json',
                 method: 'get',
                 success: function (data) {
@@ -331,7 +332,11 @@ define([
                 return $.ajax({
                         type: 'get',
                         url: pageUrl,
-                        async: false
+                        async: false,
+                        cache: false,
+                        headers: {
+                            'If-Modified-Since': 'Sat, 01 Jan 2000 00:00:01 GMT'
+                        },
                     })
                     .then(function (data) {
                         var content = $('<section/>', {
