@@ -172,10 +172,7 @@ define([
 
         this.speedIncrement = function () {
 
-            if (settings.scrollSpeed >= 100) {
-                // console.log('at 100% --');
-                return;
-            } else {
+            if (settings.scrollSpeed < 100) {
                 self.stopScrolling();
                 settings.scrollSpeed += 10;
                 self.getSkipInterval();
@@ -192,10 +189,7 @@ define([
 
         this.speedDecrement = function () {
 
-            if (settings.scrollSpeed <= 10) {
-                // console.log('at 0% --');
-                return;
-            } else {
+            if (settings.scrollSpeed > 0) {
                 self.stopScrolling();
                 settings.scrollSpeed -= 10;
                 self.getSkipInterval();
