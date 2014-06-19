@@ -26,8 +26,8 @@ require([
 
         var app = new App({
 
-            dev: false,
-            debug: false,
+            dev: true,
+            debug: true,
             clearStorage: false,
             scrollSpeed: 10
 

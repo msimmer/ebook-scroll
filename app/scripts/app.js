@@ -32,6 +32,7 @@ define([
             self.vents.bindEventHandlers();
 
             if (opts) {
+                console.log(opts);
                 $.extend(this.settings, opts);
             }
 
@@ -76,6 +77,8 @@ define([
                 }, 200);
 
             });
+
+            console.log('is mobile: ' + self.env.isMobile());
 
             // hoverIntent methods
             if (!self.env.isMobile()) {

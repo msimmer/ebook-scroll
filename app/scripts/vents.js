@@ -117,7 +117,7 @@ define([
             var v = 100 - settings.scrollSpeed,
                 n = v.toString().slice(-2),
                 r = parseInt(n, 10),
-                x = r * 5 / 50;
+                x = r * 6 / 30;
 
             self.skip = x;
 
@@ -173,7 +173,7 @@ define([
         this.speedIncrement = function () {
 
             if (settings.scrollSpeed >= 100) {
-                console.log('at 100% --');
+                // console.log('at 100% --');
                 return;
             } else {
                 self.stopScrolling();
@@ -193,7 +193,7 @@ define([
         this.speedDecrement = function () {
 
             if (settings.scrollSpeed <= 10) {
-                console.log('at 0% --');
+                // console.log('at 0% --');
                 return;
             } else {
                 self.stopScrolling();
