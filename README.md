@@ -2,7 +2,7 @@
 
 ## An Auto-Scrolling Ebook Reader in Your Browser.
 
-Built with RequireJS. Check it out in action [here](http://mzmm56.github.io/ebook-scroll/dist/), or fork the repo [here](https://github.com/mzmm56/ebook-scroll/tree/master).
+Built with RequireJS. Check it out in action [here](http://fiktion.cc/book/?fiktion_uuid=7e9aa2c0-327f-45b3-85f7-0bb401d1c1ce), or fork the repo [here](https://github.com/mzmm56/ebook-scroll/tree/master).
 
 ## Browser Support
 

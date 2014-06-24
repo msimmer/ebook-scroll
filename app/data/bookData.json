@@ -17,6 +17,12 @@
         "src": "components/fdbeeb28-6e83-4d3d-b96b-3bbd8c2d49c4/Text/ueber-den-reader.html"
     }]
 }, {
+    "uuid": "7e9aa2c0-327f-45b3-85f7-0bb401d1c1ce",
+    "components": [{
+        "title": "About the Reader",
+        "src": "components/7e9aa2c0-327f-45b3-85f7-0bb401d1c1ce/Text/About_the_Reader.html"
+    }]
+},{
     "uuid": "c343c5e3-728f-44c5-915d-5146abc97097",
     "components": [{
         "title": "Alff",
