@@ -269,30 +269,30 @@ define([
                 JSONUrl = (self.settings.dev) ? 'data/bookData.json' : siteUrl + '/wp-content/themes/Fiktion/data/bookData.json';
 
             var retrieveJsonData = $.ajax({
-                url: JSONUrl,
-                cache: false,
-                headers: {
-                    'If-Modified-Since': 'Sat, 01 Jan 2000 00:00:01 GMT'
-                },
-                dataType: 'json',
-                method: 'get',
-                success: function (data) {
-                    $.each(data, function (i) {
-                        if (this.uuid === window.ebookAppData.uuid) {
-                            self.settings.bookId = this.uuid;
-                            var components = this.components;
-                            self.sys.updatedReaderData('components', components);
-                            self.sys.updatedReaderData('currentPage', components[0].src);
-                            self.sys.updatedReaderData('firstPage', components[0].src);
-                            self.sys.updatedReaderData('lastPage', components[components.length - 1].src);
+                    url: JSONUrl,
+                    cache: false,
+                    headers: {
+                        'If-Modified-Since': 'Sat, 01 Jan 2000 00:00:01 GMT'
+                    },
+                    dataType: 'json',
+                    method: 'get',
+                    success: function (data) {
+                        $.each(data, function (i) {
+                            if (this.uuid === window.ebookAppData.uuid) {
+                                self.settings.bookId = this.uuid;
+                                var components = this.components;
+                                self.sys.updatedReaderData('components', components);
+                                self.sys.updatedReaderData('currentPage', components[0].src);
+                                self.sys.updatedReaderData('firstPage', components[0].src);
+                                self.sys.updatedReaderData('lastPage', components[components.length - 1].src);
+                            }
+                        });
+                    },
+                    error: function (x, t, s) {
+                        if (self.settings.debug) {
+                            console.log(t + ': ' + s);
                         }
-                    });
-                },
-                error: function (x, t, s) {
-                    if (self.settings.debug) {
-                        console.log(t + ': ' + s);
                     }
-                }
 
             });
 

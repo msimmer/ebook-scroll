@@ -119,6 +119,7 @@ define([
             if (localStorage.getItem(bookId) !== null) {
 
                 var obj = JSON.parse(localStorage.getItem(bookId));
+
                 reader.currentPage = obj.currentPage;
 
                 $.extend(reader.scrollPosition, obj.scrollPosition);
