@@ -46,27 +46,34 @@
             </style>
         </noscript>
         <script src="scripts/vendor/modernizr.js"></script>
-        <script type="text/javascript">
-            // window.ebookAppData = {
-            //     uuid: 'localStorage.getItem('fiktion.referrer')
-            // };
-
-            // window.ebookAppData = {
-            //     uuid: ''21a7619e-ec78-4694-97c9-88a173795996' // test book
-            // };
-
+        <script>
             window.ebookAppData = {
-                uuid: 'fdbeeb28-6e83-4d3d-b96b-3bbd8c2d49c4' // about the reader
+                uuid: '7e9aa2c0-327f-45b3-85f7-0bb401d1c1ce', // about the reader EN
+                relpath: '',
+                fullpath: 'localhost:9000',
+                bookpath: this.fullpath + '/components/' + this.uuid
             };
-
+        </script>
+        <?php
+        // $protocol       = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+        // $domain_name    = $protocol . $_SERVER['HTTP_HOST'];
+        // $uuid           = $_SESSION['book_uuid'];
+        // $relpath        = $_SESSION['rel_path'];
+        // $fullpath       = $domain_name . $_SESSION['rel_path'];
+        // $bookpath       = $fullpath . '/components/' . $uuid;
+        ?>
+        <script>
             // window.ebookAppData = {
-                // uuid: ''c343c5e3-728f-44c5-915d-5146abc97097' // alff
-            // };
+            //     uuid: "<?php echo $uuid; ?>",
+            //     relpath: "<?php echo $relpath; ?>",
+            //     fullpath:"<?php echo $fullpath; ?>",
+            //     bookpath: "<?php echo $bookpath; ?>"
+            // }
         </script>
     </head>
     <body>
         <noscript>
-            <p class="warn">Bitte java script in Ihrem Browser aktivieren für die Benutzung des Readers.
+            <p class="warn">Bitte JavaScript in Ihrem Browser aktivieren für die Benutzung des Readers.
             <br/><br/>Please enable JavaScript in your browser to use the reader.</p>
         </noscript>
         <div class="search-wrapper">

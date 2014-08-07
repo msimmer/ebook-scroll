@@ -27,6 +27,6 @@ The current list of tested browsers or operating systems.
 
 This project is made possible by support from the Haus der Kulturen der Welt (Berlin), and is financed by a grant from the German Federal Cultural Foundation.
 
-![Kulturstiftung des Bundes](http://fiktion.cc/wp-content/themes/Fiktion/components/meta/images/ksb.jpg)
+![Kulturstiftung des Bundes](gh-assets/images/ksb.jpg)
 
-![HKW](http://fiktion.cc/wp-content/themes/Fiktion/components/meta/images/hkw.png)
+![HKW](gh-assets/images/hkw.png)

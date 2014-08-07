@@ -53,27 +53,13 @@
         <!-- build:js scripts/vendor/modernizr.js -->
         <script src="bower_components/modernizr/modernizr.js"></script>
         <!-- endbuild -->
-        <script type="text/javascript">
-            // window.ebookAppData = {
-            //     uuid: 'localStorage.getItem('fiktion.referrer')
-            // };
-
-            // window.ebookAppData = {
-            //     uuid: ''21a7619e-ec78-4694-97c9-88a173795996' // test book
-            // };
-
-            // window.ebookAppData = {
-            //     uuid: 'fdbeeb28-6e83-4d3d-b96b-3bbd8c2d49c4' // about the reader DE
-            // };
-
+        <script>
             window.ebookAppData = {
-                uuid: '7e9aa2c0-327f-45b3-85f7-0bb401d1c1ce' // about the reader EN
+                uuid: '7e9aa2c0-327f-45b3-85f7-0bb401d1c1ce', // about the reader EN
+                relpath: '',
+                fullpath: 'localhost:9000',
+                bookpath: this.fullpath + '/components/' + this.uuid
             };
-
-            // window.ebookAppData = {
-                // uuid: ''c343c5e3-728f-44c5-915d-5146abc97097' // alff
-            // };
-
         </script>
         <?php
         // $protocol       = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
@@ -94,7 +80,7 @@
     </head>
     <body>
         <noscript>
-            <p class="warn">Bitte java script in Ihrem Browser aktivieren für die Benutzung des Readers.
+            <p class="warn">Bitte JavaScript in Ihrem Browser aktivieren für die Benutzung des Readers.
             <br /><br />Please enable JavaScript in your browser to use the reader.</p>
         </noscript>
         <div class="search-wrapper">

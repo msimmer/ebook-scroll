@@ -6,3 +6,4 @@ test/bower_components
 dev/
 dev/*
 *.php
+_*
