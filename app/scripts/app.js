@@ -339,6 +339,43 @@ define([
                     }
                 }
 
+                // function c(b) {
+                //     if (null === b)
+                //         if (localStorage && !localStorage.refreshed) window.onunload = window.onbeforeunload = function () {}, localStorage.clear(), localStorage.setItem("refreshed", !0), window.location.href = window.location.href;
+                //         else if (localStorage && localStorage.refreshed) {
+                //         localStorage.removeItem("refreshed");
+                //         var c = t + "/404";
+                //         return window.location.href = c, !1
+                //     }
+                //     var foo = a.Deferred();
+                //     a.ajax({
+                //         type: "get",
+                //         url: b,
+                //         async: !1,
+                //         cache: !1,
+                //         dataType:'html',
+                //         headers: {
+                //             "If-Modified-Since": "Sat, 01 Jan 2000 00:00:01 GMT"
+                //         },
+                //         success:function (c){
+                //             var d = a("<section/>", {
+                //             id: "page",
+                //             css: {
+                //                 margin: 0,
+                //                 padding: 0,
+                //                 border: 0
+                //             }
+                //         }).html(c);
+                //             k.settings.el.html(d), k.sys.updatedReaderData("currentPage", b), k.sys.updateLocalStorage(k.settings.bookId, "currentPage", b), k.settings.debug && console.log("Current page is " + b)
+                //             foo.resolve();
+                //         },
+                //         error:function(x, t, s){
+                //             console.log(t + ': ' + s);
+                //         }
+                //     });
+                //     return foo.promise();
+                // }
+
                 return $.ajax({
                         type: 'get',
                         url: pageUrl,

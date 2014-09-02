@@ -28,15 +28,15 @@
             <p>&#160;</p>
             <p><i>Look!</i> The text is scrolling all by itself.</p>
             <p>&#160;</p>
-            <p>If you want to stop the text, click <img data-img="stop_64.png" class="icon" alt="" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII="> with the cursor or tap twice on the display with your finger. To continue, again click or tap twice.</p>
+            <p>If you want to stop the text, click <img class="icon" alt="" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII="> with the cursor or tap twice on the display with your finger. To continue, again click or tap twice.</p>
             <p>&#160;</p>
-            <p>If you want the text to speed up, click <img data-img="faster_64.png" class="icon" alt="" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII="> or slide your finger to the right.</p>
+            <p>If you want the text to speed up, click <img class="icon" alt="" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII="> or slide your finger to the right.</p>
             <p>&#160;</p>
-            <p>If you want the text to slow down, click <img data-img="slower_64.png" class="icon" alt="" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII="> or slide your finger to the left. </p>
+            <p>If you want the text to slow down, click <img class="icon" alt="" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII="> or slide your finger to the left. </p>
             <p>&#160;</p>
-            <p>Select <img data-img="fullscreen_64.png" class="icon" alt="" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII="> to switch to full-page mode.</p>
+            <p>Select <img class="icon" alt="" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII="> to switch to full-page mode.</p>
             <p>&#160;</p>
-            <p>Click the <img data-img="darker_64.png" class="icon" alt="" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII="> button for a grey background; click <img data-img="lighter_64.png" class="icon" alt="" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII="> to return to white. </p>
+            <p>Click the <img class="icon" alt="" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII="> button for a grey background; click <img class="icon" alt="" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII="> to return to white. </p>
             <p>&#160;</p>
             <p>Use the scroll bar on the right-hand side of the page, or move your finger up and down on the screen, to flip forwards or backwards in the text. </p>
             <p>&#160;</p>
@@ -57,14 +57,4 @@
         <p>&#160;</p>
         <p>&#160;</p>
     </body>
-    <script>
-        var imgs = document.getElementsByTagName('img'),
-            path = window.ebookAppData.bookpath;
-        for(var i = 0; i < imgs.length; i++) {
-            if (imgs[i].hasAttribute('data-img')){
-                var imgName = imgs[i].getAttribute('data-img');
-                imgs[i].src = path + '/Images/' + imgName;
-            }
-        }
-    </script>
 </html>

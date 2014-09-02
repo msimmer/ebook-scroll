@@ -363,6 +363,12 @@ module.exports = function (grunt) {
                 'copy:scripts',
                 'imagemin',
                 'svgmin'
+            ],
+            dev: [
+                'compass',
+                'copy:styles',
+                'copy:vendor',
+                'copy:scripts'
             ]
         },
 
@@ -433,6 +439,18 @@ module.exports = function (grunt) {
         'usemin',
         'removelogging',
         'htmlmin'
+    ]);
+
+    grunt.registerTask('dev', [
+        'clean:dist',
+        'useminPrepare',
+        'concurrent:dev',
+        'autoprefixer',
+        'requirejs',
+        'concat',
+        'copy:dist',
+        'modernizr',
+        'usemin'
     ]);
 
     grunt.registerTask('default', [

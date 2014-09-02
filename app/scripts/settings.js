@@ -13,7 +13,7 @@ define([
         bookId: null,
         el: $('main'),
         chapters: $('.chapters'),
-        defaultFontSize: 18,
+        defaultFontSize: 30,
         fSize: 100,
         fSizeIncrement: 5,
         maxFontSize: function () {
