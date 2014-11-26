@@ -7,5 +7,5 @@ dev/
 dev/*
 *.php
 _*
-app/components/
-app/components/*
+components/
+components/*
