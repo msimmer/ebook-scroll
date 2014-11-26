@@ -1,37 +1,37 @@
 [{
-    "uuid": "21a7619e-ec78-4694-97c9-88a173795996",
-    "components": [{
-        "title": "Chapter 1",
-        "src": "components/page-1.html"
-    }, {
-        "title": "Chapter 2",
-        "src": "components/page-2.html"
-    }, {
-        "title": "Chapter 3",
-        "src": "components/page-3.html"
-    }]
-}, {
     "uuid": "fdbeeb28-6e83-4d3d-b96b-3bbd8c2d49c4",
     "components": [{
-        "title": "Über den Reader",
-        "src": "components/fdbeeb28-6e83-4d3d-b96b-3bbd8c2d49c4/Text/ueber-den-reader.html"
+        "title": "\u00dcber den Reader",
+        "src": "/wp-content/themes/Fiktion/components/fdbeeb28-6e83-4d3d-b96b-3bbd8c2d49c4/Text/ueber-den-reader.html"
     }]
 }, {
     "uuid": "7e9aa2c0-327f-45b3-85f7-0bb401d1c1ce",
     "components": [{
         "title": "About the Reader",
-        "src": "components/7e9aa2c0-327f-45b3-85f7-0bb401d1c1ce/Text/About_the_Reader.html"
-    }]
-},{
-    "uuid": "c343c5e3-728f-44c5-915d-5146abc97097",
-    "components": [{
-        "title": "Alff",
-        "src": "components/c343c5e3-728f-44c5-915d-5146abc97097/Text/alff.html"
+        "src": "/wp-content/themes/Fiktion/components/7e9aa2c0-327f-45b3-85f7-0bb401d1c1ce/Text/About_the_Reader.html"
     }]
 }, {
-    "uuid": "632d2c12-c58c-43e2-8448-06a86241c9bd",
+    "uuid": "F4C72D34-0891-2285-51B0-B9E1798A8D0B",
+    "components": [{
+        "title": "Starstruck",
+        "src": "/wp-content/themes/Fiktion/components/F4C72D34-0891-2285-51B0-B9E1798A8D0B/Text/starstruck_DE.html"
+    }]
+}, {
+    "uuid": "4663B6DB-782C-D2B0-DB38-8166C142F62D",
+    "components": [{
+        "title": "Starstruck",
+        "src": "/wp-content/themes/Fiktion/components/4663B6DB-782C-D2B0-DB38-8166C142F62D/Text/Section0001.html"
+    }]
+}, {
+    "uuid": "AC7D25DC-E7BB-4DCB-EB29-810FF1E14381",
     "components": [{
         "title": "Alff",
-        "src": "components/632d2c12-c58c-43e2-8448-06a86241c9bd/Text/alff.html"
+        "src": "/wp-content/themes/Fiktion/components/AC7D25DC-E7BB-4DCB-EB29-810FF1E14381/Text/alff_DE.html"
+    }]
+}, {
+    "uuid": "6496DAF0-E9A1-5868-DD6C-7F599306F76D",
+    "components": [{
+        "title": "Alff",
+        "src": "/wp-content/themes/Fiktion/components/6496DAF0-E9A1-5868-DD6C-7F599306F76D/Text/alff_EN.html"
     }]
 }]

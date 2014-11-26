@@ -5,7 +5,7 @@ define([
 ], function ($, Reader, Settings) {
     'use strict';
 
-    return function Sys() {
+    var Sys = function() {
 
         var self = this,
             reader = Reader,
@@ -13,11 +13,11 @@ define([
 
         this.updatedReaderData = function () {
             return reader[arguments[0]] = arguments[1];
-        },
+        };
 
         this.updateUserData = function () {
             return settings[arguments[0]] = arguments[1];
-        },
+        };
 
         this.updateLocalStorage = function (obj, prop, attr, nestedAttr) { // TODO: refactor
 
@@ -39,7 +39,7 @@ define([
 
             localStorage.setItem(obj, JSON.stringify(parsedObj));
 
-        },
+        };
 
         this.saveLocation = function () {
 
@@ -63,7 +63,7 @@ define([
                 reader.scrollPosition[reader.currentPage]
             );
 
-        },
+        };
 
         this.getFromLocalStorage = function (obj, prop, attr) { // TODO: refactor
 
@@ -75,7 +75,7 @@ define([
 
             return parsedObj[prop];
 
-        },
+        };
 
         this.updateUserPreferences = function () {
 
@@ -110,7 +110,7 @@ define([
                 self.updateUserPreferences();
 
             }
-        },
+        };
 
         this.getLocation = function () {
 
@@ -140,7 +140,7 @@ define([
 
             }
 
-        },
+        };
 
         this.goToPreviousLocation = function () {
 
@@ -159,5 +159,7 @@ define([
         };
 
     };
+
+    return Sys;
 
 });

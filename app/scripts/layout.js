@@ -6,7 +6,7 @@ define([
 ], function ($, Settings, Env, Styles) {
     'use strict';
 
-    return function Layout() {
+    var Layout = function () {
 
         var settings = Settings,
             env = Env,
@@ -14,20 +14,34 @@ define([
             self = this;
 
         this.targetContainerWidth = function () {
-            var w = parseInt(settings.el.css('font-size'), 10) * 25;
+            var w = parseInt(settings.el.css('font-size'), 10) * 25,
+                isMobile = env.isMobile(),
+                orientation = env.orientation();
+
+            if (isMobile && w > window.screen.width && window.screen.width <= 768 && orientation === 'portrait') {
+                return window.screen.width;
+            }
+            if (isMobile && w > window.screen.width && window.screen.width < 768 && orientation === 'landscape') {
+                return window.screen.height;
+            }
+            if (!isMobile && w > $(window).width()) {
+                return $(window).width();
+            }
+
             return w;
-        },
+        };
 
         this.targetContainerHeight = function () {
-            if (env.isMobile() && env.orientation() === 'landscape' && $(window).width() <= 568) {
-                return 250;
+            var orientation = env.orientation();
+            if (env.isMobile() && $(window).width() <= 568 && orientation === 'landscape') {
+                return 300;
             }
-            if (env.isMobile() && env.orientation() === 'portrait' && $(window).width() <= 320) {
-                return 280;
+            if (env.isMobile() && $(window).width() <= 568 && orientation === 'portrait'){
+                return window.screen.height / 2.2;
             }
             var h = parseInt(settings.el.css('line-height'), 10) * 9;
             return h;
-        },
+        };
 
         this.setFrameHeight = function () {
 
@@ -38,21 +52,18 @@ define([
                 maxHeight: targetHeight
             });
 
-        },
+        };
 
         this.setFrameWidth = function () {
-
-            if ($(window).width() <= 480) {
-                return;
-            }
 
             var targetWidth = self.targetContainerWidth();
 
             settings.el.css({
+                width: targetWidth,
                 maxWidth: targetWidth
             });
 
-        },
+        };
 
         this.adjustFramePosition = function () {
 
@@ -61,7 +72,7 @@ define([
 
             var frame = settings.el;
 
-            if ($(window).width() <= 568 && env.orientation() === 'landscape' && env.isMobile()) { // size for iPhone 5 and smaller
+            if (env.isMobile() && $(window).width() <= 568 && env.orientation() === 'landscape') { // size for iPhone 5 and smaller
                 frame.css({
                     top: 10,
                     left: 0
@@ -82,26 +93,10 @@ define([
 
             self.adjustNavPosition();
 
-            if ($('#shadow-top').length && $('#shadow-bottom').length) {
-                $('#shadow-top').css({
-                    'width': frame.width(),
-                    'left': frame.offset().left,
-                    'top': frame.offset().top
-                });
-                $('#shadow-bottom').css({
-                    'width': frame.width(),
-                    'left': frame.offset().left,
-                    'top': frame.offset().top + frame.height() - $('#shadow-bottom').height()
-                });
-            }
+            var dist = parseInt(settings.el.offset().top + settings.el.height() - 49, 10);
+            $('#shadow-bottom').css({top:dist});
 
-            if (env.isMobile()) {
-                setTimeout(function () {
-                    $('body,html').scrollTop(0);
-                }, 0);
-            }
-
-        },
+        };
 
         this.adjustNavPosition = function () {
 
@@ -131,7 +126,7 @@ define([
                 nav.addClass('mobile');
                 nav.css({
                     top: 0,
-                    width: 300
+                    width: 'auto'
                 });
             }
 
@@ -139,11 +134,11 @@ define([
                 nav.removeClass('mobile');
             }
 
-        },
+        };
 
         this.removeElementStyles = function () {
             //
-        },
+        };
 
         this.setStyles = function () {
 
@@ -157,5 +152,7 @@ define([
         };
 
     };
+
+    return Layout;
 
 });

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*! http://meyerweb.com/eric/tools/css/reset/ v2.0 | 20110126 | License: none (public domain) */
 /* line 3, _reset-normalize.scss */
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
@@ -66,7 +67,7 @@ hr {
 
 /* line 46, _reset-normalize.scss */
 q {
-  quotes: "\201C" "\201D" "\2018" "\2019";
+  quotes: "“" "”" "‘" "’";
 }
 
 /* line 49, _reset-normalize.scss */
@@ -168,7 +169,6 @@ svg:not(:root) {
     display: none !important;
   }
 }
-
 /* IE */
 /* line 33, _window-ui.scss */
 :not(main) {
@@ -200,42 +200,30 @@ svg:not(:root) {
 }
 
 @-webkit-keyframes rotateplane {
-  /* line 83, _window-ui.scss */
   0% {
     -webkit-transform: perspective(120px);
   }
-
-  /* line 84, _window-ui.scss */
   50% {
     -webkit-transform: perspective(120px) rotateY(180deg);
   }
-
-  /* line 85, _window-ui.scss */
   100% {
     -webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg);
   }
 }
-
 @keyframes rotateplane {
-  /* line 89, _window-ui.scss */
   0% {
     transform: perspective(120px) rotateX(0deg) rotateY(0deg);
     -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
   }
-
-  /* line 92, _window-ui.scss */
   50% {
     transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
     -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
   }
-
-  /* line 95, _window-ui.scss */
   100% {
     transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
     -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
   }
 }
-
 @font-face {
   font-family: "Cardo";
   src: url("fonts/cardo-bold-webfont.eot");
@@ -244,7 +232,6 @@ svg:not(:root) {
   font-style: normal;
   font-stretch: normal;
 }
-
 @font-face {
   font-family: "Cardo";
   src: url("fonts/cardo-italic-webfont.eot");
@@ -253,7 +240,6 @@ svg:not(:root) {
   font-style: normal;
   font-stretch: normal;
 }
-
 @font-face {
   font-family: "Cardo";
   src: url("fonts/cardo-regular-webfont.eot");
@@ -262,7 +248,6 @@ svg:not(:root) {
   font-style: normal;
   font-stretch: normal;
 }
-
 /* line 1, _styles.scss */
 html, body, div, hr, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
@@ -285,10 +270,10 @@ html, body {
 
 /* line 16, _styles.scss */
 html, body, main {
-  -webkit-transition: background-color 150ms ease-out;
-  -moz-transition: background-color 150ms ease-out;
-  -o-transition: background-color 150ms ease-out;
-  transition: background-color 150ms ease-out;
+  -webkit-transition: background-color 400ms ease;
+  -moz-transition: background-color 400ms ease;
+  -o-transition: background-color 400ms ease;
+  transition: background-color 400ms ease;
 }
 
 /* line 22, _styles.scss */
@@ -397,12 +382,75 @@ main:hover {
 }
 
 /* line 95, _styles.scss */
+#shadow-top, #shadow-bottom {
+  -webkit-transition: background 400ms ease;
+  -moz-transition: background 400ms ease;
+  -o-transition: background 400ms ease;
+  transition: background 400ms ease;
+}
+
+/* line 102, _styles.scss */
+.lightCss main #shadow-top {
+  position: fixed;
+  height: 50px;
+  width: inherit;
+  top: inherit;
+  background: -moz-linear-gradient(top, white 0%, rgba(255, 255, 255, 0) 100%);
+  background: -webkit-linear-gradient(top, white 0%, rgba(255, 255, 255, 0) 100%);
+  background: -o-linear-gradient(top, white 0%, rgba(255, 255, 255, 0) 100%);
+  background: -ms-linear-gradient(top, white 0%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(to bottom, white 0%, rgba(255, 255, 255, 0) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 );
+}
+/* line 114, _styles.scss */
+.lightCss main #shadow-bottom {
+  position: fixed;
+  height: 50px;
+  width: inherit;
+  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, white 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(100%, white));
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, white 100%);
+  background: -o-linear-gradient(top, rgba(255, 255, 255, 0) 0%, white 100%);
+  background: -ms-linear-gradient(top, rgba(255, 255, 255, 0) 0%, white 100%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
+}
+
+/* line 128, _styles.scss */
+.darkCss main #shadow-top {
+  position: fixed;
+  height: 50px;
+  width: inherit;
+  top: inherit;
+  background: -moz-linear-gradient(top, #cccccc 0%, rgba(204, 204, 204, 0) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #cccccc), color-stop(100%, rgba(204, 204, 204, 0)));
+  background: -webkit-linear-gradient(top, #cccccc 0%, rgba(204, 204, 204, 0) 100%);
+  background: -o-linear-gradient(top, #cccccc 0%, rgba(204, 204, 204, 0) 100%);
+  background: -ms-linear-gradient(top, #cccccc 0%, rgba(204, 204, 204, 0) 100%);
+  background: linear-gradient(to bottom, #cccccc 0%, rgba(204, 204, 204, 0) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00cccccc', endColorstr='#cccccc',GradientType=0 );
+}
+/* line 141, _styles.scss */
+.darkCss main #shadow-bottom {
+  position: fixed;
+  height: 50px;
+  width: inherit;
+  background: -moz-linear-gradient(top, rgba(204, 204, 204, 0) 0%, #cccccc 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #cccccc), color-stop(100%, #cccccc));
+  background: -webkit-linear-gradient(top, rgba(204, 204, 204, 0) 0%, #cccccc 100%);
+  background: -o-linear-gradient(top, rgba(204, 204, 204, 0) 0%, #cccccc 100%);
+  background: -ms-linear-gradient(top, rgba(204, 204, 204, 0) 0%, #cccccc 100%);
+  background: linear-gradient(to bottom, rgba(204, 204, 204, 0) 0%, #cccccc 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00cccccc', endColorstr='#cccccc',GradientType=0 );
+}
+
+/* line 155, _styles.scss */
 main a, main a:link, main a:active, main a:visited {
   color: blue !important;
   text-decoration: underline !important;
 }
 
-/* line 99, _styles.scss */
+/* line 159, _styles.scss */
 section#page {
   margin: 0;
   padding: 0;
@@ -410,7 +458,7 @@ section#page {
   opacity: .3;
 }
 
-/* line 105, _styles.scss */
+/* line 165, _styles.scss */
 .runner-help {
   position: absolute;
   bottom: 0;
@@ -421,13 +469,13 @@ section#page {
   opacity: .3;
 }
 
-/* line 114, _styles.scss */
+/* line 174, _styles.scss */
 .runner-help a {
   /*color:black;*/
   text-decoration: none;
 }
 
-/* line 118, _styles.scss */
+/* line 178, _styles.scss */
 .runner-page-count {
   position: absolute;
   bottom: 0;
@@ -442,55 +490,55 @@ section#page {
 Icons
 
 */
-/* line 133, _styles.scss */
+/* line 192, _styles.scss */
 .play-btn[data-state='play'] {
   background: transparent url(../images/play_64.png) no-repeat center;
   background-size: contain;
 }
 
-/* line 137, _styles.scss */
+/* line 196, _styles.scss */
 .play-btn[data-state='pause'] {
   background: transparent url(../images/stop_64.png) no-repeat center;
   background-size: contain;
 }
 
-/* line 141, _styles.scss */
+/* line 200, _styles.scss */
 .speed-inc {
   background: transparent url(../images/faster_64.png) no-repeat center;
   background-size: contain;
 }
 
-/* line 145, _styles.scss */
+/* line 204, _styles.scss */
 .speed-dec {
   background: transparent url(../images/slower_64.png) no-repeat center;
   background-size: contain;
 }
 
-/* line 149, _styles.scss */
+/* line 208, _styles.scss */
 .font-inc {
   background: transparent url(../images/bigger_64.png) no-repeat center;
   background-size: contain;
 }
 
-/* line 153, _styles.scss */
+/* line 212, _styles.scss */
 .font-dec {
   background: transparent url(../images/smaller_64.png) no-repeat center;
   background-size: contain;
 }
 
-/* line 157, _styles.scss */
+/* line 216, _styles.scss */
 .contrast-light {
   background: transparent url(../images/lighter_64.png) no-repeat center;
   background-size: contain;
 }
 
-/* line 161, _styles.scss */
+/* line 220, _styles.scss */
 .contrast-dark {
   background: transparent url(../images/darker_64.png) no-repeat center;
   background-size: contain;
 }
 
-/* line 165, _styles.scss */
+/* line 224, _styles.scss */
 .full-screen {
   background: transparent url(../images/fullscreen_64.png) no-repeat center;
   background-size: contain;
@@ -501,25 +549,25 @@ Icons
 Mobile styles
 
 */
-/* line 175, _styles.scss */
+/* line 234, _styles.scss */
 nav.mobile {
   top: 0;
   text-align: justify;
-  margin: 25px auto 0 auto;
+  margin: 8px auto 0 auto;
   position: relative;
 }
 
-/* line 181, _styles.scss */
+/* line 240, _styles.scss */
 nav.mobile ul.controls {
   display: inline;
 }
 
-/* line 184, _styles.scss */
+/* line 243, _styles.scss */
 nav.mobile ul.controls li {
   display: inline;
 }
 
-/* line 187, _styles.scss */
+/* line 246, _styles.scss */
 nav.mobile ul.controls li:last-child:after {
   content: ' ';
   visibility: hidden;
@@ -532,7 +580,7 @@ nav.mobile ul.controls li:last-child:after {
 Search bar
 
 */
-/* line 199, _styles.scss */
+/* line 258, _styles.scss */
 .search-wrapper {
   position: absolute;
   right: 0;
@@ -540,12 +588,12 @@ Search bar
   opacity: .3;
 }
 
-/* line 205, _styles.scss */
+/* line 264, _styles.scss */
 .input-wrapper {
   height: 32px;
 }
 
-/* line 208, _styles.scss */
+/* line 267, _styles.scss */
 #userInput {
   width: 300px;
   margin: 1px 0 0 0;
@@ -560,12 +608,12 @@ Search bar
   box-shadow:  4px 4px 6px rgba(0, 0, 0, 0.5);
 }
 
-/* line 219, _styles.scss */
+/* line 278, _styles.scss */
 #userInput:focus {
   outline: none;
 }
 
-/* line 222, _styles.scss */
+/* line 281, _styles.scss */
 #search {
   padding: 0;
   margin: 0;
@@ -578,7 +626,7 @@ Search bar
   right: 0;
 }
 
-/* line 233, _styles.scss */
+/* line 292, _styles.scss */
 #search-close {
   padding: 0;
   margin: 0 0 0 12px;
@@ -591,12 +639,17 @@ Search bar
   opacity: 0;
 }
 
+/* line 303, _styles.scss */
+#book-content {
+  padding: 0 15px 0 0;
+}
+
 /*
 
 Misc.
 
 */
-/* line 250, _styles.scss */
+/* line 312, _styles.scss */
 .hidden {
   width: 0;
   height: 0;
@@ -604,159 +657,90 @@ Misc.
   visibility: hidden;
 }
 
-/* line 256, _styles.scss */
+/* line 318, _styles.scss */
 .show-scroll-bar {
   overflow-y: scroll;
 }
 
 /* line 1, _page-styles.scss */
 .lightCss a, .lightCss abbr, .lightCss acronym, .lightCss address, .lightCss applet, .lightCss area, .lightCss article, .lightCss aside, .lightCss audio, .lightCss b, .lightCss base, .lightCss basefont, .lightCss bdi, .lightCss bdo, .lightCss bgsound, .lightCss big, .lightCss blink, .lightCss blockquote, .lightCss body, .lightCss br, .lightCss button, .lightCss canvas, .lightCss caption, .lightCss center, .lightCss cite, .lightCss code, .lightCss col, .lightCss colgroup, .lightCss content, .lightCss data, .lightCss datalist, .lightCss dd, .lightCss decorator, .lightCss del, .lightCss details, .lightCss dfn, .lightCss dir, .lightCss div, .lightCss dl, .lightCss dt, .lightCss element, .lightCss em, .lightCss embed, .lightCss fieldset, .lightCss figcaption, .lightCss figure, .lightCss font, .lightCss footer, .lightCss form, .lightCss frame, .lightCss frameset, .lightCss h1, .lightCss h2, .lightCss h3, .lightCss h4, .lightCss h5, .lightCss h6, .lightCss head, .lightCss header, .lightCss hgroup, .lightCss hr, .lightCss html, .lightCss i, .lightCss iframe, .lightCss img, .lightCss input, .lightCss ins, .lightCss isindex, .lightCss kbd, .lightCss keygen, .lightCss label, .lightCss legend, .lightCss li, .lightCss link, .lightCss listing, .lightCss main, .lightCss map, .lightCss mark, .lightCss marquee, .lightCss menu, .lightCss menuitem, .lightCss meter, .lightCss nav, .lightCss nobr, .lightCss noframes, .lightCss noscript, .lightCss object, .lightCss ol, .lightCss optgroup, .lightCss option, .lightCss output, .lightCss p, .lightCss param, .lightCss plaintext, .lightCss pre, .lightCss progress, .lightCss q, .lightCss rp, .lightCss rt, .lightCss ruby, .lightCss s, .lightCss samp, .lightCss section, .lightCss select, .lightCss shadow, .lightCss small, .lightCss source, .lightCss spacer, .lightCss span, .lightCss strike, .lightCss strong, .lightCss sub, .lightCss summary, .lightCss sup, .lightCss table, .lightCss tbody, .lightCss td, .lightCss template, .lightCss textarea, .lightCss tfoot, .lightCss th, .lightCss thead, .lightCss time, .lightCss title, .lightCss tr, .lightCss track, .lightCss tt, .lightCss u, .lightCss ul, .lightCss var, .lightCss video, .lightCss wbr {
-  color: black !important;
+  color: #000 !important;
 }
 
 /* line 2, _page-styles.scss */
 .darkCss a, .darkCss abbr, .darkCss acronym, .darkCss address, .darkCss applet, .darkCss area, .darkCss article, .darkCss aside, .darkCss audio, .darkCss b, .darkCss base, .darkCss basefont, .darkCss bdi, .darkCss bdo, .darkCss bgsound, .darkCss big, .darkCss blink, .darkCss blockquote, .darkCss body, .darkCss br, .darkCss button, .darkCss canvas, .darkCss caption, .darkCss center, .darkCss cite, .darkCss code, .darkCss col, .darkCss colgroup, .darkCss content, .darkCss data, .darkCss datalist, .darkCss dd, .darkCss decorator, .darkCss del, .darkCss details, .darkCss dfn, .darkCss dir, .darkCss div, .darkCss dl, .darkCss dt, .darkCss element, .darkCss em, .darkCss embed, .darkCss fieldset, .darkCss figcaption, .darkCss figure, .darkCss font, .darkCss footer, .darkCss form, .darkCss frame, .darkCss frameset, .darkCss h1, .darkCss h2, .darkCss h3, .darkCss h4, .darkCss h5, .darkCss h6, .darkCss head, .darkCss header, .darkCss hgroup, .darkCss hr, .darkCss html, .darkCss i, .darkCss iframe, .darkCss img, .darkCss input, .darkCss ins, .darkCss isindex, .darkCss kbd, .darkCss keygen, .darkCss label, .darkCss legend, .darkCss li, .darkCss link, .darkCss listing, .darkCss main, .darkCss map, .darkCss mark, .darkCss marquee, .darkCss menu, .darkCss menuitem, .darkCss meter, .darkCss nav, .darkCss nobr, .darkCss noframes, .darkCss noscript, .darkCss object, .darkCss ol, .darkCss optgroup, .darkCss option, .darkCss output, .darkCss p, .darkCss param, .darkCss plaintext, .darkCss pre, .darkCss progress, .darkCss q, .darkCss rp, .darkCss rt, .darkCss ruby, .darkCss s, .darkCss samp, .darkCss section, .darkCss select, .darkCss shadow, .darkCss small, .darkCss source, .darkCss spacer, .darkCss span, .darkCss strike, .darkCss strong, .darkCss sub, .darkCss summary, .darkCss sup, .darkCss table, .darkCss tbody, .darkCss td, .darkCss template, .darkCss textarea, .darkCss tfoot, .darkCss th, .darkCss thead, .darkCss time, .darkCss title, .darkCss tr, .darkCss track, .darkCss tt, .darkCss u, .darkCss ul, .darkCss var, .darkCss video, .darkCss wbr {
-  color: black !important;
+  color: #000 !important;
 }
 
-/* line 3, _page-styles.scss */
-#shadow-top.shadow-light {
-  background: -moz-linear-gradient(top, white 0%, rgba(255, 255, 255, 0) 100%);
-  background: -webkit-linear-gradient(top, white 0%, rgba(255, 255, 255, 0) 100%);
-  background: -o-linear-gradient(top, white 0%, rgba(255, 255, 255, 0) 100%);
-  background: -ms-linear-gradient(top, white 0%, rgba(255, 255, 255, 0) 100%);
-  background: linear-gradient(to bottom, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 );
-}
-
-/* line 11, _page-styles.scss */
-#shadow-top.shadow-dark {
-  background: -moz-linear-gradient(top, #cccccc 0%, rgba(204, 204, 204, 0) 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #cccccc), color-stop(100%, rgba(204, 204, 204, 0)));
-  background: -webkit-linear-gradient(top, #cccccc 0%, rgba(204, 204, 204, 0) 100%);
-  background: -o-linear-gradient(top, #cccccc 0%, rgba(204, 204, 204, 0) 100%);
-  background: -ms-linear-gradient(top, #cccccc 0%, rgba(204, 204, 204, 0) 100%);
-  background: linear-gradient(to bottom, #cccccc 0%, rgba(204, 204, 204, 0) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00cccccc', endColorstr='#cccccc',GradientType=0 );
-}
-
-/* line 20, _page-styles.scss */
-#shadow-bottom.shadow-light {
-  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, white 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(100%, white));
-  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, white 100%);
-  background: -o-linear-gradient(top, rgba(255, 255, 255, 0) 0%, white 100%);
-  background: -ms-linear-gradient(top, rgba(255, 255, 255, 0) 0%, white 100%);
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
-}
-
-/* line 29, _page-styles.scss */
-#shadow-bottom.shadow-dark {
-  background: -moz-linear-gradient(top, rgba(204, 204, 204, 0) 0%, #cccccc 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #cccccc), color-stop(100%, #cccccc));
-  background: -webkit-linear-gradient(top, rgba(204, 204, 204, 0) 0%, #cccccc 100%);
-  background: -o-linear-gradient(top, rgba(204, 204, 204, 0) 0%, #cccccc 100%);
-  background: -ms-linear-gradient(top, rgba(204, 204, 204, 0) 0%, #cccccc 100%);
-  background: linear-gradient(to bottom, rgba(204, 204, 204, 0) 0%, #cccccc 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00cccccc', endColorstr='#cccccc',GradientType=0 );
-}
-
-/* line 38, _page-styles.scss */
-#shadow-top, #shadow-bottom {
-  -webkit-transition: background 0.4s ease;
-  -moz-transition: background 0.4s ease;
-  -ms-transition: background 0.4s ease;
-  -o-transition: background 0.4s ease;
-  transition: background 0.4s ease;
-}
-
-/*iPad in landscape*/
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
-  /* line 3, _media-queries-landscape.scss */
-  body:before {
-    content: 'iPad in landscape';
-    background: white;
-    color: black;
-    position: fixed;
-    top: 0;
-    left: 0;
+  /* iPad in landscape */
+  /* line 5, _media-queries.scss */
+  ul.controls li a.full-screen {
     display: none;
   }
 
-  /* line 13, _media-queries-landscape.scss */
-  ul.controls li a.full-screen {
-    display: none;
+  /* line 8, _media-queries.scss */
+  #book-content {
+    padding: 0;
+  }
+
+  /* line 11, _media-queries.scss */
+  nav.mobile {
+    width: auto;
+    padding: 25px;
   }
 }
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: landscape) {
-  /* line 21, _media-queries-landscape.scss */
-  body:before {
-    content: 'iPhone 5 in landscape';
-    background: white;
-    color: black;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: none;
-  }
-
-  /* line 31, _media-queries-landscape.scss */
+  /* iPhone 5 in landscape */
+  /* line 20, _media-queries.scss */
   main {
-    margin: 20px 10px 0;
+    margin: 0 !important;
+    top: 0 !important;
   }
 
-  /* line 35, _media-queries-landscape.scss */
-  .mobile-portrait-only {
+  /* line 24, _media-queries.scss */
+  .mobile-portrait-only, ul.controls li a.full-screen {
     display: none;
   }
 
-  /* line 39, _media-queries-landscape.scss */
-  ul.controls li a.full-screen {
-    display: none;
+  /* line 27, _media-queries.scss */
+  #book-content {
+    padding: 0 8px;
+  }
+
+  /* line 30, _media-queries.scss */
+  #shadow-top {
+    margin-top: 0 !important;
+    top: 0 !important;
   }
 }
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: landscape) {
-  /* line 47, _media-queries-landscape.scss */
-  body:before {
-    content: 'iPhone 2G-4S in landscape';
-    background: white;
-    color: black;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: none;
-  }
-
-  /* line 57, _media-queries-landscape.scss */
+  /* iPhone 2G-4S in landscape */
+  /* line 39, _media-queries.scss */
   main {
-    margin: 20px 10px 0;
+    margin: 0 !important;
+    top: 0 !important;
   }
 
-  /* line 61, _media-queries-landscape.scss */
-  .mobile-portrait-only {
+  /* line 43, _media-queries.scss */
+  .mobile-portrait-only, ul.controls li a.full-screen {
     display: none;
   }
 
-  /* line 65, _media-queries-landscape.scss */
-  ul.controls li a.full-screen {
-    display: none;
+  /* line 46, _media-queries.scss */
+  #book-content {
+    padding: 0 8px;
+  }
+
+  /* line 49, _media-queries.scss */
+  #shadow-top {
+    margin-top: 0 !important;
+    top: 0 !important;
   }
 }
-/*iPad in portrait*/
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
-  /* line 3, _media-queries-portrait.scss */
-  body:before {
-    content: 'iPad in portrait';
-    background: white;
-    color: black;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: none;
-  }
-
-  /* line 12, _media-queries-portrait.scss */
+  /* iPad in portrait */
+  /* line 58, _media-queries.scss */
   main {
     font-size: 100%;
     position: absolute;
@@ -764,88 +748,117 @@ Misc.
     right: 0;
     bottom: 0;
     left: 0;
-    background: white;
+    background: #fff;
     overflow-y: hidden;
     overflow-x: hidden;
     max-height: 200px;
   }
 
-  /* line 24, _media-queries-portrait.scss */
+  /* line 70, _media-queries.scss */
   ul.controls li a {
     margin: 0;
   }
 
-  /* line 27, _media-queries-portrait.scss */
+  /* line 73, _media-queries.scss */
   ul.controls li a.full-screen {
     display: none;
+  }
+
+  /* line 76, _media-queries.scss */
+  #book-content {
+    padding: 0 25px;
+  }
+
+  /* line 79, _media-queries.scss */
+  nav.mobile {
+    width: auto;
+    padding: 25px;
   }
 }
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: portrait) {
-  /* line 34, _media-queries-portrait.scss */
-  body:before {
-    content: 'iPhone 5 in portrait';
-    background: white;
-    color: black;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: none;
-  }
-
-  /* line 43, _media-queries-portrait.scss */
+  /* iPhone 5 in portrait */
+  /* line 88, _media-queries.scss */
   nav.mobile {
+    margin: 0;
     top: 0 !important;
     text-align: justify;
-    margin: 25px auto 0 auto;
     position: relative;
-    width: 300px;
-    max-width: 300px;
+    width: auto;
+    max-width: 100%;
+    padding: 8px;
   }
 
-  /* line 51, _media-queries-portrait.scss */
+  /* line 97, _media-queries.scss */
   main {
-    margin: 30px 10px;
+    margin: 30px 0;
   }
 
-  /* line 54, _media-queries-portrait.scss */
+  /* line 100, _media-queries.scss */
   ul.controls li a.full-screen {
     display: none;
+  }
+
+  /* line 103, _media-queries.scss */
+  .runner-help {
+    margin: 8px 12px;
+  }
+
+  /* line 106, _media-queries.scss */
+  .runner-page-count {
+    margin: 8px;
+  }
+
+  /* line 109, _media-queries.scss */
+  #book-content {
+    padding: 0 8px;
+  }
+
+  /* line 112, _media-queries.scss */
+  #shadow-top {
+    margin-top: 30px !important;
   }
 }
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: portrait) {
-  /* line 61, _media-queries-portrait.scss */
-  body:before {
-    content: 'iPhone 2G-4S in portrait';
-    background: white;
-    color: black;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: none;
-  }
-
-  /* line 70, _media-queries-portrait.scss */
+  /* iPhone 2G-4S in portrait */
+  /* line 120, _media-queries.scss */
   nav.mobile {
+    margin: 0;
     top: 0 !important;
     text-align: justify;
-    margin: 25px auto 0 auto;
     position: relative;
-    width: 300px;
-    max-width: 300px;
+    width: auto;
+    max-width: 100%;
+    padding: 8px;
   }
 
-  /* line 78, _media-queries-portrait.scss */
+  /* line 129, _media-queries.scss */
   main {
-    margin: 30px 10px;
+    margin: 30px 0;
   }
 
-  /* line 81, _media-queries-portrait.scss */
+  /* line 132, _media-queries.scss */
   ul.controls li a.full-screen {
     margin: 0;
+    display: none;
   }
 
-  /* line 84, _media-queries-portrait.scss */
-  ul.controls li a.full-screen {
-    display: none;
+  /* line 136, _media-queries.scss */
+  .runner-help {
+    margin: 8px 12px;
+  }
+
+  /* line 139, _media-queries.scss */
+  .runner-page-count {
+    margin: 8px;
+  }
+
+  /* line 142, _media-queries.scss */
+  #book-content {
+    padding: 0 8px;
+  }
+
+  /* line 145, _media-queries.scss */
+  #shadow-top {
+    margin-top: 30px !important;
   }
 }

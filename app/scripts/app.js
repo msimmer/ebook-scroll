@@ -13,7 +13,7 @@ define([
 ], function ($, Env, Reader, Settings, Styles, Layout, Sys, Vents, Hammer) {
     'use strict';
 
-    return function App(options) {
+    var App = function(options) {
 
         var self = this,
             opts = options;
@@ -122,6 +122,10 @@ define([
             // mobile listeners
             if (self.env.isMobile()) {
 
+                $(document).on('touchstart', function(e){
+                    // e.preventDefault();
+                });
+
                 self.settings.el.css('overflow-y', 'scroll');
 
                 var el = document.getElementsByTagName('body')[0],
@@ -154,6 +158,8 @@ define([
                     clearTimeout(touchTimer);
 
                     if (!target.is('.control-btn') && !target.is(frame) && !target.parents().is(frame)) {
+
+                        console.log('-- target not control of frame or frame children');
 
                         e.preventDefault();
                         e.stopPropagation();
@@ -266,7 +272,7 @@ define([
                 protocol = pathArray[0],
                 host = pathArray[2],
                 siteUrl = protocol + '//' + host,
-                JSONUrl = (self.settings.dev) ? 'data/bookData.json' : siteUrl + '/wp-content/themes/Fiktion/data/bookData.json';
+                JSONUrl = self.settings.jsonPath
 
             var retrieveJsonData = $.ajax({
                 url: JSONUrl,
@@ -339,43 +345,6 @@ define([
                     }
                 }
 
-                // function c(b) {
-                //     if (null === b)
-                //         if (localStorage && !localStorage.refreshed) window.onunload = window.onbeforeunload = function () {}, localStorage.clear(), localStorage.setItem("refreshed", !0), window.location.href = window.location.href;
-                //         else if (localStorage && localStorage.refreshed) {
-                //         localStorage.removeItem("refreshed");
-                //         var c = t + "/404";
-                //         return window.location.href = c, !1
-                //     }
-                //     var foo = a.Deferred();
-                //     a.ajax({
-                //         type: "get",
-                //         url: b,
-                //         async: !1,
-                //         cache: !1,
-                //         dataType:'html',
-                //         headers: {
-                //             "If-Modified-Since": "Sat, 01 Jan 2000 00:00:01 GMT"
-                //         },
-                //         success:function (c){
-                //             var d = a("<section/>", {
-                //             id: "page",
-                //             css: {
-                //                 margin: 0,
-                //                 padding: 0,
-                //                 border: 0
-                //             }
-                //         }).html(c);
-                //             k.settings.el.html(d), k.sys.updatedReaderData("currentPage", b), k.sys.updateLocalStorage(k.settings.bookId, "currentPage", b), k.settings.debug && console.log("Current page is " + b)
-                //             foo.resolve();
-                //         },
-                //         error:function(x, t, s){
-                //             console.log(t + ': ' + s);
-                //         }
-                //     });
-                //     return foo.promise();
-                // }
-
                 return $.ajax({
                         type: 'get',
                         url: pageUrl,
@@ -426,26 +395,14 @@ define([
                     self.vents.contrastToggle(self.settings.contrast);
 
                     var shadowHeight = 50,
+                        topDist = self.env.isMobile() ? 0 : self.settings.el.offset().top,
                         shadowTop = $('<div/>', {
                             id: 'shadow-top',
-                            class: 'shadow-' + self.settings.contrast,
-                            css: {
-                                'position': 'fixed',
-                                'height': shadowHeight,
-                                'width': self.settings.el.width(),
-                                'left': self.settings.el.offset().left,
-                                'top': self.settings.el.offset().top,
-                            }
                         }),
                         shadowBottom = $('<div/>', {
                             id: 'shadow-bottom',
-                            class: 'shadow-' + self.settings.contrast,
                             css: {
-                                'position': 'fixed',
-                                'height': shadowHeight,
-                                'width': self.settings.el.width(),
-                                'left': self.settings.el.offset().left,
-                                'top': self.settings.el.offset().top + self.settings.el.height() - shadowHeight,
+                                'top': parseInt(self.settings.el.offset().top + self.settings.el.height() - 49, 10)
                             }
                         });
 
@@ -491,5 +448,7 @@ define([
         };
 
     };
+
+    return App;
 
 });

@@ -26,7 +26,7 @@ module.exports = function (grunt) {
         yeoman: {
             // Configurable paths
             app: 'app',
-            dist: 'dist'
+            dist: '../wp-content/themes/Fiktion'
         },
 
         // Watches files for changes and runs tasks based on the changed files
@@ -108,7 +108,14 @@ module.exports = function (grunt) {
                     dot: true,
                     src: [
                         '.tmp',
-                        '<%= yeoman.dist %>/*',
+                        '<%= yeoman.dist %>/components/',
+                        '<%= yeoman.dist %>/data/',
+                        '<%= yeoman.dist %>/images/',
+                        '<%= yeoman.dist %>/scripts/',
+                        '<%= yeoman.dist %>/styles/',
+                        '<%= yeoman.dist %>/*.icon.png',
+                        '<%= yeoman.dist %>/*.splash.png',
+                        '<%= yeoman.dist %>/index.html',
                         '!<%= yeoman.dist %>/.git*'
                     ]
                 }]
@@ -303,7 +310,7 @@ module.exports = function (grunt) {
                         '*.{ico,png,txt}',
                         '.htaccess',
                         'images/{,*/}*.*',
-                        '{,*/}*.html',
+                        // '{,*/}*.html',
                         'styles/fonts/{,*/}*.*',
                         'bower_components/bootstrap-sass/vendor/assets/fonts/bootstrap/*.*',
                         'data/*.*',
@@ -432,7 +439,7 @@ module.exports = function (grunt) {
         'requirejs',
         'concat',
         'cssmin',
-        'uglify',
+        // 'uglify',
         'copy:dist',
         'modernizr',
         // 'rev',

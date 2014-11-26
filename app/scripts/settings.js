@@ -6,6 +6,7 @@ define([
 
     var Settings = {
         dev: false,
+        jsonPath: 'data/bookData.json',
         debug: false,
         version:1.0,
         clearStorage: false,

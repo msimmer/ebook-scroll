@@ -26,7 +26,8 @@ require([
 
         var app = new App({
 
-            dev: true,
+            dev: false,
+            jsonPath: 'http://fiktion.cc/wp-content/themes/Fiktion/data/bookData.json',
             debug: false,
             clearStorage: false,
             scrollSpeed: 10

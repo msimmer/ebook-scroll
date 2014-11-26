@@ -8,7 +8,7 @@ define([
 ], function ($, Settings, Reader, Layout, Sys) {
     'use strict';
 
-    return function Vents() {
+    var Vents = function() {
 
         var settings = Settings,
             reader = Reader,
@@ -28,7 +28,7 @@ define([
             '.full-screen, click': 'toggleFullScreen',
             'main a, click': 'embeddedLinkClick'
 
-        },
+        };
 
         this.bindEventHandlers = function () {
 
@@ -53,7 +53,7 @@ define([
 
             });
 
-        },
+        };
 
         this.toggleFullScreen = function () {
 
@@ -79,9 +79,9 @@ define([
                 }
             }
 
-        },
+        };
 
-        this.listenForPageChangeInterval = null,
+        this.listenForPageChangeInterval = null;
 
         this.listenForPageChange = function () {
 
@@ -95,7 +95,7 @@ define([
                 self.countPages();
             }, intrvl);
 
-        },
+        };
 
         this.playPause = function () {
 
@@ -105,13 +105,13 @@ define([
             isScrolling ? self.stopScrolling() : self.startScrolling();
             playBtn.attr('data-state', isScrolling ? 'play' : 'pause');
 
-        },
+        };
 
-        this.requestAnim = null,
+        this.requestAnim = null;
 
-        this.ct = 0,
+        this.ct = 0;
 
-        this.skip = null,
+        this.skip = null;
 
         this.getSkipInterval = function () {
             var v = 100 - settings.scrollSpeed,
@@ -121,7 +121,7 @@ define([
 
             self.skip = x;
 
-        },
+        };
 
         this.readScroll = function () {
 
@@ -134,7 +134,7 @@ define([
             settings.el.scrollTop(settings.el.scrollTop() + 1); // run the animation
             self.requestAnim = window.animateScroll(self.readScroll);
 
-        },
+        };
 
         this.startScrolling = function () {
 
@@ -151,7 +151,7 @@ define([
                 reader.isScrolling = true;
             }
 
-        },
+        };
 
         this.stopScrolling = function () {
 
@@ -168,7 +168,7 @@ define([
                 reader.isScrolling = false;
             }
 
-        },
+        };
 
         this.speedIncrement = function () {
 
@@ -187,7 +187,7 @@ define([
             self.getSkipInterval();
             self.startScrolling();
 
-        },
+        };
 
         this.speedDecrement = function () {
 
@@ -206,7 +206,7 @@ define([
             self.getSkipInterval();
             self.startScrolling();
 
-        },
+        };
 
         this.isChapterEnd = function () {
 
@@ -216,7 +216,7 @@ define([
                 console.log('Chapter end');
             }
 
-        },
+        };
 
         this.hasEnded = false,
 
@@ -229,7 +229,7 @@ define([
                 console.log('Book end');
             }
 
-        },
+        };
 
         this.fontIncrement = function () {
 
@@ -246,7 +246,7 @@ define([
             sys.updateUserData('fSize', size);
             sys.updateUserPreferences();
 
-        },
+        };
 
         this.fontDecrement = function () {
 
@@ -263,7 +263,7 @@ define([
             sys.updateUserData('fSize', size);
             sys.updateUserPreferences();
 
-        },
+        };
 
         this.contrastToggle = function (e) {
 
@@ -273,21 +273,15 @@ define([
             if (contrast === 'dark') {
                 html.addClass('darkCss');
                 html.removeClass('lightCss');
-                $('#shadow-top, #shadow-bottom')
-                    .addClass('shadow-dark')
-                    .removeClass('shadow-light');
             } else if (contrast === 'light') {
                 html.addClass('lightCss');
                 html.removeClass('darkCss');
-                $('#shadow-top, #shadow-bottom')
-                    .addClass('shadow-light')
-                    .removeClass('shadow-dark');
             }
 
             sys.updateUserData('contrast', contrast);
             sys.updateUserPreferences();
 
-        },
+        };
 
         this.embeddedLinkClick = function (e) {
 
@@ -304,7 +298,7 @@ define([
                 sys.saveLocation();
             }
 
-        },
+        };
 
         this.orientationHasChanged = function () {
 
@@ -334,14 +328,14 @@ define([
                 }, 500);
             }
 
-        },
+        };
 
         this.resizeStopped = function () {
 
             self.countPages();
             layout.adjustFramePosition();
 
-        },
+        };
 
         this.countPages = function () {
             var main = settings.el,
@@ -387,5 +381,7 @@ define([
         };
 
     };
+
+    return Vents;
 
 });
