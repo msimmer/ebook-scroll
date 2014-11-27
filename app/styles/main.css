@@ -686,17 +686,31 @@ Search bar
   padding: 0 15px 0 0;
 }
 
+/* line 343, _styles.scss */
+.cursor {
+  cursor: auto;
+  -webkit-transition: cursor 400ms ease;
+  -moz-transition: cursor 400ms ease;
+  -o-transition: cursor 400ms ease;
+  transition: cursor 400ms ease;
+}
+
+/* line 350, _styles.scss */
+.cursor.cursor-hidden {
+  cursor: url(../images/no-cursor.png), auto;
+}
+
 /*
 
 Misc.
 
 */
-/* line 349, _styles.scss */
+/* line 359, _styles.scss */
 .hidden {
   display: none;
 }
 
-/* line 352, _styles.scss */
+/* line 362, _styles.scss */
 .show-scroll-bar {
   overflow-y: scroll;
 }

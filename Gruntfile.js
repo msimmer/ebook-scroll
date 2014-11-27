@@ -38,9 +38,12 @@ module.exports = function (grunt) {
                     livereload: true
                 }
             },
-            jstest: {
-                files: ['test/spec/{,*/}*.js'],
-                tasks: ['test:watch']
+            jsdev: {
+                files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
+                tasks: ['jshint', 'requirejs', 'copy:scripts'],
+                options: {
+                    livereload: true
+                }
             },
             gruntfile: {
                 files: ['Gruntfile.js']
@@ -120,6 +123,27 @@ module.exports = function (grunt) {
                     ]
                 }]
             },
+            js: {
+                files: [{
+                    dot: true,
+                    src: [
+                        '.tmp',
+                        '<%= yeoman.dist %>/scripts/',
+                        '!<%= yeoman.dist %>/.git*'
+                    ]
+                }]
+            },
+            styles: {
+                files: [{
+                    dot: true,
+                    src: [
+                        '.tmp',
+                        '<%= yeoman.dist %>/styles/*.css',
+                        '!<%= yeoman.dist %>/.git*'
+                    ]
+                }]
+            },
+
             server: '.tmp'
         },
 
@@ -217,7 +241,6 @@ module.exports = function (grunt) {
                     preserveLicenseComments: false,
                     useStrict: true,
                     wrap: true
-                    //uglify2: {} // https://github.com/mishoo/UglifyJS2
                 }
             }
         },
@@ -322,7 +345,7 @@ module.exports = function (grunt) {
                 expand: true,
                 dot: true,
                 cwd: '<%= yeoman.app %>/styles',
-                dest: '.tmp/styles/',
+                dest: '<%= yeoman.dist %>/styles/',
                 src: '{,*/}*.css'
             },
             vendor: {
@@ -360,9 +383,6 @@ module.exports = function (grunt) {
                 'compass:server',
                 'copy:styles'
             ],
-            test: [
-                'copy:styles'
-            ],
             dist: [
                 'compass',
                 'copy:styles',
@@ -371,11 +391,13 @@ module.exports = function (grunt) {
                 // 'imagemin',
                 // 'svgmin'
             ],
-            dev: [
-                'compass',
-                'copy:styles',
+            js: [
                 'copy:vendor',
                 'copy:scripts'
+            ],
+            styles:[
+                'compass',
+                'copy:styles'
             ]
         },
 
@@ -383,7 +405,7 @@ module.exports = function (grunt) {
             dist: {
                 src: 'dist/**/*.js',
                 options: {
-                    methods:[
+                    methods: [
                         'console.log',
                         'console.debug',
                         'console.info',
@@ -439,25 +461,12 @@ module.exports = function (grunt) {
         'requirejs',
         'concat',
         'cssmin',
-        // 'uglify',
+        'uglify',
         'copy:dist',
         'modernizr',
-        // 'rev',
         'usemin',
         'removelogging',
         'htmlmin'
-    ]);
-
-    grunt.registerTask('dev', [
-        'clean:dist',
-        'useminPrepare',
-        'concurrent:dev',
-        'autoprefixer',
-        'requirejs',
-        'concat',
-        'copy:dist',
-        'modernizr',
-        'usemin'
     ]);
 
     grunt.registerTask('default', [
@@ -466,4 +475,22 @@ module.exports = function (grunt) {
         'test',
         'build'
     ]);
+
+    grunt.registerTask('js', [
+        'clean:js',
+        'useminPrepare',
+        'concurrent:js',
+        'requirejs',
+        'copy:scripts'
+        // 'watch:js'
+    ]);
+
+    grunt.registerTask('styles', [
+        'clean:styles',
+        'useminPrepare',
+        'concurrent:styles',
+        'copy:styles',
+        'watch:styles'
+    ]);
+
 };

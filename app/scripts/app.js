@@ -426,6 +426,7 @@ define([
                                             clearInterval(intrvl);
                                             clearTimeout(pageCountTimeout);
                                             _this.vents.countPages();
+                                            _this.vents.cursorListener();
 
                                             var ids = $([]).pushStack($('h1,h2,h3,h4,h4'));
                                             if (ids.length) {

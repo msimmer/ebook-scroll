@@ -8,7 +8,7 @@ define([
 ], function ($, Settings, Reader, Layout, Sys) {
     'use strict';
 
-    var Vents = function() {
+    var Vents = function () {
 
         var settings = Settings,
             reader = Reader,
@@ -136,6 +136,41 @@ define([
 
         };
 
+        this.cursorTimer = null;
+
+        this.cursorListener = function () {
+            var $this = $('html');
+            var showCursor = function () {
+                $this.removeClass('cursor-hidden');
+            };
+            var hideCursor = function () {
+                $this.addClass('cursor-hidden');
+            };
+            var setTimer = function () {
+                if (reader.isScrolling) {
+                    _this.cursorTimer = setTimeout(function () {
+                        hideCursor();
+                    }, 2000);
+                }
+            };
+            $this.on({
+                mousemove: function () {
+                    showCursor();
+                    window.clearTimeout(_this.cursorTimer);
+                    setTimer();
+                }
+            });
+            $('a').on({
+                mouseenter: function () {
+                    window.clearTimeout(_this.cursorTimer);
+                },
+                mouseleave: function () {
+                    setTimer();
+                }
+            });
+            $this.addClass('cursor-hidden');
+        };
+
         this.startScrolling = function () {
 
             if (!reader.isScrolling) {
@@ -220,16 +255,16 @@ define([
 
         this.hasEnded = false,
 
-        this.isBookEnd = function () {
+            this.isBookEnd = function () {
 
-            _this.stopScrolling();
-            _this.hasEnded = true;
+                _this.stopScrolling();
+                _this.hasEnded = true;
 
-            if (settings.debug) {
-                console.log('Book end');
-            }
+                if (settings.debug) {
+                    console.log('Book end');
+                }
 
-        };
+            };
 
         this.fontIncrement = function () {
 
