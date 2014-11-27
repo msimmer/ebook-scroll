@@ -11,7 +11,7 @@ define([
         var settings = Settings,
             env = Env,
             styles = Styles,
-            self = this;
+            _this = this;
 
         this.targetContainerWidth = function () {
             var w = parseInt(settings.el.css('font-size'), 10) * 25,
@@ -45,7 +45,7 @@ define([
 
         this.setFrameHeight = function () {
 
-            var targetHeight = self.targetContainerHeight();
+            var targetHeight = _this.targetContainerHeight();
 
             settings.el.css({
                 height: targetHeight,
@@ -56,7 +56,7 @@ define([
 
         this.setFrameWidth = function () {
 
-            var targetWidth = self.targetContainerWidth();
+            var targetWidth = _this.targetContainerWidth();
 
             settings.el.css({
                 width: targetWidth,
@@ -67,8 +67,8 @@ define([
 
         this.adjustFramePosition = function () {
 
-            self.setFrameHeight();
-            self.setFrameWidth();
+            _this.setFrameHeight();
+            _this.setFrameWidth();
 
             var frame = settings.el;
 
@@ -91,7 +91,7 @@ define([
                 frame.css(cssObj);
             }
 
-            self.adjustNavPosition();
+            _this.adjustNavPosition();
 
             var dist = parseInt(settings.el.offset().top + settings.el.height() - 49, 10);
             $('#shadow-bottom').css({top:dist});

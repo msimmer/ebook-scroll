@@ -368,8 +368,8 @@ module.exports = function (grunt) {
                 'copy:styles',
                 'copy:vendor',
                 'copy:scripts',
-                'imagemin',
-                'svgmin'
+                // 'imagemin',
+                // 'svgmin'
             ],
             dev: [
                 'compass',

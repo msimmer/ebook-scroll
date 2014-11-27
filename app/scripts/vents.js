@@ -14,7 +14,7 @@ define([
             reader = Reader,
             layout = new Layout(),
             sys = new Sys(),
-            self = this;
+            _this = this;
 
         this.eventHandlers = {
 
@@ -89,10 +89,10 @@ define([
                 containerH = Math.floor(settings.el.height()),
                 intrvl = Math.floor((lineHeight * containerH) / settings.scrollSpeed + 1) * 100;
 
-            window.clearInterval(self.listenForPageChangeInterval);
+            window.clearInterval(_this.listenForPageChangeInterval);
 
-            self.listenForPageChangeInterval = setInterval(function () {
-                self.countPages();
+            _this.listenForPageChangeInterval = setInterval(function () {
+                _this.countPages();
             }, intrvl);
 
         };
@@ -102,7 +102,7 @@ define([
             var playBtn = $('.controls').find('.play-btn'),
                 isScrolling = reader.isScrolling;
 
-            isScrolling ? self.stopScrolling() : self.startScrolling();
+            isScrolling ? _this.stopScrolling() : _this.startScrolling();
             playBtn.attr('data-state', isScrolling ? 'play' : 'pause');
 
         };
@@ -119,20 +119,20 @@ define([
                 r = parseInt(n, 10),
                 x = r * 6 / 30;
 
-            self.skip = x;
+            _this.skip = x;
 
         };
 
         this.readScroll = function () {
 
-            self.ct++;
-            if (self.ct < self.skip) { // skip the animation every `self.skip` frame
-                self.requestAnim = window.animateScroll(self.readScroll);
+            _this.ct++;
+            if (_this.ct < _this.skip) { // skip the animation every `_this.skip` frame
+                _this.requestAnim = window.animateScroll(_this.readScroll);
                 return;
             }
-            self.ct = 0;
+            _this.ct = 0;
             settings.el.scrollTop(settings.el.scrollTop() + 1); // run the animation
-            self.requestAnim = window.animateScroll(self.readScroll);
+            _this.requestAnim = window.animateScroll(_this.readScroll);
 
         };
 
@@ -141,12 +141,12 @@ define([
             if (!reader.isScrolling) {
                 $('.controls').find('.play-btn').attr('data-state', 'pause');
 
-                if (self.skip == null) {
-                    self.getSkipInterval();
+                if (_this.skip == null) {
+                    _this.getSkipInterval();
                 }
 
-                self.readScroll();
-                self.listenForPageChange();
+                _this.readScroll();
+                _this.listenForPageChange();
 
                 reader.isScrolling = true;
             }
@@ -162,8 +162,8 @@ define([
                     console.log('Stopped');
                 }
 
-                window.cancelScroll(self.requestAnim);
-                window.clearInterval(self.listenForPageChangeInterval);
+                window.cancelScroll(_this.requestAnim);
+                window.clearInterval(_this.listenForPageChangeInterval);
 
                 reader.isScrolling = false;
             }
@@ -172,7 +172,7 @@ define([
 
         this.speedIncrement = function () {
 
-            self.stopScrolling();
+            _this.stopScrolling();
 
             if (settings.scrollSpeed < 100) {
                 settings.scrollSpeed += 10;
@@ -184,14 +184,14 @@ define([
                 sys.updateUserPreferences();
             }
 
-            self.getSkipInterval();
-            self.startScrolling();
+            _this.getSkipInterval();
+            _this.startScrolling();
 
         };
 
         this.speedDecrement = function () {
 
-            self.stopScrolling();
+            _this.stopScrolling();
 
             if (settings.scrollSpeed > 10) {
                 settings.scrollSpeed -= 10;
@@ -203,14 +203,14 @@ define([
                 sys.updateUserPreferences();
             }
 
-            self.getSkipInterval();
-            self.startScrolling();
+            _this.getSkipInterval();
+            _this.startScrolling();
 
         };
 
         this.isChapterEnd = function () {
 
-            self.stopScrolling();
+            _this.stopScrolling();
 
             if (settings.debug) {
                 console.log('Chapter end');
@@ -222,8 +222,8 @@ define([
 
         this.isBookEnd = function () {
 
-            self.stopScrolling();
-            self.hasEnded = true;
+            _this.stopScrolling();
+            _this.hasEnded = true;
 
             if (settings.debug) {
                 console.log('Book end');
@@ -245,6 +245,7 @@ define([
 
             sys.updateUserData('fSize', size);
             sys.updateUserPreferences();
+            $(document).trigger('updateChapters');
 
         };
 
@@ -262,6 +263,7 @@ define([
 
             sys.updateUserData('fSize', size);
             sys.updateUserPreferences();
+            $(document).trigger('updateChapters');
 
         };
 
@@ -291,7 +293,7 @@ define([
 
             if (ext) {
                 e.stopPropagation();
-                self.stopScrolling();
+                _this.stopScrolling();
                 target.attr('target', '_blank');
             } else {
                 sys.loadChapter(href);
@@ -322,18 +324,11 @@ define([
             }, 1);
 
             if (reader.isScrolling) {
-                self.stopScrolling();
+                _this.stopScrolling();
                 setTimeout(function () {
-                    self.startScrolling();
+                    _this.startScrolling();
                 }, 500);
             }
-
-        };
-
-        this.resizeStopped = function () {
-
-            self.countPages();
-            layout.adjustFramePosition();
 
         };
 
@@ -354,12 +349,12 @@ define([
 
             if (getCurrentPage() >= Math.round(pageH / frameH)) {
                 if (reader.currentPage === reader.lastPage) {
-                    self.isBookEnd();
+                    _this.isBookEnd();
                 } else if (reader.currentPage !== reader.lastPage) {
-                    self.isChapterEnd();
+                    _this.isChapterEnd();
                 }
             } else {
-                self.hasEnded = false;
+                _this.hasEnded = false;
             }
 
             if (settings.debug) {

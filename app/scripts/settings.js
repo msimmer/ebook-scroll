@@ -13,6 +13,7 @@ define([
         local:false,
         bookId: null,
         el: $('main'),
+        container: $('#book-content'),
         chapters: $('.chapters'),
         defaultFontSize: 30,
         fSize: 100,

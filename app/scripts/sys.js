@@ -7,7 +7,7 @@ define([
 
     var Sys = function() {
 
-        var self = this,
+        var _this = this,
             reader = Reader,
             settings = Settings;
 
@@ -47,7 +47,7 @@ define([
                 console.log('Saving current location');
             }
 
-            self.updatedReaderData(
+            _this.updatedReaderData(
                 settings.bookId,
                 'scrollPosition',
                 reader.currentPage,
@@ -56,7 +56,7 @@ define([
 
             reader.scrollPosition[reader.currentPage] = settings.el.scrollTop();
 
-            self.updateLocalStorage(
+            _this.updateLocalStorage(
                 settings.bookId,
                 'scrollPosition',
                 reader.currentPage,
@@ -107,7 +107,7 @@ define([
 
             } else {
 
-                self.updateUserPreferences();
+                _this.updateUserPreferences();
 
             }
         };
@@ -148,7 +148,7 @@ define([
                 console.log('Going to previous location');
             }
 
-            var pos = self.getFromLocalStorage(settings.bookId, 'scrollPosition', reader.currentPage);
+            var pos = _this.getFromLocalStorage(settings.bookId, 'scrollPosition', reader.currentPage);
             setTimeout(function () {
                 settings.el.scrollTop(pos);
             }, 50);

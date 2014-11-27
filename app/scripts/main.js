@@ -36,5 +36,21 @@ require([
 
         app.init();
 
+        $.event.trigger({
+            type: 'countPages'
+        }, {
+            type: 'updateChapters'
+        });
+
+
+        $(document).on({
+            countPages: function (e, data) {
+                app.vents.countPages();
+            },
+            updateChapters: function (e, data) {
+                app.chapterNav.bindChapters();
+            }
+        });
     });
+
 });
