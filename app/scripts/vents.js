@@ -2,10 +2,9 @@ define([
     'jquery',
     'settings',
     'reader',
-    'layout',
     'sys',
     'animateScroll'
-], function ($, Settings, Reader, Layout, Sys) {
+], function ($, Settings, Reader, Sys) {
     'use strict';
 
     var Vents = function () {
@@ -275,12 +274,14 @@ define([
             var size = settings.fSize < settings.maxFontSize() ? settings.fSize + settings.fSizeIncrement : settings.fSize;
 
             settings.el.css('font-size', size + '%');
-
-            layout.adjustFramePosition();
-
             sys.updateUserData('fSize', size);
-            sys.updateUserPreferences();
-            $(document).trigger('updateChapters');
+
+            $(document).trigger('updateUI', {
+                layout: 'adjustFramePosition',
+                sys: 'updateUserPreferences',
+                vents: 'countPages',
+                chapterNav: 'bindChapters'
+            });
 
         };
 
@@ -293,12 +294,14 @@ define([
             var size = settings.fSize > settings.minFontSize() ? settings.fSize - settings.fSizeIncrement : settings.fSize;
 
             settings.el.css('font-size', size + '%');
-
-            layout.adjustFramePosition();
-
             sys.updateUserData('fSize', size);
-            sys.updateUserPreferences();
-            $(document).trigger('updateChapters');
+
+            $(document).trigger('updateUI', {
+                layout: 'adjustFramePosition',
+                sys: 'updateUserPreferences',
+                vents: 'countPages',
+                chapterNav: 'bindChapters'
+            });
 
         };
 
@@ -352,7 +355,9 @@ define([
             }
 
             setTimeout(function () {
-                layout.adjustFramePosition();
+                $(document).trigger('updateUI', {
+                    layout:'adjustFramePosition'
+                });
                 if (pageYOffset) {
                     window.scrollTo(0, 0, 1);
                 }

@@ -688,16 +688,12 @@ Search bar
 
 /* line 343, _styles.scss */
 .cursor {
-  cursor: auto;
-  -webkit-transition: cursor 400ms ease;
-  -moz-transition: cursor 400ms ease;
-  -o-transition: cursor 400ms ease;
-  transition: cursor 400ms ease;
+  cursor: default;
 }
 
-/* line 350, _styles.scss */
+/* line 346, _styles.scss */
 .cursor.cursor-hidden {
-  cursor: url(../images/no-cursor.png), auto;
+  cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAsTAAALEwEAmpwYAAABy2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS40LjAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIKICAgICAgICAgICAgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIj4KICAgICAgICAgPHRpZmY6T3JpZW50YXRpb24+MTwvdGlmZjpPcmllbnRhdGlvbj4KICAgICAgICAgPHhtcDpDcmVhdG9yVG9vbD5BZG9iZSBJbWFnZVJlYWR5PC94bXA6Q3JlYXRvclRvb2w+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgqyI37xAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=), auto;
 }
 
 /*
@@ -705,14 +701,19 @@ Search bar
 Misc.
 
 */
-/* line 359, _styles.scss */
+/* line 355, _styles.scss */
 .hidden {
   display: none;
 }
 
-/* line 362, _styles.scss */
+/* line 358, _styles.scss */
 .show-scroll-bar {
   overflow-y: scroll;
+}
+
+/* line 362, _styles.scss */
+#book-content h1, #book-content h2, #book-content h3, #book-content h4, #book-content h5, #book-content h6, #book-content div, #book-content p, #book-content span, #book-content i, #book-content b, #book-content em, #book-content strong {
+  cursor: default !important;
 }
 
 /* line 1, _page-styles.scss */

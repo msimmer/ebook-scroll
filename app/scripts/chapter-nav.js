@@ -1,18 +1,16 @@
 define([
     'jquery',
-    'settings',
-    'vents',
-], function ($, Settings, Vents) {
+    'settings'
+], function ($, Settings) {
     'use strict';
 
     var ChapterNav = function () {
 
         var _this = this,
-            vents = new Vents(),
             settings = Settings;
 
         this.bindChapters = function () {
-            var ids = $([]).pushStack($('h1,h2,h3,h4,h4'));
+            var ids = $([]).pushStack($('h1,h2,h3,h4,h5,h6'));
             var scrollTop = $(window).scrollTop();
             var currentPos = false;
             var pagination = {

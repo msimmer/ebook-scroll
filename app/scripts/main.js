@@ -39,19 +39,17 @@ require([
         $('html').removeClass('no-js').addClass('cursor js');
 
         $.event.trigger({
-            type: 'countPages'
-        }, {
-            type: 'updateChapters'
+            type: 'updateUI',
+            data: {},
+            context: null
         });
 
-        $(document).on({
-            countPages: function (e, data) {
-                app.vents.countPages();
-            },
-            updateChapters: function (e, data) {
-                app.chapterNav.bindChapters();
-            }
+        $(document).on('updateUI', function (ev, data) {
+            for (var i in data) {
+                app[i][data[i]]();
+            };
         });
+
     });
 
 });
