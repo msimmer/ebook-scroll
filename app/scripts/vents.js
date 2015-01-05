@@ -11,7 +11,6 @@ define([
 
         var settings = Settings,
             reader = Reader,
-            layout = new Layout(),
             sys = new Sys(),
             _this = this;
 

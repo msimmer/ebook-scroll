@@ -23,7 +23,6 @@ define([
         settings.el.hoverIntent({
             over: function () {
                 wasScrolling = reader.isScrolling;
-                console.log(wasScrolling);
                 if (!$('show-scroll-bar').length) {
                     settings.el.addClass('show-scroll-bar');
                 }

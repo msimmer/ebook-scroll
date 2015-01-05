@@ -397,7 +397,21 @@ svg:not(:root) {
   font-stretch: normal;
 }
 
-/* line 1, _styles.scss */
+@font-face {
+  font-family: 'cardo-R';
+  src: url(fonts/cardo-R.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'cardo-I';
+  src: url(fonts/cardo-I.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* line 13, _styles.scss */
 
 html,
 body,
@@ -485,10 +499,10 @@ video {
   padding: 0;
   border: 0;
   vertical-align: baseline;
-  font-family: 'Cardo';
+  font-family: 'cardo-R';
 }
 
-/* line 8, _styles.scss */
+/* line 20, _styles.scss */
 
 html,
 body {
@@ -501,7 +515,7 @@ body {
   width: 100%;
 }
 
-/* line 16, _styles.scss */
+/* line 28, _styles.scss */
 
 html,
 body,
@@ -509,19 +523,19 @@ main {
   transition: background-color 400ms ease;
 }
 
-/* line 22, _styles.scss */
+/* line 34, _styles.scss */
 
 html.lightCSs {
   background-color: #fff;
 }
 
-/* line 25, _styles.scss */
+/* line 37, _styles.scss */
 
 html.darkCss {
   background-color: #ccc;
 }
 
-/* line 28, _styles.scss */
+/* line 40, _styles.scss */
 
 .darkCss body,
 .darkCss main,
@@ -530,7 +544,7 @@ html.darkCss {
   background-color: transparent;
 }
 
-/* line 31, _styles.scss */
+/* line 43, _styles.scss */
 
 nav {
   position: absolute;
@@ -539,13 +553,13 @@ nav {
   width: 67px;
 }
 
-/* line 37, _styles.scss */
+/* line 49, _styles.scss */
 
 a {
   text-decoration: none;
 }
 
-/* line 40, _styles.scss */
+/* line 52, _styles.scss */
 
 .site-title {
   margin: 25px;
@@ -553,14 +567,14 @@ a {
   color: black;
 }
 
-/* line 45, _styles.scss */
+/* line 57, _styles.scss */
 
 ul.controls {
   min-width: 75px;
   opacity: 0;
 }
 
-/* line 49, _styles.scss */
+/* line 61, _styles.scss */
 
 ul.controls,
 ul.components {
@@ -571,20 +585,20 @@ ul.components {
   right: 0;
 }
 
-/* line 56, _styles.scss */
+/* line 68, _styles.scss */
 
 ul.controls li {
   margin: 3px 0;
 }
 
-/* line 59, _styles.scss */
+/* line 71, _styles.scss */
 
 ul.components li {
   width: 35px;
   height: 35px;
 }
 
-/* line 63, _styles.scss */
+/* line 75, _styles.scss */
 
 ul.controls li a {
   position: relative;
@@ -594,7 +608,7 @@ ul.controls li a {
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
 }
 
-/* line 70, _styles.scss */
+/* line 82, _styles.scss */
 
 ul.components li a {
   display: block;
@@ -602,13 +616,13 @@ ul.components li a {
   width: 100%;
 }
 
-/* line 75, _styles.scss */
+/* line 87, _styles.scss */
 
 ul.chapters li {
   margin: 0 10px;
 }
 
-/* line 78, _styles.scss */
+/* line 90, _styles.scss */
 
 main {
   font-size: 100%;
@@ -626,20 +640,20 @@ main {
   -webkit-overflow-scrolling: auto !important;
 }
 
-/* line 91, _styles.scss */
+/* line 103, _styles.scss */
 
 main:hover {
   overflow-y: scroll;
 }
 
-/* line 95, _styles.scss */
+/* line 107, _styles.scss */
 
 #shadow-top,
 #shadow-bottom {
   transition: background 400ms ease;
 }
 
-/* line 102, _styles.scss */
+/* line 114, _styles.scss */
 
 .lightCss main #shadow-top {
   position: fixed;
@@ -650,7 +664,7 @@ main:hover {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 );
 }
 
-/* line 114, _styles.scss */
+/* line 126, _styles.scss */
 
 .lightCss main #shadow-bottom {
   position: fixed;
@@ -660,7 +674,7 @@ main:hover {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
 }
 
-/* line 128, _styles.scss */
+/* line 140, _styles.scss */
 
 .darkCss main #shadow-top {
   position: fixed;
@@ -671,7 +685,7 @@ main:hover {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00cccccc', endColorstr='#cccccc',GradientType=0 );
 }
 
-/* line 141, _styles.scss */
+/* line 153, _styles.scss */
 
 .darkCss main #shadow-bottom {
   position: fixed;
@@ -681,7 +695,7 @@ main:hover {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00cccccc', endColorstr='#cccccc',GradientType=0 );
 }
 
-/* line 155, _styles.scss */
+/* line 167, _styles.scss */
 
 main a,
 main a:link,
@@ -691,7 +705,7 @@ main a:visited {
   text-decoration: underline !important;
 }
 
-/* line 159, _styles.scss */
+/* line 171, _styles.scss */
 
 section#page {
   margin: 0;
@@ -700,7 +714,7 @@ section#page {
   opacity: .3;
 }
 
-/* line 165, _styles.scss */
+/* line 177, _styles.scss */
 
 .runner-help {
   position: absolute;
@@ -712,14 +726,14 @@ section#page {
   opacity: .3;
 }
 
-/* line 174, _styles.scss */
+/* line 186, _styles.scss */
 
 .runner-help a {
   /*color:black;*/
   text-decoration: none;
 }
 
-/* line 178, _styles.scss */
+/* line 190, _styles.scss */
 
 .runner-page-count {
   position: absolute;
@@ -736,63 +750,63 @@ Icons
 
 */
 
-/* line 192, _styles.scss */
+/* line 204, _styles.scss */
 
 .play-btn[data-state='play'] {
   background: transparent url(../images/play_64.png) no-repeat center;
   background-size: contain;
 }
 
-/* line 196, _styles.scss */
+/* line 208, _styles.scss */
 
 .play-btn[data-state='pause'] {
   background: transparent url(../images/stop_64.png) no-repeat center;
   background-size: contain;
 }
 
-/* line 200, _styles.scss */
+/* line 212, _styles.scss */
 
 .speed-inc {
   background: transparent url(../images/faster_64.png) no-repeat center;
   background-size: contain;
 }
 
-/* line 204, _styles.scss */
+/* line 216, _styles.scss */
 
 .speed-dec {
   background: transparent url(../images/slower_64.png) no-repeat center;
   background-size: contain;
 }
 
-/* line 208, _styles.scss */
+/* line 220, _styles.scss */
 
 .font-inc {
   background: transparent url(../images/bigger_64.png) no-repeat center;
   background-size: contain;
 }
 
-/* line 212, _styles.scss */
+/* line 224, _styles.scss */
 
 .font-dec {
   background: transparent url(../images/smaller_64.png) no-repeat center;
   background-size: contain;
 }
 
-/* line 216, _styles.scss */
+/* line 228, _styles.scss */
 
 .contrast-light {
   background: transparent url(../images/lighter_64.png) no-repeat center;
   background-size: contain;
 }
 
-/* line 220, _styles.scss */
+/* line 232, _styles.scss */
 
 .contrast-dark {
   background: transparent url(../images/darker_64.png) no-repeat center;
   background-size: contain;
 }
 
-/* line 224, _styles.scss */
+/* line 236, _styles.scss */
 
 .full-screen {
   background: transparent url(../images/fullscreen_64.png) no-repeat center;
@@ -800,7 +814,7 @@ Icons
   background-position-x: -1px;
 }
 
-/* line 229, _styles.scss */
+/* line 241, _styles.scss */
 
 .chapter-nav {
   opacity: 0;
@@ -809,7 +823,7 @@ Icons
   color: inherit;
 }
 
-/* line 235, _styles.scss */
+/* line 247, _styles.scss */
 
 #chapter-prev {
   position: fixed;
@@ -824,7 +838,7 @@ Icons
   background-size: 55%;
 }
 
-/* line 249, _styles.scss */
+/* line 261, _styles.scss */
 
 #chapter-next {
   position: fixed;
@@ -846,7 +860,7 @@ Mobile styles
 
 */
 
-/* line 271, _styles.scss */
+/* line 283, _styles.scss */
 
 nav.mobile {
   top: 0;
@@ -855,19 +869,19 @@ nav.mobile {
   position: relative;
 }
 
-/* line 277, _styles.scss */
+/* line 289, _styles.scss */
 
 nav.mobile ul.controls {
   display: inline;
 }
 
-/* line 280, _styles.scss */
+/* line 292, _styles.scss */
 
 nav.mobile ul.controls li {
   display: inline;
 }
 
-/* line 283, _styles.scss */
+/* line 295, _styles.scss */
 
 nav.mobile ul.controls li:last-child:after {
   content: ' ';
@@ -882,7 +896,7 @@ Search bar
 
 */
 
-/* line 295, _styles.scss */
+/* line 307, _styles.scss */
 
 .search-wrapper {
   position: absolute;
@@ -891,13 +905,13 @@ Search bar
   opacity: .3;
 }
 
-/* line 301, _styles.scss */
+/* line 313, _styles.scss */
 
 .input-wrapper {
   height: 32px;
 }
 
-/* line 304, _styles.scss */
+/* line 316, _styles.scss */
 
 #userInput {
   width: 300px;
@@ -911,13 +925,13 @@ Search bar
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
 }
 
-/* line 315, _styles.scss */
+/* line 327, _styles.scss */
 
 #userInput:focus {
   outline: none;
 }
 
-/* line 318, _styles.scss */
+/* line 330, _styles.scss */
 
 #search {
   padding: 0;
@@ -931,7 +945,7 @@ Search bar
   right: 0;
 }
 
-/* line 329, _styles.scss */
+/* line 341, _styles.scss */
 
 #search-close {
   padding: 0;
@@ -945,10 +959,22 @@ Search bar
   opacity: 0;
 }
 
-/* line 340, _styles.scss */
+/* line 352, _styles.scss */
 
 #book-content {
   padding: 0 15px 0 0;
+}
+
+/* line 355, _styles.scss */
+
+.cursor {
+  cursor: default;
+}
+
+/* line 358, _styles.scss */
+
+.cursor.cursor-hidden {
+  cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAsTAAALEwEAmpwYAAABy2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS40LjAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIKICAgICAgICAgICAgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIj4KICAgICAgICAgPHRpZmY6T3JpZW50YXRpb24+MTwvdGlmZjpPcmllbnRhdGlvbj4KICAgICAgICAgPHhtcDpDcmVhdG9yVG9vbD5BZG9iZSBJbWFnZVJlYWR5PC94bXA6Q3JlYXRvclRvb2w+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgqyI37xAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=), auto;
 }
 
 /*
@@ -957,16 +983,57 @@ Misc.
 
 */
 
-/* line 349, _styles.scss */
+/* line 367, _styles.scss */
 
 .hidden {
   display: none;
 }
 
-/* line 352, _styles.scss */
+/* line 370, _styles.scss */
 
 .show-scroll-bar {
   overflow-y: scroll;
+}
+
+/* line 374, _styles.scss */
+
+#book-content h1,
+#book-content h2,
+#book-content h3,
+#book-content h4,
+#book-content h5,
+#book-content h6,
+#book-content div,
+#book-content p,
+#book-content span,
+#book-content i,
+#book-content b,
+#book-content em,
+#book-content strong {
+  cursor: default !important;
+}
+
+/* line 379, _styles.scss */
+
+#book-content h1,
+#book-content h2,
+#book-content h3,
+#book-content h4,
+#book-content h5,
+#book-content h6,
+#book-content div,
+#book-content p,
+#book-content span,
+#book-content b,
+#book-content strong {
+  font-family: 'cardo-R';
+}
+
+/* line 382, _styles.scss */
+
+#book-content i,
+#book-content em {
+  font-family: 'cardo-I';
 }
 
 /* line 1, _page-styles.scss */

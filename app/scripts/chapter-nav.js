@@ -6,8 +6,11 @@ define([
 
     var ChapterNav = function () {
 
-        var _this = this,
-            settings = Settings;
+        var _this = this;
+        var settings = Settings;
+
+        _this.panels = '[data-chapter]';
+        _this.scrolledOnce = false;
 
         this.bindChapters = function () {
             var ids = $([]).pushStack($('h1,h2,h3,h4,h5,h6'));
@@ -15,7 +18,7 @@ define([
             var currentPos = false;
             var pagination = {
                 currentPos: false,
-                chapters: $.map(ids, function (obj, i) {
+                articles: $.map(ids, function (obj, i) {
                     $(obj).data({
                         chapter: i,
                         posTop: ids[i].offsetTop,
@@ -28,7 +31,7 @@ define([
                         currentEl: false
                     });
 
-                    if ($(obj).context.offsetTop >= scrollTop && !currentPos) {
+                    if ($(obj).context.offsetTop >= scrollTop && currentPos === false) {
                         $(obj).data().currentEl = true;
                         currentPos = $(obj).context.offsetTop;
                     }
@@ -48,13 +51,21 @@ define([
 
         this.moveToChapter = function (dir, callback) {
 
-            var currentPos = -1,
-                scrollTop = settings.el.scrollTop();
+            if (_this.scrolledOnce === false) {
+                _this.bindChapters();
+                _this.scrolledOnce = true;
+            }
+
+            var currentPos = false,
+                scrollTop = settings.el.scrollTop(),
+                firstArticle = false,
+                lastArticle = false,
+                hasScrolled;
 
             var getPromise = function () {
                 var dfr = $.Deferred();
-                var len = $('[data-chapter]').length - 1;
-                $('[data-chapter]').each(function (i) { // set current el
+                var len = $(_this.panels).length - 1;
+                $(_this.panels).each(function (i) { // set current el
                     var $this = $(this);
                     var buffer = 200;
                     var thisTop = $this.data().posTop;
@@ -63,26 +74,28 @@ define([
                     $this.attr('data-currentel', false).data({
                         currentEl: false
                     });
-                    if (scrollTop >= thisTop - buffer && scrollTop < chapEnd && currentPos < 0) {
+
+                    if (scrollTop >= thisTop - buffer && scrollTop < chapEnd && currentPos === false) {
                         $this.attr('data-currentel', true).data({
                             currentEl: true
                         });
                         currentPos = thisTop;
                     }
+
                     if (i === len) {
-
-                        if (currentPos < 0) {
-                            console.log('i -- ' + i);
-                            console.log('len -- ' + len);
-
-                            console.log('default --');
-                            console.log($this);
-
-                            $this.attr('data-currentel', true).data({
-                                currentEl: true
-                            });
+                        if (currentPos === false) {
+                            if (scrollTop <= thisTop) {
+                                $('[data-firstel="true"]').attr('data-currentel', true).data({
+                                    currentEl: true
+                                });
+                                firstArticle = true;
+                            } else {
+                                $this.attr('data-currentel', true).data({
+                                    currentEl: true
+                                });
+                                lastArticle = true;
+                            }
                         }
-
                         dfr.resolve();
                     }
                 });
@@ -90,11 +103,25 @@ define([
             };
 
             $.when(getPromise()).done(function () {
-                var dirPos = dir + 'Pos', // scroll to next el
-                    dirEl = dir + 'El',
-                    $this = $('[data-currentel="true"]'),
-                    pos = $this.data()[dirPos],
-                    hasScrolled = false;
+
+                hasScrolled = false;
+
+                if (firstArticle === true) {
+                    switch (dir) {
+                    case 'prev':
+                        var pos = 0;
+                        break;
+                    case 'next':
+                        var pos = $('[data-firstel="true"]').data().posTop;
+                        console.log(pos);
+                        break;
+                    }
+                } else {
+                    var dirPos = dir + 'Pos', // scroll to next el
+                        dirEl = dir + 'El',
+                        $this = $('[data-currentel="true"]'),
+                        pos = $this.data()[dirPos];
+                }
 
                 settings.el.animate({
                     scrollTop: pos
@@ -109,7 +136,7 @@ define([
                         }
                     }
                 })
-            })
+            });
 
         };
 
@@ -122,8 +149,10 @@ define([
             }).on({
                 click: function (e) {
                     e.preventDefault();
-                    _this.moveToChapter($(this).data().dir, function(){
-                        $(document).trigger('countPages');
+                    _this.moveToChapter($(this).data().dir, function () {
+                        $(document).trigger('updateUI', {
+                            vents: 'countPages'
+                        });
                     });
                 }
             }).appendTo('body');
@@ -134,8 +163,10 @@ define([
             }).on({
                 click: function (e) {
                     e.preventDefault();
-                    _this.moveToChapter($(this).data().dir, function(){
-                        $(document).trigger('countPages');
+                    _this.moveToChapter($(this).data().dir, function () {
+                        $(document).trigger('updateUI', {
+                            vents: 'countPages'
+                        });
                     });
                 }
             }).appendTo('body');

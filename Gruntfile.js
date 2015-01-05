@@ -346,6 +346,7 @@ module.exports = function (grunt) {
                 dot: true,
                 cwd: '<%= yeoman.app %>/styles',
                 dest: '<%= yeoman.dist %>/styles/',
+                // dest: '.tmp/styles/',
                 src: '{,*/}*.css'
             },
             vendor: {
@@ -481,16 +482,17 @@ module.exports = function (grunt) {
         'useminPrepare',
         'concurrent:js',
         'requirejs',
+        'uglify',
         'copy:scripts'
-        // 'watch:js'
     ]);
 
     grunt.registerTask('styles', [
         'clean:styles',
         'useminPrepare',
         'concurrent:styles',
+        'cssmin',
+        'uglify',
         'copy:styles',
-        'watch:styles'
     ]);
 
 };

@@ -30,6 +30,27 @@ define([
         _this.env = Env;
         _this.styles = Styles;
 
+        _this.bookLoadedCallback = function () {
+            _this.vents.countPages();
+            _this.vents.cursorListener();
+
+            // var ids = $([]).pushStack($('h1,h2,h3,h4,h5,h6'));
+            // if (ids.length) {
+            //     _this.chapterNav.bindChapters();
+            //     _this.chapterNav.appendNav();
+            // }
+
+            $('.controls, .runner-help, .runner-page-count, #page, .search-wrapper').animate({
+                opacity: 1
+            }, 200);
+            $('.spinner').fadeOut(200, function () {
+                setTimeout(function () {
+                    _this.vents.startScrolling();
+                }, 50);
+            });
+
+        };
+
         this.init = function () {
 
             _this.vents.bindEventHandlers();
@@ -75,7 +96,8 @@ define([
                     clearInterval(intrvl);
                     $(document).trigger('updateUI', {
                         vents: 'countPages',
-                        layout: 'adjustFramePosition'
+                        layout: 'adjustFramePosition',
+                        chapterNav: 'bindChapters'
                     });
                 }, 200);
 
@@ -92,7 +114,8 @@ define([
                 url: JSONUrl,
                 cache: false,
                 headers: {
-                    'If-Modified-Since': 'Sat, 01 Jan 2000 00:00:01 GMT'
+                    'If-Modified-Since': 'Sat, 01 Jan 2000 00:00:01 GMT',
+                    bookLoadProgress: 'retrieveJsonData'
                 },
                 dataType: 'json',
                 method: 'get',
@@ -100,7 +123,9 @@ define([
                     $.each(data, function (i) {
                         if (this.uuid === window.ebookAppData.uuid) {
                             _this.settings.bookId = this.uuid;
+
                             var components = this.components;
+
                             _this.sys.updatedReaderData('components', components);
                             _this.sys.updatedReaderData('currentPage', components[0].src);
                             _this.sys.updatedReaderData('firstPage', components[0].src);
@@ -159,35 +184,54 @@ define([
                     }
                 }
 
-                return $.ajax({
+                var $html;
+                var request = $.ajax({
                         type: 'get',
                         url: pageUrl,
                         async: false,
                         cache: false,
                         headers: {
-                            'If-Modified-Since': 'Sat, 01 Jan 2000 00:00:01 GMT'
-                        },
-                    })
-                    .then(function (data) {
-                        var content = $('<section/>', {
-                            id: 'page',
-                            css: {
-                                margin: 0,
-                                padding: 0,
-                                border: 0
+                            'If-Modified-Since': 'Sat, 01 Jan 2000 00:00:01 GMT',
+                            bookLoadProgress: 'chaptersLoaded'
+                        }
+                    }),
+                    chain = request.then(function (html) {
+                        $html = $(html);
+                        return $.ajax({
+                            type: 'get',
+                            url: 'http://fiktion.cc/wp-content/themes/Fiktion/components/F4C72D34-0891-2285-51B0-B9E1798A8D0B/Styles/online.css',
+                            async: false,
+                            cache: false,
+                            headers: {
+                                bookLoadProgress: 'stylesLoaded'
                             }
-                        }).html(data);
+                        });
+                    });
 
-                        _this.settings.el.html(content);
+                chain.done(function (css) {
 
-                        _this.sys.updatedReaderData('currentPage', pageUrl);
-                        _this.sys.updateLocalStorage(_this.settings.bookId, 'currentPage', pageUrl);
-
-                        if (_this.settings.debug) {
-                            console.log('Current page is ' + pageUrl);
+                    $html.prepend('<style>' + css + '</style>');
+                    var content = $('<section/>', {
+                        id: 'page',
+                        css: {
+                            margin: 0,
+                            padding: 0,
+                            border: 0
                         }
                     });
 
+                    content.html($html);
+
+                    _this.settings.el.html(content);
+
+                    _this.sys.updatedReaderData('currentPage', pageUrl);
+                    _this.sys.updateLocalStorage(_this.settings.bookId, 'currentPage', pageUrl);
+
+                    if (_this.settings.debug) {
+                        console.log('Current page is ' + pageUrl);
+                    }
+
+                });
             }
 
             $.when(retrieveJsonData)
@@ -205,6 +249,17 @@ define([
                     _this.layout.setStyles();
                 })
                 .then(function () {
+
+                    var ids = $([]).pushStack($('h1,h2,h3,h4,h5,h6'));
+                    if (ids.length) {
+                        _this.chapterNav.bindChapters();
+                        _this.chapterNav.appendNav();
+
+                        $('.chapter-nav').animate({
+                            opacity: 1
+                        }, 200);
+                    }
+
                     _this.layout.adjustFramePosition();
                     _this.vents.contrastToggle(_this.settings.contrast);
 
@@ -223,48 +278,6 @@ define([
                     _this.settings.el.append(shadowTop);
                     _this.settings.el.append(shadowBottom);
 
-                })
-                .then(function () {
-
-                    var limit = 60000,
-                        ct = 0,
-                        pageCountTimeout,
-                        intrvl;
-
-                    (function () {
-                        intrvl = setInterval(function () {
-                            ct += 1;
-                            if ($('#page').length) {
-                                pageCountTimeout = setTimeout(function () {
-                                    var pages = $('#page').find('p').length; // fix this
-                                    if (pages == $('#page').find('p').length && ct < limit || pages != $('#page').find('p').length && ct >= limit) {
-                                        clearInterval(intrvl);
-                                        clearTimeout(pageCountTimeout);
-                                        _this.vents.countPages();
-                                        _this.vents.cursorListener();
-
-                                        var ids = $([]).pushStack($('h1,h2,h3,h4,h5,h6'));
-                                        if (ids.length) {
-                                            _this.chapterNav.bindChapters();
-                                            _this.chapterNav.appendNav();
-                                        }
-
-                                        $('.controls, .runner-help, .runner-page-count, #page, .search-wrapper, .chapter-nav').animate({
-                                            opacity: 1
-                                        }, 200);
-                                        $('.spinner').fadeOut(200, function () {
-                                            setTimeout(function () {
-                                                _this.vents.startScrolling();
-                                            }, 50);
-                                        });
-                                    } else if (pages != $('#page').find('p').length && ct < limit) {
-                                        // continue counting
-                                        clearTimeout(pageCountTimeout);
-                                    }
-                                }, 10);
-                            }
-                        }, 50);
-                    })();
                 });
 
         };

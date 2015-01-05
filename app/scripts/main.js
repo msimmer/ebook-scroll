@@ -27,7 +27,7 @@ require([
         var app = new App({
 
             dev: false,
-            jsonPath: 'http://local.fiktion.cc/wp-content/themes/Fiktion/data/bookData.json',
+            jsonPath: 'http://fiktion.cc/wp-content/themes/Fiktion/data/bookData.json',
             debug: false,
             clearStorage: false,
             scrollSpeed: 10
@@ -50,6 +50,26 @@ require([
             };
         });
 
+        var gotJson = false;
+        var chaptersLoaded = false;
+        // var stylesLoaded = false;
+
+        $(document).ajaxComplete(function (event, xhr, settings) {
+            if (settings.headers.bookLoadProgress && settings.headers.bookLoadProgress === 'retrieveJsonData') {
+                gotJson = true;
+            }
+            if (settings.headers.bookLoadProgress && settings.headers.bookLoadProgress === 'chaptersLoaded') {
+                chaptersLoaded = true;
+            }
+
+            // if (settings.headers.bookLoadProgress && settings.headers.bookLoadProgress === 'stylesLoaded') {
+            //     stylesLoaded = true;
+            // }
+
+            if (gotJson && chaptersLoaded) {
+                app.bookLoadedCallback();
+            }
+        });
     });
 
 });
