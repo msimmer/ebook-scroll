@@ -36,7 +36,7 @@ define([
             if (env.isMobile() && $(window).width() <= 568 && orientation === 'landscape') {
                 return 300;
             }
-            if (env.isMobile() && $(window).width() <= 568 && orientation === 'portrait'){
+            if (env.isMobile() && $(window).width() <= 568 && orientation === 'portrait') {
                 return window.screen.height / 2.2;
             }
             var h = parseInt(settings.el.css('line-height'), 10) * 9;
@@ -94,7 +94,9 @@ define([
             _this.adjustNavPosition();
 
             var dist = parseInt(settings.el.offset().top + settings.el.height() - 49, 10);
-            $('#shadow-bottom').css({top:dist});
+            $('#shadow-bottom').css({
+                top: dist
+            });
 
         };
 
@@ -149,6 +151,22 @@ define([
 
             settings.el.css(mainCss);
 
+        };
+
+        this.renderShadows = function (context) {
+            var shadowHeight = 50,
+                topDist = context.env.isMobile() ? 0 : context.settings.el.offset().top;
+            return {
+                shadowTop: $('<div/>', {
+                    id: 'shadow-top',
+                }),
+                shadowBottom: $('<div/>', {
+                    id: 'shadow-bottom',
+                    css: {
+                        'top': parseInt(context.settings.el.offset().top + context.settings.el.height() - 49, 10)
+                    }
+                })
+            }
         };
 
     };

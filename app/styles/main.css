@@ -452,11 +452,12 @@ main:hover {
 
 /* line 157, _styles.scss */
 main a, main a:link, main a:active, main a:visited {
-  color: blue !important;
-  text-decoration: underline !important;
+  color: #000;
+  text-decoration: none;
+  border-bottom: 1px solid #000;
 }
 
-/* line 161, _styles.scss */
+/* line 162, _styles.scss */
 section#page {
   margin: 0;
   padding: 0;
@@ -464,7 +465,7 @@ section#page {
   opacity: .3;
 }
 
-/* line 167, _styles.scss */
+/* line 168, _styles.scss */
 .runner-help {
   position: absolute;
   bottom: 0;
@@ -475,13 +476,13 @@ section#page {
   opacity: .3;
 }
 
-/* line 176, _styles.scss */
+/* line 177, _styles.scss */
 .runner-help a {
   /*color:black;*/
   text-decoration: none;
 }
 
-/* line 180, _styles.scss */
+/* line 181, _styles.scss */
 .runner-page-count {
   position: absolute;
   bottom: 0;
@@ -496,62 +497,62 @@ section#page {
 Icons
 
 */
-/* line 194, _styles.scss */
+/* line 195, _styles.scss */
 .play-btn[data-state='play'] {
   background: transparent url(../images/play_64.png) no-repeat center;
   background-size: contain;
 }
 
-/* line 198, _styles.scss */
+/* line 199, _styles.scss */
 .play-btn[data-state='pause'] {
   background: transparent url(../images/stop_64.png) no-repeat center;
   background-size: contain;
 }
 
-/* line 202, _styles.scss */
+/* line 203, _styles.scss */
 .speed-inc {
   background: transparent url(../images/faster_64.png) no-repeat center;
   background-size: contain;
 }
 
-/* line 206, _styles.scss */
+/* line 207, _styles.scss */
 .speed-dec {
   background: transparent url(../images/slower_64.png) no-repeat center;
   background-size: contain;
 }
 
-/* line 210, _styles.scss */
+/* line 211, _styles.scss */
 .font-inc {
   background: transparent url(../images/bigger_64.png) no-repeat center;
   background-size: contain;
 }
 
-/* line 214, _styles.scss */
+/* line 215, _styles.scss */
 .font-dec {
   background: transparent url(../images/smaller_64.png) no-repeat center;
   background-size: contain;
 }
 
-/* line 218, _styles.scss */
+/* line 219, _styles.scss */
 .contrast-light {
   background: transparent url(../images/lighter_64.png) no-repeat center;
   background-size: contain;
 }
 
-/* line 222, _styles.scss */
+/* line 223, _styles.scss */
 .contrast-dark {
   background: transparent url(../images/darker_64.png) no-repeat center;
   background-size: contain;
 }
 
-/* line 226, _styles.scss */
+/* line 227, _styles.scss */
 .full-screen {
   background: transparent url(../images/fullscreen_64.png) no-repeat center;
   background-size: 110%;
   background-position-x: -1px;
 }
 
-/* line 231, _styles.scss */
+/* line 232, _styles.scss */
 .chapter-nav {
   opacity: 0;
   display: block;
@@ -559,7 +560,7 @@ Icons
   color: inherit;
 }
 
-/* line 237, _styles.scss */
+/* line 238, _styles.scss */
 #chapter-prev {
   position: fixed;
   height: 30px;
@@ -575,7 +576,7 @@ Icons
   background-size: 55%;
 }
 
-/* line 251, _styles.scss */
+/* line 252, _styles.scss */
 #chapter-next {
   position: fixed;
   height: 30px;
@@ -597,7 +598,7 @@ Icons
 Mobile styles
 
 */
-/* line 273, _styles.scss */
+/* line 274, _styles.scss */
 nav.mobile {
   top: 0;
   text-align: justify;
@@ -605,17 +606,17 @@ nav.mobile {
   position: relative;
 }
 
-/* line 279, _styles.scss */
+/* line 280, _styles.scss */
 nav.mobile ul.controls {
   display: inline;
 }
 
-/* line 282, _styles.scss */
+/* line 283, _styles.scss */
 nav.mobile ul.controls li {
   display: inline;
 }
 
-/* line 285, _styles.scss */
+/* line 286, _styles.scss */
 nav.mobile ul.controls li:last-child:after {
   content: ' ';
   visibility: hidden;
@@ -628,7 +629,7 @@ nav.mobile ul.controls li:last-child:after {
 Search bar
 
 */
-/* line 297, _styles.scss */
+/* line 298, _styles.scss */
 .search-wrapper {
   position: absolute;
   right: 0;
@@ -636,12 +637,12 @@ Search bar
   opacity: .3;
 }
 
-/* line 303, _styles.scss */
+/* line 304, _styles.scss */
 .input-wrapper {
   height: 32px;
 }
 
-/* line 306, _styles.scss */
+/* line 307, _styles.scss */
 #userInput {
   width: 300px;
   margin: 1px 0 0 0;
@@ -656,12 +657,12 @@ Search bar
   box-shadow:  4px 4px 6px rgba(0, 0, 0, 0.5);
 }
 
-/* line 317, _styles.scss */
+/* line 318, _styles.scss */
 #userInput:focus {
   outline: none;
 }
 
-/* line 320, _styles.scss */
+/* line 321, _styles.scss */
 #search {
   padding: 0;
   margin: 0;
@@ -674,7 +675,7 @@ Search bar
   right: 0;
 }
 
-/* line 331, _styles.scss */
+/* line 332, _styles.scss */
 #search-close {
   padding: 0;
   margin: 0 0 0 12px;
@@ -687,17 +688,17 @@ Search bar
   opacity: 0;
 }
 
-/* line 342, _styles.scss */
+/* line 343, _styles.scss */
 #book-content {
   padding: 0 15px 0 0;
 }
 
-/* line 345, _styles.scss */
+/* line 346, _styles.scss */
 .cursor {
   cursor: default;
 }
 
-/* line 348, _styles.scss */
+/* line 349, _styles.scss */
 .cursor.cursor-hidden {
   cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAsTAAALEwEAmpwYAAABy2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS40LjAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIKICAgICAgICAgICAgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIj4KICAgICAgICAgPHRpZmY6T3JpZW50YXRpb24+MTwvdGlmZjpPcmllbnRhdGlvbj4KICAgICAgICAgPHhtcDpDcmVhdG9yVG9vbD5BZG9iZSBJbWFnZVJlYWR5PC94bXA6Q3JlYXRvclRvb2w+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgqyI37xAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=), auto;
 }
@@ -707,26 +708,26 @@ Search bar
 Misc.
 
 */
-/* line 357, _styles.scss */
+/* line 358, _styles.scss */
 .hidden {
   display: none;
 }
 
-/* line 360, _styles.scss */
+/* line 361, _styles.scss */
 .show-scroll-bar {
   overflow-y: scroll;
 }
 
-/* line 364, _styles.scss */
+/* line 365, _styles.scss */
 #book-content h1, #book-content h2, #book-content h3, #book-content h4, #book-content h5, #book-content h6, #book-content div, #book-content p, #book-content span, #book-content i, #book-content b, #book-content em, #book-content strong {
   cursor: default !important;
 }
 
-/* line 369, _styles.scss */
+/* line 370, _styles.scss */
 #book-content h1, #book-content h2, #book-content h3, #book-content h4, #book-content h5, #book-content h6, #book-content div, #book-content p, #book-content span, #book-content b, #book-content strong {
   font-family: 'cardo-R';
 }
-/* line 372, _styles.scss */
+/* line 373, _styles.scss */
 #book-content i, #book-content em {
   font-family: 'cardo-I';
 }
