@@ -1,6 +1,7 @@
 require.config({
     paths: {
-        jquery: '../bower_components/jquery/jquery'
+        // jquery: '../bower_components/jquery/jquery'
+        jquery: 'vendor/jquery.window'
     },
     shim: {
         'jquery': {

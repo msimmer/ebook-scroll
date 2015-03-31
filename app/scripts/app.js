@@ -116,7 +116,7 @@ define([
 
             $.when( // get json data, update settings
 
-                $.get(JSONUrl, function (data) {
+                $.get(JSONUrl, { 'bust': window.ebookAppData.urlArgs }, function (data) {
                     $.each(data, function (i) {
                         if (this.uuid === window.ebookAppData.uuid) {
                             var components = this.components;
@@ -151,11 +151,11 @@ define([
 
                 $.when( // get pages from updated settings
 
-                    $.get(_this.reader.currentPage, function (html) {
+                    $.get(_this.reader.currentPage, { 'bust': window.ebookAppData.urlArgs }, function (html) {
                         globalStore.html = html;
                     }),
 
-                    $.get(window.ebookAppData.bookPath + '/Styles/online.css', function (css) {
+                    $.get(window.ebookAppData.bookPath + '/Styles/online.css', { 'bust': window.ebookAppData.urlArgs }, function (css) {
                         globalStore.css = css;
                     })
 
