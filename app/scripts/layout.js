@@ -1,176 +1,160 @@
-define([
-    'jquery',
-    'settings',
-    'env',
-    'styles'
-], function ($, Settings, Env, Styles) {
-    'use strict';
+var $ = require('./vendor/jquery');
+var environment = require('./environment');
+var settings = require('./settings');
+var styles = require('./styles');
 
-    var Layout = function () {
+module.exports = {
 
-        var settings = Settings,
-            env = Env,
-            styles = Styles,
-            _this = this;
+    targetContainerWidth: function () {
+        var w = parseInt(settings.el.css('font-size'), 10) * 25,
+            isMobile = environment.isMobile(),
+            orientation = environment.orientation();
 
-        this.targetContainerWidth = function () {
-            var w = parseInt(settings.el.css('font-size'), 10) * 25,
-                isMobile = env.isMobile(),
-                orientation = env.orientation();
+        if (isMobile && w > window.screen.width && window.screen.width <= 768 && orientation === 'portrait') {
+            return window.screen.width;
+        }
+        if (isMobile && w > window.screen.width && window.screen.width < 768 && orientation === 'landscape') {
+            return window.screen.height;
+        }
+        if (!isMobile && w > $(window).width()) {
+            return $(window).width();
+        }
 
-            if (isMobile && w > window.screen.width && window.screen.width <= 768 && orientation === 'portrait') {
-                return window.screen.width;
-            }
-            if (isMobile && w > window.screen.width && window.screen.width < 768 && orientation === 'landscape') {
-                return window.screen.height;
-            }
-            if (!isMobile && w > $(window).width()) {
-                return $(window).width();
-            }
+        return w;
+    },
 
-            return w;
-        };
+    targetContainerHeight: function () {
+        var orientation = environment.orientation();
+        if (environment.isMobile() && $(window).width() <= 568 && orientation === 'landscape') {
+            return 300;
+        }
+        if (environment.isMobile() && $(window).width() <= 568 && orientation === 'portrait') {
+            return window.screen.height / 2.2;
+        }
+        var h = parseInt(settings.el.css('line-height'), 10) * 9;
+        return h;
+    },
 
-        this.targetContainerHeight = function () {
-            var orientation = env.orientation();
-            if (env.isMobile() && $(window).width() <= 568 && orientation === 'landscape') {
-                return 300;
-            }
-            if (env.isMobile() && $(window).width() <= 568 && orientation === 'portrait') {
-                return window.screen.height / 2.2;
-            }
-            var h = parseInt(settings.el.css('line-height'), 10) * 9;
-            return h;
-        };
+    setFrameHeight: function () {
 
-        this.setFrameHeight = function () {
+        var targetHeight = this.targetContainerHeight();
 
-            var targetHeight = _this.targetContainerHeight();
+        settings.el.css({
+            height: targetHeight,
+            maxHeight: targetHeight
+        });
 
-            settings.el.css({
-                height: targetHeight,
-                maxHeight: targetHeight
+    },
+
+    setFrameWidth: function () {
+
+        var targetWidth = this.targetContainerWidth();
+
+        settings.el.css({
+            width: targetWidth,
+            maxWidth: targetWidth
+        });
+
+    },
+
+    adjustFramePosition: function () {
+
+        this.setFrameHeight();
+        this.setFrameWidth();
+
+        var frame = settings.el;
+
+        if (environment.isMobile() && $(window).width() <= 568 && environment.orientation() === 'landscape') { // size for iPhone 5 and smaller
+            frame.css({
+                top: 10,
+                left: 0
             });
+        } else {
+            var h = ($(window).width() <= 480) ? $(window).height() / 2 - 30 : $(window).height() / 2,
+                w = $(window).width() / 2,
+                frameMidH = frame.height() / 2,
+                frameMidW = frame.width() / 2,
+                targetLeft = $(window).width() <= 480 ? 0 : w - frameMidW,
+                cssObj = {
+                    top: h - frameMidH,
+                    left: targetLeft
+                };
 
-        };
+            frame.css(cssObj);
+        }
 
-        this.setFrameWidth = function () {
+        this.adjustNavPosition();
 
-            var targetWidth = _this.targetContainerWidth();
+        var dist = parseInt(settings.el.offset().top + settings.el.height() - 49, 10);
+        $('#shadow-bottom').css({
+            top: dist
+        });
 
-            settings.el.css({
-                width: targetWidth,
-                maxWidth: targetWidth
+    },
+
+    adjustNavPosition: function () {
+
+        var frame = settings.el,
+            nav = $('nav'),
+            ctrlH = $('.controls').height(), // .controls height before mobile layout abstract
+            overlap = frame.position().left <= 115, // initial sidebar width + margin
+            orientation = environment.orientation();
+
+        if (overlap && $(window).width() > 480) {
+            nav.addClass('mobile');
+            nav.css({
+                top: 0,
+                width: frame.width()
             });
+        }
 
-        };
-
-        this.adjustFramePosition = function () {
-
-            _this.setFrameHeight();
-            _this.setFrameWidth();
-
-            var frame = settings.el;
-
-            if (env.isMobile() && $(window).width() <= 568 && env.orientation() === 'landscape') { // size for iPhone 5 and smaller
-                frame.css({
-                    top: 10,
-                    left: 0
-                });
-            } else {
-                var h = ($(window).width() <= 480) ? $(window).height() / 2 - 30 : $(window).height() / 2,
-                    w = $(window).width() / 2,
-                    frameMidH = frame.height() / 2,
-                    frameMidW = frame.width() / 2,
-                    targetLeft = $(window).width() <= 480 ? 0 : w - frameMidW,
-                    cssObj = {
-                        top: h - frameMidH,
-                        left: targetLeft
-                    };
-
-                frame.css(cssObj);
-            }
-
-            _this.adjustNavPosition();
-
-            var dist = parseInt(settings.el.offset().top + settings.el.height() - 49, 10);
-            $('#shadow-bottom').css({
-                top: dist
+        if (!overlap && $(window).width() > 480) {
+            nav.removeClass('mobile');
+            nav.css({
+                top: ($(window).height() / 2) - (ctrlH / 2),
+                width: 75
             });
+        }
 
+        if (orientation === 'portrait' && $(window).width() <= 480) {
+            nav.addClass('mobile');
+            nav.css({
+                top: 0,
+                width: 'auto'
+            });
+        }
+
+        if (orientation === 'landscape' && $(window).width() <= 480) {
+            nav.removeClass('mobile');
+        }
+
+    },
+
+    setStyles: function () {
+
+        var mainCss = {
+            fontSize: settings.fSize + '%',
+            lineHeight: '1.3'
         };
 
-        this.adjustNavPosition = function () {
+        settings.el.css(mainCss);
 
-            var frame = settings.el,
-                nav = $('nav'),
-                ctrlH = $('.controls').height(), // .controls height before mobile layout abstract
-                overlap = frame.position().left <= 115, // initial sidebar width + margin
-                orientation = env.orientation();
+    },
 
-            if (overlap && $(window).width() > 480) {
-                nav.addClass('mobile');
-                nav.css({
-                    top: 0,
-                    width: frame.width()
-                });
-            }
+    renderShadows: function () {
+        // var shadowHeight = 50;
+        // topDist = context.environment.isMobile() ? 0 : context.settings.el.offset().top;
+        return {
+            shadowTop: $('<div/>', {
+                id: 'shadow-top',
+            }),
+            shadowBottom: $('<div/>', {
+                id: 'shadow-bottom',
+                css: {
+                    'top': parseInt(settings.el.offset().top + settings.el.height() - 49, 10)
+                }
+            })
+        }
+    }
 
-            if (!overlap && $(window).width() > 480) {
-                nav.removeClass('mobile');
-                nav.css({
-                    top: ($(window).height() / 2) - (ctrlH / 2),
-                    width: 75
-                });
-            }
-
-            if (orientation === 'portrait' && $(window).width() <= 480) {
-                nav.addClass('mobile');
-                nav.css({
-                    top: 0,
-                    width: 'auto'
-                });
-            }
-
-            if (orientation === 'landscape' && $(window).width() <= 480) {
-                nav.removeClass('mobile');
-            }
-
-        };
-
-        this.removeElementStyles = function () {
-            //
-        };
-
-        this.setStyles = function () {
-
-            var mainCss = {
-                fontSize: settings.fSize + '%',
-                lineHeight: '1.3'
-            };
-
-            settings.el.css(mainCss);
-
-        };
-
-        this.renderShadows = function (context) {
-            var shadowHeight = 50,
-                topDist = context.env.isMobile() ? 0 : context.settings.el.offset().top;
-            return {
-                shadowTop: $('<div/>', {
-                    id: 'shadow-top',
-                }),
-                shadowBottom: $('<div/>', {
-                    id: 'shadow-bottom',
-                    css: {
-                        'top': parseInt(context.settings.el.offset().top + context.settings.el.height() - 49, 10)
-                    }
-                })
-            }
-        };
-
-    };
-
-    return Layout;
-
-});
+}

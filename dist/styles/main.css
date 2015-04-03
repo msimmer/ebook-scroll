@@ -1,314 +1,94 @@
-@charset "UTF-8";
-
 /*! http://meyerweb.com/eric/tools/css/reset/ v2.0 | 20110126 | License: none (public domain) */
-
-/* line 3, _reset-normalize.scss */
-
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
   font-size: 100%;
   font: inherit;
-  vertical-align: baseline;
-}
+  vertical-align: baseline; }
 
-/* line 11, _reset-normalize.scss */
-
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-  display: block;
-}
-
-/* line 14, _reset-normalize.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block; }
 
 body {
-  line-height: 1;
-}
+  line-height: 1; }
 
-/* line 17, _reset-normalize.scss */
+ol, ul {
+  list-style: none; }
 
-ol,
-ul {
-  list-style: none;
-}
+blockquote, q {
+  quotes: none; }
 
-/* line 20, _reset-normalize.scss */
-
-blockquote,
-q {
-  quotes: none;
-}
-
-/* line 23, _reset-normalize.scss */
-
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
+blockquote:before, blockquote:after, q:before, q:after {
   content: '';
-  content: none;
-}
-
-/* line 27, _reset-normalize.scss */
+  content: none; }
 
 table {
   border-collapse: collapse;
-  border-spacing: 0;
-}
+  border-spacing: 0; }
 
 /*! adapted from normalize.css v2.1.2 | MIT License | git.io/normalize */
-
-/* line 32, _reset-normalize.scss */
-
 a:focus {
-  outline: 0;
-}
+  outline: 0; }
 
-/* line 35, _reset-normalize.scss */
+a:active, a:hover {
+  outline: 0; }
 
-a:active,
-a:hover {
-  outline: 0;
-}
-
-/* line 38, _reset-normalize.scss */
-
-b,
-strong {
-  font-weight: 700;
-}
-
-/* line 41, _reset-normalize.scss */
+b, strong {
+  font-weight: 700; }
 
 hr {
-  -moz-box-sizing: content-box;
   box-sizing: content-box;
-  height: 0;
-}
-
-/* line 46, _reset-normalize.scss */
+  height: 0; }
 
 q {
-  quotes: "“" "”" "‘" "’";
-}
-
-/* line 49, _reset-normalize.scss */
+  quotes: "\201C" "\201D" "\2018" "\2019"; }
 
 small {
-  font-size: 80%;
-}
+  font-size: 80%; }
 
-/* line 52, _reset-normalize.scss */
-
-sub,
-sup {
+sub, sup {
   font-size: 75%;
   line-height: 0;
   position: relative;
-  vertical-align: baseline;
-}
-
-/* line 58, _reset-normalize.scss */
+  vertical-align: baseline; }
 
 sup {
-  top: -.5em;
-}
-
-/* line 61, _reset-normalize.scss */
+  top: -.5em; }
 
 sub {
-  bottom: -.25em;
-}
-
-/* line 64, _reset-normalize.scss */
+  bottom: -.25em; }
 
 img {
-  border: 0;
-}
-
-/* line 67, _reset-normalize.scss */
+  border: 0; }
 
 svg:not(:root) {
-  overflow: hidden;
-}
+  overflow: hidden; }
 
 /* Webkit */
-
-/* line 2, _window-ui.scss */
-
 :not(main)::-webkit-scrollbar {
-  display: none;
-}
-
-/* line 3, _window-ui.scss */
+  display: none; }
 
 :not(main)::-webkit-scrollbar-button {
-  display: none;
-}
-
-/* line 4, _window-ui.scss */
+  display: none; }
 
 :not(main)::-webkit-scrollbar-track {
-  display: none;
-}
-
-/* line 5, _window-ui.scss */
+  display: none; }
 
 :not(main)::-webkit-scrollbar-track-piece {
-  display: none;
-}
-
-/* line 6, _window-ui.scss */
+  display: none; }
 
 :not(main)::-webkit-scrollbar-thumb {
-  display: none;
-}
-
-/* line 7, _window-ui.scss */
+  display: none; }
 
 :not(main)::-webkit-scrollbar-corner {
-  display: none;
-}
-
-/* line 8, _window-ui.scss */
+  display: none; }
 
 :not(main)::-webkit-resizer {
-  display: none;
-}
+  display: none; }
 
 /* Moz */
-
-@-moz-document url-prefix(http://), url-prefix(https://)  {
-  /* line 12, _window-ui.scss */
-
-  scrollbar {
-    -moz-appearance: none !important;
-    display: none !important;
-  }
-
-  /* line 16, _window-ui.scss */
-
-  thumb,
-  scrollbarbutton {
-    -moz-appearance: none !important;
-    display: none !important;
-  }
-
-  /* line 20, _window-ui.scss */
-
-  thumb:hover,
-  scrollbarbutton:hover {
-    -moz-appearance: none !important;
-    display: none !important;
-  }
-
-  /* line 24, _window-ui.scss */
-
-  scrollbarbutton {
-    display: none !important;
-  }
-
-  /* line 27, _window-ui.scss */
-
-  scrollbar[orient="vertical"] {
-    display: none !important;
-  }
-}
-
 /* IE */
-
-/* line 33, _window-ui.scss */
-
 :not(main) {
   scrollbar-base-color: transparent;
   scrollbar-3dlight-color: transparent;
@@ -318,13 +98,9 @@ svg:not(:root) {
   scrollbar-shadow-color: transparent;
   scrollbar-dark-shadow-color: transparent;
   scrollbar-darkshadow-color: transparent;
-  scrollbar-face-color: transparent;
-}
+  scrollbar-face-color: transparent; }
 
 /* Spinner */
-
-/* line 68, _window-ui.scss */
-
 .spinner {
   width: 30px;
   height: 30px;
@@ -336,293 +112,122 @@ svg:not(:root) {
   position: absolute;
   left: 50%;
   margin-left: -15px;
-  display: block;
-}
+  display: block; }
 
 @-webkit-keyframes rotateplane {
   0% {
-    -webkit-transform: perspective(120px);
-  }
+    -webkit-transform: perspective(120px); }
 
   50% {
-    -webkit-transform: perspective(120px) rotateY(180deg);
-  }
+    -webkit-transform: perspective(120px) rotateY(180deg); }
 
   100% {
-    -webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg);
-  }
-}
+    -webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg); } }
 
 @keyframes rotateplane {
   0% {
     transform: perspective(120px) rotateX(0deg) rotateY(0deg);
-    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
-  }
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg); }
 
   50% {
     transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
-    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
-  }
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg); }
 
   100% {
     transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
-    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
-  }
-}
-
-@font-face {
-  font-family: "Cardo";
-  src: url("fonts/cardo-bold-webfont.eot");
-  src: url("fonts/cardo-bold-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/cardo-bold-webfont.woff") format("woff"), url("fonts/cardo-bold-webfont.ttf") format("truetype"), url("fonts/cardo-bold-webfont.svg#Cardo") format("svg");
-  font-weight: 400;
-  font-style: normal;
-  font-stretch: normal;
-}
-
-@font-face {
-  font-family: "Cardo";
-  src: url("fonts/cardo-italic-webfont.eot");
-  src: url("fonts/cardo-italic-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/cardo-italic-webfont.woff") format("woff"), url("fonts/cardo-italic-webfont.ttf") format("truetype"), url("fonts/cardo-italic-webfont.svg#Cardo") format("svg");
-  font-weight: 400;
-  font-style: normal;
-  font-stretch: normal;
-}
-
-@font-face {
-  font-family: "Cardo";
-  src: url("fonts/cardo-regular-webfont.eot");
-  src: url("fonts/cardo-regular-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/cardo-regular-webfont.woff") format("woff"), url("fonts/cardo-regular-webfont.ttf") format("truetype"), url("fonts/cardo-regular-webfont.svg#Cardo") format("svg");
-  font-weight: 400;
-  font-style: normal;
-  font-stretch: normal;
-}
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg); } }
 
 @font-face {
   font-family: 'cardo-R';
-  src: url(fonts/cardo-R.ttf);
+  src: url('fonts/cardo-regular-webfont.eot');
+  src: url('fonts/cardo-regular-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/cardo-regular-webfont.woff') format('woff'), url('fonts/cardo-regular-webfont.ttf') format('truetype'), url('fonts/cardo-regular-webfont.svg#cardo-R') format('svg');
   font-weight: normal;
   font-style: normal;
-}
+  font-stretch: normal; }
 
 @font-face {
   font-family: 'cardo-I';
-  src: url(fonts/cardo-I.ttf);
+  src: url('fonts/cardo-italic-webfont.eot');
+  src: url('fonts/cardo-italic-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/cardo-italic-webfont.woff') format('woff'), url('fonts/cardo-italic-webfont.ttf') format('truetype'), url('fonts/cardo-italic-webfont.svg#cardo-I') format('svg');
   font-weight: normal;
   font-style: normal;
-}
+  font-stretch: normal; }
 
-/* line 13, _styles.scss */
-
-html,
-body,
-div,
-hr,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
+html, body, div, hr, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
   vertical-align: baseline;
-  font-family: 'cardo-R';
-}
+  font-family: 'cardo-R'; }
 
-/* line 20, _styles.scss */
-
-html,
-body {
+html, body {
   font-size: 30px;
   /* set base font-size */
   margin: 0;
   padding: 0;
   overflow: hidden;
   height: 100%;
-  width: 100%;
-}
+  width: 100%; }
 
-/* line 28, _styles.scss */
-
-html,
-body,
-main {
-  transition: background-color 400ms ease;
-}
-
-/* line 34, _styles.scss */
+html, body, main {
+  -webkit-transition: background-color 400ms ease;
+  transition: background-color 400ms ease; }
 
 html.lightCSs {
-  background-color: #fff;
-}
-
-/* line 37, _styles.scss */
+  background-color: #fff; }
 
 html.darkCss {
-  background-color: #ccc;
-}
+  background-color: #ccc; }
 
-/* line 40, _styles.scss */
-
-.darkCss body,
-.darkCss main,
-.lightCss body,
-.lightCss main {
-  background-color: transparent;
-}
-
-/* line 43, _styles.scss */
+.darkCss body, .darkCss main, .lightCss body, .lightCss main {
+  background-color: transparent; }
 
 nav {
   position: absolute;
   margin: 0 25px;
   height: 0;
-  width: 67px;
-}
-
-/* line 49, _styles.scss */
+  width: 67px; }
 
 a {
-  text-decoration: none;
-}
-
-/* line 52, _styles.scss */
+  text-decoration: none; }
 
 .site-title {
   margin: 25px;
   padding: 0;
-  color: black;
-}
-
-/* line 57, _styles.scss */
+  color: black; }
 
 ul.controls {
   min-width: 75px;
-  opacity: 0;
-}
+  opacity: 0; }
 
-/* line 61, _styles.scss */
-
-ul.controls,
-ul.components {
+ul.controls, ul.components {
   list-style: none;
   margin: 0;
   padding: 0;
   top: 0;
-  right: 0;
-}
-
-/* line 68, _styles.scss */
+  right: 0; }
 
 ul.controls li {
-  margin: 3px 0;
-}
-
-/* line 71, _styles.scss */
+  margin: 3px 0; }
 
 ul.components li {
   width: 35px;
-  height: 35px;
-}
-
-/* line 75, _styles.scss */
+  height: 35px; }
 
 ul.controls li a {
   position: relative;
   display: inline-block;
   height: 30px;
   width: 30px;
-  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
-}
-
-/* line 82, _styles.scss */
+  box-shadow:  4px 4px 6px rgba(0, 0, 0, 0.5); }
 
 ul.components li a {
   display: block;
   height: 100%;
-  width: 100%;
-}
-
-/* line 87, _styles.scss */
+  width: 100%; }
 
 ul.chapters li {
-  margin: 0 10px;
-}
-
-/* line 90, _styles.scss */
+  margin: 0 10px; }
 
 main {
   font-size: 100%;
@@ -637,84 +242,59 @@ main {
   overflow-x: hidden;
   max-height: 200px;
   line-height: 1.3;
-  -webkit-overflow-scrolling: auto !important;
-}
+  -webkit-overflow-scrolling: auto !important; }
+  main:hover {
+    overflow-y: scroll; }
 
-/* line 103, _styles.scss */
-
-main:hover {
-  overflow-y: scroll;
-}
-
-/* line 107, _styles.scss */
-
-#shadow-top,
-#shadow-bottom {
-  transition: background 400ms ease;
-}
-
-/* line 114, _styles.scss */
+#shadow-top, #shadow-bottom {
+  -webkit-transition: background 400ms ease;
+  transition: background 400ms ease; }
 
 .lightCss main #shadow-top {
   position: fixed;
   height: 50px;
   width: inherit;
   top: inherit;
-  background: linear-gradient(to bottom, white 0%, rgba(255, 255, 255, 0) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 );
-}
-
-/* line 126, _styles.scss */
-
+  background: -webkit-linear-gradient(top, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(to bottom, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 ); }
 .lightCss main #shadow-bottom {
   position: fixed;
   height: 50px;
   width: inherit;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
-}
-
-/* line 140, _styles.scss */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(100%, #ffffff));
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); }
 
 .darkCss main #shadow-top {
   position: fixed;
   height: 50px;
   width: inherit;
   top: inherit;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #cccccc), color-stop(100%, rgba(204, 204, 204, 0)));
+  background: -webkit-linear-gradient(top, #cccccc 0%, rgba(204, 204, 204, 0) 100%);
   background: linear-gradient(to bottom, #cccccc 0%, rgba(204, 204, 204, 0) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00cccccc', endColorstr='#cccccc',GradientType=0 );
-}
-
-/* line 153, _styles.scss */
-
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00cccccc', endColorstr='#cccccc',GradientType=0 ); }
 .darkCss main #shadow-bottom {
   position: fixed;
   height: 50px;
   width: inherit;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #cccccc), color-stop(100%, #cccccc));
+  background: -webkit-linear-gradient(top, rgba(204, 204, 204, 0) 0%, #cccccc 100%);
   background: linear-gradient(to bottom, rgba(204, 204, 204, 0) 0%, #cccccc 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00cccccc', endColorstr='#cccccc',GradientType=0 );
-}
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00cccccc', endColorstr='#cccccc',GradientType=0 ); }
 
-/* line 167, _styles.scss */
-
-main a,
-main a:link,
-main a:active,
-main a:visited {
-  color: blue !important;
-  text-decoration: underline !important;
-}
-
-/* line 171, _styles.scss */
+main a, main a:link, main a:active, main a:visited {
+  color: #000;
+  text-decoration: none;
+  border-bottom: 1px solid #000; }
 
 section#page {
   margin: 0;
   padding: 0;
   border: 0;
-  opacity: .3;
-}
-
-/* line 177, _styles.scss */
+  opacity: .3; }
 
 .runner-help {
   position: absolute;
@@ -723,17 +303,11 @@ section#page {
   margin: 25px;
   padding: 0;
   text-decoration: none;
-  opacity: .3;
-}
-
-/* line 186, _styles.scss */
+  opacity: .3; }
 
 .runner-help a {
   /*color:black;*/
-  text-decoration: none;
-}
-
-/* line 190, _styles.scss */
+  text-decoration: none; }
 
 .runner-page-count {
   position: absolute;
@@ -741,89 +315,55 @@ section#page {
   right: 0;
   margin: 25px;
   padding: 0;
-  opacity: .3;
-}
+  opacity: .3; }
 
 /*
 
 Icons
 
 */
-
-/* line 204, _styles.scss */
-
 .play-btn[data-state='play'] {
   background: transparent url(../images/play_64.png) no-repeat center;
-  background-size: contain;
-}
-
-/* line 208, _styles.scss */
+  background-size: contain; }
 
 .play-btn[data-state='pause'] {
   background: transparent url(../images/stop_64.png) no-repeat center;
-  background-size: contain;
-}
-
-/* line 212, _styles.scss */
+  background-size: contain; }
 
 .speed-inc {
   background: transparent url(../images/faster_64.png) no-repeat center;
-  background-size: contain;
-}
-
-/* line 216, _styles.scss */
+  background-size: contain; }
 
 .speed-dec {
   background: transparent url(../images/slower_64.png) no-repeat center;
-  background-size: contain;
-}
-
-/* line 220, _styles.scss */
+  background-size: contain; }
 
 .font-inc {
   background: transparent url(../images/bigger_64.png) no-repeat center;
-  background-size: contain;
-}
-
-/* line 224, _styles.scss */
+  background-size: contain; }
 
 .font-dec {
   background: transparent url(../images/smaller_64.png) no-repeat center;
-  background-size: contain;
-}
-
-/* line 228, _styles.scss */
+  background-size: contain; }
 
 .contrast-light {
   background: transparent url(../images/lighter_64.png) no-repeat center;
-  background-size: contain;
-}
-
-/* line 232, _styles.scss */
+  background-size: contain; }
 
 .contrast-dark {
   background: transparent url(../images/darker_64.png) no-repeat center;
-  background-size: contain;
-}
-
-/* line 236, _styles.scss */
+  background-size: contain; }
 
 .full-screen {
   background: transparent url(../images/fullscreen_64.png) no-repeat center;
   background-size: 110%;
-  background-position-x: -1px;
-}
-
-/* line 241, _styles.scss */
+  background-position-x: -1px; }
 
 .chapter-nav {
   opacity: 0;
   display: block;
   text-decoration: none;
-  color: inherit;
-}
-
-/* line 247, _styles.scss */
+  color: inherit; }
 
 #chapter-prev {
   position: fixed;
@@ -835,10 +375,7 @@ Icons
   margin-left: -55px;
   cursor: pointer;
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
-  background-size: 55%;
-}
-
-/* line 261, _styles.scss */
+  background-size: 55%; }
 
 #chapter-next {
   position: fixed;
@@ -851,67 +388,44 @@ Icons
   cursor: pointer;
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
   background-size: 55%;
-  background-position-x: 10px;
-}
+  background-position-x: 10px; }
 
 /*
 
 Mobile styles
 
 */
-
-/* line 283, _styles.scss */
-
 nav.mobile {
   top: 0;
   text-align: justify;
   margin: 8px auto 0 auto;
-  position: relative;
-}
-
-/* line 289, _styles.scss */
+  position: relative; }
 
 nav.mobile ul.controls {
-  display: inline;
-}
-
-/* line 292, _styles.scss */
+  display: inline; }
 
 nav.mobile ul.controls li {
-  display: inline;
-}
-
-/* line 295, _styles.scss */
+  display: inline; }
 
 nav.mobile ul.controls li:last-child:after {
   content: ' ';
   visibility: hidden;
   display: inline-block;
-  width: 100%;
-}
+  width: 100%; }
 
 /*
 
 Search bar
 
 */
-
-/* line 307, _styles.scss */
-
 .search-wrapper {
   position: absolute;
   right: 0;
   margin: 30px;
-  opacity: .3;
-}
-
-/* line 313, _styles.scss */
+  opacity: .3; }
 
 .input-wrapper {
-  height: 32px;
-}
-
-/* line 316, _styles.scss */
+  height: 32px; }
 
 #userInput {
   width: 300px;
@@ -922,16 +436,10 @@ Search bar
   text-align: left;
   height: 32px;
   float: left;
-  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
-}
-
-/* line 327, _styles.scss */
+  box-shadow:  4px 4px 6px rgba(0, 0, 0, 0.5); }
 
 #userInput:focus {
-  outline: none;
-}
-
-/* line 330, _styles.scss */
+  outline: none; }
 
 #search {
   padding: 0;
@@ -942,10 +450,7 @@ Search bar
   background-size: contain;
   display: inline-block;
   position: relative;
-  right: 0;
-}
-
-/* line 341, _styles.scss */
+  right: 0; }
 
 #search-close {
   padding: 0;
@@ -956,464 +461,84 @@ Search bar
   background-size: contain;
   display: inline-block;
   border-right: 0;
-  opacity: 0;
-}
-
-/* line 352, _styles.scss */
+  opacity: 0; }
 
 #book-content {
-  padding: 0 15px 0 0;
-}
-
-/* line 355, _styles.scss */
+  padding: 0 15px 0 0; }
 
 .cursor {
-  cursor: default;
-}
-
-/* line 358, _styles.scss */
+  cursor: default; }
 
 .cursor.cursor-hidden {
-  cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAsTAAALEwEAmpwYAAABy2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS40LjAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIKICAgICAgICAgICAgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIj4KICAgICAgICAgPHRpZmY6T3JpZW50YXRpb24+MTwvdGlmZjpPcmllbnRhdGlvbj4KICAgICAgICAgPHhtcDpDcmVhdG9yVG9vbD5BZG9iZSBJbWFnZVJlYWR5PC94bXA6Q3JlYXRvclRvb2w+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgqyI37xAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=), auto;
-}
+  cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAsTAAALEwEAmpwYAAABy2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS40LjAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIKICAgICAgICAgICAgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIj4KICAgICAgICAgPHRpZmY6T3JpZW50YXRpb24+MTwvdGlmZjpPcmllbnRhdGlvbj4KICAgICAgICAgPHhtcDpDcmVhdG9yVG9vbD5BZG9iZSBJbWFnZVJlYWR5PC94bXA6Q3JlYXRvclRvb2w+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgqyI37xAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=), auto; }
 
 /*
 
 Misc.
 
 */
-
-/* line 367, _styles.scss */
-
 .hidden {
-  display: none;
-}
-
-/* line 370, _styles.scss */
+  display: none; }
 
 .show-scroll-bar {
-  overflow-y: scroll;
-}
+  overflow-y: scroll; }
 
-/* line 374, _styles.scss */
+#book-content h1, #book-content h2, #book-content h3, #book-content h4, #book-content h5, #book-content h6, #book-content div, #book-content p, #book-content span, #book-content i, #book-content b, #book-content em, #book-content strong {
+  cursor: default !important; }
 
-#book-content h1,
-#book-content h2,
-#book-content h3,
-#book-content h4,
-#book-content h5,
-#book-content h6,
-#book-content div,
-#book-content p,
-#book-content span,
-#book-content i,
-#book-content b,
-#book-content em,
-#book-content strong {
-  cursor: default !important;
-}
+#book-content h1, #book-content h2, #book-content h3, #book-content h4, #book-content h5, #book-content h6, #book-content div, #book-content p, #book-content span, #book-content b, #book-content strong {
+  font-family: 'cardo-R'; }
+#book-content i, #book-content em {
+  font-family: 'cardo-I'; }
 
-/* line 379, _styles.scss */
+.lightCss a, .lightCss abbr, .lightCss acronym, .lightCss address, .lightCss applet, .lightCss area, .lightCss article, .lightCss aside, .lightCss audio, .lightCss b, .lightCss base, .lightCss basefont, .lightCss bdi, .lightCss bdo, .lightCss bgsound, .lightCss big, .lightCss blink, .lightCss blockquote, .lightCss body, .lightCss br, .lightCss button, .lightCss canvas, .lightCss caption, .lightCss center, .lightCss cite, .lightCss code, .lightCss col, .lightCss colgroup, .lightCss content, .lightCss data, .lightCss datalist, .lightCss dd, .lightCss decorator, .lightCss del, .lightCss details, .lightCss dfn, .lightCss dir, .lightCss div, .lightCss dl, .lightCss dt, .lightCss element, .lightCss em, .lightCss embed, .lightCss fieldset, .lightCss figcaption, .lightCss figure, .lightCss font, .lightCss footer, .lightCss form, .lightCss frame, .lightCss frameset, .lightCss h1, .lightCss h2, .lightCss h3, .lightCss h4, .lightCss h5, .lightCss h6, .lightCss head, .lightCss header, .lightCss hgroup, .lightCss hr, .lightCss html, .lightCss i, .lightCss iframe, .lightCss img, .lightCss input, .lightCss ins, .lightCss isindex, .lightCss kbd, .lightCss keygen, .lightCss label, .lightCss legend, .lightCss li, .lightCss link, .lightCss listing, .lightCss main, .lightCss map, .lightCss mark, .lightCss marquee, .lightCss menu, .lightCss menuitem, .lightCss meter, .lightCss nav, .lightCss nobr, .lightCss noframes, .lightCss noscript, .lightCss object, .lightCss ol, .lightCss optgroup, .lightCss option, .lightCss output, .lightCss p, .lightCss param, .lightCss plaintext, .lightCss pre, .lightCss progress, .lightCss q, .lightCss rp, .lightCss rt, .lightCss ruby, .lightCss s, .lightCss samp, .lightCss section, .lightCss select, .lightCss shadow, .lightCss small, .lightCss source, .lightCss spacer, .lightCss span, .lightCss strike, .lightCss strong, .lightCss sub, .lightCss summary, .lightCss sup, .lightCss table, .lightCss tbody, .lightCss td, .lightCss template, .lightCss textarea, .lightCss tfoot, .lightCss th, .lightCss thead, .lightCss time, .lightCss title, .lightCss tr, .lightCss track, .lightCss tt, .lightCss u, .lightCss ul, .lightCss var, .lightCss video, .lightCss wbr {
+  color: #000 !important; }
 
-#book-content h1,
-#book-content h2,
-#book-content h3,
-#book-content h4,
-#book-content h5,
-#book-content h6,
-#book-content div,
-#book-content p,
-#book-content span,
-#book-content b,
-#book-content strong {
-  font-family: 'cardo-R';
-}
-
-/* line 382, _styles.scss */
-
-#book-content i,
-#book-content em {
-  font-family: 'cardo-I';
-}
-
-/* line 1, _page-styles.scss */
-
-.lightCss a,
-.lightCss abbr,
-.lightCss acronym,
-.lightCss address,
-.lightCss applet,
-.lightCss area,
-.lightCss article,
-.lightCss aside,
-.lightCss audio,
-.lightCss b,
-.lightCss base,
-.lightCss basefont,
-.lightCss bdi,
-.lightCss bdo,
-.lightCss bgsound,
-.lightCss big,
-.lightCss blink,
-.lightCss blockquote,
-.lightCss body,
-.lightCss br,
-.lightCss button,
-.lightCss canvas,
-.lightCss caption,
-.lightCss center,
-.lightCss cite,
-.lightCss code,
-.lightCss col,
-.lightCss colgroup,
-.lightCss content,
-.lightCss data,
-.lightCss datalist,
-.lightCss dd,
-.lightCss decorator,
-.lightCss del,
-.lightCss details,
-.lightCss dfn,
-.lightCss dir,
-.lightCss div,
-.lightCss dl,
-.lightCss dt,
-.lightCss element,
-.lightCss em,
-.lightCss embed,
-.lightCss fieldset,
-.lightCss figcaption,
-.lightCss figure,
-.lightCss font,
-.lightCss footer,
-.lightCss form,
-.lightCss frame,
-.lightCss frameset,
-.lightCss h1,
-.lightCss h2,
-.lightCss h3,
-.lightCss h4,
-.lightCss h5,
-.lightCss h6,
-.lightCss head,
-.lightCss header,
-.lightCss hgroup,
-.lightCss hr,
-.lightCss html,
-.lightCss i,
-.lightCss iframe,
-.lightCss img,
-.lightCss input,
-.lightCss ins,
-.lightCss isindex,
-.lightCss kbd,
-.lightCss keygen,
-.lightCss label,
-.lightCss legend,
-.lightCss li,
-.lightCss link,
-.lightCss listing,
-.lightCss main,
-.lightCss map,
-.lightCss mark,
-.lightCss marquee,
-.lightCss menu,
-.lightCss menuitem,
-.lightCss meter,
-.lightCss nav,
-.lightCss nobr,
-.lightCss noframes,
-.lightCss noscript,
-.lightCss object,
-.lightCss ol,
-.lightCss optgroup,
-.lightCss option,
-.lightCss output,
-.lightCss p,
-.lightCss param,
-.lightCss plaintext,
-.lightCss pre,
-.lightCss progress,
-.lightCss q,
-.lightCss rp,
-.lightCss rt,
-.lightCss ruby,
-.lightCss s,
-.lightCss samp,
-.lightCss section,
-.lightCss select,
-.lightCss shadow,
-.lightCss small,
-.lightCss source,
-.lightCss spacer,
-.lightCss span,
-.lightCss strike,
-.lightCss strong,
-.lightCss sub,
-.lightCss summary,
-.lightCss sup,
-.lightCss table,
-.lightCss tbody,
-.lightCss td,
-.lightCss template,
-.lightCss textarea,
-.lightCss tfoot,
-.lightCss th,
-.lightCss thead,
-.lightCss time,
-.lightCss title,
-.lightCss tr,
-.lightCss track,
-.lightCss tt,
-.lightCss u,
-.lightCss ul,
-.lightCss var,
-.lightCss video,
-.lightCss wbr {
-  color: #000 !important;
-}
-
-/* line 2, _page-styles.scss */
-
-.darkCss a,
-.darkCss abbr,
-.darkCss acronym,
-.darkCss address,
-.darkCss applet,
-.darkCss area,
-.darkCss article,
-.darkCss aside,
-.darkCss audio,
-.darkCss b,
-.darkCss base,
-.darkCss basefont,
-.darkCss bdi,
-.darkCss bdo,
-.darkCss bgsound,
-.darkCss big,
-.darkCss blink,
-.darkCss blockquote,
-.darkCss body,
-.darkCss br,
-.darkCss button,
-.darkCss canvas,
-.darkCss caption,
-.darkCss center,
-.darkCss cite,
-.darkCss code,
-.darkCss col,
-.darkCss colgroup,
-.darkCss content,
-.darkCss data,
-.darkCss datalist,
-.darkCss dd,
-.darkCss decorator,
-.darkCss del,
-.darkCss details,
-.darkCss dfn,
-.darkCss dir,
-.darkCss div,
-.darkCss dl,
-.darkCss dt,
-.darkCss element,
-.darkCss em,
-.darkCss embed,
-.darkCss fieldset,
-.darkCss figcaption,
-.darkCss figure,
-.darkCss font,
-.darkCss footer,
-.darkCss form,
-.darkCss frame,
-.darkCss frameset,
-.darkCss h1,
-.darkCss h2,
-.darkCss h3,
-.darkCss h4,
-.darkCss h5,
-.darkCss h6,
-.darkCss head,
-.darkCss header,
-.darkCss hgroup,
-.darkCss hr,
-.darkCss html,
-.darkCss i,
-.darkCss iframe,
-.darkCss img,
-.darkCss input,
-.darkCss ins,
-.darkCss isindex,
-.darkCss kbd,
-.darkCss keygen,
-.darkCss label,
-.darkCss legend,
-.darkCss li,
-.darkCss link,
-.darkCss listing,
-.darkCss main,
-.darkCss map,
-.darkCss mark,
-.darkCss marquee,
-.darkCss menu,
-.darkCss menuitem,
-.darkCss meter,
-.darkCss nav,
-.darkCss nobr,
-.darkCss noframes,
-.darkCss noscript,
-.darkCss object,
-.darkCss ol,
-.darkCss optgroup,
-.darkCss option,
-.darkCss output,
-.darkCss p,
-.darkCss param,
-.darkCss plaintext,
-.darkCss pre,
-.darkCss progress,
-.darkCss q,
-.darkCss rp,
-.darkCss rt,
-.darkCss ruby,
-.darkCss s,
-.darkCss samp,
-.darkCss section,
-.darkCss select,
-.darkCss shadow,
-.darkCss small,
-.darkCss source,
-.darkCss spacer,
-.darkCss span,
-.darkCss strike,
-.darkCss strong,
-.darkCss sub,
-.darkCss summary,
-.darkCss sup,
-.darkCss table,
-.darkCss tbody,
-.darkCss td,
-.darkCss template,
-.darkCss textarea,
-.darkCss tfoot,
-.darkCss th,
-.darkCss thead,
-.darkCss time,
-.darkCss title,
-.darkCss tr,
-.darkCss track,
-.darkCss tt,
-.darkCss u,
-.darkCss ul,
-.darkCss var,
-.darkCss video,
-.darkCss wbr {
-  color: #000 !important;
-}
+.darkCss a, .darkCss abbr, .darkCss acronym, .darkCss address, .darkCss applet, .darkCss area, .darkCss article, .darkCss aside, .darkCss audio, .darkCss b, .darkCss base, .darkCss basefont, .darkCss bdi, .darkCss bdo, .darkCss bgsound, .darkCss big, .darkCss blink, .darkCss blockquote, .darkCss body, .darkCss br, .darkCss button, .darkCss canvas, .darkCss caption, .darkCss center, .darkCss cite, .darkCss code, .darkCss col, .darkCss colgroup, .darkCss content, .darkCss data, .darkCss datalist, .darkCss dd, .darkCss decorator, .darkCss del, .darkCss details, .darkCss dfn, .darkCss dir, .darkCss div, .darkCss dl, .darkCss dt, .darkCss element, .darkCss em, .darkCss embed, .darkCss fieldset, .darkCss figcaption, .darkCss figure, .darkCss font, .darkCss footer, .darkCss form, .darkCss frame, .darkCss frameset, .darkCss h1, .darkCss h2, .darkCss h3, .darkCss h4, .darkCss h5, .darkCss h6, .darkCss head, .darkCss header, .darkCss hgroup, .darkCss hr, .darkCss html, .darkCss i, .darkCss iframe, .darkCss img, .darkCss input, .darkCss ins, .darkCss isindex, .darkCss kbd, .darkCss keygen, .darkCss label, .darkCss legend, .darkCss li, .darkCss link, .darkCss listing, .darkCss main, .darkCss map, .darkCss mark, .darkCss marquee, .darkCss menu, .darkCss menuitem, .darkCss meter, .darkCss nav, .darkCss nobr, .darkCss noframes, .darkCss noscript, .darkCss object, .darkCss ol, .darkCss optgroup, .darkCss option, .darkCss output, .darkCss p, .darkCss param, .darkCss plaintext, .darkCss pre, .darkCss progress, .darkCss q, .darkCss rp, .darkCss rt, .darkCss ruby, .darkCss s, .darkCss samp, .darkCss section, .darkCss select, .darkCss shadow, .darkCss small, .darkCss source, .darkCss spacer, .darkCss span, .darkCss strike, .darkCss strong, .darkCss sub, .darkCss summary, .darkCss sup, .darkCss table, .darkCss tbody, .darkCss td, .darkCss template, .darkCss textarea, .darkCss tfoot, .darkCss th, .darkCss thead, .darkCss time, .darkCss title, .darkCss tr, .darkCss track, .darkCss tt, .darkCss u, .darkCss ul, .darkCss var, .darkCss video, .darkCss wbr {
+  color: #000 !important; }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
   /* iPad in landscape */
-
-  /* line 5, _media-queries.scss */
-
   ul.controls li a.full-screen {
-    display: none;
-  }
-
-  /* line 8, _media-queries.scss */
-
+    display: none; }
   #book-content {
-    padding: 0;
-  }
-
-  /* line 11, _media-queries.scss */
-
+    padding: 0; }
   nav.mobile {
     width: auto;
-    padding: 25px;
-  }
-}
+    padding: 25px; } }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: landscape) {
   /* iPhone 5 in landscape */
-
-  /* line 20, _media-queries.scss */
-
   main {
     margin: 0 !important;
-    top: 0 !important;
-  }
-
-  /* line 24, _media-queries.scss */
-
-  .mobile-portrait-only,
-  ul.controls li a.full-screen {
-    display: none;
-  }
-
-  /* line 27, _media-queries.scss */
-
+    top: 0 !important; }
+  .mobile-portrait-only, ul.controls li a.full-screen {
+    display: none; }
   #book-content {
-    padding: 0 8px;
-  }
-
-  /* line 30, _media-queries.scss */
-
+    padding: 0 8px; }
   #shadow-top {
     margin-top: 0 !important;
-    top: 0 !important;
-  }
-
-  /* line 34, _media-queries.scss */
-
-  #chapter-prev,
-  #chapter-next {
-    display: none;
-  }
-}
+    top: 0 !important; }
+  #chapter-prev, #chapter-next {
+    display: none; } }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: landscape) {
   /* iPhone 2G-4S in landscape */
-
-  /* line 42, _media-queries.scss */
-
   main {
     margin: 0 !important;
-    top: 0 !important;
-  }
-
-  /* line 46, _media-queries.scss */
-
-  .mobile-portrait-only,
-  ul.controls li a.full-screen {
-    display: none;
-  }
-
-  /* line 49, _media-queries.scss */
-
+    top: 0 !important; }
+  .mobile-portrait-only, ul.controls li a.full-screen {
+    display: none; }
   #book-content {
-    padding: 0 8px;
-  }
-
-  /* line 52, _media-queries.scss */
-
+    padding: 0 8px; }
   #shadow-top {
     margin-top: 0 !important;
-    top: 0 !important;
-  }
-
-  /* line 56, _media-queries.scss */
-
-  #chapter-prev,
-  #chapter-next {
-    display: none;
-  }
-}
+    top: 0 !important; }
+  #chapter-prev, #chapter-next {
+    display: none; } }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
   /* iPad in portrait */
-
-  /* line 64, _media-queries.scss */
-
   main {
     font-size: 100%;
     position: absolute;
@@ -1424,40 +549,19 @@ Misc.
     background: #fff;
     overflow-y: hidden;
     overflow-x: hidden;
-    max-height: 200px;
-  }
-
-  /* line 76, _media-queries.scss */
-
+    max-height: 200px; }
   ul.controls li a {
-    margin: 0;
-  }
-
-  /* line 79, _media-queries.scss */
-
+    margin: 0; }
   ul.controls li a.full-screen {
-    display: none;
-  }
-
-  /* line 82, _media-queries.scss */
-
+    display: none; }
   #book-content {
-    padding: 0 25px;
-  }
-
-  /* line 85, _media-queries.scss */
-
+    padding: 0 25px; }
   nav.mobile {
     width: auto;
-    padding: 25px;
-  }
-}
+    padding: 25px; } }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: portrait) {
   /* iPhone 5 in portrait */
-
-  /* line 94, _media-queries.scss */
-
   nav.mobile {
     margin: 0;
     top: 0 !important;
@@ -1465,67 +569,30 @@ Misc.
     position: relative;
     width: auto;
     max-width: 100%;
-    padding: 8px;
-  }
-
-  /* line 103, _media-queries.scss */
-
+    padding: 8px; }
   main {
-    margin: 30px 0;
-  }
-
-  /* line 106, _media-queries.scss */
-
+    margin: 30px 0; }
   ul.controls li a.full-screen {
-    display: none;
-  }
-
-  /* line 109, _media-queries.scss */
-
+    display: none; }
   .runner-help {
-    margin: 8px 12px;
-  }
-
-  /* line 112, _media-queries.scss */
-
+    margin: 8px 12px; }
   .runner-page-count {
-    margin: 8px;
-  }
-
-  /* line 115, _media-queries.scss */
-
+    margin: 8px; }
   #book-content {
-    padding: 0 8px;
-  }
-
-  /* line 118, _media-queries.scss */
-
+    padding: 0 8px; }
   #shadow-top {
-    margin-top: 30px !important;
-  }
-
-  /* line 121, _media-queries.scss */
-
+    margin-top: 30px !important; }
   #chapter-prev {
     bottom: 12px;
     left: calc(12.5% + 12px);
-    margin-left: 0;
-  }
-
-  /* line 126, _media-queries.scss */
-
+    margin-left: 0; }
   #chapter-next {
     bottom: 12px;
     left: 12.5%;
-    margin-left: 60px;
-  }
-}
+    margin-left: 60px; } }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: portrait) {
   /* iPhone 2G-4S in portrait */
-
-  /* line 136, _media-queries.scss */
-
   nav.mobile {
     margin: 0;
     top: 0 !important;
@@ -1533,59 +600,25 @@ Misc.
     position: relative;
     width: auto;
     max-width: 100%;
-    padding: 8px;
-  }
-
-  /* line 145, _media-queries.scss */
-
+    padding: 8px; }
   main {
-    margin: 30px 0;
-  }
-
-  /* line 148, _media-queries.scss */
-
+    margin: 30px 0; }
   ul.controls li a.full-screen {
     margin: 0;
-    display: none;
-  }
-
-  /* line 152, _media-queries.scss */
-
+    display: none; }
   .runner-help {
-    margin: 8px 12px;
-  }
-
-  /* line 155, _media-queries.scss */
-
+    margin: 8px 12px; }
   .runner-page-count {
-    margin: 8px;
-  }
-
-  /* line 158, _media-queries.scss */
-
+    margin: 8px; }
   #book-content {
-    padding: 0 8px;
-  }
-
-  /* line 161, _media-queries.scss */
-
+    padding: 0 8px; }
   #shadow-top {
-    margin-top: 30px !important;
-  }
-
-  /* line 164, _media-queries.scss */
-
+    margin-top: 30px !important; }
   #chapter-prev {
     bottom: 12px;
     left: calc(12.5% + 12px);
-    margin-left: 0;
-  }
-
-  /* line 169, _media-queries.scss */
-
+    margin-left: 0; }
   #chapter-next {
     bottom: 12px;
     left: 12.5%;
-    margin-left: 60px;
-  }
-}
+    margin-left: 60px; } }

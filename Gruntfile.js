@@ -100,8 +100,8 @@ module.exports = function (grunt) {
                         '<%= yeoman.dist %>/components/',
                         '<%= yeoman.dist %>/data/',
                         '<%= yeoman.dist %>/images/',
-                        '<%= yeoman.dist %>/scripts/',
-                        '<%= yeoman.dist %>/styles/',
+                        // '<%= yeoman.dist %>/scripts/',
+                        // '<%= yeoman.dist %>/styles/',
                         '<%= yeoman.dist %>/*.icon.png',
                         '<%= yeoman.dist %>/*.splash.png',
                         '<%= yeoman.dist %>/book.php',
@@ -114,7 +114,7 @@ module.exports = function (grunt) {
                     dot: true,
                     src: [
                         '.tmp',
-                        '<%= yeoman.dist %>/scripts/',
+                        '<%= yeoman.dist %>/scripts/*.js',
                         '!<%= yeoman.dist %>/.git*'
                     ]
                 }]
@@ -159,6 +159,7 @@ module.exports = function (grunt) {
         // Compiles Sass to CSS and generates necessary files if requested
         compass: {
             options: {
+                outputStyle: 'compressed',
                 sassDir: '<%= yeoman.app %>/styles',
                 cssDir: '<%= yeoman.app %>/styles',
                 // cssDir: '.tmp/styles',
@@ -176,6 +177,7 @@ module.exports = function (grunt) {
             },
             dist: {
                 options: {
+                    cssDir: '.tmp/styles',
                     generatedImagesDir: '<%= yeoman.dist %>/images/generated',
                     debugInfo: false
                 }
@@ -195,9 +197,9 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: '.tmp/styles/',
                     src: '{,*/}*.css',
-                    dest: 'dist/styles/'
+                    cwd: '<%= yeoman.dist %>/styles/',
+                    dest: '<%= yeoman.dist %>/styles/'
                 }]
             }
         },
@@ -221,8 +223,8 @@ module.exports = function (grunt) {
                     // optimize: 'none',
                     preserveLicenseComments: false,
                     useStrict: true,
-                    wrap: true,
-                    urlArgs: 'bust=0c69a24b-ebc7-491d-b205-4ba061c0baaf'
+                    wrap: true
+                    // urlArgs: 'bust=0c69a24b-ebc7-491d-b205-4ba061c0baaf'
                 }
             }
         },
@@ -244,19 +246,19 @@ module.exports = function (grunt) {
         // concat, minify and revision files. Creates configurations in memory so
         // additional tasks can operate on them
         useminPrepare: {
+            html: '<%= yeoman.app %>/book.php',
             options: {
                 dest: '<%= yeoman.dist %>'
-            },
-            html: '<%= yeoman.app %>/book.php'
+            }
         },
 
         // Performs rewrites based on rev and the useminPrepare configuration
         usemin: {
             options: {
-                assetsDirs: ['<%= yeoman.dist %>']
+                assetsDirs: ['<%= yeoman.app %>', '.tmp']
             },
             html: ['<%= yeoman.dist %>/book.php'],
-            css: ['<%= yeoman.dist %>/styles/{,*/}*.css']
+            css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
         },
 
         // The following *-min tasks produce minified files in the dist folder
@@ -316,18 +318,19 @@ module.exports = function (grunt) {
                         '.htaccess',
                         'images/{,*/}*.*',
                         'styles/fonts/{,*/}*.*',
-                        'styles/*.css',
+                        // 'styles/*.css',
                         'bower_components/bootstrap-sass/vendor/assets/fonts/bootstrap/*.*',
                         'data/*.*',
                         'book.php'
+                        // '../.tmp/{,*/}*.*'
                     ]
                 }]
             },
             styles: {
                 expand: true,
                 dot: true,
-                cwd: '<%= yeoman.app %>/styles',
-                dest: '<%= yeoman.dist %>/styles/',
+                cwd: '<%= yeoman.app %>/styles/',
+                dest: '.tmp/styles',
                 src: '{,*/}*.css'
             },
             vendor: {
@@ -340,8 +343,8 @@ module.exports = function (grunt) {
             scripts: {
                 expand: true,
                 dot: true,
-                cwd: '<%= yeoman.app %>/scripts',
-                dest: '.tmp/scripts/',
+                cwd: '<%= yeoman.app %>/scripts/',
+                dest: '.tmp/scripts',
                 src: ['**']
             },
         },
@@ -399,7 +402,26 @@ module.exports = function (grunt) {
                     ]
                 }
             }
-        }
+        },
+
+        // cssmin: {
+        //     build: {
+        //         src: '.tmp/styles/*.css',
+        //         dest: '<%= yeoman.dist %>/styles/main.css'
+        //     }
+        // },
+        // concat: {
+        //     build: {
+        //         src: '.tmp/scripts/*.js',
+        //         dest: '<%= yeoman.dist %>/scripts/main.js'
+        //     }
+        // },
+        // uglify: {
+        //     build: {
+        //         src: '.tmp/scripts/*.js',
+        //         dest: '<%= yeoman.dist %>/scripts/main.js'
+        //     }
+        // }
 
     });
 
@@ -440,16 +462,37 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean:dist',
         'useminPrepare',
-        'concurrent:dist',
-        'autoprefixer',
+        'compass:dist',
+        'copy:styles',
+        'copy:vendor',
+        'copy:scripts',
+
         'requirejs',
-        'concat',
-        'cssmin',
-        'uglify',
+        'concat'
+
+        // 'uglify',
+
+
         // 'copy:dist',
-        'rev',
-        'modernizr',
-        'usemin'
+
+        // 'autoprefixer',
+        // 'cssmin',
+
+
+
+        // 'copy:dist',
+
+
+        // 'useminPrepare',
+        // 'concurrent:dist',
+        // 'autoprefixer',
+        // 'cssmin',
+        // 'requirejs',
+        // 'uglify',
+        // 'copy:dist',
+        // 'rev',
+        // 'modernizr',
+        // 'usemin'
         // 'htmlmin'
     ]);
 

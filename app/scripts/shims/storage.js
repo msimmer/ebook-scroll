@@ -2,19 +2,18 @@
 // © (Jeremie)[https://developer.mozilla.org/en-US/profiles/Jeremie], Mar 8, 2014 1:15:44 AM
 // MIT License
 
-define(function() {
-    'use strict';
+module.exports = (function () {
 
     if (!window.localStorage) {
 
         var oneMonth = new Date();
         oneMonth.setDate(oneMonth.getDate() + 30);
 
-        Object.defineProperty(window, 'localStorage', new(function() {
+        Object.defineProperty(window, 'localStorage', new(function () {
             var aKeys = [],
                 oStorage = {};
             Object.defineProperty(oStorage, 'getItem', {
-                value: function(sKey) {
+                value: function (sKey) {
                     return sKey ? this[sKey] : null;
                 },
                 writable: false,
@@ -22,7 +21,7 @@ define(function() {
                 enumerable: false
             });
             Object.defineProperty(oStorage, 'key', {
-                value: function(nKeyId) {
+                value: function (nKeyId) {
                     return aKeys[nKeyId];
                 },
                 writable: false,
@@ -30,7 +29,7 @@ define(function() {
                 enumerable: false
             });
             Object.defineProperty(oStorage, 'setItem', {
-                value: function(sKey, sValue) {
+                value: function (sKey, sValue) {
                     if (!sKey) {
                         return;
                     }
@@ -41,14 +40,14 @@ define(function() {
                 enumerable: false
             });
             Object.defineProperty(oStorage, 'length', {
-                get: function() {
+                get: function () {
                     return aKeys.length;
                 },
                 configurable: false,
                 enumerable: false
             });
             Object.defineProperty(oStorage, 'removeItem', {
-                value: function(sKey) {
+                value: function (sKey) {
                     if (!sKey) {
                         return;
                     }
@@ -58,7 +57,7 @@ define(function() {
                 configurable: false,
                 enumerable: false
             });
-            this.get = function() {
+            this.get = function () {
                 var iThisIndx;
                 for (var sKey in oStorage) {
                     iThisIndx = aKeys.indexOf(sKey);
@@ -85,4 +84,5 @@ define(function() {
             this.enumerable = true;
         })());
     }
-});
+
+})()

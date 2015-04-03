@@ -1,0 +1,132 @@
+<?php
+/*
+
+Template Name: Book
+
+*/
+
+?>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <title>Fiktion</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="robots" content="noindex, nofollow">
+        <!-- icons -->
+        <link href="icon-57x57.png" rel="apple-touch-icon-precomposed" sizes="57x57">
+        <link href="icon-72x72.png" rel="apple-touch-icon-precomposed" sizes="72x72">
+        <link href="icon-114x114.png" rel="apple-touch-icon-precomposed" sizes="114x114">
+        <link href="icon-144x144.png" rel="apple-touch-icon-precomposed" sizes="144x144">
+        <link href="splash-320x460.png" media="(device-width: 320px)" rel="apple-touch-startup-image">
+        <link href="splash-640x920.png" media="(device-width: 320px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+        <link href="splash-768x1004.png" media="(device-width: 768px) and (orientation: portrait)" rel="apple-touch-startup-image">
+        <link href="splash-748x1024.png" media="(device-width: 768px) and (orientation: landscape)" rel="apple-touch-startup-image">
+        <link href="splash-1536x2008.png" media="(device-width: 1536px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+        <link href="splash-2048x1496.png" media="(device-width: 1536px)  and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+        <link rel="stylesheet" href="styles/main.94c2378a-7d61-4c82-adb3-03cdd83967bd.css">
+        <style type="text/css">
+            .chapters{ display: none!important; }
+        </style>
+        <noscript>
+            <style type="text/css">
+                nav,.ul,main,div,footer{ display: none!important; }
+                p.warn{
+                    width: 100%;
+                    height: 60px;
+                    background-color: red;
+                    color:white!important;
+                    padding:8px;
+                    position: fixed;
+                    top:0;
+                    left:0;
+                    font-size:18px!important;
+                    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                    text-align: left;
+                }
+            </style>
+        </noscript>
+        <?php
+            $protocol    = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+            $domain_name = $protocol . $_SERVER['HTTP_HOST'];
+            $uuid        = $_SESSION['book_uuid'];
+            $rel_path    = $_SESSION['rel_path'];
+            $full_path   = $domain_name . $_SESSION['rel_path'];
+            $book_path   = $full_path . '/components/' . $uuid; ?>
+        <script>
+            // window.ebookAppData = {
+            //     uuid: "<?php echo $uuid; ?>",
+            //     relPath: "<?php echo $rel_path; ?>",
+            //     fullPath:"<?php echo $full_path; ?>",
+            //     bookPath: "<?php echo $book_path; ?>",
+            //     urlArgs: "<?php echo CACHE_ARGS; ?>"
+            // }
+            window.ebookAppData = {
+                uuid: '4D57C8A6-EBDE-598F-AD57-761A659C93CC',
+                relPath: '/',
+                fullPath: 'http://localhost:8080',
+                bookPath: 'http://localhost:8080/components/4D57C8A6-EBDE-598F-AD57-761A659C93CC',
+                urlArgs: ''
+            }
+        </script>
+    </head>
+    <body>
+        <noscript>
+            <p class="warn">Bitte JavaScript in Ihrem Browser aktivieren für die Benutzung des Readers.
+            <br /><br />Please enable JavaScript in your browser to use the reader.</p>
+        </noscript>
+        <div class="search-wrapper">
+            <div class="input-wrapper">
+                <div id="userInput" contenteditable></div><a href="#" id="search-close"></a><a href="#" id="search"></a>
+            </div>
+        </div>
+        <nav class='mobile-portrait-only'>
+        <ul class="chapters"></ul>
+        <ul class="controls">
+            <li>
+                <a class='control-btn play-btn' data-state='play' href="#"></a>
+            </li>
+            <li>
+                <a class='control-btn speed-inc' href="#"></a></a>
+            </li>
+            <li>
+                <a class='control-btn speed-dec' href="#"></a>
+            </li>
+            <li>
+                <a class='control-btn font-inc' href="#"></a>
+            </li>
+            <li>
+                <a class='control-btn font-dec' href="#"></a>
+            </li>
+            <li>
+                <a class="control-btn contrast-toggle contrast-light" data-contrast='light' href="#"></a>
+            </li>
+            <li>
+                <a class="control-btn contrast-toggle contrast-dark" data-contrast='dark' href="#"></a>
+            </li>
+            <li>
+                <a class="control-btn full-screen" href="#"></a>
+            </li>
+        </ul>
+    </nav>
+        <main id="main"></main>
+        <div class="spinner"></div>
+        <footer class="mobile-portrait-only">
+            <p class="runner-help"><a data-uuid="<?php echo (get_language() == 'en') ? '7e9aa2c0-327f-45b3-85f7-0bb401d1c1ce' : 'fdbeeb28-6e83-4d3d-b96b-3bbd8c2d49c4' ; ?>" href="#">?</a>
+            </p>
+            <p class="runner-page-count">
+            <span class="current-page-count"></span>/<span class="total-page-count"></span>
+            </p>
+        </footer>
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <!-- <script src="scripts/book-loader.js"></script> -->
+        <script src="scripts/main.94c2378a-7d61-4c82-adb3-03cdd83967bd.js"></script>
+    </body>
+</html>
