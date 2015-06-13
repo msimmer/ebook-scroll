@@ -1,6 +1,6 @@
-var $ = require('./vendor/jquery');
+var $        = require('./vendor/jquery');
 var settings = require('./settings');
-var events = require('./events');
+var events   = require('./events');
 
 module.exports = {
 

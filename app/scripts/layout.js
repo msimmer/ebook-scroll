@@ -1,7 +1,7 @@
-var $ = require('./vendor/jquery');
+var $           = require('./vendor/jquery');
 var environment = require('./environment');
-var settings = require('./settings');
-var styles = require('./styles');
+var settings    = require('./settings');
+var styles      = require('./styles');
 
 module.exports = {
 

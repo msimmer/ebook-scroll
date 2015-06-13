@@ -31,7 +31,9 @@ Template Name: Book
         <link href="splash-748x1024.png" media="(device-width: 768px) and (orientation: landscape)" rel="apple-touch-startup-image">
         <link href="splash-1536x2008.png" media="(device-width: 1536px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
         <link href="splash-2048x1496.png" media="(device-width: 1536px)  and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
-        <link rel="stylesheet" href="styles/main.94c2378a-7d61-4c82-adb3-03cdd83967bd.css">
+        <!-- inject:css -->
+        <link rel="stylesheet" href="/dist/styles/main.94c2378a-7d61-4c82-adb3-03cdd83967bd.css">
+        <!-- endinject -->
         <style type="text/css">
             .chapters{ display: none!important; }
         </style>
@@ -53,26 +55,30 @@ Template Name: Book
                 }
             </style>
         </noscript>
+
         <?php
             $protocol    = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
             $domain_name = $protocol . $_SERVER['HTTP_HOST'];
             $uuid        = $_SESSION['book_uuid'];
             $rel_path    = $_SESSION['rel_path'];
             $full_path   = $domain_name . $_SESSION['rel_path'];
-            $book_path   = $full_path . '/components/' . $uuid; ?>
+            $book_path   = $full_path . '/components/' . $uuid;
+
+            $args = array(
+                'uuid'      => $uuid,
+                'rel_path'  => $rel_path,
+                'full_path' => $full_path,
+                'book_path' => $book_path,
+            );
+
+            fk_inject_book_data(true); ?>
+
         <script>
-            // window.ebookAppData = {
-            //     uuid: "<?php echo $uuid; ?>",
-            //     relPath: "<?php echo $rel_path; ?>",
-            //     fullPath:"<?php echo $full_path; ?>",
-            //     bookPath: "<?php echo $book_path; ?>",
-            //     urlArgs: "<?php echo CACHE_ARGS; ?>"
-            // }
             window.ebookAppData = {
-                uuid: '4663B6DB-782C-D2B0-DB38-8166C142F62D',
+                uuid: '4D57C8A6-EBDE-598F-AD57-761A659C93CC',
                 relPath: '/',
                 fullPath: 'http://localhost:8080',
-                bookPath: 'http://localhost:8080/components/4663B6DB-782C-D2B0-DB38-8166C142F62D',
+                bookPath: 'http://localhost:8080/components/4D57C8A6-EBDE-598F-AD57-761A659C93CC',
                 urlArgs: ''
             }
         </script>
@@ -125,8 +131,12 @@ Template Name: Book
             <span class="current-page-count"></span>/<span class="total-page-count"></span>
             </p>
         </footer>
+
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-        <!-- <script src="scripts/book-loader.js"></script> -->
-        <script src="scripts/main.94c2378a-7d61-4c82-adb3-03cdd83967bd.js"></script>
+        <?php fk_inject_deps(true); ?>
+        <!-- <script src="js/book-loader.js"></script> -->
+        <!-- inject:js -->
+        <script src="/dist/scripts/main.94c2378a-7d61-4c82-adb3-03cdd83967bd.js"></script>
+        <!-- endinject -->
     </body>
 </html>

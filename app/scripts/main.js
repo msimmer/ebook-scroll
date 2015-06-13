@@ -1,4 +1,4 @@
-var $ = require('./vendor/jquery');
+var $   = require('./vendor/jquery');
 var App = require('./app');
 
 $(function () {

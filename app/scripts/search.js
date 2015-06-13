@@ -1,6 +1,6 @@
-var $ = require('./vendor/jquery');
+var $           = require('./vendor/jquery');
 var environment = require('./environment');
-var settings = require('./settings');
+var settings    = require('./settings');
 
 module.exports = (function () {
     var $searchWrapper = $('.search-wrapper'),

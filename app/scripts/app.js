@@ -1,16 +1,16 @@
-var $ = require('./vendor/jquery'),
-    environment = require('./environment'),
-    reader = require('./reader'),
-    settings = require('./settings'),
-    styles = require('./styles'),
-    layout = require('./layout'),
-    userSettings = require('./user-settings'),
-    events = require('./events'),
-    mobile = require('./mobile'),
-    chapters = require('./chapters'),
-    search = require('./search'),
-    hover = require('./hover'),
-    storage = require('./shims/storage');
+var $            = require('./vendor/jquery');
+var environment  = require('./environment');
+var reader       = require('./reader');
+var settings     = require('./settings');
+var styles       = require('./styles');
+var layout       = require('./layout');
+var userSettings = require('./user-settings');
+var events       = require('./events');
+var mobile       = require('./mobile');
+var chapters     = require('./chapters');
+var search       = require('./search');
+var hover        = require('./hover');
+var storage      = require('./shims/storage');
 
 module.exports = function (options) {
 

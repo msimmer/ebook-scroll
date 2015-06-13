@@ -1,4 +1,4 @@
-var $ = require('./vendor/jquery');
+var $           = require('./vendor/jquery');
 var environment = require('./environment');
 module.exports = {
     dev: false,

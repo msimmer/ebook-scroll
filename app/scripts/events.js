@@ -1,8 +1,8 @@
-var $ = require('./vendor/jquery');
-var settings = require('./settings');
-var reader = require('./reader');
+var $            = require('./vendor/jquery');
+var settings     = require('./settings');
+var reader       = require('./reader');
 var userSettings = require('./user-settings');
-var layout = require('./layout');
+var layout       = require('./layout');
 
 module.exports = {
 

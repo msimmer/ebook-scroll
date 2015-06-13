@@ -3,7 +3,7 @@ var environment = require('./environment');
 var reader      = require('./reader');
 var settings    = require('./settings');
 var events      = require('./events');
-var Hammer      = require('./plugins/hammer');
+var Hammer      = require('./vendor/hammer');
 
 module.exports = function(){
 
