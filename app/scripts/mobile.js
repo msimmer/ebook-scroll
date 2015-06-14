@@ -1,11 +1,11 @@
-var $           = require('./vendor/jquery');
+// var $           = require('./vendor/jquery');
 var environment = require('./environment');
 var reader      = require('./reader');
 var settings    = require('./settings');
 var events      = require('./events');
 var Hammer      = require('./vendor/hammer');
 
-module.exports = function(){
+return function Mobile(){
 
     if (!environment.isMobile()) {
         return;
@@ -52,7 +52,7 @@ module.exports = function(){
 
         } else if (target.is(frame) || target.parents().is(frame)) {
 
-            if (e.type == 'doubletap') {
+            if (e.type === 'doubletap') {
 
                 doubleTapped = true;
 
@@ -67,7 +67,7 @@ module.exports = function(){
                     events.startScrolling();
                 }
 
-            } else if (e.type == 'touch' && e.gesture.touches.length < 2) {
+            } else if (e.type === 'touch' && e.gesture.touches.length < 2) {
 
                 touchTimer = setTimeout(function () {
                     e.stopPropagation();
@@ -81,7 +81,7 @@ module.exports = function(){
                     }
                 }, 150);
 
-            } else if (e.type == 'release') {
+            } else if (e.type === 'release') {
 
                 if (wasHolding) {
                     e.gesture.stopPropagation();
@@ -96,7 +96,7 @@ module.exports = function(){
                     }
                 }
 
-            } else if (e.type == 'pinchin') {
+            } else if (e.type === 'pinchin') {
 
                 e.stopPropagation();
                 e.gesture.stopPropagation();
@@ -108,7 +108,7 @@ module.exports = function(){
 
                 e.gesture.stopDetect();
 
-            } else if (e.type == 'pinchout') {
+            } else if (e.type === 'pinchout') {
 
                 e.stopPropagation();
                 e.gesture.stopPropagation();
@@ -120,19 +120,19 @@ module.exports = function(){
 
                 e.gesture.stopDetect();
 
-            } else if (e.type == 'dragend' && e.gesture.touches.length < 2) {
+            } else if (e.type === 'dragend' && e.gesture.touches.length < 2) {
 
                 e.preventDefault();
                 e.stopPropagation();
                 e.gesture.preventDefault();
                 e.gesture.stopPropagation();
 
-                if (e.gesture.distance >= 70 && e.gesture.direction == 'right') {
+                if (e.gesture.distance >= 70 && e.gesture.direction === 'right') {
 
                     e.gesture.stopDetect();
                     events.speedIncrement();
 
-                } else if (e.gesture.distance >= 70 && e.gesture.direction == 'left') {
+                } else if (e.gesture.distance >= 70 && e.gesture.direction === 'left') {
 
                     e.gesture.stopDetect();
                     events.speedDecrement();
@@ -148,4 +148,4 @@ module.exports = function(){
 
     });
 
-}
+};

@@ -55,26 +55,26 @@ Template Name: Book
             </style>
         </noscript>
 
-        <?php
-            $protocol    = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-            $domain_name = $protocol . $_SERVER['HTTP_HOST'];
-            $uuid        = $_SESSION['book_uuid'];
-            $rel_path    = $_SESSION['rel_path'];
-            $full_path   = $domain_name . $_SESSION['rel_path'];
-            $book_path   = $full_path . '/components/' . $uuid;
+        <!-- < ? php
+            // $protocol    = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+            // $domain_name = $protocol . $_SERVER['HTTP_HOST'];
+            // $uuid        = $_SESSION['book_uuid'];
+            // $rel_path    = $_SESSION['rel_path'];
+            // $full_path   = $domain_name . $_SESSION['rel_path'];
+            // $book_path   = $full_path . '/components/' . $uuid;
 
-            $args = array(
-                'uuid'      => $uuid,
-                'rel_path'  => $rel_path,
-                'full_path' => $full_path,
-                'book_path' => $book_path,
-            );
+            // $args = array(
+            //     'uuid'      => $uuid,
+            //     'rel_path'  => $rel_path,
+            //     'full_path' => $full_path,
+            //     'book_path' => $book_path,
+            // );
 
-            fk_inject_book_data(true); ?>
+            // fk_inject_book_data(true, $args); ? > -->
 
         <script>
             window.ebookAppData = {
-                uuid: '4D57C8A6-EBDE-598F-AD57-761A659C93CC',
+                uuid: 'fdbeeb28-6e83-4d3d-b96b-3bbd8c2d49c4',
                 relPath: '/',
                 fullPath: 'http://localhost:8080',
                 bookPath: 'http://localhost:8080/components/4D57C8A6-EBDE-598F-AD57-761A659C93CC',
@@ -124,15 +124,17 @@ Template Name: Book
         <main id="main"></main>
         <div class="spinner"></div>
         <footer class="mobile-portrait-only">
-            <p class="runner-help"><a data-uuid="<?php echo (get_language() == 'en') ? '7e9aa2c0-327f-45b3-85f7-0bb401d1c1ce' : 'fdbeeb28-6e83-4d3d-b96b-3bbd8c2d49c4' ; ?>" href="#">?</a>
-            </p>
+           <!--  <p class="runner-help"><a data-uuid="< ? php echo (get_language() == 'en') ? '7e9aa2c0-327f-45b3-85f7-0bb401d1c1ce' : 'fdbeeb28-6e83-4d3d-b96b-3bbd8c2d49c4' ; ?>" href="#">?</a>
+            </p> -->
             <p class="runner-page-count">
             <span class="current-page-count"></span>/<span class="total-page-count"></span>
             </p>
         </footer>
 
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-        <?php fk_inject_deps(true); ?>
+        <script type="text/javascript" data-main="scripts/main.build.94c2378a-7d61-4c82-adb3-03cdd83967bd" src="scripts/require.js"></script>
+        <?php
+        // fk_inject_deps(true); ?>
         <!-- inject:js -->
         <!-- endinject -->
     </body>

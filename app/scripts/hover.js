@@ -1,10 +1,11 @@
-var $           = require('./vendor/jquery');
+// var $           = require('./vendor/jquery');
 var environment = require('./environment');
 var reader      = require('./reader');
+var events      = require('./events');
 var settings    = require('./settings');
-var hoverIntent = require('./vendor/hover-intent');
+// var hoverIntent = require('./vendor/hover-intent');
 
-module.exports = function () {
+return function Hover () {
 
     if (environment.isMobile()) {
         return;

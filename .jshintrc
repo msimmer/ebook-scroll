@@ -13,9 +13,15 @@
     "noarg": true,
     "quotmark": "single",
     "undef": true,
-    "unused": true,
+    "unused": false,
     "strict": false,
     "trailing": true,
     "smarttabs": true,
-    "jquery": true
+    "jquery": true,
+    "globals": {
+        "define": true,
+        "module": true,
+        "exports": true,
+        "require":true
+    }
 }

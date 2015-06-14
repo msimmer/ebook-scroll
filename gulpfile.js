@@ -1,49 +1,30 @@
 var
-    gulp         = require('gulp'),
-    browserify   = require('browserify'),
-    transform    = require('vinyl-transform'),
-    gutil        = require('gulp-util'),
-    sass         = require('gulp-sass'),
+    gulp = require('gulp'),
+    browserify = require('browserify'),
+    transform = require('vinyl-transform'),
+    gutil = require('gulp-util'),
+    sass = require('gulp-sass'),
     autoprefixer = require('gulp-autoprefixer'),
-    minifycss    = require('gulp-minify-css'),
-    jshint       = require('gulp-jshint'),
-    uglify       = require('gulp-uglify'),
+    minifycss = require('gulp-minify-css'),
+    jshint = require('gulp-jshint'),
+    uglify = require('gulp-uglify'),
     // imagemin  = require('gulp-imagemin'),
-    rename       = require('gulp-rename'),
-    concat       = require('gulp-concat'),
-    notify       = require('gulp-notify'),
-    cache        = require('gulp-cache'),
-    livereload   = require('gulp-livereload'),
-    requirejs    = require('gulp-requirejs'),
-    del          = require('del'),
-    plumber      = require('gulp-plumber'),
-    connect      = require('gulp-connect'),
-    argv         = require('yargs').argv,
-    inject       = require('gulp-inject')
+    rename = require('gulp-rename'),
+    concat = require('gulp-concat'),
+    notify = require('gulp-notify'),
+    cache = require('gulp-cache'),
+    livereload = require('gulp-livereload'),
+    requirejs = require('gulp-requirejs'),
+    del = require('del'),
+    plumber = require('gulp-plumber'),
+    connect = require('gulp-connect'),
+    argv = require('yargs').argv,
+    inject = require('gulp-inject')
 
-    production   = !!(argv.production), // --production flag
-    dist         = !!(argv.production) ? '../wp-content/themes/Fiktion' : './dist';
+production = !!(argv.production), // --production flag
+    dist = !!(argv.production) ? '../wp-content/themes/Fiktion' : './dist';
 
-var revision = '94c2378a-7d61-4c82-adb3-03cdd83967bd';
-
-gulp.task('browserify', function () {
-    var browserified = transform(function (filename) {
-        var b = browserify(filename);
-        return b.bundle();
-    });
-
-    return gulp.src(['./app/scripts/main.js'])
-        .pipe(plumber(function (error) {
-            gutil.log(gutil.colors.red('Error: ' + error.message));
-            this.emit('end');
-        }))
-        .pipe(browserified)
-        .pipe(uglify())
-        .pipe(rename({
-            suffix: '.' + revision
-        }))
-        .pipe(gulp.dest(dist + '/scripts'));
-});
+var rev = '94c2378a-7d61-4c82-adb3-03cdd83967bd';
 
 gulp.task('styles', function () {
     return gulp.src('app/styles/main.scss')
@@ -55,12 +36,12 @@ gulp.task('styles', function () {
         .pipe(minifycss())
         // .pipe(gulp.dest(dist + '/styles'))
         .pipe(rename({
-            suffix: '.' + revision
+            suffix: '.' + rev
         }))
         .pipe(gulp.dest(dist + '/styles'));
 });
 
-gulp.task('scripts', function () {
+gulp.task('jslint', function () {
     return gulp.src('app/scripts/*.js')
         .pipe(jshint('.jshintrc'))
         .pipe(jshint.reporter('jshint-stylish'))
@@ -81,9 +62,9 @@ gulp.task('default', ['clean'], function () {
     gulp.start('styles', 'scripts');
 });
 
-gulp.task('watch', ['server'], function () {
+gulp.task('watch', ['localServer'], function () {
     gulp.watch('app/styles/**/*.scss', ['styles']);
-    gulp.watch('app/scripts/**/*.js', ['browserify']);
+    gulp.watch('app/scripts/**/*.js', ['scripts']);
     gulp.watch('app/images/**/*', ['images']);
     gulp.watch(['app/*.html', 'app/*.php'], ['index']);
 
@@ -95,6 +76,7 @@ gulp.task('watch', ['server'], function () {
 });
 
 var filesToMove = [
+    './app/scripts/require.js',
     './app/data/**/*.*',
     './app/images/**/*.*',
     './app/components/**/*.*',
@@ -103,7 +85,7 @@ var filesToMove = [
     './app/*.html'
 ];
 
-gulp.task('move', ['clean'], function () {
+gulp.task('move', function () {
     gulp.src(filesToMove, {
             base: './app'
         })
@@ -115,25 +97,52 @@ gulp.task('index', function () {
     var sources = gulp.src([
         dist + '/scripts/**/*.js',
         dist + '/styles/**/*.css',
-        '!' + dist +'/styles/main.css'
+        '!' + dist + '/styles/main.css'
     ], {
         read: false
     });
 
     gulp.src('./app/index.html')
         .pipe(inject(sources, {
-            ignorePath:'..'
+            ignorePath: ['..', 'dist']
         }))
         .pipe(gulp.dest(dist));
 });
 
-gulp.task('server', function () {
+gulp.task('localServer', function () {
     connect.server({
         root: 'dist',
         livereload: true
     });
 });
 
-gulp.task('build', ['clean', 'scripts', 'move', 'index'], function () {
-    gulp.start('styles', 'browserify', 'server', 'watch');
+gulp.task('scripts', function () {
+    return gulp.src(['./app/scripts/main.build.js'])
+        .pipe(plumber(function (error) {
+            gutil.log(gutil.colors.red('Error: ' + error.message));
+            this.emit('end');
+        }))
+        .pipe(requirejs({
+            name: 'main',
+            baseUrl: './app/scripts',
+            out: './main.build.js',
+            shim: {
+                // standard require.js shim options
+            },
+            // ... more require.js options
+        }))
+        // .pipe(gulp.dest('./app/scripts')); // pipe it to the output DIR)
+        // .pipe(uglify())
+        .pipe(rename({
+            suffix: '.' + rev
+        }))
+        .pipe(gulp.dest(dist + '/scripts'));
+});
+
+// gulp.task('build', ['clean', 'jslint', 'styles'], function () {
+//     gulp.start(['move', 'scripts', 'index', 'localServer', 'watch']);
+// });
+
+gulp.task('serve', ['clean', 'jslint', 'styles'], function () {
+    gulp.start(['move', 'scripts', 'index', 'localServer', 'watch']);
 });

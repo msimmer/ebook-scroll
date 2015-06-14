@@ -1,7 +1,6 @@
-var $   = require('./vendor/jquery');
-var App = require('./app');
+require(['app'], function (App) {
 
-$(function () {
+    // $(function () {
 
     var app = new App({
 
@@ -17,5 +16,7 @@ $(function () {
     $('html').removeClass('no-js').addClass('cursor js');
 
     app.init();
+
+    // });
 
 });

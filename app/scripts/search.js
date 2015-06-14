@@ -1,8 +1,8 @@
-var $           = require('./vendor/jquery');
+// var $           = require('./vendor/jquery');
 var environment = require('./environment');
 var settings    = require('./settings');
 
-module.exports = (function () {
+return (function Search () {
     var $searchWrapper = $('.search-wrapper'),
         $input = $('#userInput'),
         $searchBtn = $('#search'),
@@ -27,7 +27,7 @@ module.exports = (function () {
         } else if (document.selection && document.body.createTextRange) {
             sel = document.selection;
             var textRange;
-            if (sel.type == 'Text') {
+            if (sel.type === 'Text') {
                 textRange = sel.createRange();
                 textRange.collapse(false);
             } else {
@@ -61,10 +61,10 @@ module.exports = (function () {
             }
 
             $(document).on('keydown', function (e) {
-                if (e.which == 13) {
+                if (e.which === 13) {
                     e.preventDefault();
                     $searchBtn.click();
-                } else if (e.which == 27) {
+                } else if (e.which === 27) {
                     e.preventDefault();
                     $input.css({
                         opacity: 0
@@ -76,7 +76,7 @@ module.exports = (function () {
             });
         },
         blur: function () {
-            if ($input.text() == '') {
+            if ($input.text() === '') {
                 setTimeout(function () {
                     $input.css({
                         opacity: 0
