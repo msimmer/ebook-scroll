@@ -30,7 +30,7 @@
  * @author Brian Cherne <brian(at)cherne(dot)net>
  */
 
-var $ = require('../vendor/jquery');
+// var $ = require('../vendor/jquery');
 
 $.fn.hoverIntent = function(handlerIn, handlerOut, selector) {
 

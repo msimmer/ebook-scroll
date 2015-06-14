@@ -32,6 +32,7 @@ Template Name: Book
         <link href="splash-1536x2008.png" media="(device-width: 1536px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
         <link href="splash-2048x1496.png" media="(device-width: 1536px)  and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
         <!-- inject:css -->
+        <link rel="stylesheet" href="/styles/main.94c2378a-7d61-4c82-adb3-03cdd83967bd.css">
         <!-- endinject -->
         <style type="text/css">
             .chapters{ display: none!important; }
@@ -74,10 +75,10 @@ Template Name: Book
 
         <script>
             window.ebookAppData = {
-                uuid: 'fdbeeb28-6e83-4d3d-b96b-3bbd8c2d49c4',
+                uuid: '4663B6DB-782C-D2B0-DB38-8166C142F62D',
                 relPath: '/',
                 fullPath: 'http://localhost:8080',
-                bookPath: 'http://localhost:8080/components/4D57C8A6-EBDE-598F-AD57-761A659C93CC',
+                bookPath: 'http://localhost:8080/components/4663B6DB-782C-D2B0-DB38-8166C142F62D',
                 urlArgs: ''
             }
         </script>
@@ -124,7 +125,7 @@ Template Name: Book
         <main id="main"></main>
         <div class="spinner"></div>
         <footer class="mobile-portrait-only">
-           <!--  <p class="runner-help"><a data-uuid="< ? php echo (get_language() == 'en') ? '7e9aa2c0-327f-45b3-85f7-0bb401d1c1ce' : 'fdbeeb28-6e83-4d3d-b96b-3bbd8c2d49c4' ; ?>" href="#">?</a>
+           <!--  <p class="runner-help"><a data-uuid="< ? php echo (get_language() == 'en') ? '7e9aa2c0-327f-45b3-85f7-0bb401d1c1ce' : 'fdbeeb28-6e83-4d3d-b96b-3bbd8c2d49c4' ; ? >" href="#">?</a>
             </p> -->
             <p class="runner-page-count">
             <span class="current-page-count"></span>/<span class="total-page-count"></span>
@@ -133,9 +134,9 @@ Template Name: Book
 
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script type="text/javascript" data-main="scripts/main.build.94c2378a-7d61-4c82-adb3-03cdd83967bd" src="scripts/require.js"></script>
-        <?php
-        // fk_inject_deps(true); ?>
-        <!-- inject:js -->
-        <!-- endinject -->
+        <!-- < ? php
+        // fk_inject_deps(true); ? > -->
+        <!-- bug-inject:js -->
+        <!-- bug-endinject -->
     </body>
 </html>

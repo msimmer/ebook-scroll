@@ -1,22 +1,21 @@
 require(['app'], function (App) {
 
-    // $(function () {
-
     var app = new App({
 
         dev: true,
         jsonPath: 'data/bookData.json',
         // jsonPath: 'http://local.fiktion.cc/wp-content/themes/Fiktion/data/bookData.json',
-        debug: false,
-        clearStorage: false,
-        scrollSpeed: 10
+        debug: true,
+        clearStorage: true,
+        scrollSpeed: 10,
+        shebang:'#/',
+        hashDest: '#/8'
+        // hashDest: window.location.hash
 
     });
 
     $('html').removeClass('no-js').addClass('cursor js');
 
     app.init();
-
-    // });
 
 });

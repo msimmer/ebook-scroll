@@ -1,6 +1,6 @@
 define(function (require) {
 
-    var environment = require('./environment');
+    var environment = require('environment');
     return {
         dev: false,
         jsonPath: 'data/bookData.json',
@@ -24,6 +24,7 @@ define(function (require) {
         contrast: 'light',
         scrollSpeed: 10,
         currentChapterIndex: null,
-        chapterSelector: '[data-chapter]'
+        chapterSelector: '[data-chapter]',
+        chapterData:[]
     };
 });

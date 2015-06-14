@@ -1,9 +1,8 @@
 define(function (require) {
-    var history      = require('vendor/history');
-    var settings     = require('settings');
-    var reader       = require('reader');
-    var userSettings = require('user-settings');
-    var layout       = require('layout');
+    var settings = require('./settings');
+    var reader = require('./reader');
+    var userSettings = require('./user-settings');
+    var layout = require('./layout');
 
     var Events = function () {
 
@@ -76,6 +75,14 @@ define(function (require) {
 
         this.listenForPageChange = function () {
 
+            var intervalCallback = function(){
+                $(document).trigger('updateNavIndicators');
+            };
+
+            if (_this.listenForPageChangeInterval === null) { // kick off by counting pages and setting chapter url
+                intervalCallback();
+            }
+
             var lineHeight = Math.floor(parseInt($(settings.el.first('p')).css('line-height'), 10)),
                 containerH = Math.floor(settings.el.height()),
                 intrvl = Math.floor((lineHeight * containerH) / settings.scrollSpeed + 1) * 100;
@@ -83,7 +90,7 @@ define(function (require) {
             window.clearInterval(_this.listenForPageChangeInterval);
 
             _this.listenForPageChangeInterval = setInterval(function () {
-                _this.countPages();
+                intervalCallback();
             }, intrvl);
 
         };
@@ -358,6 +365,7 @@ define(function (require) {
         };
 
         this.countPages = function () {
+
             var main = settings.el,
                 frameH = main.height(),
                 page = main.find('#page'),
@@ -382,21 +390,21 @@ define(function (require) {
                 _this.hasEnded = false;
             }
 
-            if (settings.debug) {
-                var intrvl,
-                    ct;
-                intrvl = setInterval(function () {
-                    ct++;
-                    if (page.length) {
-                        clearInterval(intrvl);
-                        console.log('Reading location is -- ' + getCurrentPage());
-                    }
-                    if (ct >= 1000) {
-                        clearInterval(intrvl);
-                        console.log('Reading location timed out.');
-                    }
-                }, 10);
-            }
+            // if (settings.debug) {
+            //     // var intrvl,
+            //     //     ct;
+            //     // intrvl = setInterval(function () {
+            //     //     ct++;
+            //     //     if (page.length) {
+            //     //         clearInterval(intrvl);
+            //     //         console.log('Reading location is -- ' + getCurrentPage());
+            //     //     }
+            //     //     if (ct >= 1000) {
+            //     //         clearInterval(intrvl);
+            //     //         console.log('Reading location timed out.');
+            //     //     }
+            //     // }, 10);
+            // }
 
         };
 

@@ -184,9 +184,9 @@ define('environment',[],function () {
 
 });
 
-define('settings',['require','./environment'],function (require) {
+define('settings',['require','environment'],function (require) {
 
-    var environment = require('./environment');
+    var environment = require('environment');
     return {
         dev: false,
         jsonPath: 'data/bookData.json',
@@ -210,7 +210,8 @@ define('settings',['require','./environment'],function (require) {
         contrast: 'light',
         scrollSpeed: 10,
         currentChapterIndex: null,
-        chapterSelector: '[data-chapter]'
+        chapterSelector: '[data-chapter]',
+        chapterData:[]
     };
 });
 
@@ -529,8 +530,6 @@ define('user-settings',['require','./reader','./settings'],function (require) {
 });
 
 define('events',['require','./settings','./reader','./user-settings','./layout'],function (require) {
-    // var $            = require('./vendor/jquery');
-    // var history      = require('./vendor/history');
     var settings = require('./settings');
     var reader = require('./reader');
     var userSettings = require('./user-settings');
@@ -607,6 +606,14 @@ define('events',['require','./settings','./reader','./user-settings','./layout']
 
         this.listenForPageChange = function () {
 
+            var intervalCallback = function(){
+                $(document).trigger('updateNavIndicators');
+            };
+
+            if (_this.listenForPageChangeInterval === null) { // kick off by counting pages and setting chapter url
+                intervalCallback();
+            }
+
             var lineHeight = Math.floor(parseInt($(settings.el.first('p')).css('line-height'), 10)),
                 containerH = Math.floor(settings.el.height()),
                 intrvl = Math.floor((lineHeight * containerH) / settings.scrollSpeed + 1) * 100;
@@ -614,7 +621,7 @@ define('events',['require','./settings','./reader','./user-settings','./layout']
             window.clearInterval(_this.listenForPageChangeInterval);
 
             _this.listenForPageChangeInterval = setInterval(function () {
-                _this.countPages();
+                intervalCallback();
             }, intrvl);
 
         };
@@ -889,6 +896,7 @@ define('events',['require','./settings','./reader','./user-settings','./layout']
         };
 
         this.countPages = function () {
+
             var main = settings.el,
                 frameH = main.height(),
                 page = main.find('#page'),
@@ -913,21 +921,21 @@ define('events',['require','./settings','./reader','./user-settings','./layout']
                 _this.hasEnded = false;
             }
 
-            if (settings.debug) {
-                var intrvl,
-                    ct;
-                intrvl = setInterval(function () {
-                    ct++;
-                    if (page.length) {
-                        clearInterval(intrvl);
-                        console.log('Reading location is -- ' + getCurrentPage());
-                    }
-                    if (ct >= 1000) {
-                        clearInterval(intrvl);
-                        console.log('Reading location timed out.');
-                    }
-                }, 10);
-            }
+            // if (settings.debug) {
+            //     // var intrvl,
+            //     //     ct;
+            //     // intrvl = setInterval(function () {
+            //     //     ct++;
+            //     //     if (page.length) {
+            //     //         clearInterval(intrvl);
+            //     //         console.log('Reading location is -- ' + getCurrentPage());
+            //     //     }
+            //     //     if (ct >= 1000) {
+            //     //         clearInterval(intrvl);
+            //     //         console.log('Reading location timed out.');
+            //     //     }
+            //     // }, 10);
+            // }
 
         };
 
@@ -936,10 +944,8 @@ define('events',['require','./settings','./reader','./user-settings','./layout']
     return new Events();
 });
 
-define('chapters',['require','./settings','./events'],function (require) {
-    var settings = require('./settings');
-    var events   = require('./events');
-
+define('chapters',['require','settings'],function (require) {
+    var settings = require('settings');
     return {
 
         panels: settings.chapterSelector,
@@ -957,6 +963,9 @@ define('chapters',['require','./settings','./events'],function (require) {
 
                     $obj.data({
                         chapter: i,
+                        index: i,
+                        name: $obj.text(),
+                        slug: $obj.text().replace(/\s+/g, '-').replace(/[.]/g, '').toLowerCase(),
                         posTop: ids[i].offsetTop,
                         firstEl: i === 0 ? true : false,
                         lastEl: i === ids.length - 1 ? true : false,
@@ -985,7 +994,40 @@ define('chapters',['require','./settings','./events'],function (require) {
             pagination.currentPos = currentPos;
         },
 
-        moveToChapter: function (dir, callback) {
+        getCurrentChapter: function () {
+
+            var scrollTop = settings.el.scrollTop();
+            var buffer = 200;
+            var currentChapterData;
+
+            // if (settings.chapterData.length < 1) {
+                var $chs = $(settings.chapterSelector);
+                $chs.each(function () {
+                    var $this = $(this);
+                    var data = $this.data();
+                    var newData = {
+                        posTop: data.posTop,
+                        nextPos: data.nextPos,
+                        index: data.index,
+                        name: data.name,
+                        slug: data.slug
+                    };
+                    settings.chapterData.push(newData);
+                });
+            // }
+
+            for (var a = settings.chapterData.length - 1; a >= 0; a--) {
+                var ch = settings.chapterData[a];
+                if (scrollTop >= ch.posTop - buffer && scrollTop < ch.nextPos) { // found current el
+                    currentChapterData = ch;
+                }
+            }
+
+            return currentChapterData;
+
+        },
+
+        moveToChapter: function (dir, callback, jump) {
 
             var _this = this;
 
@@ -1013,11 +1055,18 @@ define('chapters',['require','./settings','./events'],function (require) {
                         currentEl: false
                     });
 
-                    if (scrollTop >= thisTop - buffer && scrollTop < chapEnd && currentPos === false) {
+                    if (jump > -1 && parseInt($this.attr('data-index'), 10) === jump) {
                         $this.attr('data-currentel', true).data({
                             currentEl: true
                         });
                         currentPos = thisTop;
+
+                    } else if (!jump && scrollTop >= thisTop - buffer && scrollTop < chapEnd && currentPos === false) { // found current el
+                        $this.attr('data-currentel', true).data({
+                            currentEl: true
+                        });
+                        currentPos = thisTop;
+
                     }
 
                     if (i === len) {
@@ -1044,23 +1093,33 @@ define('chapters',['require','./settings','./events'],function (require) {
 
                 hasScrolled = false;
 
-                var pos = firstArticle === true && dir === 'prev' ? 0 :
-                    firstArticle === true && dir === 'next' ? $('[data-firstel="true"]').data().posTop :
-                    firstArticle !== true ? $('[data-currentel="true"]').data()[dir + 'Pos'] : 0;
-
-                settings.el.animate({
-                    scrollTop: pos
-                }, {
-                    complete: function () {
-                        if (!hasScrolled) {
-                            hasScrolled = true;
-                            if (typeof callback === 'function') {
-                                callback();
+                var scrollAnim = function (pos) {
+                    settings.el.animate({
+                        scrollTop: pos
+                    }, {
+                        complete: function () {
+                            if (!hasScrolled) {
+                                hasScrolled = true;
+                                if (typeof callback === 'function') {
+                                    callback();
+                                }
+                                return;
                             }
-                            return;
                         }
-                    }
-                });
+                    });
+                };
+
+                if (firstArticle === true && dir === 'prev') {
+                    scrollAnim(0);
+                } else if (firstArticle === true && dir === 'next') {
+                    scrollAnim($('[data-firstel="true"]').data().posTop);
+                } else if (firstArticle !== true && !dir){
+                    console.log($('[data-currentel="true"]').data().posTop);
+                    scrollAnim($('[data-currentel="true"]').data().posTop);
+                } else if (firstArticle !== true) {
+                    scrollAnim($('[data-currentel="true"]').data()[dir + 'Pos']);
+                }
+
             });
 
         },
@@ -1076,8 +1135,8 @@ define('chapters',['require','./settings','./events'],function (require) {
             }).on({
                 click: function (e) {
                     e.preventDefault();
-                    _this.moveToChapter($(this).data().dir, function(){
-                        events.countPages();
+                    _this.moveToChapter($(this).data().dir, function () {
+                        $(document).trigger('updateNavIndicators');
                     });
                 }
             }).appendTo('body');
@@ -1088,8 +1147,8 @@ define('chapters',['require','./settings','./events'],function (require) {
             }).on({
                 click: function (e) {
                     e.preventDefault();
-                    _this.moveToChapter($(this).data().dir, function(){
-                        events.countPages();
+                    _this.moveToChapter($(this).data().dir, function () {
+                        $(document).trigger('updateNavIndicators');
                     });
                 }
             });
@@ -1102,15 +1161,211 @@ define('chapters',['require','./settings','./events'],function (require) {
     };
 });
 
-define('app',['require','./reader','./settings','./layout','./user-settings','./events','./chapters'],function (require) {
-    var reader = require('./reader');
-    var settings = require('./settings');
-    var layout = require('./layout');
-    var userSettings = require('./user-settings');
-    var events = require('./events');
-    var chapters = require('./chapters');
+/*!
+ * hoverIntent r7 // 2013.03.11 // jQuery 1.9.1+
+ * http://cherne.net/brian/resources/jquery.hoverIntent.html
+ *
+ * You may use hoverIntent under the terms of the MIT license. Basically that
+ * means you are free to use hoverIntent as long as this header is left intact.
+ * Copyright 2007, 2013 Brian Cherne
+ */
 
-    return function App (options) {
+/* hoverIntent is similar to jQuery's built-in "hover" method except that
+ * instead of firing the handlerIn function immediately, hoverIntent checks
+ * to see if the user's mouse has slowed down (beneath the sensitivity
+ * threshold) before firing the event. The handlerOut function is only
+ * called after a matching handlerIn.
+ *
+ * // basic usage ... just like .hover()
+ * .hoverIntent( handlerIn, handlerOut )
+ * .hoverIntent( handlerInOut )
+ *
+ * // basic usage ... with event delegation!
+ * .hoverIntent( handlerIn, handlerOut, selector )
+ * .hoverIntent( handlerInOut, selector )
+ *
+ * // using a basic configuration object
+ * .hoverIntent( config )
+ *
+ * @param  handlerIn   function OR configuration object
+ * @param  handlerOut  function OR selector for delegation OR undefined
+ * @param  selector    selector OR undefined
+ * @author Brian Cherne <brian(at)cherne(dot)net>
+ */
+
+// var $ = require('../vendor/jquery');
+
+$.fn.hoverIntent = function(handlerIn, handlerOut, selector) {
+
+    // default configuration values
+    var cfg = {
+        interval: 100,
+        sensitivity: 7,
+        timeout: 0
+    };
+
+    if (typeof handlerIn === "object") {
+        cfg = $.extend(cfg, handlerIn);
+    } else if ($.isFunction(handlerOut)) {
+        cfg = $.extend(cfg, {
+            over: handlerIn,
+            out: handlerOut,
+            selector: selector
+        });
+    } else {
+        cfg = $.extend(cfg, {
+            over: handlerIn,
+            out: handlerIn,
+            selector: handlerOut
+        });
+    }
+
+    // instantiate variables
+    // cX, cY = current X and Y position of mouse, updated by mousemove event
+    // pX, pY = previous X and Y position of mouse, set by mouseover and polling interval
+    var cX, cY, pX, pY;
+
+    // A private function for getting mouse position
+    var track = function(ev) {
+        cX = ev.pageX;
+        cY = ev.pageY;
+    };
+
+    // A private function for comparing current and previous mouse position
+    var compare = function(ev, ob) {
+        ob.hoverIntent_t = clearTimeout(ob.hoverIntent_t);
+        // compare mouse positions to see if they've crossed the threshold
+        if ((Math.abs(pX - cX) + Math.abs(pY - cY)) < cfg.sensitivity) {
+            $(ob).off("mousemove.hoverIntent", track);
+            // set hoverIntent state to true (so mouseOut can be called)
+            ob.hoverIntent_s = 1;
+            return cfg.over.apply(ob, [ev]);
+        } else {
+            // set previous coordinates for next time
+            pX = cX;
+            pY = cY;
+            // use self-calling timeout, guarantees intervals are spaced out properly (avoids JavaScript timer bugs)
+            ob.hoverIntent_t = setTimeout(function() {
+                compare(ev, ob);
+            }, cfg.interval);
+        }
+    };
+
+    // A private function for delaying the mouseOut function
+    var delay = function(ev, ob) {
+        ob.hoverIntent_t = clearTimeout(ob.hoverIntent_t);
+        ob.hoverIntent_s = 0;
+        return cfg.out.apply(ob, [ev]);
+    };
+
+    // A private function for handling mouse 'hovering'
+    var handleHover = function(e) {
+        // copy objects to be passed into t (required for event object to be passed in IE)
+        var ev = jQuery.extend({}, e);
+        var ob = this;
+
+        // cancel hoverIntent timer if it exists
+        if (ob.hoverIntent_t) {
+            ob.hoverIntent_t = clearTimeout(ob.hoverIntent_t);
+        }
+
+        // if e.type == "mouseenter"
+        if (e.type == "mouseenter") {
+            // set "previous" X and Y position based on initial entry point
+            pX = ev.pageX;
+            pY = ev.pageY;
+            // update "current" X and Y position based on mousemove
+            $(ob).on("mousemove.hoverIntent", track);
+            // start polling interval (self-calling timeout) to compare mouse coordinates over time
+            if (ob.hoverIntent_s != 1) {
+                ob.hoverIntent_t = setTimeout(function() {
+                    compare(ev, ob);
+                }, cfg.interval);
+            }
+
+            // else e.type == "mouseleave"
+        } else {
+            // unbind expensive mousemove event
+            $(ob).off("mousemove.hoverIntent", track);
+            // if hoverIntent state is true, then call the mouseOut function after the specified delay
+            if (ob.hoverIntent_s == 1) {
+                ob.hoverIntent_t = setTimeout(function() {
+                    delay(ev, ob);
+                }, cfg.timeout);
+            }
+        }
+    };
+
+    // listen for mouseenter and mouseleave
+    return this.on({
+        'mouseenter.hoverIntent': handleHover,
+        'mouseleave.hoverIntent': handleHover
+    }, cfg.selector);
+};
+
+define("vendor/hover-intent", function(){});
+
+define('hover',['require','environment','reader','events','settings','vendor/hover-intent'],function (require) {
+    var environment = require('environment');
+    var reader = require('reader');
+    var events = require('events');
+    var settings = require('settings');
+    var hoverIntent = require('vendor/hover-intent');
+
+    var Hover = function () {
+
+        if (environment.isMobile()) {
+            return;
+        }
+
+        var wasScrolling;
+        var isManuallyScrolling;
+        var scrollCheckInterval = 200;
+
+        settings.el.hoverIntent({
+            over: function () {
+                wasScrolling = reader.isScrolling;
+                if (!$('show-scroll-bar').length) {
+                    settings.el.addClass('show-scroll-bar');
+                }
+                if (wasScrolling) {
+                    events.stopScrolling();
+                }
+                window.clearInterval(isManuallyScrolling);
+                isManuallyScrolling = setInterval(function () {
+                    $(document).trigger('updateNavIndicators');
+                }, scrollCheckInterval);
+            },
+            out: function () {
+                if ($('.show-scroll-bar').length && !$('#userInput').is(':focus')) {
+                    settings.el.removeClass('show-scroll-bar');
+                }
+                if (wasScrolling) {
+                    events.startScrolling();
+                }
+                window.clearInterval(isManuallyScrolling);
+            },
+            interval: 200,
+            sensitivity: 1,
+            timeout: 0
+        });
+
+    };
+
+    return new Hover();
+
+});
+
+define('app',['require','reader','settings','layout','user-settings','events','chapters','hover'],function (require) {
+    var reader       = require('reader');
+    var settings     = require('settings');
+    var layout       = require('layout');
+    var userSettings = require('user-settings');
+    var events       = require('events');
+    var chapters     = require('chapters');
+    var hover        = require('hover');
+
+    return function App(options) {
 
         var opts = options;
 
@@ -1156,12 +1411,16 @@ define('app',['require','./reader','./settings','./layout','./user-settings','./
                 var intrvl;
                 intrvl = setInterval(function () {
                     clearInterval(intrvl);
-                    $(document).trigger('updateUi', {});
+                    $(document).trigger('updateUi');
                 }, 200);
             });
 
             $.event.trigger({
                 type: 'udpateUi'
+            }, {
+                type: 'uiReady'
+            }, {
+                type: 'updateNavIndicators'
             });
 
             $(document).on('updateUi', function () {
@@ -1169,6 +1428,19 @@ define('app',['require','./reader','./settings','./layout','./user-settings','./
                 layout.adjustFramePosition();
                 userSettings.updateUserPreferences();
                 events.countPages();
+            });
+
+            $(document).on('uiReady', function () {
+                // console.log('uiReady');
+            });
+
+            $(document).on('updateNavIndicators', function () {
+                events.countPages();
+                var chData = chapters.getCurrentChapter();
+                if (chData.index !== settings.currentChapterIndex) {
+                    settings.currentChapterIndex = chData.index;
+                    history.pushState(null, chData.slug, opts.shebang + chData.slug);
+                }
             });
 
             function addJsonDataToDom(data) {
@@ -1205,6 +1477,7 @@ define('app',['require','./reader','./settings','./layout','./user-settings','./
                 $.get(JSONUrl, {
                     'bust': window.ebookAppData.urlArgs
                 }, function (data) {
+
                     $.each(data, function () {
                         if (this.uuid === window.ebookAppData.uuid) {
                             var components = this.components;
@@ -1227,8 +1500,8 @@ define('app',['require','./reader','./settings','./layout','./user-settings','./
                         } else if (localStorage && localStorage.refreshed) {
                             localStorage.removeItem('refreshed');
                             console.log('404\'d');
-                            // window.location.href = '/404';
-                            // return false;
+                            window.location.href = '/404';
+                            return false;
                         }
                     }
 
@@ -1305,9 +1578,31 @@ define('app',['require','./reader','./settings','./layout','./user-settings','./
                     settings.el.append(shadows.shadowTop);
                     settings.el.append(shadows.shadowBottom);
 
-                    settings.el.on('scroll', function () {
-                        console.log('scrolled');
-                    });
+                    // $(document).trigger('updateNavIndicators');
+
+
+                    // settings.el.on('scroll', function(){
+                    //     $(document).trigger('updateNavIndicators');
+                    // });
+
+
+
+                    // if (opts.hashDest) {
+                    //     var target;
+                    //     var sanitizedHash = opts.hashDest.replace(/^#\//, '');
+                    //     for (var i = settings.chapterData.length - 1; i >= 0; i--) {
+                    //         var ch = settings.chapterData[i];
+                    //         if (ch.slug === sanitizedHash) {
+                    //             target = ch.index;
+                    //         }
+                    //     };
+
+                    //     setTimeout(function(){
+                    //         chapters.moveToChapter(null, function(){}, target);
+                    //     }, 3000);
+
+
+                    // }
 
                 });
 
@@ -1321,24 +1616,23 @@ define('app',['require','./reader','./settings','./layout','./user-settings','./
 
 require(['app'], function (App) {
 
-    // $(function () {
-
     var app = new App({
 
         dev: true,
         jsonPath: 'data/bookData.json',
         // jsonPath: 'http://local.fiktion.cc/wp-content/themes/Fiktion/data/bookData.json',
-        debug: false,
-        clearStorage: false,
-        scrollSpeed: 10
+        debug: true,
+        clearStorage: true,
+        scrollSpeed: 10,
+        shebang:'#/',
+        hashDest: '#/8'
+        // hashDest: window.location.hash
 
     });
 
     $('html').removeClass('no-js').addClass('cursor js');
 
     app.init();
-
-    // });
 
 });
 

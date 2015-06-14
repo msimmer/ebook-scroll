@@ -1,12 +1,13 @@
 define(function (require) {
-    var reader = require('./reader');
-    var settings = require('./settings');
-    var layout = require('./layout');
-    var userSettings = require('./user-settings');
-    var events = require('./events');
-    var chapters = require('./chapters');
+    var reader       = require('reader');
+    var settings     = require('settings');
+    var layout       = require('layout');
+    var userSettings = require('user-settings');
+    var events       = require('events');
+    var chapters     = require('chapters');
+    var hover        = require('hover');
 
-    return function App (options) {
+    return function App(options) {
 
         var opts = options;
 
@@ -52,12 +53,16 @@ define(function (require) {
                 var intrvl;
                 intrvl = setInterval(function () {
                     clearInterval(intrvl);
-                    $(document).trigger('updateUi', {});
+                    $(document).trigger('updateUi');
                 }, 200);
             });
 
             $.event.trigger({
                 type: 'udpateUi'
+            }, {
+                type: 'uiReady'
+            }, {
+                type: 'updateNavIndicators'
             });
 
             $(document).on('updateUi', function () {
@@ -65,6 +70,19 @@ define(function (require) {
                 layout.adjustFramePosition();
                 userSettings.updateUserPreferences();
                 events.countPages();
+            });
+
+            $(document).on('uiReady', function () {
+                // console.log('uiReady');
+            });
+
+            $(document).on('updateNavIndicators', function () {
+                events.countPages();
+                var chData = chapters.getCurrentChapter();
+                if (chData.index !== settings.currentChapterIndex) {
+                    settings.currentChapterIndex = chData.index;
+                    history.pushState(null, chData.slug, opts.shebang + chData.slug);
+                }
             });
 
             function addJsonDataToDom(data) {
@@ -101,6 +119,7 @@ define(function (require) {
                 $.get(JSONUrl, {
                     'bust': window.ebookAppData.urlArgs
                 }, function (data) {
+
                     $.each(data, function () {
                         if (this.uuid === window.ebookAppData.uuid) {
                             var components = this.components;
@@ -123,8 +142,8 @@ define(function (require) {
                         } else if (localStorage && localStorage.refreshed) {
                             localStorage.removeItem('refreshed');
                             console.log('404\'d');
-                            // window.location.href = '/404';
-                            // return false;
+                            window.location.href = '/404';
+                            return false;
                         }
                     }
 
@@ -201,9 +220,31 @@ define(function (require) {
                     settings.el.append(shadows.shadowTop);
                     settings.el.append(shadows.shadowBottom);
 
-                    settings.el.on('scroll', function () {
-                        console.log('scrolled');
-                    });
+                    // $(document).trigger('updateNavIndicators');
+
+
+                    // settings.el.on('scroll', function(){
+                    //     $(document).trigger('updateNavIndicators');
+                    // });
+
+
+
+                    // if (opts.hashDest) {
+                    //     var target;
+                    //     var sanitizedHash = opts.hashDest.replace(/^#\//, '');
+                    //     for (var i = settings.chapterData.length - 1; i >= 0; i--) {
+                    //         var ch = settings.chapterData[i];
+                    //         if (ch.slug === sanitizedHash) {
+                    //             target = ch.index;
+                    //         }
+                    //     };
+
+                    //     setTimeout(function(){
+                    //         chapters.moveToChapter(null, function(){}, target);
+                    //     }, 3000);
+
+
+                    // }
 
                 });
 

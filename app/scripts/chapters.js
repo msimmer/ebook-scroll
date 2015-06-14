@@ -1,7 +1,5 @@
 define(function (require) {
-    var settings = require('./settings');
-    var events   = require('./events');
-
+    var settings = require('settings');
     return {
 
         panels: settings.chapterSelector,
@@ -19,6 +17,9 @@ define(function (require) {
 
                     $obj.data({
                         chapter: i,
+                        index: i,
+                        name: $obj.text(),
+                        slug: $obj.text().replace(/\s+/g, '-').replace(/[.]/g, '').toLowerCase(),
                         posTop: ids[i].offsetTop,
                         firstEl: i === 0 ? true : false,
                         lastEl: i === ids.length - 1 ? true : false,
@@ -47,7 +48,40 @@ define(function (require) {
             pagination.currentPos = currentPos;
         },
 
-        moveToChapter: function (dir, callback) {
+        getCurrentChapter: function () {
+
+            var scrollTop = settings.el.scrollTop();
+            var buffer = 200;
+            var currentChapterData;
+
+            // if (settings.chapterData.length < 1) {
+                var $chs = $(settings.chapterSelector);
+                $chs.each(function () {
+                    var $this = $(this);
+                    var data = $this.data();
+                    var newData = {
+                        posTop: data.posTop,
+                        nextPos: data.nextPos,
+                        index: data.index,
+                        name: data.name,
+                        slug: data.slug
+                    };
+                    settings.chapterData.push(newData);
+                });
+            // }
+
+            for (var a = settings.chapterData.length - 1; a >= 0; a--) {
+                var ch = settings.chapterData[a];
+                if (scrollTop >= ch.posTop - buffer && scrollTop < ch.nextPos) { // found current el
+                    currentChapterData = ch;
+                }
+            }
+
+            return currentChapterData;
+
+        },
+
+        moveToChapter: function (dir, callback, jump) {
 
             var _this = this;
 
@@ -75,11 +109,18 @@ define(function (require) {
                         currentEl: false
                     });
 
-                    if (scrollTop >= thisTop - buffer && scrollTop < chapEnd && currentPos === false) {
+                    if (jump > -1 && parseInt($this.attr('data-index'), 10) === jump) {
                         $this.attr('data-currentel', true).data({
                             currentEl: true
                         });
                         currentPos = thisTop;
+
+                    } else if (!jump && scrollTop >= thisTop - buffer && scrollTop < chapEnd && currentPos === false) { // found current el
+                        $this.attr('data-currentel', true).data({
+                            currentEl: true
+                        });
+                        currentPos = thisTop;
+
                     }
 
                     if (i === len) {
@@ -106,23 +147,33 @@ define(function (require) {
 
                 hasScrolled = false;
 
-                var pos = firstArticle === true && dir === 'prev' ? 0 :
-                    firstArticle === true && dir === 'next' ? $('[data-firstel="true"]').data().posTop :
-                    firstArticle !== true ? $('[data-currentel="true"]').data()[dir + 'Pos'] : 0;
-
-                settings.el.animate({
-                    scrollTop: pos
-                }, {
-                    complete: function () {
-                        if (!hasScrolled) {
-                            hasScrolled = true;
-                            if (typeof callback === 'function') {
-                                callback();
+                var scrollAnim = function (pos) {
+                    settings.el.animate({
+                        scrollTop: pos
+                    }, {
+                        complete: function () {
+                            if (!hasScrolled) {
+                                hasScrolled = true;
+                                if (typeof callback === 'function') {
+                                    callback();
+                                }
+                                return;
                             }
-                            return;
                         }
-                    }
-                });
+                    });
+                };
+
+                if (firstArticle === true && dir === 'prev') {
+                    scrollAnim(0);
+                } else if (firstArticle === true && dir === 'next') {
+                    scrollAnim($('[data-firstel="true"]').data().posTop);
+                } else if (firstArticle !== true && !dir){
+                    console.log($('[data-currentel="true"]').data().posTop);
+                    scrollAnim($('[data-currentel="true"]').data().posTop);
+                } else if (firstArticle !== true) {
+                    scrollAnim($('[data-currentel="true"]').data()[dir + 'Pos']);
+                }
+
             });
 
         },
@@ -138,8 +189,8 @@ define(function (require) {
             }).on({
                 click: function (e) {
                     e.preventDefault();
-                    _this.moveToChapter($(this).data().dir, function(){
-                        events.countPages();
+                    _this.moveToChapter($(this).data().dir, function () {
+                        $(document).trigger('updateNavIndicators');
                     });
                 }
             }).appendTo('body');
@@ -150,8 +201,8 @@ define(function (require) {
             }).on({
                 click: function (e) {
                     e.preventDefault();
-                    _this.moveToChapter($(this).data().dir, function(){
-                        events.countPages();
+                    _this.moveToChapter($(this).data().dir, function () {
+                        $(document).trigger('updateNavIndicators');
                     });
                 }
             });
