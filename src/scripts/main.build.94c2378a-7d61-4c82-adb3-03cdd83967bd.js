@@ -1,1161 +1,1178 @@
 
-define('modules/environment',[],function () {
+define('modules/environment',[],function() {
 
-    return {
+  return {
 
-        tablet: [
-            'ipad',
-            'android',
-            'android 3.0',
-            'xoom',
-            'sch-i800',
-            'playbook',
-            'tablet',
-            'kindle',
-        ],
-        handheld: [
-            'iphone',
-            'ipod',
-            'android',
-            'blackberry',
-            'opera',
-            'mini',
-            'windows\sce',
-            'palm',
-            'smartphone',
-            'iemobile',
-        ],
-        epicMobile: [
-            'android',
-            'iphone',
-            'ipod',
-            'acs',
-            'alav',
-            'alca',
-            'amoi',
-            'audi',
-            'aste',
-            'avan',
-            'benq',
-            'bird',
-            'blac',
-            'blaz',
-            'brew',
-            'cell',
-            'cldc',
-            'cmd-',
-            'dang',
-            'doco',
-            'eric',
-            'hipt',
-            'inno',
-            'ipaq',
-            'java',
-            'jigs',
-            'kddi',
-            'keji',
-            'leno',
-            'lg-c',
-            'lg-d',
-            'lg-g',
-            'lge-',
-            'maui',
-            'maxo',
-            'midp',
-            'mits',
-            'mmef',
-            'mobi',
-            'mot-',
-            'moto',
-            'mwbp',
-            'nec-',
-            'newt',
-            'noki',
-            'opwv',
-            'palm',
-            'pana',
-            'pant',
-            'pdxg',
-            'phil',
-            'play',
-            'pluc',
-            'port',
-            'prox',
-            'qtek',
-            'qwap',
-            'sage',
-            'sams',
-            'sany',
-            'sch-',
-            'sec-',
-            'send',
-            'seri',
-            'sgh-',
-            'shar',
-            'sie-',
-            'siem',
-            'smal',
-            'smar',
-            'sony',
-            'sph-',
-            'symb',
-            't-mo',
-            'teli',
-            'tim-',
-            'tosh',
-            'tsm-',
-            'upg1',
-            'upsi',
-            'vk-v',
-            'voda',
-            'w3cs',
-            'wap-',
-            'wapa',
-            'wapi',
-            'wapp',
-            'wapr',
-            'webc',
-            'winw',
-            'winw',
-            'xda',
-            'xda-',
-            'up.browser',
-            'up.link',
-            'windowssce',
-            'iemobile',
-            'mini',
-            'mmp',
-            'symbian',
-            'midp',
-            'wap',
-            'phone',
-            'pocket',
-            'mobile',
-            'pda',
-            'psp'
-        ],
-        isMobile: function () {
-            var reasonableNumberofDevices = this.tablet.concat(this.handheld),
-                deviceStr = reasonableNumberofDevices.join('|'),
-                regex = new RegExp(deviceStr, 'i');
-            return (regex.test(navigator.userAgent.toLowerCase()) && !(/macintosh/i.test(navigator.userAgent.toLowerCase())));
-        },
-        prefix: function () {
-            var styles = window.getComputedStyle(document.documentElement, ''),
-                pre = (Array.prototype.slice
-                    .call(styles)
-                    .join('')
-                    .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
-                )[1],
-                dom = ('WebKit|Moz|MS|O').match(new RegExp('(' + pre + ')', 'i'))[1];
-            return {
-                dom: dom,
-                lowercase: pre,
-                css: '-' + pre + '-',
-                js: pre[0].toUpperCase() + pre.substr(1)
-            };
-        },
-        orientation: function () {
-            switch (window.orientation) {
-            case 0:
-            case 180:
-                return 'portrait';
-            case 90:
-            case -90:
-                return 'landscape';
-            default:
-                return null;
-            }
+    tablet: [
+      'ipad',
+      'android',
+      'android 3.0',
+      'xoom',
+      'sch-i800',
+      'playbook',
+      'tablet',
+      'kindle',
+    ],
+    handheld: [
+      'iphone',
+      'ipod',
+      'android',
+      'blackberry',
+      'opera',
+      'mini',
+      'windows\sce',
+      'palm',
+      'smartphone',
+      'iemobile',
+    ],
+    epicMobile: [
+      'android',
+      'iphone',
+      'ipod',
+      'acs',
+      'alav',
+      'alca',
+      'amoi',
+      'audi',
+      'aste',
+      'avan',
+      'benq',
+      'bird',
+      'blac',
+      'blaz',
+      'brew',
+      'cell',
+      'cldc',
+      'cmd-',
+      'dang',
+      'doco',
+      'eric',
+      'hipt',
+      'inno',
+      'ipaq',
+      'java',
+      'jigs',
+      'kddi',
+      'keji',
+      'leno',
+      'lg-c',
+      'lg-d',
+      'lg-g',
+      'lge-',
+      'maui',
+      'maxo',
+      'midp',
+      'mits',
+      'mmef',
+      'mobi',
+      'mot-',
+      'moto',
+      'mwbp',
+      'nec-',
+      'newt',
+      'noki',
+      'opwv',
+      'palm',
+      'pana',
+      'pant',
+      'pdxg',
+      'phil',
+      'play',
+      'pluc',
+      'port',
+      'prox',
+      'qtek',
+      'qwap',
+      'sage',
+      'sams',
+      'sany',
+      'sch-',
+      'sec-',
+      'send',
+      'seri',
+      'sgh-',
+      'shar',
+      'sie-',
+      'siem',
+      'smal',
+      'smar',
+      'sony',
+      'sph-',
+      'symb',
+      't-mo',
+      'teli',
+      'tim-',
+      'tosh',
+      'tsm-',
+      'upg1',
+      'upsi',
+      'vk-v',
+      'voda',
+      'w3cs',
+      'wap-',
+      'wapa',
+      'wapi',
+      'wapp',
+      'wapr',
+      'webc',
+      'winw',
+      'winw',
+      'xda',
+      'xda-',
+      'up.browser',
+      'up.link',
+      'windowssce',
+      'iemobile',
+      'mini',
+      'mmp',
+      'symbian',
+      'midp',
+      'wap',
+      'phone',
+      'pocket',
+      'mobile',
+      'pda',
+      'psp'
+    ],
+    isMobile: function() {
+      var reasonableNumberofDevices = this.tablet.concat(this.handheld),
+        deviceStr = reasonableNumberofDevices.join('|'),
+        regex = new RegExp(deviceStr, 'i');
+      return (regex.test(navigator.userAgent.toLowerCase()) && !(/macintosh/i.test(navigator.userAgent.toLowerCase())));
+    },
+    prefix: function() {
+      var styles = window.getComputedStyle(document.documentElement, ''),
+        pre = (Array.prototype.slice
+          .call(styles)
+          .join('')
+          .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
+        )[1],
+        dom = ('WebKit|Moz|MS|O').match(new RegExp('(' + pre + ')', 'i'))[1];
+      return {
+        dom: dom,
+        lowercase: pre,
+        css: '-' + pre + '-',
+        js: pre[0].toUpperCase() + pre.substr(1)
+      };
+    },
+    orientation: function() {
+      switch (window.orientation) {
+        case 0:
+        case 180:
+          return 'portrait';
+        case 90:
+        case -90:
+          return 'landscape';
+        default:
+          return null;
+      }
+    }
+  };
+
+});
+
+define('modules/reader',[],function() {
+  return {
+    components: [], // (array) ordered list of ebook chapters pulled from <spine>
+    currentPage: null, // (string) url
+    firstPage: null, // (string) url
+    lastPage: null, // (string) url
+    scrollPosition: {}, // (obj) containing src: (str) url, pos: (int) main.scrollTop()
+    endPosition: null, // (int) bottom of #reader scroll container
+    isScrolling: false // (bool) true/false
+  };
+
+});
+
+define('modules/settings',['require','modules/environment'],function(require) {
+
+  var environment = require('modules/environment');
+  return {
+    dev: false,
+    jsonPath: '/wp-content/themes/Fiktion/data/bookData.json',
+    debug: false,
+    version: 1.0,
+    clearStorage: false,
+    local: false,
+    bookId: null,
+    el: $('main'),
+    container: $('#book-content'),
+    chapters: $('.chapters'),
+    defaultFontSize: 30,
+    fSize: 100,
+    fSizeIncrement: 5,
+    maxFontSize: function() {
+      return environment.isMobile() ? 130 : 150;
+    },
+    minFontSize: function() {
+      return environment.isMobile() ? 50 : 70;
+    },
+    contrast: 'light',
+    scrollSpeed: 10,
+    currentChapterIndex: null,
+    chapterSelector: '[data-chapter]',
+    chapterData: [],
+    documentTitle: 'Fiktion',
+    bookSlug: ''
+  };
+});
+
+define('modules/layout',['require','modules/environment','modules/settings'],function(require) {
+
+  var environment = require('modules/environment');
+  var settings = require('modules/settings');
+
+  return {
+
+    targetContainerWidth: function() {
+      var w = parseInt(settings.el.css('font-size'), 10) * 25,
+        isMobile = environment.isMobile(),
+        orientation = environment.orientation();
+
+      if (isMobile && w > window.screen.width && window.screen.width <= 768 && orientation === 'portrait') {
+        return window.screen.width;
+      }
+      if (isMobile && w > window.screen.width && window.screen.width < 768 && orientation === 'landscape') {
+        return window.screen.height;
+      }
+      if (!isMobile && w > $(window).width()) {
+        return $(window).width();
+      }
+
+      return w;
+    },
+
+    targetContainerHeight: function() {
+      var orientation = environment.orientation();
+      if (environment.isMobile() && $(window).width() <= 568 && orientation === 'landscape') {
+        return 300;
+      }
+      if (environment.isMobile() && $(window).width() <= 568 && orientation === 'portrait') {
+        return window.screen.height / 2.2;
+      }
+      var h = parseInt(settings.el.css('line-height'), 10) * 9;
+      return h;
+    },
+
+    setFrameHeight: function() {
+
+      var targetHeight = this.targetContainerHeight();
+
+      settings.el.css({
+        height: targetHeight,
+        maxHeight: targetHeight
+      });
+
+    },
+
+    setFrameWidth: function() {
+
+      var targetWidth = this.targetContainerWidth();
+
+      settings.el.css({
+        width: targetWidth,
+        maxWidth: targetWidth
+      });
+
+    },
+
+    adjustFramePosition: function() {
+
+      this.setFrameHeight();
+      this.setFrameWidth();
+
+      var frame = settings.el;
+
+      if (environment.isMobile() && $(window).width() <= 568 && environment.orientation() === 'landscape') { // size for iPhone 5 and smaller
+        frame.css({
+          top: 10,
+          left: 0
+        });
+      } else {
+        var h = ($(window).width() <= 480) ? $(window).height() / 2 - 30 : $(window).height() / 2,
+          w = $(window).width() / 2,
+          frameMidH = frame.height() / 2,
+          frameMidW = frame.width() / 2,
+          targetLeft = $(window).width() <= 480 ? 0 : w - frameMidW,
+          cssObj = {
+            top: h - frameMidH,
+            left: targetLeft
+          };
+
+        frame.css(cssObj);
+      }
+
+      this.adjustNavPosition();
+
+      var distTop = parseInt(settings.el.css('top'), 10);
+      var distBottom = parseInt(settings.el.offset().top + settings.el.height() - 49, 10);
+      $('#shadow-top').css({
+        top: distTop
+      });
+      $('#shadow-bottom').css({
+        top: distBottom
+      });
+
+    },
+
+    adjustNavPosition: function() {
+
+      var frame = settings.el,
+        nav = $('nav'),
+        overlap = frame.position().left <= 115, // initial sidebar width + margin
+        orientation = environment.orientation();
+
+      if (overlap && $(window).width() > 480) {
+        nav.addClass('mobile').css({
+          top: 0,
+          width: frame.width()
+        });
+      } else if (!overlap && $(window).width() > 480) {
+        nav.removeClass('mobile').css({
+          top: ($(window).height() / 2) - ($('.controls').height() / 2),
+          width: 75
+        });
+      } else if (orientation === 'portrait' && $(window).width() <= 480) {
+        nav.addClass('mobile').css({
+          top: 0,
+          width: 'auto'
+        });
+      } else if (orientation === 'landscape' && $(window).width() <= 480) {
+        nav.removeClass('mobile');
+      }
+
+    },
+
+    setStyles: function() {
+      var mainCss = {
+        fontSize: settings.fSize + '%',
+        lineHeight: '1.3'
+      };
+
+      settings.el.css(mainCss);
+
+    },
+
+    renderShadows: function() {
+      return {
+        shadowTop: $('<div/>', {
+          id: 'shadow-top',
+        }),
+        shadowBottom: $('<div/>', {
+          id: 'shadow-bottom',
+          css: {
+            'top': parseInt(settings.el.offset().top + settings.el.height() - 49, 10)
+          }
+        })
+      };
+    }
+
+  };
+
+});
+
+define('modules/user-settings',['require','modules/reader','modules/settings'],function(require) {
+  var reader = require('modules/reader');
+  var settings = require('modules/settings');
+
+  return {
+
+    updatedReaderData: function() {
+      reader[arguments[0]] = arguments[1];
+    },
+
+    updateUserData: function() {
+      settings[arguments[0]] = arguments[1];
+    },
+
+    updateLocalStorage: function(obj, prop, attr, nestedAttr) {
+
+      if (localStorage.getItem(obj) === null) { // localstorage was not added on page load or was removed
+        return;
+      }
+
+      if (typeof prop === 'undefined' || typeof attr === 'undefined') {
+        throw 'Error: sys.updateLocalStorage() undefined argument';
+      }
+
+      var parsedObj = JSON.parse(localStorage.getItem(obj));
+
+      if (typeof nestedAttr !== 'undefined') {
+        parsedObj[prop][attr] = nestedAttr;
+      } else if (typeof nestedAttr === 'undefined') {
+        parsedObj[prop] = attr;
+      }
+
+      localStorage.setItem(obj, JSON.stringify(parsedObj));
+
+    },
+
+    saveLocation: function() {
+
+      if (settings.debug) {
+        console.log('Saving current location');
+      }
+
+      this.updatedReaderData(
+        settings.bookId,
+        'scrollPosition',
+        reader.currentPage,
+        reader.scrollPosition[reader.currentPage]
+      );
+
+      reader.scrollPosition[reader.currentPage] = settings.el.scrollTop();
+
+      this.updateLocalStorage(
+        settings.bookId,
+        'scrollPosition',
+        reader.currentPage,
+        reader.scrollPosition[reader.currentPage]
+      );
+
+    },
+
+    getFromLocalStorage: function(obj, prop, attr) {
+
+      var parsedObj = JSON.parse(localStorage.getItem(obj));
+
+      if (typeof attr !== 'undefined') {
+        return parsedObj[prop][attr];
+      }
+
+      return parsedObj[prop];
+
+    },
+
+    updateUserPreferences: function() {
+
+      if (settings.debug) {
+        console.log('Updating user preferences');
+      }
+
+      var userPreferences = {
+        fSize: settings.fSize,
+        contrast: settings.contrast,
+        scrollSpeed: settings.scrollSpeed
+      };
+
+      localStorage.setItem('userPreferences', JSON.stringify(userPreferences));
+
+    },
+
+    getUserPreferences: function() {
+      if (settings.debug) {
+        console.log('Getting User Preferences');
+      }
+      if (localStorage.getItem('userPreferences') !== null) {
+        var obj = JSON.parse(localStorage.getItem('userPreferences'));
+        $.extend(settings, obj);
+      } else {
+        this.updateUserPreferences();
+      }
+    },
+
+    getLocation: function() {
+
+      var bookId = settings.bookId;
+
+      if (localStorage.getItem(bookId) !== null) {
+
+        var obj = JSON.parse(localStorage.getItem(bookId));
+
+        reader.currentPage = obj.currentPage;
+
+        $.extend(reader.scrollPosition, obj.scrollPosition);
+
+      } else {
+
+        var clientBook = {
+          bookId: window.ebookAppData.uuid,
+          currentPage: reader.firstPage,
+          scrollPosition: {}
+        };
+
+        reader.currentPage = reader.firstPage;
+        reader.scrollPosition[reader.firstPage] = 0;
+        clientBook.scrollPosition[reader.firstPage] = 0;
+
+        localStorage.setItem(window.ebookAppData.uuid, JSON.stringify(clientBook));
+
+      }
+
+    },
+
+    goToPreviousLocation: function() {
+
+      if (settings.debug) {
+        console.log('Going to previous location');
+      }
+
+      var pos = this.getFromLocalStorage(settings.bookId, 'scrollPosition', reader.currentPage);
+      setTimeout(function() {
+        settings.el.scrollTop(pos);
+      }, 50);
+    },
+
+    goToNextChapter: function() {
+      return;
+    }
+
+  };
+});
+
+define('modules/events',['require','modules/settings','modules/reader','modules/user-settings','modules/layout'],function(require) {
+  var settings = require('modules/settings');
+  var reader = require('modules/reader');
+  var userSettings = require('modules/user-settings');
+  var layout = require('modules/layout');
+
+  var Events = function() {
+
+    var _this = this;
+
+    this.eventHandlers = {
+
+      '.play-btn, click': 'playPause',
+      '.speed-inc, click': 'speedIncrement',
+      '.speed-dec, click': 'speedDecrement',
+      '.font-inc, click': 'fontIncrement',
+      '.font-dec, click': 'fontDecrement',
+      '.contrast-dark, click': 'contrastToggle',
+      '.contrast-light, click': 'contrastToggle',
+      '.full-screen, click': 'toggleFullScreen',
+      'main a, click': 'embeddedLinkClick'
+
+    };
+
+    this.bindEventHandlers = function() {
+
+      $.each(_this.eventHandlers, function(k, v) {
+
+        var eArr = k.split(','),
+          fArr = v.split(','),
+          elem = $.trim(eArr[0]),
+          trig = $.trim(eArr[1]),
+          func = $.trim(fArr[0]),
+          args = fArr.slice(1);
+
+        $(elem).on(trig, function(e) {
+          if (e && typeof e.originalEvent !== 'undefined') {
+            args.push(e);
+            e.preventDefault();
+          }
+          _this[func].apply(_this, args);
+        });
+
+      });
+
+    };
+
+    this.toggleFullScreen = function() {
+
+      if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+        if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen();
+        } else if (document.documentElement.msRequestFullscreen) {
+          document.documentElement.msRequestFullscreen();
+        } else if (document.documentElement.mozRequestFullScreen) {
+          document.documentElement.mozRequestFullScreen();
+        } else if (document.documentElement.webkitRequestFullscreen) {
+          document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
         }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+      }
+
     };
 
-});
+    this.listenForPageChangeInterval = null;
 
-define('modules/reader',[],function () {
-    return {
-        components: [], // (array) ordered list of ebook chapters pulled from <spine>
-        currentPage: null, // (string) url
-        firstPage: null, // (string) url
-        lastPage: null, // (string) url
-        scrollPosition: {}, // (obj) containing src: (str) url, pos: (int) main.scrollTop()
-        endPosition: null, // (int) bottom of #reader scroll container
-        isScrolling: false // (bool) true/false
+    this.listenForPageChange = function() {
+
+      var intervalCallback = function() {
+        $(document).trigger('updateNavIndicators');
+      };
+
+      if (_this.listenForPageChangeInterval === null) { // kick off by counting pages and setting chapter url
+        intervalCallback();
+      }
+
+      var lineHeight = Math.floor(parseInt($(settings.el.first('p')).css('line-height'), 10)),
+        containerH = Math.floor(settings.el.height()),
+        intrvl = Math.floor((lineHeight * containerH) / settings.scrollSpeed + 1) * 100;
+
+      window.clearInterval(_this.listenForPageChangeInterval);
+
+      _this.listenForPageChangeInterval = setInterval(function() {
+        intervalCallback();
+      }, intrvl);
+
     };
 
-});
+    this.playPause = function() {
 
-define('modules/settings',['require','modules/environment'],function (require) {
+      var playBtn = $('.controls').find('.play-btn'),
+        isScrolling = reader.isScrolling;
 
-    var environment = require('modules/environment');
-    return {
-        dev: false,
-        jsonPath: '/wp-content/themes/Fiktion/data/bookData.json',
-        debug: false,
-        version: 1.0,
-        clearStorage: false,
-        local: false,
-        bookId: null,
-        el: $('main'),
-        container: $('#book-content'),
-        chapters: $('.chapters'),
-        defaultFontSize: 30,
-        fSize: 100,
-        fSizeIncrement: 5,
-        maxFontSize: function () {
-            return environment.isMobile() ? 130 : 150;
-        },
-        minFontSize: function () {
-            return environment.isMobile() ? 50 : 70;
-        },
-        contrast: 'light',
-        scrollSpeed: 10,
-        currentChapterIndex: null,
-        chapterSelector: '[data-chapter]',
-        chapterData:[],
-        documentTitle:'Fiktion',
-        bookSlug: ''
+      if (isScrolling) {
+        _this.stopScrolling();
+      } else {
+        _this.startScrolling();
+      }
+      playBtn.attr('data-state', isScrolling ? 'play' : 'pause');
+
     };
-});
 
-define('modules/layout',['require','modules/environment','modules/settings'],function (require) {
+    this.requestAnim = null;
 
-    var environment = require('modules/environment');
-    var settings    = require('modules/settings');
+    this.ct = 0;
 
-    return {
+    this.skip = null;
 
-        targetContainerWidth: function () {
-            var w = parseInt(settings.el.css('font-size'), 10) * 25,
-                isMobile = environment.isMobile(),
-                orientation = environment.orientation();
+    this.getSkipInterval = function() {
+      var v = 100 - settings.scrollSpeed,
+        n = v.toString().slice(-2),
+        r = parseInt(n, 10),
+        x = r * 6 / 30;
 
-            if (isMobile && w > window.screen.width && window.screen.width <= 768 && orientation === 'portrait') {
-                return window.screen.width;
-            }
-            if (isMobile && w > window.screen.width && window.screen.width < 768 && orientation === 'landscape') {
-                return window.screen.height;
-            }
-            if (!isMobile && w > $(window).width()) {
-                return $(window).width();
-            }
+      _this.skip = x;
 
-            return w;
+    };
+
+    this.animateScroll = function(context, callback) {
+      return setTimeout(function() {
+        context[callback].apply(context);
+      }, 0);
+    };
+
+    this.readScroll = function() {
+
+      _this.ct++;
+      if (_this.ct < _this.skip) { // skip the animation every `this.skip` frame
+        _this.requestAnim = _this.animateScroll(_this, 'readScroll');
+        return;
+      }
+      _this.ct = 0;
+      settings.el.scrollTop(settings.el.scrollTop() + 1); // run the animation
+      _this.requestAnim = _this.animateScroll(_this, 'readScroll');
+
+    };
+
+    this.cursorTimer = null;
+
+    this.cursorListener = function() {
+      var $this = $('html');
+      var showCursor = function() {
+        $this.removeClass('cursor-hidden');
+      };
+      var hideCursor = function() {
+        $this.addClass('cursor-hidden');
+      };
+      var setTimer = function() {
+        if (reader.isScrolling) {
+          _this.cursorTimer = setTimeout(function() {
+            hideCursor();
+          }, 2000);
+        }
+      };
+      $this.on({
+        mousemove: function() {
+          showCursor();
+          window.clearTimeout(_this.cursorTimer);
+          setTimer();
+        }
+      });
+      $('a').on({
+        mouseenter: function() {
+          window.clearTimeout(_this.cursorTimer);
         },
+        mouseleave: function() {
+          setTimer();
+        }
+      });
+      $this.addClass('cursor-hidden');
+    };
 
-        targetContainerHeight: function () {
-            var orientation = environment.orientation();
-            if (environment.isMobile() && $(window).width() <= 568 && orientation === 'landscape') {
-                return 300;
-            }
-            if (environment.isMobile() && $(window).width() <= 568 && orientation === 'portrait') {
-                return window.screen.height / 2.2;
-            }
-            var h = parseInt(settings.el.css('line-height'), 10) * 9;
-            return h;
-        },
+    this.startScrolling = function() {
 
-        setFrameHeight: function () {
+      if (!reader.isScrolling) {
+        $('.controls').find('.play-btn').attr('data-state', 'pause');
 
-            var targetHeight = this.targetContainerHeight();
-
-            settings.el.css({
-                height: targetHeight,
-                maxHeight: targetHeight
-            });
-
-        },
-
-        setFrameWidth: function () {
-
-            var targetWidth = this.targetContainerWidth();
-
-            settings.el.css({
-                width: targetWidth,
-                maxWidth: targetWidth
-            });
-
-        },
-
-        adjustFramePosition: function () {
-
-            this.setFrameHeight();
-            this.setFrameWidth();
-
-            var frame = settings.el;
-
-            if (environment.isMobile() && $(window).width() <= 568 && environment.orientation() === 'landscape') { // size for iPhone 5 and smaller
-                frame.css({
-                    top: 10,
-                    left: 0
-                });
-            } else {
-                var h = ($(window).width() <= 480) ? $(window).height() / 2 - 30 : $(window).height() / 2,
-                    w = $(window).width() / 2,
-                    frameMidH = frame.height() / 2,
-                    frameMidW = frame.width() / 2,
-                    targetLeft = $(window).width() <= 480 ? 0 : w - frameMidW,
-                    cssObj = {
-                        top: h - frameMidH,
-                        left: targetLeft
-                    };
-
-                frame.css(cssObj);
-            }
-
-            this.adjustNavPosition();
-
-            var distTop    = parseInt(settings.el.css('top'), 10);
-            var distBottom = parseInt(settings.el.offset().top + settings.el.height() - 49, 10);
-            $('#shadow-top').css({
-                top: distTop
-            });
-            $('#shadow-bottom').css({
-                top: distBottom
-            });
-
-        },
-
-        adjustNavPosition: function () {
-
-            var frame = settings.el,
-                nav = $('nav'),
-                overlap = frame.position().left <= 115, // initial sidebar width + margin
-                orientation = environment.orientation();
-
-            if (overlap && $(window).width() > 480) {
-                nav.addClass('mobile').css({
-                    top: 0,
-                    width: frame.width()
-                });
-            } else if (!overlap && $(window).width() > 480) {
-                nav.removeClass('mobile').css({
-                    top: ($(window).height() / 2) - ($('.controls').height() / 2),
-                    width: 75
-                });
-            } else if (orientation === 'portrait' && $(window).width() <= 480) {
-                nav.addClass('mobile').css({
-                    top: 0,
-                    width: 'auto'
-                });
-            } else if (orientation === 'landscape' && $(window).width() <= 480) {
-                nav.removeClass('mobile');
-            }
-
-        },
-
-        setStyles: function () {
-            var mainCss = {
-                fontSize: settings.fSize + '%',
-                lineHeight: '1.3'
-            };
-
-            settings.el.css(mainCss);
-
-        },
-
-        renderShadows: function () {
-            return {
-                shadowTop: $('<div/>', {
-                    id: 'shadow-top',
-                }),
-                shadowBottom: $('<div/>', {
-                    id: 'shadow-bottom',
-                    css: {
-                        'top': parseInt(settings.el.offset().top + settings.el.height() - 49, 10)
-                    }
-                })
-            };
+        if (_this.skip === null) {
+          _this.getSkipInterval();
         }
 
+        _this.readScroll();
+        _this.listenForPageChange();
+
+        reader.isScrolling = true;
+      }
+
     };
 
-});
+    this.stopScrolling = function() {
+      if (reader.isScrolling) {
+        $('.controls').find('.play-btn').attr('data-state', 'play');
+        if (settings.debug) {
+          console.log('Stopped');
+        }
+        window.clearTimeout(_this.requestAnim);
+        window.clearInterval(_this.listenForPageChangeInterval);
+        reader.isScrolling = false;
+      }
 
-define('modules/user-settings',['require','modules/reader','modules/settings'],function (require) {
-    var reader   = require('modules/reader');
-    var settings = require('modules/settings');
+    };
 
-    return {
+    this.speedIncrement = function() {
 
-        updatedReaderData: function () {
-            reader[arguments[0]] = arguments[1];
-        },
+      _this.stopScrolling();
 
-        updateUserData: function () {
-            settings[arguments[0]] = arguments[1];
-        },
+      if (settings.scrollSpeed < 100) {
+        settings.scrollSpeed += 10;
 
-        updateLocalStorage: function (obj, prop, attr, nestedAttr) {
-
-            if (localStorage.getItem(obj) === null) { // localstorage was not added on page load or was removed
-                return;
-            }
-
-            if (typeof prop === 'undefined' || typeof attr === 'undefined') {
-                throw 'Error: sys.updateLocalStorage() undefined argument';
-            }
-
-            var parsedObj = JSON.parse(localStorage.getItem(obj));
-
-            if (typeof nestedAttr !== 'undefined') {
-                parsedObj[prop][attr] = nestedAttr;
-            } else if (typeof nestedAttr === 'undefined') {
-                parsedObj[prop] = attr;
-            }
-
-            localStorage.setItem(obj, JSON.stringify(parsedObj));
-
-        },
-
-        saveLocation: function () {
-
-            if (settings.debug) {
-                console.log('Saving current location');
-            }
-
-            this.updatedReaderData(
-                settings.bookId,
-                'scrollPosition',
-                reader.currentPage,
-                reader.scrollPosition[reader.currentPage]
-            );
-
-            reader.scrollPosition[reader.currentPage] = settings.el.scrollTop();
-
-            this.updateLocalStorage(
-                settings.bookId,
-                'scrollPosition',
-                reader.currentPage,
-                reader.scrollPosition[reader.currentPage]
-            );
-
-        },
-
-        getFromLocalStorage: function (obj, prop, attr) {
-
-            var parsedObj = JSON.parse(localStorage.getItem(obj));
-
-            if (typeof attr !== 'undefined') {
-                return parsedObj[prop][attr];
-            }
-
-            return parsedObj[prop];
-
-        },
-
-        updateUserPreferences: function () {
-
-            if (settings.debug) {
-                console.log('Updating user preferences');
-            }
-
-            var userPreferences = {
-                fSize: settings.fSize,
-                contrast: settings.contrast,
-                scrollSpeed: settings.scrollSpeed
-            };
-
-            localStorage.setItem('userPreferences', JSON.stringify(userPreferences));
-
-        },
-
-        getUserPreferences: function () {
-            if (settings.debug) {
-                console.log('Getting User Preferences');
-            }
-            if (localStorage.getItem('userPreferences') !== null) {
-                var obj = JSON.parse(localStorage.getItem('userPreferences'));
-                $.extend(settings, obj);
-            } else {
-                this.updateUserPreferences();
-            }
-        },
-
-        getLocation: function () {
-
-            var bookId = settings.bookId;
-
-            if (localStorage.getItem(bookId) !== null) {
-
-                var obj = JSON.parse(localStorage.getItem(bookId));
-
-                reader.currentPage = obj.currentPage;
-
-                $.extend(reader.scrollPosition, obj.scrollPosition);
-
-            } else {
-
-                var clientBook = {
-                    bookId: window.ebookAppData.uuid,
-                    currentPage: reader.firstPage,
-                    scrollPosition: {}
-                };
-
-                reader.currentPage = reader.firstPage;
-                reader.scrollPosition[reader.firstPage] = 0;
-                clientBook.scrollPosition[reader.firstPage] = 0;
-
-                localStorage.setItem(window.ebookAppData.uuid, JSON.stringify(clientBook));
-
-            }
-
-        },
-
-        goToPreviousLocation: function () {
-
-            if (settings.debug) {
-                console.log('Going to previous location');
-            }
-
-            var pos = this.getFromLocalStorage(settings.bookId, 'scrollPosition', reader.currentPage);
-            setTimeout(function () {
-                settings.el.scrollTop(pos);
-            }, 50);
-        },
-
-        goToNextChapter: function () {
-            return;
+        if (settings.debug) {
+          console.log('Reading speed incremented to ' + settings.scrollSpeed);
         }
 
-    };
-});
-
-define('modules/events',['require','modules/settings','modules/reader','modules/user-settings','modules/layout'],function (require) {
-    var settings     = require('modules/settings');
-    var reader       = require('modules/reader');
-    var userSettings = require('modules/user-settings');
-    var layout       = require('modules/layout');
-
-    var Events = function () {
-
-        var _this = this;
-
-        this.eventHandlers = {
-
-            '.play-btn, click': 'playPause',
-            '.speed-inc, click': 'speedIncrement',
-            '.speed-dec, click': 'speedDecrement',
-            '.font-inc, click': 'fontIncrement',
-            '.font-dec, click': 'fontDecrement',
-            '.contrast-dark, click': 'contrastToggle',
-            '.contrast-light, click': 'contrastToggle',
-            '.full-screen, click': 'toggleFullScreen',
-            'main a, click': 'embeddedLinkClick'
-
-        };
-
-        this.bindEventHandlers = function () {
-
-            $.each(_this.eventHandlers, function (k, v) {
-
-                var eArr = k.split(','),
-                    fArr = v.split(','),
-                    elem = $.trim(eArr[0]),
-                    trig = $.trim(eArr[1]),
-                    func = $.trim(fArr[0]),
-                    args = fArr.slice(1);
-
-                $(elem).on(trig, function (e) {
-                    if (e && typeof e.originalEvent !== 'undefined') {
-                        args.push(e);
-                        e.preventDefault();
-                    }
-                    _this[func].apply(_this, args);
-                });
-
-            });
-
-        };
-
-        this.toggleFullScreen = function () {
-
-            if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
-                if (document.documentElement.requestFullscreen) {
-                    document.documentElement.requestFullscreen();
-                } else if (document.documentElement.msRequestFullscreen) {
-                    document.documentElement.msRequestFullscreen();
-                } else if (document.documentElement.mozRequestFullScreen) {
-                    document.documentElement.mozRequestFullScreen();
-                } else if (document.documentElement.webkitRequestFullscreen) {
-                    document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-                }
-            } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.msExitFullscreen) {
-                    document.msExitFullscreen();
-                } else if (document.mozCancelFullScreen) {
-                    document.mozCancelFullScreen();
-                } else if (document.webkitExitFullscreen) {
-                    document.webkitExitFullscreen();
-                }
-            }
-
-        };
-
-        this.listenForPageChangeInterval = null;
-
-        this.listenForPageChange = function () {
-
-            var intervalCallback = function(){
-                $(document).trigger('updateNavIndicators');
-            };
-
-            if (_this.listenForPageChangeInterval === null) { // kick off by counting pages and setting chapter url
-                intervalCallback();
-            }
-
-            var lineHeight = Math.floor(parseInt($(settings.el.first('p')).css('line-height'), 10)),
-                containerH = Math.floor(settings.el.height()),
-                intrvl = Math.floor((lineHeight * containerH) / settings.scrollSpeed + 1) * 100;
-
-            window.clearInterval(_this.listenForPageChangeInterval);
-
-            _this.listenForPageChangeInterval = setInterval(function () {
-                intervalCallback();
-            }, intrvl);
-
-        };
-
-        this.playPause = function () {
-
-            var playBtn = $('.controls').find('.play-btn'),
-                isScrolling = reader.isScrolling;
-
-            if (isScrolling) {
-                _this.stopScrolling();
-            } else {
-                _this.startScrolling();
-            }
-            playBtn.attr('data-state', isScrolling ? 'play' : 'pause');
-
-        };
-
-        this.requestAnim = null;
-
-        this.ct = 0;
-
-        this.skip = null;
-
-        this.getSkipInterval = function () {
-            var v = 100 - settings.scrollSpeed,
-                n = v.toString().slice(-2),
-                r = parseInt(n, 10),
-                x = r * 6 / 30;
-
-            _this.skip = x;
-
-        };
-
-        this.animateScroll = function (context, callback) {
-            return setTimeout(function () {
-                context[callback].apply(context);
-            }, 0);
-        };
-
-        this.readScroll = function () {
-
-            _this.ct++;
-            if (_this.ct < _this.skip) { // skip the animation every `this.skip` frame
-                _this.requestAnim = _this.animateScroll(_this, 'readScroll');
-                return;
-            }
-            _this.ct = 0;
-            settings.el.scrollTop(settings.el.scrollTop() + 1); // run the animation
-            _this.requestAnim = _this.animateScroll(_this, 'readScroll');
-
-        };
-
-        this.cursorTimer = null;
-
-        this.cursorListener = function () {
-            var $this = $('html');
-            var showCursor = function () {
-                $this.removeClass('cursor-hidden');
-            };
-            var hideCursor = function () {
-                $this.addClass('cursor-hidden');
-            };
-            var setTimer = function () {
-                if (reader.isScrolling) {
-                    _this.cursorTimer = setTimeout(function () {
-                        hideCursor();
-                    }, 2000);
-                }
-            };
-            $this.on({
-                mousemove: function () {
-                    showCursor();
-                    window.clearTimeout(_this.cursorTimer);
-                    setTimer();
-                }
-            });
-            $('a').on({
-                mouseenter: function () {
-                    window.clearTimeout(_this.cursorTimer);
-                },
-                mouseleave: function () {
-                    setTimer();
-                }
-            });
-            $this.addClass('cursor-hidden');
-        };
-
-        this.startScrolling = function () {
-
-            if (!reader.isScrolling) {
-                $('.controls').find('.play-btn').attr('data-state', 'pause');
-
-                if (_this.skip === null) {
-                    _this.getSkipInterval();
-                }
-
-                _this.readScroll();
-                _this.listenForPageChange();
-
-                reader.isScrolling = true;
-            }
-
-        };
-
-        this.stopScrolling = function () {
-            if (reader.isScrolling) {
-                $('.controls').find('.play-btn').attr('data-state', 'play');
-                if (settings.debug) {
-                    console.log('Stopped');
-                }
-                window.clearTimeout(_this.requestAnim);
-                window.clearInterval(_this.listenForPageChangeInterval);
-                reader.isScrolling = false;
-            }
-
-        };
-
-        this.speedIncrement = function () {
-
-            _this.stopScrolling();
-
-            if (settings.scrollSpeed < 100) {
-                settings.scrollSpeed += 10;
-
-                if (settings.debug) {
-                    console.log('Reading speed incremented to ' + settings.scrollSpeed);
-                }
-
-                userSettings.updateUserPreferences();
-            }
-
-            _this.getSkipInterval();
-            _this.startScrolling();
-
-        };
-
-        this.speedDecrement = function () {
-
-            _this.stopScrolling();
-
-            if (settings.scrollSpeed > 10) {
-                settings.scrollSpeed -= 10;
-
-                if (settings.debug) {
-                    console.log('Reading speed decremented to ' + settings.scrollSpeed);
-                }
-
-                userSettings.updateUserPreferences();
-            }
-
-            _this.getSkipInterval();
-            _this.startScrolling();
-
-        };
-
-        this.isChapterEnd = function () {
-
-            _this.stopScrolling();
-
-            if (settings.debug) {
-                console.log('Chapter end');
-            }
-
-        };
-
-        this.hasEnded = false;
-
-        this.isBookEnd = function () {
-
-            // _this.stopScrolling();
-            // _this.hasEnded = true;
-
-            // if (settings.debug) {
-            //     console.log('Book end');
-            // }
-
-        };
-
-        this.fontIncrement = function () {
-
-            if (settings.fSize === settings.maxFontSize()) {
-                return;
-            }
-            var size = settings.fSize < settings.maxFontSize() ? settings.fSize + settings.fSizeIncrement : settings.fSize;
-
-            settings.el.css('font-size', size + '%');
-            userSettings.updateUserData('fSize', size);
-
-            $(document).trigger('updateUi');
-
-        };
-
-        this.fontDecrement = function () {
-
-            if (settings.fSize === settings.minFontSize()) {
-                return;
-            }
-
-            var size = settings.fSize > settings.minFontSize() ? settings.fSize - settings.fSizeIncrement : settings.fSize;
-
-            settings.el.css('font-size', size + '%');
-            userSettings.updateUserData('fSize', size);
-
-            $(document).trigger('updateUi');
-
-        };
-
-        this.contrastToggle = function (e) {
-
-            var contrast = e && e.currentTarget ? $(e.currentTarget).attr('data-contrast') : e,
-                html = $('html');
-
-            if (contrast === 'dark') {
-                html.addClass('darkCss');
-                html.removeClass('lightCss');
-            } else if (contrast === 'light') {
-                html.addClass('lightCss');
-                html.removeClass('darkCss');
-            }
-
-            userSettings.updateUserData('contrast', contrast);
-            userSettings.updateUserPreferences();
-
-        };
-
-        this.embeddedLinkClick = function (e) {
-
-            var target = $(e.currentTarget),
-                href = target.attr('href'),
-                external = function (href) {
-                    return href.match('^http') !== null;
-                };
-
-            if (external(href)) {
-                e.stopPropagation();
-                _this.stopScrolling();
-                target.attr('target', '_blank');
-            } else {
-                userSettings.loadChapter(href);
-                userSettings.saveLocation();
-            }
-
-        };
-
-        this.orientationHasChanged = function () {
-
-            if (settings.debug) {
-                switch (window.orientation) {
-                case -90:
-                case 90:
-                    console.log('Orientation has changed to landscape');
-                    break;
-                default:
-                    console.log('Orientation has changed to portrait');
-                    break;
-                }
-            }
-
-            setTimeout(function () {
-                layout.adjustFramePosition();
-                if (window.pageYOffset) {
-                    window.scrollTo(0, 0, 1);
-                }
-            }, 1);
-
-            if (reader.isScrolling) {
-                _this.stopScrolling();
-                setTimeout(function () {
-                    _this.startScrolling();
-                }, 500);
-            }
-
-        };
-
-        this.countPages = function () {
-
-            var main = settings.el,
-                frameH = main.height(),
-                page = main.find('#page'),
-                pageH = page.height(),
-                totalPageIndicator = $('.total-page-count'),
-                currentPageIndicator = $('.current-page-count');
-
-            function getCurrentPage() {
-                return Math.round((-(page.offset().top - main.offset().top) / frameH) + 1);
-            }
-
-            totalPageIndicator.html(Math.round(pageH / frameH));
-            currentPageIndicator.html(getCurrentPage());
-
-            if (getCurrentPage() >= Math.round(pageH / frameH)) {
-                if (reader.currentPage === reader.lastPage) {
-                    _this.isBookEnd();
-                } else if (reader.currentPage !== reader.lastPage) {
-                    _this.isChapterEnd();
-                }
-            } else {
-                _this.hasEnded = false;
-            }
-
-            // if (settings.debug) {
-            //     // var intrvl,
-            //     //     ct;
-            //     // intrvl = setInterval(function () {
-            //     //     ct++;
-            //     //     if (page.length) {
-            //     //         clearInterval(intrvl);
-            //     //         console.log('Reading location is -- ' + getCurrentPage());
-            //     //     }
-            //     //     if (ct >= 1000) {
-            //     //         clearInterval(intrvl);
-            //     //         console.log('Reading location timed out.');
-            //     //     }
-            //     // }, 10);
-            // }
-
-        };
+        userSettings.updateUserPreferences();
+      }
+
+      _this.getSkipInterval();
+      _this.startScrolling();
 
     };
 
-    return new Events();
+    this.speedDecrement = function() {
+
+      _this.stopScrolling();
+
+      if (settings.scrollSpeed > 10) {
+        settings.scrollSpeed -= 10;
+
+        if (settings.debug) {
+          console.log('Reading speed decremented to ' + settings.scrollSpeed);
+        }
+
+        userSettings.updateUserPreferences();
+      }
+
+      _this.getSkipInterval();
+      _this.startScrolling();
+
+    };
+
+    this.isChapterEnd = function() {
+
+      _this.stopScrolling();
+
+      if (settings.debug) {
+        console.log('Chapter end');
+      }
+
+    };
+
+    this.hasEnded = false;
+
+    this.isBookEnd = function() {
+
+      // _this.stopScrolling();
+      // _this.hasEnded = true;
+
+      // if (settings.debug) {
+      //     console.log('Book end');
+      // }
+
+    };
+
+    this.fontIncrement = function() {
+
+      if (settings.fSize === settings.maxFontSize()) {
+        return;
+      }
+      var size = settings.fSize < settings.maxFontSize() ? settings.fSize + settings.fSizeIncrement : settings.fSize;
+
+      settings.el.css('font-size', size + '%');
+      userSettings.updateUserData('fSize', size);
+
+      $(document).trigger('updateUi');
+
+    };
+
+    this.fontDecrement = function() {
+
+      if (settings.fSize === settings.minFontSize()) {
+        return;
+      }
+
+      var size = settings.fSize > settings.minFontSize() ? settings.fSize - settings.fSizeIncrement : settings.fSize;
+
+      settings.el.css('font-size', size + '%');
+      userSettings.updateUserData('fSize', size);
+
+      $(document).trigger('updateUi');
+
+    };
+
+    this.contrastToggle = function(e) {
+
+      var contrast = e && e.currentTarget ? $(e.currentTarget).attr('data-contrast') : e,
+        html = $('html');
+
+      if (contrast === 'dark') {
+        html.addClass('darkCss');
+        html.removeClass('lightCss');
+      } else if (contrast === 'light') {
+        html.addClass('lightCss');
+        html.removeClass('darkCss');
+      }
+
+      userSettings.updateUserData('contrast', contrast);
+      userSettings.updateUserPreferences();
+
+    };
+
+    this.embeddedLinkClick = function(e) {
+
+      var target = $(e.currentTarget),
+        href = target.attr('href'),
+        external = function(href) {
+          return href.match('^http') !== null;
+        };
+
+      if (external(href)) {
+        e.stopPropagation();
+        _this.stopScrolling();
+        target.attr('target', '_blank');
+      } else {
+        userSettings.loadChapter(href);
+        userSettings.saveLocation();
+      }
+
+    };
+
+    this.orientationHasChanged = function() {
+
+      if (settings.debug) {
+        switch (window.orientation) {
+          case -90:
+          case 90:
+            console.log('Orientation has changed to landscape');
+            break;
+          default:
+            console.log('Orientation has changed to portrait');
+            break;
+        }
+      }
+
+      setTimeout(function() {
+        layout.adjustFramePosition();
+        if (window.pageYOffset) {
+          window.scrollTo(0, 0, 1);
+        }
+      }, 1);
+
+      if (reader.isScrolling) {
+        _this.stopScrolling();
+        setTimeout(function() {
+          _this.startScrolling();
+        }, 500);
+      }
+
+    };
+
+    this.countPages = function() {
+
+      var main = settings.el,
+        frameH = main.height(),
+        page = main.find('#page'),
+        pageH = page.height(),
+        totalPageIndicator = $('.total-page-count'),
+        currentPageIndicator = $('.current-page-count');
+
+      function getCurrentPage() {
+        return Math.round((-(page.offset().top - main.offset().top) / frameH) + 1);
+      }
+
+      totalPageIndicator.html(Math.round(pageH / frameH));
+      currentPageIndicator.html(getCurrentPage());
+
+      if (getCurrentPage() >= Math.round(pageH / frameH)) {
+        if (reader.currentPage === reader.lastPage) {
+          _this.isBookEnd();
+        } else if (reader.currentPage !== reader.lastPage) {
+          _this.isChapterEnd();
+        }
+      } else {
+        _this.hasEnded = false;
+      }
+
+      // if (settings.debug) {
+      //     // var intrvl,
+      //     //     ct;
+      //     // intrvl = setInterval(function () {
+      //     //     ct++;
+      //     //     if (page.length) {
+      //     //         clearInterval(intrvl);
+      //     //         console.log('Reading location is -- ' + getCurrentPage());
+      //     //     }
+      //     //     if (ct >= 1000) {
+      //     //         clearInterval(intrvl);
+      //     //         console.log('Reading location timed out.');
+      //     //     }
+      //     // }, 10);
+      // }
+
+    };
+
+  };
+
+  return new Events();
 });
 
 define('modules/chapters',['require','modules/settings'],function(require) {
-    var settings = require('modules/settings');
+  var settings = require('modules/settings');
 
-    return new function Chapters() {
+  return new function Chapters() {
 
-        this.panels = settings.chapterSelector;
-        this.currentPos = false;
-        this.articles = [];
+    this.panels = settings.chapterSelector;
+    this.currentPos = false;
+    this.articles = [];
 
-        this.updateState = function() {
-            var _this = this;
-            var currentChapter = _this.getCurrentChapter();
-            if (currentChapter && currentChapter.slug) {
-                var hashUrl = '#/' + settings.bookSlug + '/' + currentChapter.slug
-                window.location.hash = hashUrl;
-                console.log(currentChapter.slug);
-            };
+    this.updateState = function() {
+      var _this = this;
+      var currentChapter = _this.getCurrentChapter();
+      if (currentChapter && currentChapter.slug) {
+        var hashUrl = '#/' + settings.bookSlug + '/' + currentChapter.slug
+        window.location.hash = hashUrl;
+      };
+    };
+
+    this.bindChapters = function() {
+      var _this = this;
+      var ids = $([]).pushStack($('h1,h2,h3,h4,h5,h6'));
+      var scrollTop = $(window).scrollTop();
+      _this.currentPos = false;
+      _this.articles = [];
+      $.map(ids, function(obj, i) {
+        var $obj = $(obj);
+        var articleData = {
+          chapter: i,
+          index: i,
+          name: $obj.text(),
+          slug: $obj.text().replace(/\s+/g, '-').replace(/[.]/g, '').toLowerCase(),
+          posTop: ids[i].offsetTop,
+          firstEl: i === 0 ? true : false,
+          lastEl: i === ids.length - 1 ? true : false,
+          prevEl: i - 1 > -1 ? ids[i - 1] : ids[0],
+          nextEl: i + 1 <= ids.length - 1 ? ids[i + 1] : ids[ids.length - 1],
+          prevPos: i - 1 > -1 ? ids[i - 1].offsetTop : 0,
+          nextPos: i + 1 <= ids.length - 1 ? ids[i + 1].offsetTop : ids[i].offsetTop,
+          currentEl: false
         };
+        $obj.data(articleData);
+        _this.articles.push(articleData);
 
-        this.bindChapters = function() {
-            var _this = this;
-            var ids = $([]).pushStack($('h1,h2,h3,h4,h5,h6'));
-            var scrollTop = $(window).scrollTop();
-            _this.currentPos = false;
-            _this.articles = $.map(ids, function(obj, i) {
+        if ($obj.context.offsetTop >= scrollTop && _this.currentPos === false) {
+          $obj.data().currentEl = true;
+          _this.currentPos = $obj.context.offsetTop;
+        }
 
-                var $obj = $(obj);
+        for (var p in $obj.data()) {
+          if (typeof $obj.data()[p] !== 'object') {
+            $obj.attr('data-' + p, $obj.data()[p]);
+          }
+        }
 
-                $obj.data({
-                    chapter: i,
-                    index: i,
-                    name: $obj.text(),
-                    slug: $obj.text().replace(/\s+/g, '-').replace(/[.]/g, '').toLowerCase(),
-                    posTop: ids[i].offsetTop,
-                    firstEl: i === 0 ? true : false,
-                    lastEl: i === ids.length - 1 ? true : false,
-                    prevEl: i - 1 > -1 ? ids[i - 1] : ids[0],
-                    nextEl: i + 1 <= ids.length - 1 ? ids[i + 1] : ids[ids.length - 1],
-                    prevPos: i - 1 > -1 ? ids[i - 1].offsetTop : 0,
-                    nextPos: i + 1 <= ids.length - 1 ? ids[i + 1].offsetTop : ids[i].offsetTop,
-                    currentEl: false
-                });
-
-                if ($obj.context.offsetTop >= scrollTop && _this.currentPos === false) {
-                    $obj.data().currentEl = true;
-                    _this.currentPos = $obj.context.offsetTop;
-                }
-
-                for (var p in $obj.data()) {
-                    if (typeof $obj.data()[p] !== 'object') {
-                        $obj.attr('data-' + p, $obj.data()[p]);
-                    }
-                }
-
-                return $obj;
-            });
-
-        };
-
-        this.getCurrentChapter = function() {
-
-            var scrollTop = settings.el.scrollTop();
-            var buffer = 200;
-            var currentChapterData;
-
-            var $chs = $(settings.chapterSelector);
-            $chs.each(function() {
-                var $this = $(this);
-                var data = $this.data();
-                var newData = {
-                    posTop: data.posTop,
-                    nextPos: data.nextPos,
-                    index: data.index,
-                    name: data.name,
-                    slug: data.slug
-                };
-                settings.chapterData.push(newData);
-            });
-
-            for (var a = settings.chapterData.length - 1; a >= 0; a--) {
-                var ch = settings.chapterData[a];
-                if (scrollTop >= ch.posTop - buffer && scrollTop < ch.nextPos) { // found current el
-                    currentChapterData = ch;
-                }
-            }
-
-            return currentChapterData;
-
-        };
-
-        this.moveToChapter = function(dir, callback, jump) {
-
-            var _this = this;
-            _this.bindChapters();
-
-            var currentPos = false,
-                scrollTop = settings.el.scrollTop(),
-                firstArticle = false,
-                lastArticle = false,
-                hasScrolled,
-                state;
-
-            var getPromise = function() {
-
-                var dfr = $.Deferred();
-                var len = $(_this.panels).length - 1;
-                $(_this.panels).each(function(i) { // set current el
-                    var $this = $(this);
-                    var buffer = 200;
-                    var thisTop = $this.data().posTop;
-                    var chapEnd = $this.data().nextPos;
-
-                    $this.attr('data-currentel', false).data({
-                        currentEl: false
-                    });
-
-                    if (jump > -1 && parseInt($this.attr('data-index'), 10) === jump) {
-                        $this.attr('data-currentel', true).data({
-                            currentEl: true
-                        });
-                        currentPos = thisTop;
-
-                    } else if (!jump && scrollTop >= thisTop - buffer && scrollTop < chapEnd && currentPos === false) { // found current el
-                        $this.attr('data-currentel', true).data({
-                            currentEl: true
-                        });
-                        currentPos = thisTop;
-
-                    }
-
-                    if (i === len) {
-                        if (currentPos === false) {
-                            if (scrollTop <= thisTop) {
-                                $('[data-firstel="true"]').attr('data-currentel', true).data({
-                                    currentEl: true
-                                });
-                                firstArticle = true;
-                            } else {
-                                $this.attr('data-currentel', true).data({
-                                    currentEl: true
-                                });
-                                lastArticle = true;
-                            }
-                        }
-                        dfr.resolve();
-                    }
-                });
-                return dfr.promise();
-            };
-
-            $.when(getPromise()).done(function() {
-                hasScrolled = false;
-                var scrollAnim = function(pos) {
-                    settings.el.animate({
-                        scrollTop: pos
-                    }, {
-                        complete: function() {
-                            if (!hasScrolled) {
-                                hasScrolled = true;
-                                if (typeof callback === 'function') {
-                                    callback();
-                                }
-                                return;
-                            }
-                        }
-                    });
-                };
-
-                if (firstArticle === true && dir === 'prev') {
-                    scrollAnim(0);
-                } else if (firstArticle === true && dir === 'next') {
-                    scrollAnim($('[data-firstel="true"]').data().posTop);
-                } else if (firstArticle !== true && !dir) {
-                    scrollAnim($('[data-currentel="true"]').data().posTop);
-                } else if (firstArticle !== true) {
-                    scrollAnim($('[data-currentel="true"]').data()[dir + 'Pos']);
-                }
-
-            });
-
-        };
-
-        this.appendNav = function() {
-
-            var _this = this;
-
-            var $prev = $('<a/>', {
-                id: 'chapter-prev',
-                'class': 'chapter-nav',
-                'data-dir': 'prev'
-            }).on({
-                click: function(e) {
-                    e.preventDefault();
-                    _this.moveToChapter($(this).data().dir, function() {
-                        $(document).trigger('updateNavIndicators');
-                        // $(document).trigger('updateState');
-                    });
-                }
-            }).appendTo('body');
-            var $next = $('<a/>', {
-                id: 'chapter-next',
-                'class': 'chapter-nav',
-                'data-dir': 'next'
-            }).on({
-                click: function(e) {
-                    e.preventDefault();
-                    _this.moveToChapter($(this).data().dir, function() {
-                        $(document).trigger('updateNavIndicators');
-                        // $(document).trigger('updateState');
-                    });
-                }
-            });
-
-            $('body').append($prev);
-            $('body').append($next);
-
-        };
+        return $obj;
+      });
 
     };
+
+    this.getCurrentChapter = function() {
+
+      var scrollTop = settings.el.scrollTop();
+      var buffer = 200;
+      var currentChapterData;
+
+      var $chs = $(settings.chapterSelector);
+      $chs.each(function() {
+        var $this = $(this);
+        var data = $this.data();
+        var newData = {
+          posTop: data.posTop,
+          nextPos: data.nextPos,
+          index: data.index,
+          name: data.name,
+          slug: data.slug
+        };
+        settings.chapterData.push(newData);
+      });
+
+      for (var a = settings.chapterData.length - 1; a >= 0; a--) {
+        var ch = settings.chapterData[a];
+        if (scrollTop >= ch.posTop - buffer && scrollTop < ch.nextPos) { // found current el
+          currentChapterData = ch;
+        }
+      }
+
+      return currentChapterData;
+
+    };
+
+    this.getChapterBySlug = function(slug) {
+      var _this = this;
+      for (var i = 0; i < _this.articles.length; i++) {
+        if (_this.articles[i].slug === slug) {
+          return _this.articles[i];
+        };
+      }
+      return false;
+    };
+
+    this.jumpToChapter = function(slug, callback) {
+      var _this = this;
+      var chapter = _this.getChapterBySlug(slug.toString());
+      var buffer, pos, jumpTimer;
+      _this.bindChapters();
+
+      if (chapter) {
+        buffer = 200;
+        pos = parseInt($('[data-slug="' + slug + '"]').attr('data-postop'), 10);
+        settings.el.scrollTop(pos);
+        if (callback && typeof callback === 'function') {
+          callback();
+        }
+      }
+    };
+
+    this.scrollToChapter = function(dir, callback) {
+
+      var _this = this;
+      _this.bindChapters();
+
+      var currentPos = false,
+        scrollTop = settings.el.scrollTop(),
+        firstArticle = false,
+        lastArticle = false,
+        hasScrolled,
+        state;
+
+      var getPromise = function() {
+
+        var dfr = $.Deferred();
+        var len = $(_this.panels).length - 1;
+        $(_this.panels).each(function(i) { // set current el
+          var $this = $(this);
+          var buffer = 200;
+          var thisTop = $this.data().posTop;
+          var chapEnd = $this.data().nextPos;
+
+          $this.attr('data-currentel', false).data({
+            currentEl: false
+          });
+
+          if (scrollTop >= thisTop - buffer && scrollTop < chapEnd && currentPos === false) { // found current el
+            $this.attr('data-currentel', true).data({
+              currentEl: true
+            });
+            currentPos = thisTop;
+          }
+
+          if (i === len) {
+            if (currentPos === false) {
+              if (scrollTop <= thisTop) {
+                $('[data-firstel="true"]').attr('data-currentel', true).data({
+                  currentEl: true
+                });
+                firstArticle = true;
+              } else {
+                $this.attr('data-currentel', true).data({
+                  currentEl: true
+                });
+                lastArticle = true;
+              }
+            }
+            dfr.resolve();
+          }
+        });
+        return dfr.promise();
+      };
+
+      $.when(getPromise()).done(function() {
+        hasScrolled = false;
+        var scrollAnim = function(pos) {
+          settings.el.animate({
+            scrollTop: pos
+          }, {
+            complete: function() {
+              if (!hasScrolled) {
+                hasScrolled = true;
+                if (typeof callback === 'function') {
+                  callback();
+                }
+                return;
+              }
+            }
+          });
+        };
+
+        if (firstArticle === true && dir === 'prev') {
+          scrollAnim(0);
+        } else if (firstArticle === true && dir === 'next') {
+          scrollAnim($('[data-firstel="true"]').data().posTop);
+        } else if (firstArticle !== true && !dir) {
+          scrollAnim($('[data-currentel="true"]').data().posTop);
+        } else if (firstArticle !== true) {
+          scrollAnim($('[data-currentel="true"]').data()[dir + 'Pos']);
+        }
+
+      });
+
+    };
+
+    this.appendNav = function() {
+
+      var _this = this;
+
+      var $prev = $('<a/>', {
+        id: 'chapter-prev',
+        'class': 'chapter-nav',
+        'data-dir': 'prev'
+      }).on({
+        click: function(e) {
+          e.preventDefault();
+          _this.scrollToChapter($(this).data().dir, function() {
+            $(document).trigger('updateNavIndicators');
+          });
+        }
+      }).appendTo('body');
+      var $next = $('<a/>', {
+        id: 'chapter-next',
+        'class': 'chapter-nav',
+        'data-dir': 'next'
+      }).on({
+        click: function(e) {
+          e.preventDefault();
+          _this.scrollToChapter($(this).data().dir, function() {
+            $(document).trigger('updateNavIndicators');
+          });
+        }
+      });
+
+      $('body').append($prev);
+      $('body').append($next);
+
+    };
+
+  };
 });
 
 /*!
@@ -1302,183 +1319,183 @@ $.fn.hoverIntent = function(handlerIn, handlerOut, selector) {
 
 define("modules/../../vendor/hover-intent", function(){});
 
-define('modules/hover',['require','modules/environment','modules/reader','modules/events','modules/settings','../../vendor/hover-intent'],function (require) {
-    var environment = require('modules/environment');
-    var reader      = require('modules/reader');
-    var events      = require('modules/events');
-    var settings    = require('modules/settings');
-    var hoverIntent = require('../../vendor/hover-intent');
+define('modules/hover',['require','modules/environment','modules/reader','modules/events','modules/settings','../../vendor/hover-intent'],function(require) {
+  var environment = require('modules/environment');
+  var reader = require('modules/reader');
+  var events = require('modules/events');
+  var settings = require('modules/settings');
+  var hoverIntent = require('../../vendor/hover-intent');
 
-    var Hover = function () {
+  var Hover = function() {
 
-        if (environment.isMobile()) {
-            return;
+    if (environment.isMobile()) {
+      return;
+    }
+
+    var wasScrolling;
+    var isManuallyScrolling;
+    var scrollCheckInterval = 200;
+
+    settings.el.hoverIntent({
+      over: function() {
+        wasScrolling = reader.isScrolling;
+        if (!$('show-scroll-bar').length) {
+          settings.el.addClass('show-scroll-bar');
         }
+        if (wasScrolling) {
+          events.stopScrolling();
+        }
+        window.clearInterval(isManuallyScrolling);
+        isManuallyScrolling = setInterval(function() {
+          $(document).trigger('updateNavIndicators');
+        }, scrollCheckInterval);
+      },
+      out: function() {
+        if ($('.show-scroll-bar').length && !$('#userInput').is(':focus')) {
+          settings.el.removeClass('show-scroll-bar');
+        }
+        if (wasScrolling) {
+          events.startScrolling();
+        }
+        window.clearInterval(isManuallyScrolling);
+      },
+      interval: 200,
+      sensitivity: 1,
+      timeout: 0
+    });
 
-        var wasScrolling;
-        var isManuallyScrolling;
-        var scrollCheckInterval = 200;
+  };
 
-        settings.el.hoverIntent({
-            over: function () {
-                wasScrolling = reader.isScrolling;
-                if (!$('show-scroll-bar').length) {
-                    settings.el.addClass('show-scroll-bar');
-                }
-                if (wasScrolling) {
-                    events.stopScrolling();
-                }
-                window.clearInterval(isManuallyScrolling);
-                isManuallyScrolling = setInterval(function () {
-                    $(document).trigger('updateNavIndicators');
-                }, scrollCheckInterval);
-            },
-            out: function () {
-                if ($('.show-scroll-bar').length && !$('#userInput').is(':focus')) {
-                    settings.el.removeClass('show-scroll-bar');
-                }
-                if (wasScrolling) {
-                    events.startScrolling();
-                }
-                window.clearInterval(isManuallyScrolling);
-            },
-            interval: 200,
-            sensitivity: 1,
-            timeout: 0
-        });
-
-    };
-
-    return new Hover();
+  return new Hover();
 
 });
 
-define('modules/search',['require','modules/environment','modules/settings'],function (require) {
+define('modules/search',['require','modules/environment','modules/settings'],function(require) {
 
-    var environment = require('modules/environment');
-    var settings    = require('modules/settings');
+  var environment = require('modules/environment');
+  var settings = require('modules/settings');
 
-    return (function Search() {
-        var $searchWrapper = $('.search-wrapper'),
-            $input = $('#userInput'),
-            $searchBtn = $('#search'),
-            $closeBtn = $('#search-close');
+  return (function Search() {
+    var $searchWrapper = $('.search-wrapper'),
+      $input = $('#userInput'),
+      $searchBtn = $('#search'),
+      $closeBtn = $('#search-close');
 
-        function addRemoveSearchBar() {
-            if (environment.isMobile() || $('.mobile').length) {
-                $searchWrapper.hide();
-            } else {
-                $searchWrapper.show();
-            }
+    function addRemoveSearchBar() {
+      if (environment.isMobile() || $('.mobile').length) {
+        $searchWrapper.hide();
+      } else {
+        $searchWrapper.show();
+      }
+    }
+
+    function doSearch(text) {
+      var sel;
+      if (window.find && window.getSelection) {
+        sel = window.getSelection();
+        if (sel.rangeCount > 0) {
+          sel.collapseToEnd();
         }
-
-        function doSearch(text) {
-            var sel;
-            if (window.find && window.getSelection) {
-                sel = window.getSelection();
-                if (sel.rangeCount > 0) {
-                    sel.collapseToEnd();
-                }
-                window.find(text, 0, 0, 1);
-            } else if (document.selection && document.body.createTextRange) {
-                sel = document.selection;
-                var textRange;
-                if (sel.type === 'Text') {
-                    textRange = sel.createRange();
-                    textRange.collapse(false);
-                } else {
-                    textRange = document.body.createTextRange();
-                    textRange.collapse(true);
-                }
-                if (textRange.findText(text)) {
-                    textRange.select();
-                }
-            }
-            if (!$(sel.anchorNode.parentElement).is($input)) {
-                settings.el.scrollTop(sel.anchorNode.parentElement.offsetTop);
-            }
+        window.find(text, 0, 0, 1);
+      } else if (document.selection && document.body.createTextRange) {
+        sel = document.selection;
+        var textRange;
+        if (sel.type === 'Text') {
+          textRange = sel.createRange();
+          textRange.collapse(false);
+        } else {
+          textRange = document.body.createTextRange();
+          textRange.collapse(true);
         }
+        if (textRange.findText(text)) {
+          textRange.select();
+        }
+      }
+      if (!$(sel.anchorNode.parentElement).is($input)) {
+        settings.el.scrollTop(sel.anchorNode.parentElement.offsetTop);
+      }
+    }
 
-        $input.on({
-            mouseenter: function () {
-                $input
-                    .focus()
-                    .css({
-                        opacity: 1
-                    });
-                $closeBtn.css({
-                    opacity: 1
-                });
-            },
-            focus: function () {
-                if (!$('.show-scroll-bar').length) {
-                    settings.el.addClass('show-scroll-bar');
-                }
-            },
-            blur: function () {
-                if ($input.text() === '') {
-                    setTimeout(function () {
-                        $input.css({
-                            opacity: 0
-                        });
-                        $closeBtn.css({
-                            opacity: 0
-                        });
-                        if ($('.show-scroll-bar').length) {
-                            settings.el.removeClass('show-scroll-bar');
-                        }
-                    }, 1000);
-                }
-            }
+    $input.on({
+      mouseenter: function() {
+        $input
+          .focus()
+          .css({
+            opacity: 1
+          });
+        $closeBtn.css({
+          opacity: 1
         });
-
-        $searchBtn.on({
-            mouseenter: function () {
-                $input
-                    .focus()
-                    .css({
-                        opacity: 1
-                    });
-                $closeBtn.css({
-                    opacity: 1
-                });
-            },
-            click: function (e) {
-                e.preventDefault();
-                var term = $input.text();
-                doSearch(term);
-            }
-        });
-
-        $closeBtn.on('click', function (e) {
-            e.preventDefault();
-            $input
-                .blur()
-                .css({
-                    opacity: 0
-                });
-            $closeBtn.css({
-                opacity: 0
+      },
+      focus: function() {
+        if (!$('.show-scroll-bar').length) {
+          settings.el.addClass('show-scroll-bar');
+        }
+      },
+      blur: function() {
+        if ($input.text() === '') {
+          setTimeout(function() {
+            $input.css({
+              opacity: 0
             });
-            $input.text('');
-        });
-
-        $(window).resize(function () {
-            addRemoveSearchBar();
-        });
-
-        $(document).on('keydown', function(e){
-            if (e.which === 13) {
-                e.preventDefault();
-                $searchBtn.triggerHandler('click');
-            } else if (e.which === 27) {
-                e.preventDefault();
-                $closeBtn.triggerHandler('click');
+            $closeBtn.css({
+              opacity: 0
+            });
+            if ($('.show-scroll-bar').length) {
+              settings.el.removeClass('show-scroll-bar');
             }
-        });
-        addRemoveSearchBar();
+          }, 1000);
+        }
+      }
+    });
 
-    })();
+    $searchBtn.on({
+      mouseenter: function() {
+        $input
+          .focus()
+          .css({
+            opacity: 1
+          });
+        $closeBtn.css({
+          opacity: 1
+        });
+      },
+      click: function(e) {
+        e.preventDefault();
+        var term = $input.text();
+        doSearch(term);
+      }
+    });
+
+    $closeBtn.on('click', function(e) {
+      e.preventDefault();
+      $input
+        .blur()
+        .css({
+          opacity: 0
+        });
+      $closeBtn.css({
+        opacity: 0
+      });
+      $input.text('');
+    });
+
+    $(window).resize(function() {
+      addRemoveSearchBar();
+    });
+
+    $(document).on('keydown', function(e) {
+      if (e.which === 13) {
+        e.preventDefault();
+        $searchBtn.triggerHandler('click');
+      } else if (e.which === 27) {
+        e.preventDefault();
+        $closeBtn.triggerHandler('click');
+      }
+    });
+    addRemoveSearchBar();
+
+  })();
 });
 
 /*! Hammer.JS - v1.1.0dev - 2014-04-14
@@ -3644,132 +3661,132 @@ define('modules/mobile',['require','modules/reader','modules/settings','modules/
       wasHolding = false,
       touchTimer,
       options = {
-          behavior: {
-              doubleTapInterval: 200,
-              contentZooming: 'none',
-              touchAction: 'none',
-              touchCallout: 'none',
-              userDrag: 'none'
-          },
-          dragLockToAxis: true,
-          dragBlockHorizontal: true
+        behavior: {
+          doubleTapInterval: 200,
+          contentZooming: 'none',
+          touchAction: 'none',
+          touchCallout: 'none',
+          userDrag: 'none'
+        },
+        dragLockToAxis: true,
+        dragBlockHorizontal: true
       },
       hammer = new Hammer(el, options);
 
-    hammer.on('touch release pinchin pinchout dragend doubletap tap', function (e) {
+    hammer.on('touch release pinchin pinchout dragend doubletap tap', function(e) {
 
-        console.log(e);
+      console.log(e);
 
-        var target = $(e.target);
+      var target = $(e.target);
 
-        doubleTapped = false;
-        clearTimeout(touchTimer);
+      doubleTapped = false;
+      clearTimeout(touchTimer);
 
-        if (!target.is('.control-btn') && !target.is('.chapter-nav') && !target.is(frame) && !target.parents().is(frame)) {
+      if (!target.is('.control-btn') && !target.is('.chapter-nav') && !target.is(frame) && !target.parents().is(frame)) {
 
-            e.preventDefault();
+        e.preventDefault();
+        e.stopPropagation();
+        e.gesture.preventDefault();
+        e.gesture.stopPropagation();
+        e.gesture.stopDetect();
+
+      } else if (target.is(frame) || target.parents().is(frame)) {
+
+        if (e.type === 'doubletap') {
+
+          doubleTapped = true;
+
+          e.stopPropagation();
+          e.gesture.stopPropagation();
+
+          wasScrolling = reader.isScrolling;
+
+          if (wasScrolling) {
+            events.stopScrolling();
+          } else {
+            events.startScrolling();
+          }
+
+        } else if (e.type === 'touch' && e.gesture.touches.length < 2) {
+
+          touchTimer = setTimeout(function() {
             e.stopPropagation();
-            e.gesture.preventDefault();
             e.gesture.stopPropagation();
-            e.gesture.stopDetect();
 
-        } else if (target.is(frame) || target.parents().is(frame)) {
+            wasScrolling = reader.isScrolling;
+            wasHolding = true;
 
-            if (e.type === 'doubletap') {
+            if (wasScrolling && !doubleTapped) {
+              events.stopScrolling();
+            }
+          }, 150);
 
-                doubleTapped = true;
+        } else if (e.type === 'release') {
 
-                e.stopPropagation();
-                e.gesture.stopPropagation();
+          if (wasHolding) {
+            e.gesture.stopPropagation();
+            events.countPages();
 
-                wasScrolling = reader.isScrolling;
-
-                if (wasScrolling) {
-                    events.stopScrolling();
-                } else {
-                    events.startScrolling();
-                }
-
-            } else if (e.type === 'touch' && e.gesture.touches.length < 2) {
-
-                touchTimer = setTimeout(function () {
-                    e.stopPropagation();
-                    e.gesture.stopPropagation();
-
-                    wasScrolling = reader.isScrolling;
-                    wasHolding = true;
-
-                    if (wasScrolling && !doubleTapped) {
-                        events.stopScrolling();
-                    }
-                }, 150);
-
-            } else if (e.type === 'release') {
-
-                if (wasHolding) {
-                    e.gesture.stopPropagation();
-                    events.countPages();
-
-                    if (wasScrolling && wasHolding) {
-                        setTimeout(function () {
-                            wasHolding = false;
-                            events.startScrolling();
-                        }, 200);
-
-                    }
-                }
-
-            } else if (e.type === 'pinchin') {
-
-                console.log('pinchin');
-
-                e.stopPropagation();
-                e.gesture.stopPropagation();
-
-                events.fontDecrement();
-                if (wasScrolling) {
-                    events.startScrolling();
-                }
-
-                e.gesture.stopDetect();
-
-            } else if (e.type === 'pinchout') {
-
-                e.stopPropagation();
-                e.gesture.stopPropagation();
-
-                events.fontIncrement();
-                if (wasScrolling) {
-                    events.startScrolling();
-                }
-
-                e.gesture.stopDetect();
-
-            } else if (e.type === 'dragend' && e.gesture.touches.length < 2) {
-
-                e.preventDefault();
-                e.stopPropagation();
-                e.gesture.preventDefault();
-                e.gesture.stopPropagation();
-
-                if (e.gesture.distance >= 70 && e.gesture.direction === 'right') {
-
-                    e.gesture.stopDetect();
-                    events.speedIncrement();
-
-                } else if (e.gesture.distance >= 70 && e.gesture.direction === 'left') {
-
-                    e.gesture.stopDetect();
-                    events.speedDecrement();
-
-                }
+            if (wasScrolling && wasHolding) {
+              setTimeout(function() {
+                wasHolding = false;
+                events.startScrolling();
+              }, 200);
 
             }
+          }
 
-        } else if (target.parents().is(controls)) {
-            e.stopPropagation();
-            e.gesture.stopPropagation();
+        } else if (e.type === 'pinchin') {
+
+          console.log('pinchin');
+
+          e.stopPropagation();
+          e.gesture.stopPropagation();
+
+          events.fontDecrement();
+          if (wasScrolling) {
+            events.startScrolling();
+          }
+
+          e.gesture.stopDetect();
+
+        } else if (e.type === 'pinchout') {
+
+          e.stopPropagation();
+          e.gesture.stopPropagation();
+
+          events.fontIncrement();
+          if (wasScrolling) {
+            events.startScrolling();
+          }
+
+          e.gesture.stopDetect();
+
+        } else if (e.type === 'dragend' && e.gesture.touches.length < 2) {
+
+          e.preventDefault();
+          e.stopPropagation();
+          e.gesture.preventDefault();
+          e.gesture.stopPropagation();
+
+          if (e.gesture.distance >= 70 && e.gesture.direction === 'right') {
+
+            e.gesture.stopDetect();
+            events.speedIncrement();
+
+          } else if (e.gesture.distance >= 70 && e.gesture.direction === 'left') {
+
+            e.gesture.stopDetect();
+            events.speedDecrement();
+
+          }
+
         }
+
+      } else if (target.parents().is(controls)) {
+        e.stopPropagation();
+        e.gesture.stopPropagation();
+      }
 
     });
 
@@ -3860,9 +3877,20 @@ define('modules/app',['require','modules/environment','modules/reader','modules/
         events.countPages();
       });
 
+      var uiHasInit = false;
+      $(document).on('uiReady', function() {
+        uiHasInit = true;
+        var slug = window.location.hash.split('/')[2];
+        setTimeout(function(){
+          chapters.jumpToChapter(slug);
+        }, 0);
+      });
+
       $(document).on('updateNavIndicators', function() {
         events.countPages();
-        chapters.updateState();
+        if (uiHasInit) {
+          chapters.updateState();
+        }
       });
 
       $(document).on('updateState', function() {
@@ -3925,7 +3953,6 @@ define('modules/app',['require','modules/environment','modules/reader','modules/
               window.location.href = window.location.href;
             } else if (localStorage && localStorage.refreshed) {
               localStorage.removeItem('refreshed');
-              console.log('404\'d');
               window.location.href = '/404';
               return false;
             }
@@ -4004,6 +4031,8 @@ define('modules/app',['require','modules/environment','modules/reader','modules/
           settings.el.append(shadows.shadowTop);
           settings.el.append(shadows.shadowBottom);
 
+          $(document).trigger('uiReady');
+
         });
 
       });
@@ -4015,10 +4044,10 @@ define('modules/app',['require','modules/environment','modules/reader','modules/
 });
 
 require.config({
-  baseUrl:'./'
+  baseUrl: './'
 });
 
-require(['modules/app'], function (App) {
+require(['modules/app'], function(App) {
 
   var app = new App({
     dev: false,

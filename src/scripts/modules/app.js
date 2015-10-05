@@ -81,9 +81,20 @@ define(function(require) {
         events.countPages();
       });
 
+      var uiHasInit = false;
+      $(document).on('uiReady', function() {
+        uiHasInit = true;
+        var slug = window.location.hash.split('/')[2];
+        setTimeout(function(){
+          chapters.jumpToChapter(slug);
+        }, 0);
+      });
+
       $(document).on('updateNavIndicators', function() {
         events.countPages();
-        chapters.updateState();
+        if (uiHasInit) {
+          chapters.updateState();
+        }
       });
 
       $(document).on('updateState', function() {
@@ -101,7 +112,6 @@ define(function(require) {
               click: function(e) {
                 e.preventDefault();
                 userSettings.saveLocation();
-                // load new chapter fn
                 userSettings.goToPreviousLocation();
               }
             })
@@ -146,7 +156,6 @@ define(function(require) {
               window.location.href = window.location.href;
             } else if (localStorage && localStorage.refreshed) {
               localStorage.removeItem('refreshed');
-              console.log('404\'d');
               window.location.href = '/404';
               return false;
             }
@@ -224,6 +233,8 @@ define(function(require) {
 
           settings.el.append(shadows.shadowTop);
           settings.el.append(shadows.shadowBottom);
+
+          $(document).trigger('uiReady');
 
         });
 

@@ -13,7 +13,6 @@ define(function(require) {
       if (currentChapter && currentChapter.slug) {
         var hashUrl = '#/' + settings.bookSlug + '/' + currentChapter.slug
         window.location.hash = hashUrl;
-        console.log(currentChapter.slug);
       };
     };
 
@@ -22,11 +21,10 @@ define(function(require) {
       var ids = $([]).pushStack($('h1,h2,h3,h4,h5,h6'));
       var scrollTop = $(window).scrollTop();
       _this.currentPos = false;
-      _this.articles = $.map(ids, function(obj, i) {
-
+      _this.articles = [];
+      $.map(ids, function(obj, i) {
         var $obj = $(obj);
-
-        $obj.data({
+        var articleData = {
           chapter: i,
           index: i,
           name: $obj.text(),
@@ -39,7 +37,9 @@ define(function(require) {
           prevPos: i - 1 > -1 ? ids[i - 1].offsetTop : 0,
           nextPos: i + 1 <= ids.length - 1 ? ids[i + 1].offsetTop : ids[i].offsetTop,
           currentEl: false
-        });
+        };
+        $obj.data(articleData);
+        _this.articles.push(articleData);
 
         if ($obj.context.offsetTop >= scrollTop && _this.currentPos === false) {
           $obj.data().currentEl = true;
@@ -88,7 +88,33 @@ define(function(require) {
 
     };
 
-    this.moveToChapter = function(dir, callback, jump) {
+    this.getChapterBySlug = function(slug) {
+      var _this = this;
+      for (var i = 0; i < _this.articles.length; i++) {
+        if (_this.articles[i].slug === slug) {
+          return _this.articles[i];
+        };
+      }
+      return false;
+    };
+
+    this.jumpToChapter = function(slug, callback) {
+      var _this = this;
+      var chapter = _this.getChapterBySlug(slug.toString());
+      var buffer, pos, jumpTimer;
+      _this.bindChapters();
+
+      if (chapter) {
+        buffer = 200;
+        pos = parseInt($('[data-slug="' + slug + '"]').attr('data-postop'), 10);
+        settings.el.scrollTop(pos);
+        if (callback && typeof callback === 'function') {
+          callback();
+        }
+      }
+    };
+
+    this.scrollToChapter = function(dir, callback) {
 
       var _this = this;
       _this.bindChapters();
@@ -114,18 +140,11 @@ define(function(require) {
             currentEl: false
           });
 
-          if (jump > -1 && parseInt($this.attr('data-index'), 10) === jump) {
+          if (scrollTop >= thisTop - buffer && scrollTop < chapEnd && currentPos === false) { // found current el
             $this.attr('data-currentel', true).data({
               currentEl: true
             });
             currentPos = thisTop;
-
-          } else if (!jump && scrollTop >= thisTop - buffer && scrollTop < chapEnd && currentPos === false) { // found current el
-            $this.attr('data-currentel', true).data({
-              currentEl: true
-            });
-            currentPos = thisTop;
-
           }
 
           if (i === len) {
@@ -191,9 +210,8 @@ define(function(require) {
       }).on({
         click: function(e) {
           e.preventDefault();
-          _this.moveToChapter($(this).data().dir, function() {
+          _this.scrollToChapter($(this).data().dir, function() {
             $(document).trigger('updateNavIndicators');
-            // $(document).trigger('updateState');
           });
         }
       }).appendTo('body');
@@ -204,9 +222,8 @@ define(function(require) {
       }).on({
         click: function(e) {
           e.preventDefault();
-          _this.moveToChapter($(this).data().dir, function() {
+          _this.scrollToChapter($(this).data().dir, function() {
             $(document).trigger('updateNavIndicators');
-            // $(document).trigger('updateState');
           });
         }
       });
