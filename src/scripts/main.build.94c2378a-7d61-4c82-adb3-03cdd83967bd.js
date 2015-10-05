@@ -3908,7 +3908,6 @@ define('modules/app',['require','modules/environment','modules/reader','modules/
               click: function(e) {
                 e.preventDefault();
                 userSettings.saveLocation();
-                // load new chapter fn
                 userSettings.goToPreviousLocation();
               }
             })
@@ -4051,12 +4050,10 @@ require(['modules/app'], function(App) {
 
   var app = new App({
     dev: false,
-    jsonPath: 'http://localhost:8080/data/bookData.json',
-    // jsonPath: '/wp-content/themes/Fiktion/data/bookData.json',
-    debug: true,
+    jsonPath: window.location.href.match(/^http:\/\/local/) !== null ? 'http://localhost:8080/data/bookData.json' : '/wp-content/themes/Fiktion/data/bookData.json',
+    debug: false,
     clearStorage: false,
-    scrollSpeed: 10,
-    bookSlug: 'test-book'
+    scrollSpeed: 10
   });
 
   $('html').removeClass('no-js').addClass('cursor js');
