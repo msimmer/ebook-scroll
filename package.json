@@ -1,6 +1,6 @@
 {
-  "name": "rjs",
-  "version": "0.0.0",
+  "name": "ebook-scroll",
+  "version": "0.0.1",
   "dependencies": {},
   "devDependencies": {
     "del": "^1.1.1",
