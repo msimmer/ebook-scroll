@@ -967,7 +967,9 @@ define('modules/chapters',['require','modules/settings'],function(require) {
           chapter: i,
           index: i,
           name: $obj.text(),
-          slug: $obj.text().replace(/\s+/g, '-').replace(/[.]/g, '').toLowerCase(),
+          slug: $obj.text()
+            .replace(/\s+/g, '-')
+            .replace(/[.,\/!@#$%^&*()+=?<>~`]/g, '_').toLowerCase(),
           posTop: ids[i].offsetTop,
           firstEl: i === 0 ? true : false,
           lastEl: i === ids.length - 1 ? true : false,
@@ -3883,7 +3885,7 @@ define('modules/app',['require','modules/environment','modules/reader','modules/
         var slug = window.location.hash.split('/')[2];
         var jumpTimer;
         clearTimeout(jumpTimer);
-        jumpTimer = setTimeout(function(){
+        jumpTimer = setTimeout(function() {
           if (slug) {
             chapters.jumpToChapter(slug);
           }
@@ -3998,6 +4000,7 @@ define('modules/app',['require','modules/environment','modules/reader','modules/
               html: globalStore.html
             })
           );
+        }).then(function() { // html is added to dom, styles have been applied
 
           userSettings.getLocation();
           userSettings.getUserPreferences();
@@ -4017,10 +4020,8 @@ define('modules/app',['require','modules/environment','modules/reader','modules/
             }, 50);
           });
 
-          if ($([]).pushStack($('h1,h2,h3,h4,h5,h6')).length > 0) {
-            chapters.bindChapters();
+          if ($('h1,h2,h3,h4,h5,h6').length) {
             chapters.appendNav();
-
             $('.chapter-nav').animate({
               opacity: 1
             }, 200);
@@ -4035,7 +4036,6 @@ define('modules/app',['require','modules/environment','modules/reader','modules/
           settings.el.append(shadows.shadowBottom);
 
           $(document).trigger('uiReady');
-
         });
 
       });

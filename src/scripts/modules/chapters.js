@@ -28,7 +28,9 @@ define(function(require) {
           chapter: i,
           index: i,
           name: $obj.text(),
-          slug: $obj.text().replace(/\s+/g, '-').replace(/[.]/g, '').toLowerCase(),
+          slug: $obj.text()
+            .replace(/\s+/g, '-')
+            .replace(/[.,\/!@#$%^&*()+=?<>~`]/g, '_').toLowerCase(),
           posTop: ids[i].offsetTop,
           firstEl: i === 0 ? true : false,
           lastEl: i === ids.length - 1 ? true : false,

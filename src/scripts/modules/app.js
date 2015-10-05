@@ -87,7 +87,7 @@ define(function(require) {
         var slug = window.location.hash.split('/')[2];
         var jumpTimer;
         clearTimeout(jumpTimer);
-        jumpTimer = setTimeout(function(){
+        jumpTimer = setTimeout(function() {
           if (slug) {
             chapters.jumpToChapter(slug);
           }
@@ -202,6 +202,7 @@ define(function(require) {
               html: globalStore.html
             })
           );
+        }).then(function() { // html is added to dom, styles have been applied
 
           userSettings.getLocation();
           userSettings.getUserPreferences();
@@ -221,10 +222,8 @@ define(function(require) {
             }, 50);
           });
 
-          if ($([]).pushStack($('h1,h2,h3,h4,h5,h6')).length > 0) {
-            chapters.bindChapters();
+          if ($('h1,h2,h3,h4,h5,h6').length) {
             chapters.appendNav();
-
             $('.chapter-nav').animate({
               opacity: 1
             }, 200);
@@ -239,7 +238,6 @@ define(function(require) {
           settings.el.append(shadows.shadowBottom);
 
           $(document).trigger('uiReady');
-
         });
 
       });
