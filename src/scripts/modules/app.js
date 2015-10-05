@@ -202,16 +202,23 @@ define(function(require) {
               html: globalStore.html
             })
           );
+
         }).then(function() { // html is added to dom, styles have been applied
 
           userSettings.getLocation();
           userSettings.getUserPreferences();
           userSettings.goToPreviousLocation();
           layout.setStyles();
-
-          // requires elements in DOM
+          layout.adjustFramePosition();
+          events.contrastToggle(settings.contrast);
           events.countPages();
           events.cursorListener();
+
+          var shadows = layout.renderShadows();
+
+          settings.el.append(shadows.shadowTop);
+          settings.el.append(shadows.shadowBottom);
+
 
           $('.controls, .runner-help, .runner-page-count, #page, .search-wrapper').animate({
             opacity: 1
@@ -229,15 +236,10 @@ define(function(require) {
             }, 200);
           }
 
-          layout.adjustFramePosition();
-          events.contrastToggle(settings.contrast);
+          $.when(chapters.bindChapters()).done(function() {
+            $(document).trigger('uiReady');
+          });
 
-          var shadows = layout.renderShadows();
-
-          settings.el.append(shadows.shadowTop);
-          settings.el.append(shadows.shadowBottom);
-
-          $(document).trigger('uiReady');
         });
 
       });

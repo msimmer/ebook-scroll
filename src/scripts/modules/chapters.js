@@ -17,6 +17,7 @@ define(function(require) {
     };
 
     this.bindChapters = function() {
+      var dfr = $.Deferred();
       var _this = this;
       var ids = $([]).pushStack($('h1,h2,h3,h4,h5,h6'));
       var scrollTop = $(window).scrollTop();
@@ -53,9 +54,12 @@ define(function(require) {
             $obj.attr('data-' + p, $obj.data()[p]);
           }
         }
-
-        return $obj;
+        if (i === ids.length - 1) {
+          dfr.resolve();
+        }
       });
+
+      return dfr.promise();
 
     };
 
@@ -101,19 +105,21 @@ define(function(require) {
     };
 
     this.jumpToChapter = function(slug, callback) {
-      var _this = this;
-      var chapter = _this.getChapterBySlug(slug.toString());
-      var buffer, pos, jumpTimer;
-      _this.bindChapters();
 
-      if (chapter) {
-        buffer = 200;
-        pos = parseInt($('[data-slug="' + slug + '"]').attr('data-postop'), 10);
-        settings.el.scrollTop(pos);
-        if (callback && typeof callback === 'function') {
-          callback();
+      var _this = this;
+
+      $.when(_this.bindChapters()).done(function() {
+        var chapter = _this.getChapterBySlug(slug.toString());
+        var buffer, pos, jumpTimer;
+        if (chapter) {
+          buffer = 200;
+          pos = parseInt($('[data-slug="' + slug + '"]').attr('data-postop'), 10);
+          settings.el.scrollTop(pos);
+          if (callback && typeof callback === 'function') {
+            callback();
+          }
         }
-      }
+      });
     };
 
     this.scrollToChapter = function(dir, callback) {

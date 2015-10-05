@@ -956,6 +956,7 @@ define('modules/chapters',['require','modules/settings'],function(require) {
     };
 
     this.bindChapters = function() {
+      var dfr = $.Deferred();
       var _this = this;
       var ids = $([]).pushStack($('h1,h2,h3,h4,h5,h6'));
       var scrollTop = $(window).scrollTop();
@@ -992,9 +993,12 @@ define('modules/chapters',['require','modules/settings'],function(require) {
             $obj.attr('data-' + p, $obj.data()[p]);
           }
         }
-
-        return $obj;
+        if (i === ids.length - 1) {
+          dfr.resolve();
+        }
       });
+
+      return dfr.promise();
 
     };
 
@@ -1040,19 +1044,21 @@ define('modules/chapters',['require','modules/settings'],function(require) {
     };
 
     this.jumpToChapter = function(slug, callback) {
-      var _this = this;
-      var chapter = _this.getChapterBySlug(slug.toString());
-      var buffer, pos, jumpTimer;
-      _this.bindChapters();
 
-      if (chapter) {
-        buffer = 200;
-        pos = parseInt($('[data-slug="' + slug + '"]').attr('data-postop'), 10);
-        settings.el.scrollTop(pos);
-        if (callback && typeof callback === 'function') {
-          callback();
+      var _this = this;
+
+      $.when(_this.bindChapters()).done(function() {
+        var chapter = _this.getChapterBySlug(slug.toString());
+        var buffer, pos, jumpTimer;
+        if (chapter) {
+          buffer = 200;
+          pos = parseInt($('[data-slug="' + slug + '"]').attr('data-postop'), 10);
+          settings.el.scrollTop(pos);
+          if (callback && typeof callback === 'function') {
+            callback();
+          }
         }
-      }
+      });
     };
 
     this.scrollToChapter = function(dir, callback) {
@@ -4000,16 +4006,23 @@ define('modules/app',['require','modules/environment','modules/reader','modules/
               html: globalStore.html
             })
           );
+
         }).then(function() { // html is added to dom, styles have been applied
 
           userSettings.getLocation();
           userSettings.getUserPreferences();
           userSettings.goToPreviousLocation();
           layout.setStyles();
-
-          // requires elements in DOM
+          layout.adjustFramePosition();
+          events.contrastToggle(settings.contrast);
           events.countPages();
           events.cursorListener();
+
+          var shadows = layout.renderShadows();
+
+          settings.el.append(shadows.shadowTop);
+          settings.el.append(shadows.shadowBottom);
+
 
           $('.controls, .runner-help, .runner-page-count, #page, .search-wrapper').animate({
             opacity: 1
@@ -4027,15 +4040,10 @@ define('modules/app',['require','modules/environment','modules/reader','modules/
             }, 200);
           }
 
-          layout.adjustFramePosition();
-          events.contrastToggle(settings.contrast);
+          $.when(chapters.bindChapters()).done(function() {
+            $(document).trigger('uiReady');
+          });
 
-          var shadows = layout.renderShadows();
-
-          settings.el.append(shadows.shadowTop);
-          settings.el.append(shadows.shadowBottom);
-
-          $(document).trigger('uiReady');
         });
 
       });
