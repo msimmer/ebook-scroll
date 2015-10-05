@@ -13,7 +13,7 @@ var connect = require('gulp-connect');
 var inject = require('gulp-inject');
 
 var production = false;
-var rev = '94c2378a-7d61-4c82-adb3-03cdd83967bd';
+var rev = '4322051a-c267-463c-9541-bc2ba1d3334a';
 var dirName = function() {
   return production === true ? 'dist' : 'src';
 };

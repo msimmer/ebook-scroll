@@ -3881,8 +3881,12 @@ define('modules/app',['require','modules/environment','modules/reader','modules/
       $(document).on('uiReady', function() {
         uiHasInit = true;
         var slug = window.location.hash.split('/')[2];
-        setTimeout(function(){
-          chapters.jumpToChapter(slug);
+        var jumpTimer;
+        clearTimeout(jumpTimer);
+        jumpTimer = setTimeout(function(){
+          if (slug) {
+            chapters.jumpToChapter(slug);
+          }
         }, 0);
       });
 
