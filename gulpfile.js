@@ -21,6 +21,7 @@ var dirName = function() {
 gulp.task('styles', function() {
   var sassStyle = production === true ? 'compressed' : 'expanded';
   var dir = dirName();
+  console.log(dir);
   return gulp.src('src/styles/scss/main.scss')
     .pipe(sass({
       outputStyle: sassStyle,
