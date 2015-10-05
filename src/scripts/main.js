@@ -1,8 +1,8 @@
 require.config({
-  baseUrl:'./'
+  baseUrl: './'
 });
 
-require(['modules/app'], function (App) {
+require(['modules/app'], function(App) {
 
   var app = new App({
     dev: false,
