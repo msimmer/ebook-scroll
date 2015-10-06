@@ -181,6 +181,8 @@ define(function(require) {
 
     this.startScrolling = function() {
 
+      // console.log('start');
+
       if (!reader.isScrolling) {
         $('.controls').find('.play-btn').attr('data-state', 'pause');
 
@@ -197,6 +199,7 @@ define(function(require) {
     };
 
     this.stopScrolling = function() {
+      // console.log('stop');
       if (reader.isScrolling) {
         $('.controls').find('.play-btn').attr('data-state', 'play');
         if (settings.debug) {

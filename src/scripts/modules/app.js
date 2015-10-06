@@ -14,6 +14,7 @@ define(function(require) {
   return function App(options) {
 
     var opts = options;
+    var uiHasInit = false;
 
     this.init = function() {
 
@@ -57,6 +58,10 @@ define(function(require) {
       }());
 
       $(window).on('resize', function() {
+        console.log(uiHasInit);
+        if (!uiHasInit) {
+          return;
+        }
         var intrvl;
         intrvl = setInterval(function() {
           clearInterval(intrvl);
@@ -75,13 +80,12 @@ define(function(require) {
       });
 
       $(document).on('updateUi', function() {
-        chapters.bindChapters();
+        // chapters.bindChapters();
         layout.adjustFramePosition();
         userSettings.updateUserPreferences();
         events.countPages();
       });
 
-      var uiHasInit = false;
       $(document).on('uiReady', function() {
         uiHasInit = true;
         var slug = window.location.hash.split('/')[2];

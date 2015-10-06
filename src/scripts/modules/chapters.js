@@ -1,8 +1,11 @@
 define(function(require) {
   var settings = require('modules/settings');
+  var reader = require('modules/reader');
+  var events = require('modules/events');
 
   return new function Chapters() {
 
+    this.wasScrolling;
     this.panels = settings.chapterSelector;
     this.currentPos = false;
     this.articles = [];
@@ -12,15 +15,22 @@ define(function(require) {
       var currentChapter = _this.getCurrentChapter();
       if (currentChapter && currentChapter.slug) {
         var hashUrl = '#/' + settings.bookSlug + '/' + currentChapter.slug
-        window.location.hash = hashUrl;
+        window.history.replaceState(null, 'Fiktion', hashUrl);
       };
     };
 
     this.bindChapters = function() {
+
+      this.wasScrolling = reader.isScrolling;
+      if (this.wasScrolling) {
+        events.stopScrolling();
+      }
+
       var dfr = $.Deferred();
       var _this = this;
       var ids = $([]).pushStack($('h1,h2,h3,h4,h5,h6'));
       var scrollTop = $(window).scrollTop();
+      var timer;
       _this.currentPos = false;
       _this.articles = [];
       $.map(ids, function(obj, i) {
@@ -55,7 +65,10 @@ define(function(require) {
           }
         }
         if (i === ids.length - 1) {
-          dfr.resolve();
+          clearTimeout(timer);
+          timer = setTimeout(function() {
+            dfr.resolve();
+          }, 0);
         }
       });
 
@@ -86,11 +99,9 @@ define(function(require) {
       for (var a = settings.chapterData.length - 1; a >= 0; a--) {
         var ch = settings.chapterData[a];
         if (scrollTop >= ch.posTop - buffer && scrollTop < ch.nextPos) { // found current el
-          currentChapterData = ch;
+          return ch;
         }
       }
-
-      return currentChapterData;
 
     };
 
@@ -105,16 +116,15 @@ define(function(require) {
     };
 
     this.jumpToChapter = function(slug, callback) {
-
       var _this = this;
-
       $.when(_this.bindChapters()).done(function() {
         var chapter = _this.getChapterBySlug(slug.toString());
-        var buffer, pos, jumpTimer;
+        var jumpTimer;
         if (chapter) {
-          buffer = 200;
-          pos = parseInt($('[data-slug="' + slug + '"]').attr('data-postop'), 10);
-          settings.el.scrollTop(pos);
+          settings.el.scrollTop($('[data-slug="' + slug + '"]').attr('data-postop'));
+          if (_this.wasScrolling && !reader.isScrolling) {
+            events.startScrolling();
+          }
           if (callback && typeof callback === 'function') {
             callback();
           }
@@ -125,84 +135,87 @@ define(function(require) {
     this.scrollToChapter = function(dir, callback) {
 
       var _this = this;
-      _this.bindChapters();
+      $.when(_this.bindChapters()).done(function() {
+        var currentPos = false,
+          scrollTop = settings.el.scrollTop(),
+          firstArticle = false,
+          lastArticle = false,
+          hasScrolled,
+          state;
 
-      var currentPos = false,
-        scrollTop = settings.el.scrollTop(),
-        firstArticle = false,
-        lastArticle = false,
-        hasScrolled,
-        state;
+        var getPromise = function() {
 
-      var getPromise = function() {
+          var dfr = $.Deferred();
+          var len = $(_this.panels).length - 1;
+          $(_this.panels).each(function(i) { // set current el
+            var $this = $(this);
+            var buffer = 200;
+            var thisTop = $this.data().posTop;
+            var chapEnd = $this.data().nextPos;
 
-        var dfr = $.Deferred();
-        var len = $(_this.panels).length - 1;
-        $(_this.panels).each(function(i) { // set current el
-          var $this = $(this);
-          var buffer = 200;
-          var thisTop = $this.data().posTop;
-          var chapEnd = $this.data().nextPos;
-
-          $this.attr('data-currentel', false).data({
-            currentEl: false
-          });
-
-          if (scrollTop >= thisTop - buffer && scrollTop < chapEnd && currentPos === false) { // found current el
-            $this.attr('data-currentel', true).data({
-              currentEl: true
+            $this.attr('data-currentel', false).data({
+              currentEl: false
             });
-            currentPos = thisTop;
-          }
 
-          if (i === len) {
-            if (currentPos === false) {
-              if (scrollTop <= thisTop) {
-                $('[data-firstel="true"]').attr('data-currentel', true).data({
-                  currentEl: true
-                });
-                firstArticle = true;
-              } else {
-                $this.attr('data-currentel', true).data({
-                  currentEl: true
-                });
-                lastArticle = true;
-              }
+            if (scrollTop >= thisTop - buffer && scrollTop < chapEnd && currentPos === false) { // found current el
+              $this.attr('data-currentel', true).data({
+                currentEl: true
+              });
+              currentPos = thisTop;
             }
-            dfr.resolve();
-          }
-        });
-        return dfr.promise();
-      };
 
-      $.when(getPromise()).done(function() {
-        hasScrolled = false;
-        var scrollAnim = function(pos) {
-          settings.el.animate({
-            scrollTop: pos
-          }, {
-            complete: function() {
-              if (!hasScrolled) {
-                hasScrolled = true;
-                if (typeof callback === 'function') {
-                  callback();
+            if (i === len) {
+              if (currentPos === false) {
+                if (scrollTop <= thisTop) {
+                  $('[data-firstel="true"]').attr('data-currentel', true).data({
+                    currentEl: true
+                  });
+                  firstArticle = true;
+                } else {
+                  $this.attr('data-currentel', true).data({
+                    currentEl: true
+                  });
+                  lastArticle = true;
                 }
-                return;
               }
+              dfr.resolve();
             }
           });
+          return dfr.promise();
         };
 
-        if (firstArticle === true && dir === 'prev') {
-          scrollAnim(0);
-        } else if (firstArticle === true && dir === 'next') {
-          scrollAnim($('[data-firstel="true"]').data().posTop);
-        } else if (firstArticle !== true && !dir) {
-          scrollAnim($('[data-currentel="true"]').data().posTop);
-        } else if (firstArticle !== true) {
-          scrollAnim($('[data-currentel="true"]').data()[dir + 'Pos']);
-        }
+        $.when(getPromise()).done(function() {
+          hasScrolled = false;
+          var scrollAnim = function(pos) {
+            settings.el.animate({
+              scrollTop: pos
+            }, {
+              complete: function() {
+                if (!hasScrolled) {
+                  hasScrolled = true;
+                  if (_this.wasScrolling && !reader.isScrolling) {
+                    events.startScrolling();
+                  }
+                  if (typeof callback === 'function') {
+                    callback();
+                  }
+                  return;
+                }
+              }
+            });
+          };
 
+          if (firstArticle === true && dir === 'prev') {
+            scrollAnim(0);
+          } else if (firstArticle === true && dir === 'next') {
+            scrollAnim($('[data-firstel="true"]').data().posTop);
+          } else if (firstArticle !== true && !dir) {
+            scrollAnim($('[data-currentel="true"]').data().posTop);
+          } else if (firstArticle !== true) {
+            scrollAnim($('[data-currentel="true"]').data()[dir + 'Pos']);
+          }
+
+        });
       });
 
     };
