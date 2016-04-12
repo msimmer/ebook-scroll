@@ -1,11 +1,7 @@
-node_modules
-.tmp
-.sass-cache
-app/bower_components
-test/bower_components
-dev
-*.php
-_*
-components
-*.log
+.DS_Store
+.tmp/
+.sass-cache/
+node_modules/
+bower_components/
 dist/
+*.log
