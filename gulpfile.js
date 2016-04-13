@@ -11,6 +11,7 @@ var plumber = require('gulp-plumber');
 var inject = require('gulp-inject');
 var express = require('express');
 var path = require('path');
+var shell = require('gulp-shell');
 
 var production = false;
 var rev = '4322051a-c267-463c-9541-bc2ba1d3334a';
@@ -131,10 +132,16 @@ gulp.task('uglify', ['copy'], function () {
     .pipe(gulp.dest('dist/javascripts'));
 });
 
-gulp.task('depends', function () {
-  // madge --circular ./src/javascripts/
-  // madge --format amd --image map.png --require-config ./src/javascripts/config.js ./src/javascripts/
+gulp.task('dependencies', function () {
+  var task = gulp.src('')
+    .pipe(shell([
+      'madge --circular ./src/javascripts/',
+      'madge --format amd --image deps.png --require-config ./src/javascripts/config.js ./src/javascripts/'
+    ]));
+    gutil.log(gutil.colors.green('A dependency map has been generated at deps.png'));
+    return task;
 });
+
 
 gulp.task('serve', [
   'scripts',
