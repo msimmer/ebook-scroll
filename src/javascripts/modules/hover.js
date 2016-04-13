@@ -1,11 +1,20 @@
-define(function(require) {
-  var environment = require('modules/environment');
-  var reader = require('modules/reader');
-  var events = require('modules/events');
-  var settings = require('modules/settings');
-  var hoverIntent = require('../../vendor/hover-intent');
+define([
+  'jquery',
+  'hover-intent',
+  'modules/environment',
+  'modules/reader',
+  'modules/events',
+  'modules/settings',
+], function (
+  $,
+  hoverIntent,
+  environment,
+  reader,
+  events,
+  settings
+) {
 
-  var Hover = function() {
+  var Hover = function () {
 
     if (environment.isMobile()) {
       return;
@@ -16,7 +25,7 @@ define(function(require) {
     var scrollCheckInterval = 200;
 
     settings.el.hoverIntent({
-      over: function() {
+      over: function () {
         wasScrolling = reader.isScrolling;
         if (!$('show-scroll-bar').length) {
           settings.el.addClass('show-scroll-bar');
@@ -25,11 +34,11 @@ define(function(require) {
           events.stopScrolling();
         }
         window.clearInterval(isManuallyScrolling);
-        isManuallyScrolling = setInterval(function() {
+        isManuallyScrolling = setInterval(function () {
           $(document).trigger('updateNavIndicators');
         }, scrollCheckInterval);
       },
-      out: function() {
+      out: function () {
         if ($('.show-scroll-bar').length && !$('#userInput').is(':focus')) {
           settings.el.removeClass('show-scroll-bar');
         }

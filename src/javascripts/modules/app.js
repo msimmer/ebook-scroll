@@ -1,47 +1,82 @@
-define(function(require) {
-
-  var environment = require('modules/environment');
-  var reader = require('modules/reader');
-  var settings = require('modules/settings');
-  var layout = require('modules/layout');
-  var userSettings = require('modules/user-settings');
-  var events = require('modules/events');
-  var chapters = require('modules/chapters');
-  var hover = require('modules/hover');
-  var search = require('modules/search');
-  var mobile = require('modules/mobile');
+define([
+  'jquery',
+  'modules/environment',
+  'modules/settings',
+  'modules/reader',
+  'modules/user-settings',
+  'modules/events',
+  'modules/chapters',
+  'modules/search',
+  'modules/mobile',
+  'modules/layout'
+], function (
+  $,
+  environment,
+  settings,
+  reader,
+  userSettings,
+  events,
+  chapters,
+  search,
+  mobile,
+  layout
+) {
 
   return function App(options) {
 
     var opts = options;
     var uiHasInit = false;
 
-    this.init = function() {
+    this.bindDocumentEvents = function () {
 
-      if (environment.isMobile()) {
-        new mobile();
-      }
-      events.bindEventHandlers();
+      $.event.trigger({
+        type: 'udpateUi'
+      }, {
+        type: 'uiReady'
+      }, {
+        type: 'updateNavIndicators'
+      }, {
+        type: 'updateState'
+      });
 
-      if (opts) {
-        $.extend(settings, opts);
-      }
 
-      if (settings.clearStorage && !localStorage.refreshed) {
-        localStorage.clear();
-        localStorage.setItem('refreshed', true);
-        window.location.href = window.location.href;
-      } else if (settings.clearStorage && localStorage.refreshed) {
-        localStorage.removeItem('refreshed');
-      }
+      $(document).on('updateUi', function () {
+        layout.adjustFramePosition();
+        userSettings.updateUserPreferences();
+        events.countPages();
+      });
 
+      $(document).on('uiReady', function () {
+        uiHasInit = true;
+        var slug = window.location.hash.split('/')[2];
+        var jumpTimer;
+        clearTimeout(jumpTimer);
+        jumpTimer = setTimeout(function () {
+          if (slug) {
+            chapters.jumpToChapter(slug);
+          }
+        }, 0);
+      });
+
+      $(document).on('updateNavIndicators', function () {
+        events.countPages();
+        if (uiHasInit) {
+          chapters.updateState();
+        }
+      });
+
+      $(document).on('updateState', function () {
+        chapters.updateState();
+      });
+    };
+    this.bindWindowEvents = function () {
       window.addEventListener('orientationchange', events.orientationHasChanged);
-      window.onunload = window.onbeforeunload = (function() {
+      window.onunload = window.onbeforeunload = (function () {
         $('html, body').scrollTop(0);
 
         var writeComplete = false;
 
-        return function() {
+        return function () {
 
           if (writeComplete) {
             return;
@@ -57,67 +92,51 @@ define(function(require) {
 
       }());
 
-      $(window).on('resize', function() {
-        console.log(uiHasInit);
+      $(window).on('resize', function () {
         if (!uiHasInit) {
           return;
         }
         var intrvl;
-        intrvl = setInterval(function() {
+        intrvl = setInterval(function () {
           clearInterval(intrvl);
           $(document).trigger('updateUi');
         }, 200);
       });
+    };
 
-      $.event.trigger({
-        type: 'udpateUi'
-      }, {
-        type: 'uiReady'
-      }, {
-        type: 'updateNavIndicators'
-      }, {
-        type: 'updateState'
-      });
+    this.bind = function () {
+      this.bindDocumentEvents();
+      this.bindWindowEvents();
+    };
 
-      $(document).on('updateUi', function() {
-        // chapters.bindChapters();
-        layout.adjustFramePosition();
-        userSettings.updateUserPreferences();
-        events.countPages();
-      });
+    this.init = function () {
 
-      $(document).on('uiReady', function() {
-        uiHasInit = true;
-        var slug = window.location.hash.split('/')[2];
-        var jumpTimer;
-        clearTimeout(jumpTimer);
-        jumpTimer = setTimeout(function() {
-          if (slug) {
-            chapters.jumpToChapter(slug);
-          }
-        }, 0);
-      });
+      events.bindEventHandlers();
+      this.bind();
 
-      $(document).on('updateNavIndicators', function() {
-        events.countPages();
-        if (uiHasInit) {
-          chapters.updateState();
-        }
-      });
+      if (opts) {
+        $.extend(settings, opts);
+      }
 
-      $(document).on('updateState', function() {
-        chapters.updateState();
-      });
+      if (settings.clearStorage && !localStorage.refreshed) {
+        localStorage.clear();
+        localStorage.setItem('refreshed', true);
+        window.location.href = window.location.href;
+      } else if (settings.clearStorage && localStorage.refreshed) {
+        localStorage.removeItem('refreshed');
+      }
+
+
 
       function addJsonDataToDom(data) {
 
-        $.each(data, function(i, o) {
+        $.each(data, function (i, o) {
 
           $('<li/>', {
             html: $('<a/>', {
               text: o.title,
               href: o.src,
-              click: function(e) {
+              click: function (e) {
                 e.preventDefault();
                 userSettings.saveLocation();
                 userSettings.goToPreviousLocation();
@@ -141,9 +160,9 @@ define(function(require) {
 
         $.get(JSONUrl, {
           'bust': window.ebookAppData.urlArgs
-        }, function(data) {
+        }, function (data) {
 
-          $.each(data, function() {
+          $.each(data, function () {
             if (this.uuid === window.ebookAppData.uuid) {
               var components = this.components[0];
               settings.bookId = this.uuid;
@@ -156,7 +175,7 @@ define(function(require) {
 
           if (reader.currentPage === null) {
             if (localStorage && !localStorage.refreshed) {
-              window.onunload = window.onbeforeunload = function() {
+              window.onunload = window.onbeforeunload = function () {
                 return;
               };
               localStorage.clear();
@@ -173,23 +192,23 @@ define(function(require) {
 
         })
 
-      ).then(function() {
+      ).then(function () {
 
         $.when( // get pages from updated settings
 
           $.get(reader.currentPage, {
             'bust': window.ebookAppData.urlArgs
-          }, function(html) {
+          }, function (html) {
             globalStore.html = html;
           }),
 
-          $.get(window.ebookAppData.relPath + '/components/style/global-style.css', {
+          $.get('/assets/style/global-style.css', {
             'bust': window.ebookAppData.urlArgs
-          }, function(css) {
+          }, function (css) {
             globalStore.css = css;
           })
 
-        ).then(function() { // append html to page
+        ).then(function () { // append html to page
 
           addJsonDataToDom(reader.components);
 
@@ -207,7 +226,7 @@ define(function(require) {
             })
           );
 
-        }).then(function() { // html is added to dom, styles have been applied
+        }).then(function () { // html is added to dom, styles have been applied
 
           userSettings.getLocation();
           userSettings.getUserPreferences();
@@ -227,8 +246,8 @@ define(function(require) {
           $('.controls, .runner-help, .runner-page-count, #page, .search-wrapper').animate({
             opacity: 1
           }, 200);
-          $('.spinner').fadeOut(200, function() {
-            setTimeout(function() {
+          $('.spinner').fadeOut(200, function () {
+            setTimeout(function () {
               events.startScrolling();
             }, 50);
           });
@@ -240,7 +259,7 @@ define(function(require) {
             }, 200);
           }
 
-          $.when(chapters.bindChapters()).done(function() {
+          $.when(chapters.bindChapters()).done(function () {
             $(document).trigger('uiReady');
           });
 

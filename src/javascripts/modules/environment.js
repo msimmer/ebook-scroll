@@ -1,30 +1,7 @@
-define(function() {
+define(function () {
 
   return {
-
-    tablet: [
-      'ipad',
-      'android',
-      'android 3.0',
-      'xoom',
-      'sch-i800',
-      'playbook',
-      'tablet',
-      'kindle',
-    ],
-    handheld: [
-      'iphone',
-      'ipod',
-      'android',
-      'blackberry',
-      'opera',
-      'mini',
-      'windows\sce',
-      'palm',
-      'smartphone',
-      'iemobile',
-    ],
-    epicMobile: [
+    devices: [
       'android',
       'iphone',
       'ipod',
@@ -133,13 +110,11 @@ define(function() {
       'pda',
       'psp'
     ],
-    isMobile: function() {
-      var reasonableNumberofDevices = this.tablet.concat(this.handheld),
-        deviceStr = reasonableNumberofDevices.join('|'),
-        regex = new RegExp(deviceStr, 'i');
+    isMobile: function () {
+      var regex = new RegExp(this.devices.join('|'), 'i');
       return (regex.test(navigator.userAgent.toLowerCase()) && !(/macintosh/i.test(navigator.userAgent.toLowerCase())));
     },
-    prefix: function() {
+    prefix: function () {
       var styles = window.getComputedStyle(document.documentElement, ''),
         pre = (Array.prototype.slice
           .call(styles)
@@ -154,16 +129,16 @@ define(function() {
         js: pre[0].toUpperCase() + pre.substr(1)
       };
     },
-    orientation: function() {
+    orientation: function () {
       switch (window.orientation) {
-        case 0:
-        case 180:
-          return 'portrait';
-        case 90:
-        case -90:
-          return 'landscape';
-        default:
-          return null;
+      case 0:
+      case 180:
+        return 'portrait';
+      case 90:
+      case -90:
+        return 'landscape';
+      default:
+        return null;
       }
     }
   };

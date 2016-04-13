@@ -1,10 +1,18 @@
-define(function(require) {
-  var settings = require('modules/settings');
-  var reader = require('modules/reader');
-  var userSettings = require('modules/user-settings');
-  var layout = require('modules/layout');
+define([
+  'jquery',
+  'modules/reader',
+  'modules/settings',
+  'modules/user-settings',
+  'modules/layout'
+], function (
+  $,
+  reader,
+  settings,
+  userSettings,
+  layout
+) {
 
-  var Events = function() {
+  var Events = function () {
 
     var _this = this;
 
@@ -22,9 +30,9 @@ define(function(require) {
 
     };
 
-    this.bindEventHandlers = function() {
+    this.bindEventHandlers = function () {
 
-      $.each(_this.eventHandlers, function(k, v) {
+      $.each(_this.eventHandlers, function (k, v) {
 
         var eArr = k.split(','),
           fArr = v.split(','),
@@ -33,7 +41,7 @@ define(function(require) {
           func = $.trim(fArr[0]),
           args = fArr.slice(1);
 
-        $(elem).on(trig, function(e) {
+        $(elem).on(trig, function (e) {
           if (e && typeof e.originalEvent !== 'undefined') {
             args.push(e);
             e.preventDefault();
@@ -45,7 +53,7 @@ define(function(require) {
 
     };
 
-    this.toggleFullScreen = function() {
+    this.toggleFullScreen = function () {
 
       if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
         if (document.documentElement.requestFullscreen) {
@@ -73,9 +81,9 @@ define(function(require) {
 
     this.listenForPageChangeInterval = null;
 
-    this.listenForPageChange = function() {
+    this.listenForPageChange = function () {
 
-      var intervalCallback = function() {
+      var intervalCallback = function () {
         $(document).trigger('updateNavIndicators');
       };
 
@@ -89,13 +97,13 @@ define(function(require) {
 
       window.clearInterval(_this.listenForPageChangeInterval);
 
-      _this.listenForPageChangeInterval = setInterval(function() {
+      _this.listenForPageChangeInterval = setInterval(function () {
         intervalCallback();
       }, intrvl);
 
     };
 
-    this.playPause = function() {
+    this.playPause = function () {
 
       var playBtn = $('.controls').find('.play-btn'),
         isScrolling = reader.isScrolling;
@@ -115,7 +123,7 @@ define(function(require) {
 
     this.skip = null;
 
-    this.getSkipInterval = function() {
+    this.getSkipInterval = function () {
       var v = 100 - settings.scrollSpeed,
         n = v.toString().slice(-2),
         r = parseInt(n, 10),
@@ -125,13 +133,13 @@ define(function(require) {
 
     };
 
-    this.animateScroll = function(context, callback) {
-      return setTimeout(function() {
+    this.animateScroll = function (context, callback) {
+      return setTimeout(function () {
         context[callback].apply(context);
       }, 0);
     };
 
-    this.readScroll = function() {
+    this.readScroll = function () {
 
       _this.ct++;
       if (_this.ct < _this.skip) { // skip the animation every `this.skip` frame
@@ -146,42 +154,40 @@ define(function(require) {
 
     this.cursorTimer = null;
 
-    this.cursorListener = function() {
+    this.cursorListener = function () {
       var $this = $('html');
-      var showCursor = function() {
+      var showCursor = function () {
         $this.removeClass('cursor-hidden');
       };
-      var hideCursor = function() {
+      var hideCursor = function () {
         $this.addClass('cursor-hidden');
       };
-      var setTimer = function() {
+      var setTimer = function () {
         if (reader.isScrolling) {
-          _this.cursorTimer = setTimeout(function() {
+          _this.cursorTimer = setTimeout(function () {
             hideCursor();
           }, 2000);
         }
       };
       $this.on({
-        mousemove: function() {
+        mousemove: function () {
           showCursor();
           window.clearTimeout(_this.cursorTimer);
           setTimer();
         }
       });
       $('a').on({
-        mouseenter: function() {
+        mouseenter: function () {
           window.clearTimeout(_this.cursorTimer);
         },
-        mouseleave: function() {
+        mouseleave: function () {
           setTimer();
         }
       });
       $this.addClass('cursor-hidden');
     };
 
-    this.startScrolling = function() {
-
-      // console.log('start');
+    this.startScrolling = function () {
 
       if (!reader.isScrolling) {
         $('.controls').find('.play-btn').attr('data-state', 'pause');
@@ -198,8 +204,7 @@ define(function(require) {
 
     };
 
-    this.stopScrolling = function() {
-      // console.log('stop');
+    this.stopScrolling = function () {
       if (reader.isScrolling) {
         $('.controls').find('.play-btn').attr('data-state', 'play');
         if (settings.debug) {
@@ -212,7 +217,7 @@ define(function(require) {
 
     };
 
-    this.speedIncrement = function() {
+    this.speedIncrement = function () {
 
       _this.stopScrolling();
 
@@ -231,7 +236,7 @@ define(function(require) {
 
     };
 
-    this.speedDecrement = function() {
+    this.speedDecrement = function () {
 
       _this.stopScrolling();
 
@@ -250,7 +255,7 @@ define(function(require) {
 
     };
 
-    this.isChapterEnd = function() {
+    this.isChapterEnd = function () {
 
       _this.stopScrolling();
 
@@ -262,7 +267,7 @@ define(function(require) {
 
     this.hasEnded = false;
 
-    this.isBookEnd = function() {
+    this.isBookEnd = function () {
 
       // _this.stopScrolling();
       // _this.hasEnded = true;
@@ -273,7 +278,7 @@ define(function(require) {
 
     };
 
-    this.fontIncrement = function() {
+    this.fontIncrement = function () {
 
       if (settings.fSize === settings.maxFontSize()) {
         return;
@@ -287,7 +292,7 @@ define(function(require) {
 
     };
 
-    this.fontDecrement = function() {
+    this.fontDecrement = function () {
 
       if (settings.fSize === settings.minFontSize()) {
         return;
@@ -302,7 +307,7 @@ define(function(require) {
 
     };
 
-    this.contrastToggle = function(e) {
+    this.contrastToggle = function (e) {
 
       var contrast = e && e.currentTarget ? $(e.currentTarget).attr('data-contrast') : e,
         html = $('html');
@@ -320,11 +325,11 @@ define(function(require) {
 
     };
 
-    this.embeddedLinkClick = function(e) {
+    this.embeddedLinkClick = function (e) {
 
       var target = $(e.currentTarget),
         href = target.attr('href'),
-        external = function(href) {
+        external = function (href) {
           return href.match('^http') !== null;
         };
 
@@ -339,21 +344,21 @@ define(function(require) {
 
     };
 
-    this.orientationHasChanged = function() {
+    this.orientationHasChanged = function () {
 
       if (settings.debug) {
         switch (window.orientation) {
-          case -90:
-          case 90:
-            console.log('Orientation has changed to landscape');
-            break;
-          default:
-            console.log('Orientation has changed to portrait');
-            break;
+        case -90:
+        case 90:
+          console.log('Orientation has changed to landscape');
+          break;
+        default:
+          console.log('Orientation has changed to portrait');
+          break;
         }
       }
 
-      setTimeout(function() {
+      setTimeout(function () {
         layout.adjustFramePosition();
         if (window.pageYOffset) {
           window.scrollTo(0, 0, 1);
@@ -362,14 +367,14 @@ define(function(require) {
 
       if (reader.isScrolling) {
         _this.stopScrolling();
-        setTimeout(function() {
+        setTimeout(function () {
           _this.startScrolling();
         }, 500);
       }
 
     };
 
-    this.countPages = function() {
+    this.countPages = function () {
 
       var main = settings.el,
         frameH = main.height(),
@@ -395,25 +400,10 @@ define(function(require) {
         _this.hasEnded = false;
       }
 
-      // if (settings.debug) {
-      //     // var intrvl,
-      //     //     ct;
-      //     // intrvl = setInterval(function () {
-      //     //     ct++;
-      //     //     if (page.length) {
-      //     //         clearInterval(intrvl);
-      //     //         console.log('Reading location is -- ' + getCurrentPage());
-      //     //     }
-      //     //     if (ct >= 1000) {
-      //     //         clearInterval(intrvl);
-      //     //         console.log('Reading location timed out.');
-      //     //     }
-      //     // }, 10);
-      // }
-
     };
 
   };
 
   return new Events();
+
 });

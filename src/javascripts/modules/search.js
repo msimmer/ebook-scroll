@@ -1,9 +1,6 @@
-define(function(require) {
+define(['jquery', 'modules/environment', 'modules/settings'], function($, environment, settings) {
 
-  var environment = require('modules/environment');
-  var settings = require('modules/settings');
-
-  return (function Search() {
+  var Search = function() {
     var $searchWrapper = $('.search-wrapper'),
       $input = $('#userInput'),
       $searchBtn = $('#search'),
@@ -123,5 +120,8 @@ define(function(require) {
     });
     addRemoveSearchBar();
 
-  })();
+  };
+
+  return new Search();
+
 });

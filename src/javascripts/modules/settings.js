@@ -1,9 +1,7 @@
-define(function(require) {
-
-  var environment = require('modules/environment');
+define(['jquery', 'modules/environment'], function($, environment) {
   return {
     dev: false,
-    jsonPath: '/wp-content/themes/Fiktion/data/bookData.json',
+    jsonPath: 'http://localhost:3000/data/books.json',
     debug: false,
     version: 1.0,
     clearStorage: false,

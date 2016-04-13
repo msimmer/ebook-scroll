@@ -1,10 +1,10 @@
-define(function(require) {
+define(['require', 'jquery', 'hammer'], function (require, $, Hammer) {
+  var environment = require('modules/environment');
   var reader = require('modules/reader');
   var settings = require('modules/settings');
   var events = require('modules/events');
-  var Hammer = require('../../vendor/hammer');
 
-  return function Mobile() {
+  var Mobile = function () {
 
     settings.el.css('overflow-y', 'scroll');
 
@@ -28,7 +28,7 @@ define(function(require) {
       },
       hammer = new Hammer(el, options);
 
-    hammer.on('touch release pinchin pinchout dragend doubletap tap', function(e) {
+    hammer.on('touch release pinchin pinchout dragend doubletap tap', function (e) {
 
       console.log(e);
 
@@ -64,7 +64,7 @@ define(function(require) {
 
         } else if (e.type === 'touch' && e.gesture.touches.length < 2) {
 
-          touchTimer = setTimeout(function() {
+          touchTimer = setTimeout(function () {
             e.stopPropagation();
             e.gesture.stopPropagation();
 
@@ -83,7 +83,7 @@ define(function(require) {
             events.countPages();
 
             if (wasScrolling && wasHolding) {
-              setTimeout(function() {
+              setTimeout(function () {
                 wasHolding = false;
                 events.startScrolling();
               }, 200);
@@ -147,4 +147,10 @@ define(function(require) {
 
   };
 
-})
+  if (environment.isMobile()) {
+    return new Mobile();
+  } else {
+    return Mobile;
+  }
+
+});

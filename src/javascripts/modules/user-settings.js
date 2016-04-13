@@ -1,25 +1,23 @@
-define(function(require) {
-  var reader = require('modules/reader');
-  var settings = require('modules/settings');
+define(['jquery', 'modules/reader', 'modules/settings'], function ($, reader, settings) {
 
-  return {
+  var UserSettings = function () {
 
-    updatedReaderData: function() {
-      reader[arguments[0]] = arguments[1];
-    },
+    this.updatedReaderData = function (key, val) {
+      reader[key] = val;
+    };
 
-    updateUserData: function() {
-      settings[arguments[0]] = arguments[1];
-    },
+    this.updateUserData = function (key, val) {
+      settings[key] = val;
+    };
 
-    updateLocalStorage: function(obj, prop, attr, nestedAttr) {
+    this.updateLocalStorage = function (obj, prop, attr, nestedAttr) {
 
       if (localStorage.getItem(obj) === null) { // localstorage was not added on page load or was removed
         return;
       }
 
       if (typeof prop === 'undefined' || typeof attr === 'undefined') {
-        throw 'Error: sys.updateLocalStorage() undefined argument';
+        throw new Error('sys.updateLocalStorage() undefined argument');
       }
 
       var parsedObj = JSON.parse(localStorage.getItem(obj));
@@ -32,9 +30,9 @@ define(function(require) {
 
       localStorage.setItem(obj, JSON.stringify(parsedObj));
 
-    },
+    };
 
-    saveLocation: function() {
+    this.saveLocation = function () {
 
       if (settings.debug) {
         console.log('Saving current location');
@@ -56,9 +54,9 @@ define(function(require) {
         reader.scrollPosition[reader.currentPage]
       );
 
-    },
+    };
 
-    getFromLocalStorage: function(obj, prop, attr) {
+    this.getFromLocalStorage = function (obj, prop, attr) {
 
       var parsedObj = JSON.parse(localStorage.getItem(obj));
 
@@ -68,9 +66,9 @@ define(function(require) {
 
       return parsedObj[prop];
 
-    },
+    };
 
-    updateUserPreferences: function() {
+    this.updateUserPreferences = function () {
 
       if (settings.debug) {
         console.log('Updating user preferences');
@@ -84,9 +82,9 @@ define(function(require) {
 
       localStorage.setItem('userPreferences', JSON.stringify(userPreferences));
 
-    },
+    };
 
-    getUserPreferences: function() {
+    this.getUserPreferences = function () {
       if (settings.debug) {
         console.log('Getting User Preferences');
       }
@@ -96,9 +94,9 @@ define(function(require) {
       } else {
         this.updateUserPreferences();
       }
-    },
+    };
 
-    getLocation: function() {
+    this.getLocation = function () {
 
       var bookId = settings.bookId;
 
@@ -126,23 +124,22 @@ define(function(require) {
 
       }
 
-    },
+    };
 
-    goToPreviousLocation: function() {
+    this.goToPreviousLocation = function () {
 
       if (settings.debug) {
         console.log('Going to previous location');
       }
 
       var pos = this.getFromLocalStorage(settings.bookId, 'scrollPosition', reader.currentPage);
-      setTimeout(function() {
+      setTimeout(function () {
         settings.el.scrollTop(pos);
       }, 50);
-    },
-
-    goToNextChapter: function() {
-      return;
-    }
+    };
 
   };
+
+  return new UserSettings();
+
 });

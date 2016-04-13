@@ -1,7 +1,4 @@
-define(function(require) {
-
-  var environment = require('modules/environment');
-  var settings = require('modules/settings');
+define(['jquery', 'modules/environment', 'modules/settings'], function($, environment, settings) {
 
   return {
 

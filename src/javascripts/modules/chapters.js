@@ -1,25 +1,34 @@
-define(function(require) {
-  var settings = require('modules/settings');
-  var reader = require('modules/reader');
-  var events = require('modules/events');
+define([
+  'require',
+  'jquery',
+  'modules/settings',
+  'modules/reader',
+  'modules/events'
+], function (
+  require,
+  $,
+  settings,
+  reader,
+  events
+) {
 
-  return new function Chapters() {
+  var Chapters = function () {
 
-    this.wasScrolling;
+    this.wasScrolling = null;
     this.panels = settings.chapterSelector;
     this.currentPos = false;
     this.articles = [];
 
-    this.updateState = function() {
+    this.updateState = function () {
       var _this = this;
       var currentChapter = _this.getCurrentChapter();
       if (currentChapter && currentChapter.slug) {
-        var hashUrl = '#/' + settings.bookSlug + '/' + currentChapter.slug
+        var hashUrl = '#/' + settings.bookSlug + '/' + currentChapter.slug;
         window.history.replaceState(null, 'Fiktion', hashUrl);
-      };
+      }
     };
 
-    this.bindChapters = function() {
+    this.bindChapters = function () {
 
       this.wasScrolling = reader.isScrolling;
       if (this.wasScrolling) {
@@ -33,7 +42,10 @@ define(function(require) {
       var timer;
       _this.currentPos = false;
       _this.articles = [];
-      $.map(ids, function(obj, i) {
+      if (!ids.length) {
+        dfr.resolve();
+      }
+      $.map(ids, function (obj, i) {
         var $obj = $(obj);
         var articleData = {
           chapter: i,
@@ -64,9 +76,10 @@ define(function(require) {
             $obj.attr('data-' + p, $obj.data()[p]);
           }
         }
+
         if (i === ids.length - 1) {
           clearTimeout(timer);
-          timer = setTimeout(function() {
+          timer = setTimeout(function () {
             dfr.resolve();
           }, 0);
         }
@@ -76,14 +89,14 @@ define(function(require) {
 
     };
 
-    this.getCurrentChapter = function() {
+    this.getCurrentChapter = function () {
 
       var scrollTop = settings.el.scrollTop();
       var buffer = 200;
       var currentChapterData;
 
       var $chs = $(settings.chapterSelector);
-      $chs.each(function() {
+      $chs.each(function () {
         var $this = $(this);
         var data = $this.data();
         var newData = {
@@ -105,19 +118,19 @@ define(function(require) {
 
     };
 
-    this.getChapterBySlug = function(slug) {
+    this.getChapterBySlug = function (slug) {
       var _this = this;
       for (var i = 0; i < _this.articles.length; i++) {
         if (_this.articles[i].slug === slug) {
           return _this.articles[i];
-        };
+        }
       }
       return false;
     };
 
-    this.jumpToChapter = function(slug, callback) {
+    this.jumpToChapter = function (slug, callback) {
       var _this = this;
-      $.when(_this.bindChapters()).done(function() {
+      $.when(_this.bindChapters()).done(function () {
         var chapter = _this.getChapterBySlug(slug.toString());
         var jumpTimer;
         if (chapter) {
@@ -132,10 +145,10 @@ define(function(require) {
       });
     };
 
-    this.scrollToChapter = function(dir, callback) {
+    this.scrollToChapter = function (dir, callback) {
 
       var _this = this;
-      $.when(_this.bindChapters()).done(function() {
+      $.when(_this.bindChapters()).done(function () {
         var currentPos = false,
           scrollTop = settings.el.scrollTop(),
           firstArticle = false,
@@ -143,11 +156,11 @@ define(function(require) {
           hasScrolled,
           state;
 
-        var getPromise = function() {
+        var getPromise = function () {
 
           var dfr = $.Deferred();
           var len = $(_this.panels).length - 1;
-          $(_this.panels).each(function(i) { // set current el
+          $(_this.panels).each(function (i) { // set current el
             var $this = $(this);
             var buffer = 200;
             var thisTop = $this.data().posTop;
@@ -184,13 +197,13 @@ define(function(require) {
           return dfr.promise();
         };
 
-        $.when(getPromise()).done(function() {
+        $.when(getPromise()).done(function () {
           hasScrolled = false;
-          var scrollAnim = function(pos) {
+          var scrollAnim = function (pos) {
             settings.el.animate({
               scrollTop: pos
             }, {
-              complete: function() {
+              complete: function () {
                 if (!hasScrolled) {
                   hasScrolled = true;
                   if (_this.wasScrolling && !reader.isScrolling) {
@@ -220,7 +233,7 @@ define(function(require) {
 
     };
 
-    this.appendNav = function() {
+    this.appendNav = function () {
 
       var _this = this;
 
@@ -229,9 +242,9 @@ define(function(require) {
         'class': 'chapter-nav',
         'data-dir': 'prev'
       }).on({
-        click: function(e) {
+        click: function (e) {
           e.preventDefault();
-          _this.scrollToChapter($(this).data().dir, function() {
+          _this.scrollToChapter($(this).data().dir, function () {
             $(document).trigger('updateNavIndicators');
           });
         }
@@ -241,9 +254,9 @@ define(function(require) {
         'class': 'chapter-nav',
         'data-dir': 'next'
       }).on({
-        click: function(e) {
+        click: function (e) {
           e.preventDefault();
-          _this.scrollToChapter($(this).data().dir, function() {
+          _this.scrollToChapter($(this).data().dir, function () {
             $(document).trigger('updateNavIndicators');
           });
         }
@@ -255,4 +268,7 @@ define(function(require) {
     };
 
   };
+
+  return new Chapters();
+
 });
