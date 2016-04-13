@@ -1,0 +1,331 @@
+@import url(http://fonts.googleapis.com/css?family=Cardo:400,400italic,700&subset=latin,greek-ext,greek,latin-ext);
+html{font-size: 30px;}
+#book-content html,
+#book-content body,
+#book-content div,
+#book-content hr,
+#book-content span,
+#book-content applet,
+#book-content object,
+#book-content iframe,
+#book-content h1,
+#book-content h2,
+#book-content h3,
+#book-content h4,
+#book-content h5,
+#book-content h6,
+#book-content p,
+#book-content blockquote,
+#book-content pre,
+#book-content a,
+#book-content abbr,
+#book-content acronym,
+#book-content address,
+#book-content big,
+#book-content cite,
+#book-content code,
+#book-content del,
+#book-content dfn,
+#book-content em,
+#book-content img,
+#book-content ins,
+#book-content kbd,
+#book-content q,
+#book-content s,
+#book-content samp,
+#book-content small,
+#book-content strike,
+#book-content strong,
+#book-content sub,
+#book-content sup,
+#book-content tt,
+#book-content var,
+#book-content b,
+#book-content u,
+#book-content i,
+#book-content center,
+#book-content dl,
+#book-content dt,
+#book-content dd,
+#book-content ol,
+#book-content ul,
+#book-content li,
+#book-content fieldset,
+#book-content form,
+#book-content label,
+#book-content legend,
+#book-content table,
+#book-content caption,
+#book-content tbody,
+#book-content tfoot,
+#book-content thead,
+#book-content tr,
+#book-content th,
+#book-content td,
+#book-content article,
+#book-content aside,
+#book-content canvas,
+#book-content details,
+#book-content embed,
+#book-content figure,
+#book-content figcaption,
+#book-content footer,
+#book-content header,
+#book-content hgroup,
+#book-content menu,
+#book-content nav,
+#book-content output,
+#book-content ruby,
+#book-content section,
+#book-content summary,
+#book-content time,
+#book-content mark,
+#book-content audio,
+#book-content video{margin:0;padding:0;border:0;vertical-align:baseline;}
+#book-content{
+margin:0 15px 0 15px;
+padding:0 0 12em 0;
+font-family: Cardo, Garamond, 'Times New Roman', Times, serif;
+font-weight: normal;
+font-style: normal;
+-webkit-hyphens:auto;
+-epub-hyphens:auto;
+-moz-hyphens:auto;
+-ms-hyphens:auto;
+-o-hyphens:auto;
+hyphens:auto;
+}
+
+#book-content h1 {
+font-size: 2.0000em;
+line-height: 1.3em;
+padding-top: 0.6500em;
+padding-bottom: 1.3em;
+text-indent: 0;
+text-align: center;
+font-weight: normal;
+-webkit-hyphens: auto;
+-epub-hyphens: auto;
+-moz-hyphens: auto;
+-ms-hyphens: auto;
+-o-hyphens: auto;
+hyphens: auto;
+}
+
+#book-content h2 {
+font-size: 1.5000em;
+line-height: 1.4em;
+padding-top: 0.5em;
+padding-bottom: 0.5em;
+text-indent: 0;
+text-align: center;
+font-weight: normal;
+-webkit-hyphens: auto;
+-epub-hyphens: auto;
+-moz-hyphens: auto;
+-ms-hyphens: auto;
+-o-hyphens: auto;
+hyphens: auto;
+}
+
+#book-content h3 {
+font-size: 1em;
+line-height: 1.3em;
+padding-top: 0;
+padding-bottom: 0;
+text-indent: 0;
+font-weight: normal;
+text-align: center;
+-webkit-hyphens: auto;
+-epub-hyphens: auto;
+-moz-hyphens: auto;
+-ms-hyphens: auto;
+-o-hyphens: auto;
+hyphens: auto;
+}
+
+#book-content h2 + h3 {
+padding-top: 0;
+}
+
+#book-content p {
+font-size: 1em;
+line-height: 1.3em;
+padding-top: 0;
+padding-bottom: 0;
+text-indent: 1.3em;
+text-align: left;
+-webkit-hyphens: auto;
+-epub-hyphens: auto;
+-moz-hyphens: auto;
+-ms-hyphens: auto;
+-o-hyphens: auto;
+hyphens: auto;
+orphans: 2;
+widows: 1;
+}
+
+#book-content i,
+#book-content em {
+font-weight: normal;
+font-style: italic;
+}
+
+#book-content b,
+#book-content strong {
+font-weight: 700;
+font-style: normal;
+}
+
+#book-content a {
+color: black;
+}
+
+#book-content .sub-title-header {
+text-align: center;
+}
+
+#book-content .sub-title p {
+text-indent: 0;
+padding: 0 0 1.3em 0;
+}
+
+#book-content .dedication p {
+text-align: right;
+text-indent: 0;
+}
+
+#book-content .quote p {
+text-indent: 0;
+padding: 1.3em 0 0 0;
+}
+
+#book-content .quote p.meta {
+text-indent: 2.5em;
+}
+
+#book-content .quote p.byline {
+padding-top: 0;
+}
+
+#book-content h1 + p,
+#book-content h2 + p,
+#book-content h3 + p,
+#book-content .quote + p,
+#book-content .dedication + p,
+#book-content .no-ind-follow + p {
+text-indent: 0;
+}
+
+#book-content p + h3 {
+padding-top: 1.3em;
+}
+
+#book-content .imprint p {
+text-indent: 0;
+}
+
+#book-content .imprint p a {
+text-decoration: none!important;
+border: 0!important;
+}
+
+#book-content .block {
+display: block;
+padding-top: 5px;
+}
+
+#book-content p.no-padding {
+padding: 0;
+}
+
+#book-content p.no-indent {
+text-indent: 0;
+}
+
+#book-content .chapter-lead p {
+text-indent: 0;
+padding: 0;
+}
+
+#book-content p.small-caps, #book-content span.small-caps {
+font-size: 0.75em;
+}
+
+#book-content sub {
+font-size: 0.75em;
+line-height: 0;
+vertical-align: sub;
+}
+
+#book-content sup {
+font-size: 0.75em;
+line-height: 0;
+vertical-align: super;
+}
+
+#book-content .sigilChapterBreak {
+page-break-before: always!important;
+}
+
+#book-content p.center {
+text-indent: 0;
+text-align: center;
+}
+
+#book-content p.bullet {
+text-indent: 0;
+margin-left: 1.3em;
+}
+
+#book-content p.bullet+p {
+text-indent: 0;
+}
+
+#book-content span.neg-indent {
+display: inline-block;
+text-indent: -1.3em;
+}
+
+#book-content .note {
+font-size: 0.75em;
+text-indent: 0;
+}
+
+#book-content a.fn {
+text-decoration: none!important;
+color: inherit!important;
+}
+
+#book-content .bq {
+text-indent: 0;
+margin-left: 1.3em;
+}
+
+#book-content .bq +.bq,
+#book-content .bq-both + .bq-both {
+text-indent: 1.3em;
+}
+
+#book-content .bq-both {
+text-indent: 0;
+margin-left: 1.3em;
+margin-right: 1.3em;
+}
+
+#book-content .censor {
+display: inline-block;
+background-color: black;
+color: black;
+height: 1em;
+line-height: 1.1;
+}
+
+#book-content .indent-after-first {
+margin-left: 1.3em;
+text-indent: -1.3em;
+}
+
+#book-content .strike {
+text-decoration: line-through;
+}

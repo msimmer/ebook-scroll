@@ -1,0 +1,7 @@
+[{
+  "uuid": "1234567890",
+  "components": [{
+    "title": "Test Book",
+    "src": "/assets\/test-book\/Text\/book.html"
+  }]
+}]
