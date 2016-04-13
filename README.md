@@ -52,7 +52,7 @@ Ebook Scroll was developed for ebooks, but will load any `html` files in the `re
 
 ```
 resources
-  ├── test-one
+  ├── book-one
   │   └── Text
   │       ├── chapter-one.html
   │       ├── chapter-two.html
@@ -69,13 +69,13 @@ And in `data/books.json`
   "uuid": "1",
   "components": [{
     "title": "Chapter One",
-    "src": "/assets\/test-book\/Text\/chapter-one.html"
+    "src": "/assets\/book-one\/Text\/chapter-one.html"
   }, {
     "title": "Chapter Two",
-    "src": "/assets\/test-book\/Text\/chapter-two.html"
+    "src": "/assets\/book-one\/Text\/chapter-two.html"
   }, {
     "title": "Chapter Three",
-    "src": "/assets\/test-book\/Text\/chapter-three.html"
+    "src": "/assets\/book-one\/Text\/chapter-three.html"
   }]
 }, {
   "uuid": "2",
