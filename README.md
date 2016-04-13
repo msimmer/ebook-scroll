@@ -2,7 +2,7 @@
 
 ## An Auto-Scrolling Ebook Reader in Your Browser.
 
-Built on RequireJS. Check it out in action [here](http://fiktion.cc/book/?fiktion_uuid=7e9aa2c0-327f-45b3-85f7-0bb401d1c1ce).
+Built on RequireJS. Check it out in action [here](http://fiktion.cc/book/#/about-the-reader).
 
 ## Installation
 
